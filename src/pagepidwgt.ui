@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PagePidWgtClass</class>
+ <widget class="QWidget" name="PagePidWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>PID regulators setup</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0" columnstretch="0,0,0">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>K p</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="pVoltBox">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="iVoltBox">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="FloatSpinBox" name="fpVoltBox" native="true">
+        <property name="maximum" stdset="0">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>K i</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="FloatSpinBox" name="fiVoltBox" native="true">
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="FloatSpinBox" name="fdVoltBox" native="true">
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>K d</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="dVoltBox">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="3">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="0" colspan="3">
+       <widget class="QPushButton" name="pidTuningBtn">
+        <property name="text">
+         <string>PID tuning</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FloatSpinBox</class>
+   <extends>QWidget</extends>
+   <header>floatspinbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>pVoltBox</tabstop>
+  <tabstop>iVoltBox</tabstop>
+  <tabstop>dVoltBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

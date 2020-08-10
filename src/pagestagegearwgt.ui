@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageStageGearWgtClass</class>
+ <widget class="QWidget" name="PageStageGearWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>324</width>
+    <height>294</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Equivalent input inertia:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="FloatSpinBox" name="ratedInputTorqueSpin">
+     <property name="suffix">
+      <string> N m</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="FloatSpinBox" name="ratedInputSpeedSpin">
+     <property name="suffix">
+      <string> rpm</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Manufacturer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="varlengthLineEdit" name="manufacturerEdit">
+     <property name="maxLength">
+      <number>16</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Part number:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="varlengthLineEdit" name="partnumberEdit">
+     <property name="maxLength">
+      <number>24</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Reduction:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Max. continuous torque:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Max input speed:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="1">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QSpinBox" name="reductionOutSpin">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSpinBox{ border-right-width: 0px}</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string> : </string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="reductionInSpin">
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="accelerated">
+         <bool>true</bool>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Output backlash:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
+      <string>Efficiency:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="FloatSpinBox" name="maxOutputBacklashSpin">
+     <property name="suffix">
+      <string> deg</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="FloatSpinBox" name="inputInertiaSpin">
+     <property name="suffix">
+      <string> g cm²</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="FloatSpinBox" name="efficiencySpin">
+     <property name="suffix">
+      <string> %</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>manufacturerEdit</tabstop>
+  <tabstop>partnumberEdit</tabstop>
+  <tabstop>reductionOutSpin</tabstop>
+  <tabstop>reductionInSpin</tabstop>
+  <tabstop>ratedInputTorqueSpin</tabstop>
+  <tabstop>ratedInputSpeedSpin</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,2 @@
+ATTRS{idVendor}=="1cbe", ATTRS{idProduct}=="0007", ENV{ID_MM_DEVICE_IGNORE}="1"
+SUBSYSTEM=="tty", KERNEL=="ttyACM*", ATTRS{idVendor}=="1cbe", ATTRS{idProduct}=="0007", MODE:="0666", SYMLINK+="ximc/$attr{serial}"

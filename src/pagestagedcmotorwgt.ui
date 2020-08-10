@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageStageDCMotorWgtClass</class>
+ <widget class="QWidget" name="PageStageDCMotorWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>342</width>
+    <height>859</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_19">
+     <property name="text">
+      <string>Nominal speed:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_20">
+     <property name="text">
+      <string>Nominal torque:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_21">
+     <property name="text">
+      <string>Nominal power:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="0">
+    <widget class="QLabel" name="label_13">
+     <property name="text">
+      <string>Speed constant:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="1">
+    <widget class="FloatSpinBox" name="detentTorqueSpin" native="true">
+     <property name="suffix">
+      <string> mN m</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="FloatSpinBox" name="nominalCurrentSpin" native="true">
+     <property name="suffix">
+      <string> A</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="FloatSpinBox" name="nominalSpeedSpin" native="true">
+     <property name="suffix">
+      <string> rpm</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="FloatSpinBox" name="nominalTorqueSpin" native="true">
+     <property name="suffix">
+      <string> mN m</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="FloatSpinBox" name="nominalPowerSpin" native="true">
+     <property name="suffix">
+      <string> W</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="1">
+    <widget class="FloatSpinBox" name="maxSpeedSpin" native="true">
+     <property name="suffix">
+      <string> []</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="0">
+    <widget class="QLabel" name="label_12">
+     <property name="text">
+      <string>Torque constant:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="17" column="1">
+    <widget class="FloatSpinBox" name="speedConstantSpin" native="true">
+     <property name="suffix">
+      <string> [] / V</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="0">
+    <widget class="QLabel" name="label_14">
+     <property name="text">
+      <string>Speed / torque gradient:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="21" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Max current:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="0">
+    <widget class="QLabel" name="label_24">
+     <property name="text">
+      <string>Max speed:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="24" column="1">
+    <widget class="FloatSpinBox" name="noLoadSpeedSpin" native="true">
+     <property name="suffix">
+      <string> rpm</string>
+     </property>
+    </widget>
+   </item>
+   <item row="22" column="1">
+    <widget class="FloatSpinBox" name="maxCurrentTimeSpin" native="true">
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+   </item>
+   <item row="23" column="1">
+    <widget class="FloatSpinBox" name="noLoadCurrentSpin" native="true">
+     <property name="suffix">
+      <string> A</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0">
+    <widget class="QLabel" name="label_23">
+     <property name="text">
+      <string>Detent torque:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="18" column="1">
+    <widget class="FloatSpinBox" name="speedTorqueGradientSpin" native="true">
+     <property name="suffix">
+      <string> rpm / mN m</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="1">
+    <widget class="FloatSpinBox" name="mechanicalTimeConstantSpin" native="true">
+     <property name="suffix">
+      <string> ms</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0">
+    <widget class="QLabel" name="label_16">
+     <property name="text">
+      <string>Rotor inertia:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1">
+    <widget class="FloatSpinBox" name="rotorInertiaSpin" native="true">
+     <property name="suffix">
+      <string> g cm²</string>
+     </property>
+    </widget>
+   </item>
+   <item row="23" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>No load current:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Stall torque:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="FloatSpinBox" name="windingResistanceSpin" native="true">
+     <property name="suffix">
+      <string> Ohm</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="1">
+    <widget class="FloatSpinBox" name="torqueConstantSpin" native="true">
+     <property name="suffix">
+      <string> mN m / A</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
+      <string>Winding inductance:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="FloatSpinBox" name="windingInductanceSpin" native="true">
+     <property name="suffix">
+      <string> mH</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1">
+    <widget class="FloatSpinBox" name="stallTorqueSpin" native="true">
+     <property name="suffix">
+      <string> mN m</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Winding resistance:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="24" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>No load speed:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="0">
+    <widget class="QLabel" name="label_15">
+     <property name="text">
+      <string>Mechanical time constant:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="22" column="0">
+    <widget class="QLabel" name="label_25">
+     <property name="text">
+      <string>Max current time:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="21" column="1">
+    <widget class="FloatSpinBox" name="maxCurrentSpin" native="true">
+     <property name="suffix">
+      <string> A</string>
+     </property>
+    </widget>
+   </item>
+   <item row="36" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Manufacturer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="varlengthLineEdit" name="manufacturerEdit">
+     <property name="maxLength">
+      <number>16</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Part number:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="varlengthLineEdit" name="partnumberEdit">
+     <property name="maxLength">
+      <number>24</number>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Nominal voltage:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="FloatSpinBox" name="nominalVoltageSpin" native="true">
+     <property name="suffix">
+      <string> V</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_17">
+     <property name="text">
+      <string>Phases:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Motor type:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Poles:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_18">
+     <property name="text">
+      <string>Nominal current:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QSpinBox" name="polesSpin">
+     <property name="maximum">
+      <number>65535</number>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QSpinBox" name="phasesSpin">
+     <property name="maximum">
+      <number>65535</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="motorTypeCombo">
+     <item>
+      <property name="text">
+       <string>Stepper</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DC</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>BLDC</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FloatSpinBox</class>
+   <extends>QAbstractSpinBox</extends>
+   <header>floatspinbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

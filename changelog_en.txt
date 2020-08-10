@@ -1,0 +1,141 @@
+﻿-------------v1.7.0, release date: 2013.01.16-----------
+Feature #2232	Select first controller in the list
+Bug #2266	Fix spinbox hangup
+
+-------------v1.7 RC4, release date: 2013.01.11-----------
+Feature #1397	Fix joystick deadzone calculation
+Feature #1890	Add SetZero script to distribution
+
+-------------v1.7 RC3, release date: 2013.01.09-----------
+Feature #2127	Updated EEPROM save/load routines
+Feature #2212	Steps per turn and microstep mode moved to Motion setup.
+
+-------------v1.7 RC2, release date: 2013.01.05-----------
+Feature #2127	Fixes to functions that read EEPROM data
+Bug #2208	Fix scripts
+
+-------------v1.7 RC1, release date: 2012.12.28-----------
+Feature #2165	Load default script instead of empty window
+Bug #2167	Add scripts to linux and mac osx installs
+
+-------------v1.6.9, release date: 2012.12.21-----------
+Feature #1857	Driver support for Windows 8
+Feature #2079	Device open retries (bluetooth connection)
+Feature #2127	Read EEPROM data
+
+-------------v1.6.8, release date: 2012.12.18-----------
+Bug #2103	Unhandled exception on startup
+Bug #2106	Fix Tabstop order on stepper motor page
+
+-------------v1.6.7, release date: 2012.12.13-----------
+Bug #2108	Remove speed microstep limit
+
+-------------v1.6.6, release date: 2012.12.11-----------
+Feature #1730	XiLab startup speedup
+Feature #1889	Homing window appearance
+Feature #2009	Libximc unicode support
+Bug #2086	Homing window fix
+Bug #2094	Add checkmark REV_SENS_INV in SCTP
+
+-------------v1.6.5, release date: 2012.12.07-----------
+Feature #1256	Advertise encoder if found
+Feature #1976	Add flags charts
+Feature #2032	XiLab не должно удалять версии 1.4 и ниже
+Bug #2035	Fix settings limits in usermode
+Bug #2070	Fix program termination
+
+-------------v1.6.4, release date: 2012.11.23-----------
+Feature #1911	Add scrolling to XILab settings window
+Feature #2010	Remove Coarse Cycling
+Bug #1978	Hide encoder in No device
+Bug #2019	Fix for settings save on exit
+
+-------------v1.6.3, release date: 2012.11.13-----------
+Feature #1262	Log type changed to table
+Feature #1632	Exit button waits for SSTP to complete
+Feature #1954	ALARM event is added to log
+Feature #1958	Protocol 15.3 support
+Feature #1976	Flags graphics added
+Feature #2004	Added UART settings
+
+-------------v1.6.2, release date: 2012.10.30-----------
+Feature #1928	Homing: second phase "+ half turn" mode
+Bug #1636	1 geti 2 gser in bootloader
+Bug #1962	Fix PWHT indicator in NoDevice mode
+
+-------------v1.6.1, release date: 2012.10.19-----------
+Feature #1397	Joystick calibration dialog
+Feature #1577	Send GETS and set ERRC/ERRD in bootloader
+Bug #1884	XiLab debug build exception on 100% CPU load
+
+-------------v1.6.0, release date: 2012.10.08-----------
+Feature #1873	Кнопка Update XILab ведет не туда
+Feature #1876	Команда смены типа двигателя должна отсылаться первой
+
+-------------v1.6 RC1, release date: 2012.10.05-----------
+Bug #1832	Fix sending of SENG command
+Bug #1843	Add new fields (R and L) to RDAN command display tab
+Bug #1844	Disappearance of Homing window
+
+-------------v1.5.13, release date: 2012.10.02-----------
+Feature #1769 	XiLab installer
+Bug #1810	Hide "Power" field in main window in bootloader mode	
+Bug #1841	Rearrange "Home position" tab according to protocol
+
+-------------v1.5.12, release date: 2012.09.19-----------
+Feature #1591	Slow Stop feature
+Bug #883	Fix for indefinite "No device"
+
+-------------v1.5.11, release date: 2012.09.12-----------
+Feature #	Protocol 15.2 support
+Feature #1236	Message source in log window
+Bug #526	Initialization error handling
+Bug #1140	Microstep change handling on save
+Bug #1494	More than 10000 sec charts now display correctly
+
+-------------v1.5.10, release date: 2012.08.29-----------
+Bug #1658	Fixed coarse cyclic mode bounds
+Bug #1140	Controller position autosave
+
+-------------v1.5.9, release date: 2012.08.01-----------
+Bug #1697	Fixed port disconnect bug
+
+-------------v1.5.8, release date: 2012.07.18-----------
+Feature #1583	Protocol 15.1 support
+Bug #1593	Fixed QtScript crashes
+
+-------------v1.5.7, release date: 2012.07.12-----------
+Feature #525	Optimize sent commands in main window
+Feature #807	Positioner name field
+Feature #810	Window title
+Feature #812	QtScript in separate execution thread
+Feature #927	Checkbox "Shutdown on overheat"
+Feature #1277	Rebuild XILab with new library version
+Feature #1428	Log libximc messages to XiLab window
+Bug #440	Configuration file display
+Bug #1141	Add controller S/N to child windows
+Bug #1270	Graphs fix
+Bug #1369	Settings weren't saved into controller
+Bug #1432	Wrong graph file size
+Bug #1434	Reading from default settings file
+
+-------------v1.5.6, release date: 2012.06.08-----------
+Feature #810	Serial number in window title
+Feature #891	Compare two settings files
+Bug #1270	Fix charts
+Bug #		Initial encoder display fix
+Bug #		"config file"->"graph file" fix
+Bug #		Fix graph "tail" bug
+Bug #		Fix multiple "Device found" messages
+
+-------------v1.5.5, release date: 2012.05.22-----------
+Feature #1295	Full GETS support in main window
+Feature #	Protocol 14.4 support
+Bug #		WinXP text label white shadow fix
+
+-------------v1.5.4, release date: 2012.05.15-----------
+Feature #1236	Main window log
+Feature #1239	Secondary position indicator (main window)
+Feature #1294	Remove input value limits in Settings
+Bug #776	An option to use encoder
+Bug #818	Change microstep mode fix

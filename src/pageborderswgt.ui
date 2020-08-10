@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageBordersWgtClass</class>
+ <widget class="QWidget" name="PageBordersWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>536</width>
+    <height>414</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Borders setup</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="horizontalSpacing">
+       <number>24</number>
+      </property>
+      <item row="3" column="0">
+       <widget class="QWidget" name="encoderWgt" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>64</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Left border</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>6</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>64</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Right border</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="1">
+          <widget class="StepSpinBox" name="leftBdrValue"/>
+         </item>
+         <item row="3" column="1">
+          <widget class="StepSpinBox" name="rightBdrValue"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QWidget" name="swithWgt" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QGroupBox" name="limit1Box">
+           <property name="title">
+            <string>Limit switch 1</string>
+           </property>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Pushed position</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="pushed1Lst">
+              <item>
+               <property name="text">
+                <string>close</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>open</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Border</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="border1Lst">
+              <item>
+               <property name="text">
+                <string>left</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>right</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="limit2Box">
+           <property name="title">
+            <string>Limit switch 2</string>
+           </property>
+           <layout class="QFormLayout" name="formLayout_3">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Pushed position</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="pushed2Lst">
+              <item>
+               <property name="text">
+                <string>close</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>open</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Border</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="border2Lst">
+              <item>
+               <property name="text">
+                <string>left</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>right</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="borderMissetChk">
+           <property name="text">
+            <string>Border misset detection</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QCheckBox" name="stopRightChk">
+        <property name="text">
+         <string>Stop at right border</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>6</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="stopLeftChk">
+        <property name="text">
+         <string>Stop at left border</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="switchBtn">
+        <property name="text">
+         <string>By limit switches</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="encoderBtn">
+        <property name="text">
+         <string>By position</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <spacer name="verticalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>encoderBtn</tabstop>
+  <tabstop>switchBtn</tabstop>
+  <tabstop>pushed1Lst</tabstop>
+  <tabstop>border1Lst</tabstop>
+  <tabstop>pushed2Lst</tabstop>
+  <tabstop>border2Lst</tabstop>
+  <tabstop>stopLeftChk</tabstop>
+  <tabstop>stopRightChk</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>encoderBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>encoderWgt</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>63</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>switchBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swithWgt</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>364</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>500</x>
+     <y>196</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

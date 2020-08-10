@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageUserUnitsWgtClass</class>
+ <widget class="QWidget" name="PageUserUnitsWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>438</width>
+    <height>265</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PageUserUnitsWgt</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>12</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>User units</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="topMargin">
+       <number>7</number>
+      </property>
+      <item row="2" column="0">
+       <widget class="QLabel" name="coefficientLbl">
+        <property name="text">
+         <string>Ratio</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QCheckBox" name="enableChk">
+        <property name="text">
+         <string>Enable user units</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QPushButton" name="pushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Get from EEPROM</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QFrame" name="frame">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="50,1,25,25">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="StepSpinBox" name="stepMultiplier" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>=</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="DoubleSpinBox" name="unitMultiplier" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="unitEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maxLength">
+            <number>8</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="precisionLbl">
+        <property name="text">
+         <string>Precision</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="precisionValue">
+        <property name="suffix">
+         <string> decimals</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="enabled">
+       <bool>true</bool>
+     </property>
+     <property name="title">
+       <string>Correction table</string>
+     </property>
+      <layout class="QGridLayout" name="gridLayout1">
+        <property name="topMargin">
+          <number>7</number>
+        </property>
+      <item row="3" column="0" colspan="2">
+        <widget class="QPushButton" name="pushButton1">
+          <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+            </sizepolicy>
+          </property>
+          <property name="text">
+            <string>Load table</string>
+          </property>
+        </widget>       
+      </item>
+        <item row="4" column="0" colspan="2">
+          <widget class="QPushButton" name="pushButton2">
+            <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+              </sizepolicy>
+            </property>
+            <property name="text">
+              <string>Clear table</string>
+            </property>
+          </widget>
+        </item>
+        <item row="2" column="0">
+          <widget class="QLabel" name="namefileLbl">
+            <property name="text">
+              <string>""</string>
+            </property>
+            <property name="alignment">
+              <set>Qt::AlignLeft|Qt::AlignLeading|Qt::AlignVCenter</set>
+            </property>
+          </widget>
+        </item>
+    </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_5">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>StepSpinBox</class>
+   <extends>QWidget</extends>
+   <header>stepspinbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DoubleSpinBox</class>
+   <extends>QWidget</extends>
+   <header>doublespinbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>enableChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>precisionValue</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>152</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>201</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enableChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>precisionLbl</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>53</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enableChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>coefficientLbl</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>36</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>39</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enableChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox_5</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enableChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>frame</receiver>
+   <slot>setEnabled(bool)</slot>
+    <hints>
+     <hint type="sourcelabel">
+      <x>155</x>
+      <y>37</y>
+     </hint>
+    <hint type="destinationlabel">
+      <x>254</x>
+      <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

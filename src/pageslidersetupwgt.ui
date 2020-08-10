@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageSliderSetupWgtClass</class>
+ <widget class="QWidget" name="PageSliderSetupWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>518</width>
+    <height>504</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PageSliderWgt</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Slider settings</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="1" column="1">
+       <widget class="StepSpinBox" name="rightPointValue">
+        <property name="minimum">
+         <number>-2147483647</number>
+        </property>
+        <property name="maximum">
+         <number>2147483647</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Right slider bound</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Left slider bound</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="StepSpinBox" name="leftPointValue">
+        <property name="minimum">
+         <number>-2147483647</number>
+        </property>
+        <property name="maximum">
+         <number>2147483647</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QCheckBox" name="LoadFromDeviceChk">
+        <property name="text">
+         <string>Use values from &quot;Borders&quot; page for slider bounds</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QCheckBox" name="WatchOverLimitsChk">
+        <property name="text">
+         <string>Watch over limits</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Position settings</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QCheckBox" name="showSecondaryChk">
+        <property name="text">
+         <string>Show secondary position</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>LoadFromDeviceChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>rightPointValue</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>84</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LoadFromDeviceChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>leftPointValue</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>355</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>44</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,6 @@
+#ifndef COMMONVARS_H
+#define COMMONVARS_H
+
+#define BOOTLOADER_DELAY 1000
+
+#endif // COMMONVARS_H

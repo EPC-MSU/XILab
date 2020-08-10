@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A75900E-13E6-4F04-A48D-2AFE3E6EE3EA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XILab", "XILab.vcxproj", "{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug - servicemode|Win32 = debug - servicemode|Win32
+		debug - servicemode|x64 = debug - servicemode|x64
+		debug - usermode|Win32 = debug - usermode|Win32
+		debug - usermode|x64 = debug - usermode|x64
+		release - servicemode|Win32 = release - servicemode|Win32
+		release - servicemode|x64 = release - servicemode|x64
+		release - usermode|Win32 = release - usermode|Win32
+		release - usermode|x64 = release - usermode|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|Win32.ActiveCfg = debug - servicemode new|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|Win32.Build.0 = debug - servicemode new|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|x64.ActiveCfg = debug - servicemode new|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|x64.Build.0 = debug - servicemode new|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|Win32.ActiveCfg = debug - usermode new|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|Win32.Build.0 = debug - usermode new|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|x64.ActiveCfg = debug - usermode new|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|x64.Build.0 = debug - usermode new|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - servicemode|Win32.ActiveCfg = release - servicemode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - servicemode|Win32.Build.0 = release - servicemode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - servicemode|x64.ActiveCfg = release - servicemode|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - servicemode|x64.Build.0 = release - servicemode|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - usermode|Win32.ActiveCfg = release - usermode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - usermode|Win32.Build.0 = release - usermode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - usermode|x64.ActiveCfg = release - usermode|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - usermode|x64.Build.0 = release - usermode|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		QtVersion = 4.8.0
+	EndGlobalSection
+EndGlobal

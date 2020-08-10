@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageDCMotorWgtClass</class>
+ <widget class="QWidget" name="PageDCMotorWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>380</width>
+    <height>660</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>9</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Motor parameters</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="horizontalSpacing">
+       <number>24</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="reversChk">
+        <property name="text">
+         <string>Revers</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="voltageChk">
+        <property name="text">
+         <string>Max voltage</string>
+        </property>
+        <property name="tristate">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="useMaxSpeedChk">
+        <property name="text">
+         <string>Move with max speed</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="voltageBox">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="suffix">
+         <string> mV</string>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="limitSpeedChk">
+        <property name="text">
+         <string>Limit speed with max speed</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="StepSpinBox" name="rpmBox" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> rpm</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="currentBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix">
+         <string> mA</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="currentChk">
+        <property name="text">
+         <string>Max current</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="maxNominalSpeedLbl">
+        <property name="text">
+         <string>     Max nominal speed</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Motion setup</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0">
+      <property name="horizontalSpacing">
+       <number>12</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="StepSpinBox" name="speedBox" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> rpm</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="StepSpinBox" name="accelBox" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> rpm/s</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>     Backlash compensation speed</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>     Deceleration</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="StepSpinBox" name="antiplaySpeedBox" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> rpm</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="StepSpinBox" name="decelBox" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> rpm/s</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="accelChk">
+        <property name="text">
+         <string>Acceleration</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="playChk">
+        <property name="text">
+         <string>Backlash compensation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="StepSpinBox" name="playBox" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> counts</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="workingSpeedLbl">
+        <property name="text">
+         <string>     Working speed</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Feedback</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4" columnstretch="0,0">
+      <property name="horizontalSpacing">
+       <number>12</number>
+      </property>
+      <item row="2" column="0" colspan="2">
+       <widget class="QFrame" name="encoderFrame">
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="cptLbl">
+           <property name="text">
+            <string>Encoder counts per turn</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="cptBox">
+           <property name="suffix">
+            <string> counts</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="encoderReverseChk">
+           <property name="text">
+            <string>Encoder reverse</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="encoderRadio">
+        <property name="text">
+         <string>Encoder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="feedbackTypeBox">
+        <item>
+         <property name="text">
+          <string>Autodetect</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Single-ended</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Differential</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="hiddenRadio">
+        <property name="text">
+         <string>hide me</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StepSpinBox</class>
+   <extends>QWidget</extends>
+   <header>stepspinbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>reversChk</tabstop>
+  <tabstop>useMaxSpeedChk</tabstop>
+  <tabstop>limitSpeedChk</tabstop>
+  <tabstop>rpmBox</tabstop>
+  <tabstop>currentChk</tabstop>
+  <tabstop>currentBox</tabstop>
+  <tabstop>voltageChk</tabstop>
+  <tabstop>voltageBox</tabstop>
+  <tabstop>speedBox</tabstop>
+  <tabstop>playChk</tabstop>
+  <tabstop>playBox</tabstop>
+  <tabstop>antiplaySpeedBox</tabstop>
+  <tabstop>accelChk</tabstop>
+  <tabstop>accelBox</tabstop>
+  <tabstop>decelBox</tabstop>
+  <tabstop>encoderRadio</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>currentChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>currentBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>playChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>playBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>132</x>
+     <y>272</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>accelChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>accelBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>322</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>accelChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>decelBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>playChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>antiplaySpeedBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>81</x>
+     <y>272</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>useMaxSpeedChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>speedBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>151</x>
+     <y>63</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

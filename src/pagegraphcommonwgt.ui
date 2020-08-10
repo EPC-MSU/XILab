@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageGraphCommonWgtClass</class>
+ <widget class="QWidget" name="PageGraphCommonWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>383</width>
+    <height>242</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GraphCommonWgt</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="mainBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>Common setup</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,1">
+      <property name="horizontalSpacing">
+       <number>12</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Visible interval</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="datapointsValue">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="suffix">
+         <string> s</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>3600</number>
+        </property>
+        <property name="value">
+         <number>60</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_1">
+        <property name="text">
+         <string>Update interval</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="intervalValue">
+        <property name="suffix">
+         <string> ms</string>
+        </property>
+        <property name="minimum">
+         <number>50</number>
+        </property>
+        <property name="maximum">
+         <number>60000</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="dataUpdateChk">
+     <property name="text">
+      <string>Break data update when motor stopped</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="autostartOnOpen">
+     <property name="text">
+      <string>Autostart charts on window open</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>datapointsValue</tabstop>
+  <tabstop>intervalValue</tabstop>
+  <tabstop>dataUpdateChk</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

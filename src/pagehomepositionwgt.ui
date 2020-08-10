@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageHomePositionWgtClass</class>
+ <widget class="QWidget" name="PageHomePositionWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>375</width>
+    <height>327</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="horizontalSpacing">
+    <number>24</number>
+   </property>
+   <item row="10" column="1">
+    <widget class="QComboBox" name="StopCondBox_2">
+     <item>
+      <property name="text">
+       <string>revolution sensor</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>synchronization pulse</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>limit switch</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QCheckBox" name="halfRevChk">
+     <property name="text">
+      <string>Blind half turn</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>1st move speed</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>1st move direction</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="dirFastBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <item>
+      <property name="text">
+       <string>left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="14" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Standoff</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="StopCondBox">
+     <item>
+      <property name="text">
+       <string>revolution sensor</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>synchronization pulse</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>limit switch</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Stop after</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QCheckBox" name="fromEndChk">
+     <property name="text">
+      <string>Use second phase of homing</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>2nd move direction</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QComboBox" name="dirBox">
+     <item>
+      <property name="text">
+       <string>left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>2nd move speed</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Stop after</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="StepSpinBox" name="speedFastBox" native="true"/>
+   </item>
+   <item row="9" column="1">
+    <widget class="StepSpinBox" name="speedSlowBox" native="true"/>
+   </item>
+   <item row="11" column="1">
+    <widget class="StepSpinBox" name="deltaBox" native="true"/>
+   </item>
+   <item row="12" column="0" colspan="2">
+    <widget class="QCheckBox" name="fastHomeBox">
+     <property name="text">
+      <string>Use fast homing algorithm</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StepSpinBox</class>
+   <extends>QWidget</extends>
+   <header>stepspinbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>dirFastBox</tabstop>
+  <tabstop>StopCondBox</tabstop>
+  <tabstop>fromEndChk</tabstop>
+  <tabstop>halfRevChk</tabstop>
+  <tabstop>dirBox</tabstop>
+  <tabstop>StopCondBox_2</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>fromEndChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_7</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>79</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fromEndChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dirBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>228</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>363</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fromEndChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_5</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>99</x>
+     <y>190</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fromEndChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_3</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>65</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fromEndChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>StopCondBox_2</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fromEndChk</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>halfRevChk</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>125</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fromEndChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>speedSlowBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>101</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>231</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

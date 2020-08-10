@@ -1,0 +1,66 @@
+<RCC>
+    <qresource prefix="/chartdlg">
+        <file>images/chartdlg/chart.png</file>
+    </qresource>
+    <qresource prefix="/scriptdlg">
+        <file>images/scriptdlg/script.png</file>
+    </qresource>
+    <qresource prefix="/joydlg">
+        <file>images/joydlg/stick.png</file>
+    </qresource>
+    <qresource prefix="/devicedlg">
+        <file>images/devicedlg/connected.png</file>
+        <file>images/devicedlg/item.png</file>
+        <file>images/devicedlg/wait.gif</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>images/icons/window_icon.png</file>
+    </qresource>
+    <qresource prefix="/startwindow">
+        <file>images/startwindow/arrows.gif</file>
+        <file>images/startwindow/motor_icon.png</file>
+        <file>images/startwindow/question.png</file>
+        <file>images/startwindow/list.png</file>
+        <file>images/startwindow/new_year.png</file>
+    </qresource>
+    <qresource prefix="/mainwindow">
+        <file>images/mainwindow/ind_off.png</file>
+        <file>images/mainwindow/ind_on.png</file>
+        <file>images/mainwindow/ind_red.png</file>
+        <file>images/mainwindow/ind_grey.png</file>
+        <file>images/mainwindow/ind_green.png</file>
+        <file>images/mainwindow/left.png</file>
+        <file>images/mainwindow/left_bdr.png</file>
+        <file>images/mainwindow/main.png</file>
+        <file>images/mainwindow/right.png</file>
+        <file>images/mainwindow/right_bdr.png</file>
+        <file>images/mainwindow/stop.png</file>
+        <file>images/mainwindow/cyclic.png</file>
+        <file>images/mainwindow/cyclic_off.png</file>
+        <file>images/mainwindow/check.png</file>
+        <file>images/mainwindow/antiplay.png</file>
+        <file>images/mainwindow/state_moving.svg</file>
+    </qresource>
+    <qresource prefix="/settingsdlg">
+        <file>images/settingsdlg/settings.png</file>
+        <file>images/settingsdlg/x.png</file>
+        <file>images/settingsdlg/wrench.png</file>
+    </qresource>
+    <qresource prefix="/multiaxis">
+        <file>images/multiaxis/Stop_sign_light_red.svg</file>
+        <file>images/multiaxis/down.svg</file>
+        <file>images/multiaxis/left.svg</file>
+        <file>images/multiaxis/right.svg</file>
+        <file>images/multiaxis/up.svg</file>
+    </qresource>
+    <qresource prefix="/ximcrules">
+        <file>rulesfile</file>
+    </qresource>
+    <qresource prefix="/attenuator">
+        <file>images/attenuator/em_circle.gif</file>
+        <file>images/attenuator/green_circle.png</file>
+        <file>images/attenuator/ind_green.png</file>
+        <file>images/attenuator/ind_grey.png</file>
+        <file>images/attenuator/ind_red.png</file>
+    </qresource>
+</RCC>

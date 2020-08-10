@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageTtlWgtClass</class>
+ <widget class="QWidget" name="PageTtlWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>402</width>
+    <height>498</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="4" column="0" colspan="3">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Sync out</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Fixed state</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="SyncoutOnstart">
+        <property name="text">
+         <string>On start</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QCheckBox" name="SyncoutOnperiod">
+        <property name="text">
+         <string>Every</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="SyncoutEnabled">
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="SyncoutOnstop">
+        <property name="text">
+         <string>On stop</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Pulse width</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="pulseBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1" colspan="2">
+       <widget class="QSpinBox" name="periodBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="suffix">
+         <string> counts/steps</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QComboBox" name="impulseUnitsLst">
+        <item>
+         <property name="text">
+          <string>Microseconds</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Encoder counts / Steps</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="SyncoutInvert">
+        <property name="text">
+         <string>Invert</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" rowspan="2" colspan="2">
+       <widget class="QFrame" name="frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <widget class="QRadioButton" name="SyncoutState_0">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>46</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="SyncoutState_1">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>0</y>
+           <width>46</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Accuracy</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1" colspan="2">
+       <widget class="StepSpinBox" name="accuracyBox" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Sync in</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="3" column="2">
+       <widget class="StepSpinBox" name="positionBox" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="SyncinEnabled">
+        <property name="text">
+         <string>Enabled</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="SyncinGotoposition">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Absolute position</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="SyncinInvert">
+        <property name="text">
+         <string>Invert</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Clutter time</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QSpinBox" name="clutterBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="suffix">
+         <string> μs</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="StepSpinBox" name="speedBox" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>      Speed</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StepSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>stepspinbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_6</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>112</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>pulseBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_5</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SyncoutState_0</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>81</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SyncoutState_1</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SyncoutOnstart</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>95</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SyncoutOnstop</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>66</x>
+     <y>364</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SyncoutOnperiod</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>95</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>periodBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>262</x>
+     <y>393</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>impulseUnitsLst</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>378</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutOnperiod</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>periodBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>230</x>
+     <y>393</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncinEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SyncinGotoposition</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>146</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncinEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>positionBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>146</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>378</x>
+     <y>131</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncinEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>speedBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>56</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>378</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SyncoutEnabled</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_7</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>39</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,3 @@
+#!/bin/sh
+set -e
+xdg-desktop-icon install /usr/share/applications/ximc-xilab.desktop

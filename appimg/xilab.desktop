@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=%ver
+Name=XILab
+Comment=XIMC motor controller application
+Exec=xilab
+Icon=xilab
+Terminal=false
+Categories=Utility;

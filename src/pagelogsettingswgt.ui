@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageLogSettingsWgtClass</class>
+ <widget class="QWidget" name="PageLogSettingsWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>339</width>
+    <height>247</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PageLogSettingsWgt</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="loglevelBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>Display messages by loglevel</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
+      <property name="horizontalSpacing">
+       <number>12</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>XiLab</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Libximc</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Script</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QComboBox" name="comboBoxLLL">
+        <item>
+         <property name="text">
+          <string>None</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Error</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Warning, error</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Info, warning, error</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QComboBox" name="comboBoxXLL">
+        <item>
+         <property name="text">
+          <string>None</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Error</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Warning, error</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Info, warning, error</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2">
+       <widget class="QComboBox" name="comboBoxSLL">
+        <item>
+         <property name="text">
+          <string>None</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Error</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Warning, error</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Info, warning, error</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="AutosaveChk">
+     <property name="text">
+      <string>Enable log autosave</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="AutosavePath"/>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>comboBoxXLL</tabstop>
+  <tabstop>comboBoxLLL</tabstop>
+  <tabstop>comboBoxSLL</tabstop>
+  <tabstop>AutosaveChk</tabstop>
+  <tabstop>AutosavePath</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>AutosaveChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>AutosavePath</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

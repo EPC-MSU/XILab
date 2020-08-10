@@ -1,0 +1,79 @@
+;
+;   Stellaris USB CDC (serial) driver installation file.
+;
+[Version]
+Signature="$Windows NT$"
+Class=Ports
+ClassGuid={4d36e978-e325-11ce-bfc1-08002be10318} 
+Provider=%MFGNAME%
+LayoutFile=layout.inf
+DriverVer=04/27/2012,0.1.1.2
+CatalogFile.NTx86=standa_8smc4-5.cat
+CatalogFile.NTamd64=standa_8smc4-5.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[DefaultInstall]
+CopyFiles=Standa_8SMC4-5.inf
+
+[Manufacturer]
+%MFGNAME%=VirtualComDevices,NT,NTamd64
+
+[VirtualComDevices.NT]
+%DESCRIPTION_0%=DriverInstall,USB\VID_1CBE&PID_0007&MI_00
+%DESCRIPTION_1%=DriverInstall,USB\VID_1CBE&PID_0007&MI_02
+%DESCRIPTION_2%=DriverInstall,USB\VID_1CBE&PID_0007&MI_04
+%DESCRIPTION_3%=DriverInstall,USB\VID_1CBE&PID_0007&MI_06
+%DESCRIPTION_4%=DriverInstall,USB\VID_1CBE&PID_0007&MI_08
+%DESCRIPTION_5%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0A
+%DESCRIPTION_6%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0C
+%DESCRIPTION_7%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0E
+%DESCRIPTION_8%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0F
+%DESCRIPTION_9%=DriverInstall,USB\VID_1CBE&PID_0007&MI_10
+
+[VirtualComDevices.NTamd64]
+%DESCRIPTION_0%=DriverInstall,USB\VID_1CBE&PID_0007&MI_00
+%DESCRIPTION_1%=DriverInstall,USB\VID_1CBE&PID_0007&MI_02
+%DESCRIPTION_2%=DriverInstall,USB\VID_1CBE&PID_0007&MI_04
+%DESCRIPTION_3%=DriverInstall,USB\VID_1CBE&PID_0007&MI_06
+%DESCRIPTION_4%=DriverInstall,USB\VID_1CBE&PID_0007&MI_08
+%DESCRIPTION_5%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0A
+%DESCRIPTION_6%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0C
+%DESCRIPTION_7%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0E
+%DESCRIPTION_8%=DriverInstall,USB\VID_1CBE&PID_0007&MI_0F
+%DESCRIPTION_9%=DriverInstall,USB\VID_1CBE&PID_0007&MI_10
+
+[DriverInstall.NT]
+Include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=DriverInstall.NT.AddReg
+
+[DriverInstall.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.NT.Services]
+AddService=usbser, 0x00000002, DriverServiceInst
+
+[DriverServiceInst]
+DisplayName=%SERVICE%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+
+[Strings]
+MFGNAME     = "XIMC"
+DESCRIPTION_0 = "XIMC Motor Controller"
+DESCRIPTION_1 = "XIMC Motor Controller #2"
+DESCRIPTION_2 = "XIMC Motor Controller #3"
+DESCRIPTION_3 = "XIMC Motor Controller #4"
+DESCRIPTION_4 = "XIMC Motor Controller #5"
+DESCRIPTION_5 = "XIMC Motor Controller #6"
+DESCRIPTION_6 = "XIMC Motor Controller #7"
+DESCRIPTION_7 = "XIMC Motor Controller #8"
+DESCRIPTION_8 = "XIMC Motor Controller #9"
+DESCRIPTION_9 = "XIMC Motor Controller #10"
+SERVICE     = "XIMC USB Motor Controller"

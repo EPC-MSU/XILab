@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageDebugWgtClass</class>
+ <widget class="QWidget" name="PageDebugWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>439</width>
+    <height>922</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="GetDebugData">
+     <property name="title">
+      <string>Get debug data</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_getData">
+      <item row="0" column="0" colspan="2">
+       <widget class="QPushButton" name="dbgrBtn">
+        <property name="text">
+         <string>GET DATA</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="SetDebugData">
+     <property name="title">
+      <string>Set debug data</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_setData">
+      <item row="0" column="0" colspan="6">
+       <widget class="QFrame" name="frame">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="dbgwBtn">
+           <property name="text">
+            <string>SET DATA</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="copyBtn">
+           <property name="text">
+            <string>FILL SETs FROM GETs</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="SPOS__GPOS">
+     <property name="title">
+      <string>SPOS/GPOS</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="1">
+       <widget class="QPushButton" name="gposBtn">
+        <property name="text">
+         <string>GPOS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="LongLongSpinBox" name="encSpinBox" native="true"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="sposBtn">
+        <property name="text">
+         <string>SPOS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="ignorePosCheckBox">
+        <property name="text">
+         <string>Ignore position</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="ignoreEncCheckBox">
+        <property name="text">
+         <string>Ignore encoder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_pos">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_enc">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="StepSpinBox" name="posSpinBox"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>CHMT</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="chmtSpinBox">
+        <property name="maximum">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="chmtLabel">
+        <property name="text">
+         <string>Set active motor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="chmtSet">
+        <property name="text">
+         <string>SET</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="chmtLabel_2">
+        <property name="text">
+         <string>Active motor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="chmtGet">
+        <property name="text">
+         <string>GET</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="chmtStatus">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="FRAM">
+     <property name="title">
+      <string>SNVM/GNVM</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_NVM">
+      <item row="0" column="2" colspan="2">
+       <widget class="QPushButton" name="gnvmBtn">
+        <property name="text">
+         <string>GNVM</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QPushButton" name="snvmBtn">
+        <property name="text">
+         <string>SNVM</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="Other">
+     <property name="title">
+      <string>Other</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="loftBtn">
+        <property name="text">
+         <string>LOFT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="clfrBtn">
+        <property name="text">
+         <string>CLFR</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pwofBtn">
+        <property name="text">
+         <string>PWOF</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="eesvBtn">
+        <property name="text">
+         <string>EESV</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="restBtn">
+        <property name="text">
+         <string>REST</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="eerdBtn">
+        <property name="text">
+         <string>EERD</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="Reinstall">
+     <property name="title">
+      <string> Software tools</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,1">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="fixBtn">
+        <property name="text">
+         <string>Reinstall USB-COM device</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>PID calibration</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="callpidBtn">
+        <property name="text">
+         <string>Open</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StepSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>stepspinbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LongLongSpinBox</class>
+   <extends>QWidget</extends>
+   <header>longlongspinbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>ignorePosCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>posSpinBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>325</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>49</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ignoreEncCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>encSpinBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>350</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>144</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

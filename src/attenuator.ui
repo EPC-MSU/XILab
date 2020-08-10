@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Attenuator</class>
+ <widget class="QWidget" name="Attenuator">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>477</width>
+    <height>361</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Attenuator</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="4" column="0">
+      <widget class="QGroupBox" name="groupWishTrans_2">
+       <property name="title">
+        <string/>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="wish_trans_lab_2">
+          <property name="text">
+           <string>Current Transmittance</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="current_transmit_ed">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="moveBut">
+          <property name="text">
+           <string>Move</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="resetBut">
+          <property name="text">
+           <string>Reset</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QGroupBox" name="Wheel2">
+       <property name="title">
+        <string>Wheel2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QGroupBox" name="Wheel1">
+       <property name="title">
+        <string>Wheel1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QFrame" name="frame">
+       <property name="lineWidth">
+        <number>0</number>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="groupWishTrans">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="wish_transmit_ed"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="wish_trans_lab_4">
+             <property name="text">
+              <string> Transmittance</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0" alignment="Qt::AlignHCenter">
+            <widget class="QPushButton" name="atten_calb_button">
+             <property name="text">
+              <string>Calibrate</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" alignment="Qt::AlignHCenter">
+            <widget class="QLabel" name="atten_calb_label">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

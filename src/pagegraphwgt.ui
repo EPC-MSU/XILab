@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageGraphWgtClass</class>
+ <widget class="QWidget" name="PageGraphWgtClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>364</width>
+    <height>315</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PageGraphWgt</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="mainBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>Curve setup</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
+      <property name="horizontalSpacing">
+       <number>12</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Line width</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QComboBox" name="linestyleBox"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_1">
+        <property name="text">
+         <string>Line style</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QDoubleSpinBox" name="linewidthValue">
+        <property name="decimals">
+         <number>1</number>
+        </property>
+        <property name="minimum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="ColorButton" name="colorBox" native="true"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Color</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Scaling</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Scale min</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="minScaleValue">
+        <property name="decimals">
+         <number>1</number>
+        </property>
+        <property name="minimum">
+         <double>-2147483647.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>2147483647.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="maxScaleValue">
+        <property name="decimals">
+         <number>1</number>
+        </property>
+        <property name="minimum">
+         <double>-2147483647.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>2147483647.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Scale max</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="autoscaleChk">
+     <property name="text">
+      <string>Autoscale</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="antialiasingChk">
+     <property name="text">
+      <string>Antialiasing</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QPushButton</extends>
+   <header>colorbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>linewidthValue</tabstop>
+  <tabstop>linestyleBox</tabstop>
+  <tabstop>minScaleValue</tabstop>
+  <tabstop>maxScaleValue</tabstop>
+  <tabstop>autoscaleChk</tabstop>
+  <tabstop>antialiasingChk</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>autoscaleChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>61</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>35</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
