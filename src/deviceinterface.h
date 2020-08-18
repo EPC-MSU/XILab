@@ -110,8 +110,6 @@ public:
 
 	// Группа команд управления движением
 	result_t command_power_off ();
-	result_t command_add_sync_in_action (const command_add_sync_in_action_t* command_add_sync_in_action);
-	result_t command_add_sync_in_action_calb (const command_add_sync_in_action_calb_t* command_add_sync_in_action_calb, const calibration_t* calb);
 	result_t command_stop ();
 	result_t command_sstp ();
 	result_t command_move (int pos, int upos);

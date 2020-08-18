@@ -146,12 +146,6 @@ static void fromScriptValue(const QScriptValue &obj, controller_name_t &s) {
 	s.CtrlFlags = obj.property("CtrlFlags").toUInt32();
 }
 
-static void fromScriptValue(const QScriptValue &obj, command_add_sync_in_action_t &s) {
-	s.Position = obj.property("Position").toInt32();
-	s.uPosition = obj.property("uPosition").toInt32();
-	s.Time = obj.property("Time").toUInt32();
-}
-
 static void fromScriptValue(const QScriptValue &obj, get_position_t &s) {
 	s.Position = obj.property("Position").toInt32();
 	s.uPosition = obj.property("uPosition").toInt32();

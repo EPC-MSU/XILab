@@ -50,8 +50,6 @@ qScriptRegisterMetaType<uart_settings_t>(qengine, toScriptValue, fromScriptValue
 qScriptRegisterMetaType<uart_settings_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<controller_name_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<controller_name_t>(qengine, toScriptValue, fromScriptValue);
-qScriptRegisterMetaType<command_add_sync_in_action_t>(qengine, toScriptValue, fromScriptValue);
-qScriptRegisterMetaType<command_add_sync_in_action_calb_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<get_position_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<get_position_calb_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<set_position_t>(qengine, toScriptValue, fromScriptValue);

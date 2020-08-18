@@ -298,16 +298,6 @@ controller_name_t AxisObject::get_controller_name() const
 	devinterface->get_controller_name(&s);
 	return s;
 }
-// WRITER
-void AxisObject::command_add_sync_in_action(command_add_sync_in_action_t s) const
-{
-	devinterface->command_add_sync_in_action(&s);
-}
-// WRITER CALB
-void AxisObject::command_add_sync_in_action_calb(command_add_sync_in_action_calb_t s, calibration_t calb) const
-{
-	devinterface->command_add_sync_in_action_calb(&s, &calb);
-}
 // READER
 get_position_t AxisObject::get_position() const
 {

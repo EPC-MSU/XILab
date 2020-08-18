@@ -69,13 +69,6 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const control_settings_
 	obj.setProperty("DeltaPosition", s.DeltaPosition);
 	return obj;
 }
-Q_DECLARE_METATYPE(command_add_sync_in_action_calb_t);
-static QScriptValue toScriptValue(QScriptEngine *engine, const command_add_sync_in_action_calb_t &s) {
-	QScriptValue obj = engine->newObject();
-	obj.setProperty("Position", s.Position);
-	obj.setProperty("Time", s.Time);
-	return obj;
-}
 Q_DECLARE_METATYPE(get_position_calb_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const get_position_calb_t &s) {
 	QScriptValue obj = engine->newObject();

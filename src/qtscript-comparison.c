@@ -205,15 +205,6 @@ bool operator==(const libximc::controller_name_t& l, const libximc::controller_n
 	return eq;
 }
 
-bool operator==(const libximc::command_add_sync_in_action_t& l, const libximc::command_add_sync_in_action_t& r)
-{
-	bool eq = true;
-	eq &= (l.Position == r.Position);
-	eq &= (l.uPosition == r.uPosition);
-	eq &= (l.Time == r.Time);
-	return eq;
-}
-
 bool operator==(const libximc::get_position_t& l, const libximc::get_position_t& r)
 {
 	bool eq = true;

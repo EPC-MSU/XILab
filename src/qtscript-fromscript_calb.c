@@ -52,11 +52,6 @@ static void fromScriptValue(const QScriptValue &obj, control_settings_calb_t &s)
 	s.DeltaPosition = obj.property("DeltaPosition").toNumber();
 }
 
-static void fromScriptValue(const QScriptValue &obj, command_add_sync_in_action_calb_t &s) {
-	s.Position = obj.property("Position").toNumber();
-	s.Time = obj.property("Time").toUInt32();
-}
-
 static void fromScriptValue(const QScriptValue &obj, get_position_calb_t &s) {
 	s.Position = obj.property("Position").toNumber();
 	s.EncPosition = obj.property("EncPosition").toInteger();

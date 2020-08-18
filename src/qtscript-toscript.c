@@ -190,14 +190,6 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const controller_name_t
 	obj.setProperty("CtrlFlags", s.CtrlFlags);
 	return obj;
 }
-Q_DECLARE_METATYPE(command_add_sync_in_action_t);
-static QScriptValue toScriptValue(QScriptEngine *engine, const command_add_sync_in_action_t &s) {
-	QScriptValue obj = engine->newObject();
-	obj.setProperty("Position", s.Position);
-	obj.setProperty("uPosition", s.uPosition);
-	obj.setProperty("Time", s.Time);
-	return obj;
-}
 Q_DECLARE_METATYPE(get_position_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const get_position_t &s) {
 	QScriptValue obj = engine->newObject();

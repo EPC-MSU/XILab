@@ -213,26 +213,6 @@ result_t DeviceInterface::command_power_off ()
 	return result;
 }
 
-//Команда ASIA
-result_t DeviceInterface::command_add_sync_in_action (const command_add_sync_in_action_t* command_add_sync_in_action)
-{
-	result = libximc::command_add_sync_in_action(id, command_add_sync_in_action);
-	if (result != result_ok)
-		emit errorSignal("command_add_sync_in_action", result);
-	return result;
-
-}
-
-//Команда ASIA, калиброванная версия
-result_t DeviceInterface::command_add_sync_in_action_calb (const command_add_sync_in_action_calb_t* command_add_sync_in_action_calb, const calibration_t* calb)
-{
-	result = libximc::command_add_sync_in_action_calb(id, command_add_sync_in_action_calb, calb);
-	if (result != result_ok)
-		emit errorSignal("command_add_sync_in_action_calb", result);
-	return result;
-
-}
-
 //Команда STOP
 result_t DeviceInterface::command_stop ()
 {

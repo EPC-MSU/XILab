@@ -48,8 +48,6 @@ void set_uart_settings(uart_settings_t s) const;
 uart_settings_t get_uart_settings() const;
 void set_controller_name(controller_name_t s) const;
 controller_name_t get_controller_name() const;
-void set_add_sync_in_action(add_sync_in_action_t s) const;
-void set_add_sync_in_action_calb(add_sync_in_action_calb_t s, calibration_t calb) const;
 get_position_t get_position() const;
 get_position_calb_t get_position_calb(calibration_t calb) const;
 void set_position(set_position_t s) const;
