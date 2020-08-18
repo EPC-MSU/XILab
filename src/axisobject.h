@@ -119,7 +119,6 @@ void set_gear_settings(gear_settings_t s) const;
 gear_settings_t get_gear_settings() const;
 void set_accessories_settings(accessories_settings_t s) const;
 accessories_settings_t get_accessories_settings() const;
-void command_change_motor(command_change_motor_t s) const;
 void command_save_settings() const;
 void command_read_settings() const;
 device_information_t get_device_information() const;

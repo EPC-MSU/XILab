@@ -22,8 +22,6 @@ public:
 private slots:
 	void OnSpos();
 	void OnGpos();
-	void OnChmt();
-	void OnCget();
 	void OnSnvm();
 	void OnGnvm();
 	void OnLoft();

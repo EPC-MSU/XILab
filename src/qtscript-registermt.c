@@ -83,5 +83,4 @@ qScriptRegisterMetaType<gear_settings_t>(qengine, toScriptValue, fromScriptValue
 qScriptRegisterMetaType<gear_settings_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<accessories_settings_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<accessories_settings_t>(qengine, toScriptValue, fromScriptValue);
-qScriptRegisterMetaType<command_change_motor_t>(qengine, toScriptValue, fromScriptValue);
 qScriptRegisterMetaType<device_information_t>(qengine, toScriptValue, fromScriptValue);

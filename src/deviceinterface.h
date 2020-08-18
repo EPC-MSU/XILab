@@ -156,7 +156,6 @@ public:
 	result_t get_debug_read (debug_read_t* debug_read);
 	result_t set_debug_write (debug_write_t* debug_write);
 	result_t command_clear_fram ();
-	result_t command_change_motor (const command_change_motor_t* command_change_motor);
 	result_t get_measurements(measurements_t* measurements);
 	result_t command_start_measurements();
 

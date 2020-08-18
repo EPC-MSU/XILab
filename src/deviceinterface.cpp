@@ -638,16 +638,6 @@ result_t DeviceInterface::command_reset ()
 	return result;
 }
 
-//Команда CHMT
-result_t DeviceInterface::command_change_motor (const command_change_motor_t* command_change_motor)
-{
-	result = libximc::command_change_motor(id, command_change_motor);
-	if (result != result_ok)
-		emit errorSignal("command_change_motor", result);
-	return result;
-}
-
-
 int DeviceInterface::getMode()
 {
 	if (id == device_undefined)

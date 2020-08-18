@@ -337,10 +337,6 @@ static void fromScriptValue(const QScriptValue &obj, init_random_t &s) {
 	for (int i=0; i<16; i++) { s.key[i] = obj.property("key").property(i).toUInt32(); }
 }
 
-static void fromScriptValue(const QScriptValue &obj, command_change_motor_t &s) {
-	s.Motor = obj.property("Motor").toUInt32();
-}
-
 static void fromScriptValue(const QScriptValue &obj, status_t &s) {
 	s.MoveSts   = obj.property("MoveSts").toUInt32();
 	s.MvCmdSts  = obj.property("MvCmdSts").toUInt32();

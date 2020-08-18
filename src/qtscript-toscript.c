@@ -431,12 +431,6 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const init_random_t &s)
 	obj.setProperty("key", key);
 	return obj;
 }
-Q_DECLARE_METATYPE(command_change_motor_t);
-static QScriptValue toScriptValue(QScriptEngine *engine, const command_change_motor_t &s) {
-	QScriptValue obj = engine->newObject();
-	obj.setProperty("Motor", s.Motor);
-	return obj;
-}
 Q_DECLARE_METATYPE(device_information_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const device_information_t &s) {
 	QScriptValue obj = engine->newObject();

@@ -498,8 +498,3 @@ accessories_settings_t AxisObject::get_accessories_settings() const
 	return s;
 }
 
-// COMMAND
-void AxisObject::command_change_motor(command_change_motor_t s) const
-{
-	devinterface->command_change_motor(&s);
-}

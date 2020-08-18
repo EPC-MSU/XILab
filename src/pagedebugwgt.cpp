@@ -54,8 +54,6 @@ PageDebugWgt::PageDebugWgt(QWidget *parent, MotorSettings *motorStgs, char* dev_
 	QObject::connect(m_ui->copyBtn, SIGNAL(clicked()), this, SLOT(OnCopy()));
 	QObject::connect(m_ui->sposBtn, SIGNAL(clicked()), this, SLOT(OnSpos()));
 	QObject::connect(m_ui->gposBtn, SIGNAL(clicked()), this, SLOT(OnGpos()));
-	QObject::connect(m_ui->chmtSet, SIGNAL(clicked()), this, SLOT(OnChmt()));
-	QObject::connect(m_ui->chmtGet, SIGNAL(clicked()), this, SLOT(OnCget()));
 	QObject::connect(m_ui->snvmBtn, SIGNAL(clicked()), this, SLOT(OnSnvm()));
 	QObject::connect(m_ui->gnvmBtn, SIGNAL(clicked()), this, SLOT(OnGnvm()));
 	QObject::connect(m_ui->loftBtn, SIGNAL(clicked()), this, SLOT(OnLoft()));
@@ -155,20 +153,6 @@ void PageDebugWgt::OnRest() {
 
 void PageDebugWgt::OnClfr() {
 	devinterface->command_clear_fram();
-}
-
-void PageDebugWgt::OnChmt() {
-	command_change_motor_t chmt;
-	chmt.Motor = m_ui->chmtSpinBox->value();
-	devinterface->command_change_motor(&chmt);
-}
-
-void PageDebugWgt::OnCget() {
-	status_t status;
-	m_ui->chmtStatus->setText("");
-	if (devinterface->get_status(&status) == result_ok) {
-		m_ui->chmtStatus->setText(QString::number((status.Flags & STATE_CURRENT_MOTOR_BITS) / STATE_CURRENT_MOTOR1));
-	}
 }
 
 void PageDebugWgt::OnSnvm() {
