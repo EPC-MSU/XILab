@@ -39,7 +39,7 @@ fi
 
 clean_some_stuff()
 {
-	rm -rvf data.tar.gz control.tar.gz debian-binary usr lib ximc.h ximc-[0-9\.]*[0-9] release_64* release_32* GeneratedFiles* xiresource
+	rm -rvf data.tar.gz control.tar.gz debian-binary usr lib ximc.h ximc-[0-9\.]*[0-9] release_64* release_32* GeneratedFiles* xiresource macosx
 }
 
 # Bring Qt/Qwt versions as environment variables
