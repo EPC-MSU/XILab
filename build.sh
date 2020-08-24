@@ -47,7 +47,8 @@ clean_some_stuff()
 QT_VER_MAJOR=$(echo $QT_VER |  awk -F '.' '{print$1;}' )
 QWT_VER_MAJOR=$(echo $QWT_VER |  awk -F '.' '{print$1;}' )
 
-QTDIR=/usr/local/Trolltech/Qt-${QT_VER}/
+# do not place a trailing slash
+QTDIR=/usr/local/Trolltech/Qt-${QT_VER}
 PATH=$QTDIR/bin:$PATH
 LD_LIBRARY_PATH=$QTDIR/lib:./usr/lib:$LD_LIBRARY_PATH
 export QTDIR PATH LD_LIBRARY_PATH
