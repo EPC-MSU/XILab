@@ -337,7 +337,7 @@ void MainWindow::InitUI()
 
 	extLbl.setFixedWidth(ST_PANE_WIDTH);
 	extLbl.setAlignment(Qt::AlignHCenter);
-	extLbl.setToolTip(tr("The error is caused by the input signal.."));
+	extLbl.setToolTip(tr("The error is caused by the input signal."));
 	extLbl.setFont(font);
 	extLbl.setPalette(palette_red);
 	extLbl.setText("EXTi");
