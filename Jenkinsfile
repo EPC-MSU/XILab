@@ -22,7 +22,6 @@ pipeline {
       // execute at master
       steps {
         echo "Libximc version=${LIBXIMC_VERSION}"
-        sh "false"
       }
     } // stage
 
