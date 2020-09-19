@@ -5,6 +5,11 @@ pipeline {
     choice(name: 'XIMC_RELEASE_TYPE', choices: ['RELEASE', 'DEBUG'], description: 'Build and sign type')
   }
 
+  triggers {
+    // enable weekly rebuilds
+    cron('H H(6-9) * * 1')
+  }
+
   options {
     disableConcurrentBuilds()
     parallelsAlwaysFailFast()
