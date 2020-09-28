@@ -39,7 +39,7 @@
         <file>images/mainwindow/cyclic_off.png</file>
         <file>images/mainwindow/check.png</file>
         <file>images/mainwindow/antiplay.png</file>
-        <file>images/mainwindow/state_moving.svg</file>
+        <file>images/mainwindow/state_moving.png</file>
     </qresource>
     <qresource prefix="/settingsdlg">
         <file>images/settingsdlg/settings.png</file>
@@ -47,11 +47,11 @@
         <file>images/settingsdlg/wrench.png</file>
     </qresource>
     <qresource prefix="/multiaxis">
-        <file>images/multiaxis/Stop_sign_light_red.svg</file>
-        <file>images/multiaxis/down.svg</file>
-        <file>images/multiaxis/left.svg</file>
-        <file>images/multiaxis/right.svg</file>
-        <file>images/multiaxis/up.svg</file>
+        <file>images/multiaxis/Stop_sign_light_red.png</file>
+        <file>images/multiaxis/down.png</file>
+        <file>images/multiaxis/left.png</file>
+        <file>images/multiaxis/right.png</file>
+        <file>images/multiaxis/up.png</file>
     </qresource>
     <qresource prefix="/ximcrules">
         <file>rulesfile</file>

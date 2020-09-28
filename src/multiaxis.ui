@@ -424,7 +424,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/multiaxis/images/multiaxis/up.svg</normaloff>:/multiaxis/images/multiaxis/up.svg</iconset>
+                   <normaloff>:/multiaxis/images/multiaxis/up.png</normaloff>:/multiaxis/images/multiaxis/up.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -471,7 +471,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/multiaxis/images/multiaxis/left.svg</normaloff>:/multiaxis/images/multiaxis/left.svg</iconset>
+                   <normaloff>:/multiaxis/images/multiaxis/left.png</normaloff>:/multiaxis/images/multiaxis/left.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -531,7 +531,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/multiaxis/images/multiaxis/right.svg</normaloff>:/multiaxis/images/multiaxis/right.svg</iconset>
+                   <normaloff>:/multiaxis/images/multiaxis/right.png</normaloff>:/multiaxis/images/multiaxis/right.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -575,7 +575,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/multiaxis/images/multiaxis/down.svg</normaloff>:/multiaxis/images/multiaxis/down.svg</iconset>
+                   <normaloff>:/multiaxis/images/multiaxis/down.png</normaloff>:/multiaxis/images/multiaxis/down.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -634,7 +634,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/multiaxis/images/multiaxis/up.svg</normaloff>:/multiaxis/images/multiaxis/up.svg</iconset>
+                   <normaloff>:/multiaxis/images/multiaxis/up.png</normaloff>:/multiaxis/images/multiaxis/up.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -703,7 +703,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/multiaxis/images/multiaxis/down.svg</normaloff>:/multiaxis/images/multiaxis/down.svg</iconset>
+                   <normaloff>:/multiaxis/images/multiaxis/down.png</normaloff>:/multiaxis/images/multiaxis/down.png</iconset>
                  </property>
                 </widget>
                </item>

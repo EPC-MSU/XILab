@@ -371,21 +371,7 @@ void MainWindow::InitUI()
 	errvLbl.setDisabled(true);
 	ui->statusBar->addPermanentWidget(&errvLbl);
 
-	QPixmap state_moving = QPixmap(":/mainwindow/images/mainwindow/state_moving.svg", "svg");
-	if (state_moving.isNull()) {
-		QIcon icon;
-		icon.addFile(QString::fromUtf8(":/mainwindow/images/mainwindow/state_moving.svg"), QSize(), QIcon::Normal, QIcon::Off);
-		QPixmap pixmap = icon.pixmap(16,16);
-		if (pixmap.isNull()) {
-			mlog->InsertLine(QDateTime::currentDateTime(), "SVG render error: vector graphics will not be drawn.", SOURCE_XILAB, LOGLEVEL_ERROR, NULL);
-		} else {
-			mlog->InsertLine(QDateTime::currentDateTime(), "SVG render warning: QPixmap not supported, using a workaround.", SOURCE_XILAB, LOGLEVEL_WARNING, NULL);
-			ui->movingStateLbl->setPixmap(pixmap);
-		}
-	} else {
-		ui->movingStateLbl->setPixmap(state_moving);
-	}
-
+	ui->movingStateLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/state_moving.png"));
 	ui->targetSpeedLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/check.png"));
 	ui->antiplayLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/antiplay.png"));
 
