@@ -25,6 +25,7 @@ private:
 	device_information_t device_info;
 	device_enumeration_t dev_enum;
 protected:
+	QStringList SearchAdapters();
 	void run();
 signals:
 	void finished(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t>, QList<Qt::ItemFlags> flags);
