@@ -19,6 +19,10 @@ namespace Ui {
 #define STATE_LIST		2
 #define STATE_THINKING	4
 
+//Values of hint management timers.
+#define TIME_DOUBLE_CLICK 600
+#define TIME_SHOW 1200
+
 namespace Columns
 {
 	enum
@@ -51,7 +55,7 @@ private:
 	int state;
 	volatile int targetSpeed;
 	int lastFrame;
-	QTimer timer;
+	QTimer timer, timer1, timer2;
 	QPoint lastPoint;
 	bool b_move;
 	DeviceSearchSettings *dss;
@@ -75,10 +79,13 @@ private:
 
 	void SetPicture();
 
+	void  ShowDeviseSelClic();
+
 public slots:
 void deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags);
 	void itemDoubleClicked(QTableWidgetItem*);
 	void itemClicked(QTableWidgetItem *item);
+	void itemPressed(QTableWidgetItem *item);
 	void selectBtnClicked();
 	void retryBtnClicked();
 	void cancelBtnClicked();
@@ -87,6 +94,8 @@ void deviceListRecieved(bool enum_ok, QStringList names, QStringList description
 	void noDevicesLinuxHelperClicked();
 	void timerUpdate();
 	bool return_probe();
+	void timer1Full();
+	void timer2Full();
 };
 
 

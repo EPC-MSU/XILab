@@ -88,6 +88,10 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	qRegisterMetaType<QList<uint32_t> >("QList<uint32_t>");
 
 	connect(devicethread, SIGNAL(finished(bool, QStringList, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)), this, SLOT(deviceListRecieved(bool, QStringList, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)));
+	/*
+	 * When pressed, a timer starts to control double-tapping so that the hint is not displayed.
+	*/
+	connect(m_ui->deviceListTable, SIGNAL(itemPressed(QTableWidgetItem*)), this, SLOT(itemPressed(QTableWidgetItem*)));
 	connect(m_ui->deviceListTable, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(itemDoubleClicked(QTableWidgetItem*)));
 	connect(m_ui->deviceListTable, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(itemClicked(QTableWidgetItem*)));
 	connect(m_ui->selectBtn, SIGNAL(clicked()), this, SLOT(selectBtnClicked()));
@@ -97,13 +101,19 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	connect(m_ui->exBtn, SIGNAL(clicked()), this, SLOT(exBtnClicked()));
 	connect(m_ui->noDevicesLinuxHelper, SIGNAL(clicked()), this, SLOT(noDevicesLinuxHelperClicked()));
 	connect(&timer, SIGNAL(timeout()), this, SLOT(timerUpdate()), Qt::DirectConnection);
+	/*
+	 * Timers for managing the opening mode hint
+	 * timer1 - double-click control.
+	 * timer2 - time when the hint is displayed.
+	*/
+	connect(&timer1, SIGNAL(timeout()), this, SLOT(timer1Full()), Qt::DirectConnection);
+	connect(&timer2, SIGNAL(timeout()), this, SLOT(timer2Full()), Qt::DirectConnection);
 
 	QSize leftsize = m_ui->devices_frame->sizeHint();
 	QSize rightsize = m_ui->settings_frame->sizeHint();
 
 	this->loadWindowGeometry(MakeProgramConfigFilename());
 	inited = true;
-	// resize( 0, std::max(leftsize.height(), rightsize.height()) );
 }
 
 StartWindow::~StartWindow()
@@ -195,6 +205,34 @@ void StartWindow::SetPicture()
 	}
 }
 
+void  StartWindow::ShowDeviseSelClic()
+{
+	QModelIndexList list = m_ui->deviceListTable->selectionModel()->selectedRows();
+	QModelIndexList::iterator i;
+	int count_row = 0;
+
+	for (i = list.begin(); i < list.end(); ++i)
+	{
+		count_row++;
+	}
+
+	if (count_row == 0)
+	{
+		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()+20), "No axes are selected.");
+	}
+	if (count_row == 1)
+	{
+		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()+20), "The app will run in single-axis mode.");
+	}
+	else
+	{
+		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()+20), "The app will run in multi-axis mode.");
+	}
+
+	timer2.start(TIME_SHOW);
+	
+}
+
 void StartWindow::startSearching()
 {
 	state = STATE_THINKING;
@@ -258,12 +296,17 @@ void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringLis
 
 		}
 		m_ui->deviceListTable->setCurrentCell(0, 1);
-		m_ui->selectBtn->setEnabled(m_ui->deviceListTable->rowCount() > 1);
+		m_ui->selectBtn->setEnabled(m_ui->deviceListTable->rowCount() > 1);		
 	}
 
 	LoadAxisConfig(serials);
 
 	this->m_ui->deviceListTable->setSortingEnabled(true);
+}
+
+void StartWindow::itemPressed(QTableWidgetItem *item)
+{
+	timer1.start(TIME_DOUBLE_CLICK);
 }
 
 void StartWindow::itemClicked(QTableWidgetItem *item)
@@ -278,6 +321,8 @@ void StartWindow::itemDoubleClicked(QTableWidgetItem  *item)
 	QString url = this->m_ui->deviceListTable->item(item->row(), Columns::COLUMN_URI)->text();
 
 	selectedDevices.push_back(url);
+
+	timer1.stop();
 }
 
 void StartWindow::timerUpdate()
@@ -322,6 +367,18 @@ void StartWindow::timerUpdate()
 	}
 	
 	m_ui->pixLbl->update();
+}
+
+void StartWindow::timer1Full()
+{
+	ShowDeviseSelClic();
+	timer1.stop();
+}
+
+void StartWindow::timer2Full()
+{
+	QWhatsThis::hideText();
+	timer2.stop();
 }
 
 void StartWindow::selectBtnClicked()
