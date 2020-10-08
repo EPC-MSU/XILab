@@ -63,7 +63,7 @@ void DeviceThread::run()
 	{
 		if (dss->Server_hosts.size() == 0)
 		{
-			qs = QString("");
+			qs = QString("addr=");
 			/*
 			 * Adding the 0th interface to the search and generating the number of search passes.
 			*/
@@ -85,7 +85,6 @@ void DeviceThread::run()
 		}
 	}
 	QByteArray qa = qs.toAscii();
-	const char* hints = qa.constData();
 
 	QList<Qt::ItemFlags> flags;
 	QStringList urls, descriptions, friendlyNames, positionerNames;
@@ -103,7 +102,7 @@ void DeviceThread::run()
 		int namesCount;
 		std::vector<char*> deviceUrls;
 		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
-		dev_enum = devinterface->enumerate_devices(open_flags, hints);
+		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
 		if (dev_enum == NULL) {
 			emit finished(false, QStringList(), QStringList(), QStringList(), QStringList(), QList<uint32_t>(), flags);
 			return;
