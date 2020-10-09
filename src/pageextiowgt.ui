@@ -116,11 +116,6 @@
           <string>Out active when motor is on</string>
          </property>
         </item>
-        <item>
-         <property name="text">
-          <string>Out active when motor is found</string>
-         </property>
-        </item>
        </widget>
       </item>
      </layout>

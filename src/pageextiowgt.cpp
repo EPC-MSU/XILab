@@ -49,7 +49,6 @@ void PageExtioWgt::FromUiToClass(MotorSettings *lmStgs)
 		case 2: lmStgs->extio.EXTIOModeFlags |= EXTIO_SETUP_MODE_OUT_MOVING; break;
 		case 3: lmStgs->extio.EXTIOModeFlags |= EXTIO_SETUP_MODE_OUT_ALARM; break;
 		case 4: lmStgs->extio.EXTIOModeFlags |= EXTIO_SETUP_MODE_OUT_MOTOR_ON; break;
-		case 5: lmStgs->extio.EXTIOModeFlags |= EXTIO_SETUP_MODE_OUT_MOTOR_FOUND; break;
 		default: break;
 	}
 

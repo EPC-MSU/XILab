@@ -166,7 +166,6 @@ MotorSettings::MotorSettings(DeviceInterface *_devinterface)
 		<< pair("OUT_MOVING", EXTIO_SETUP_MODE_OUT_MOVING)
 		<< pair("OUT_ALARM", EXTIO_SETUP_MODE_OUT_ALARM)
 		<< pair("OUT_MOTOR_ON", EXTIO_SETUP_MODE_OUT_MOTOR_ON)
-		<< pair("OUT_MOTOR_FOUND", EXTIO_SETUP_MODE_OUT_MOTOR_FOUND)
 		;
 
 	controlTypeList
