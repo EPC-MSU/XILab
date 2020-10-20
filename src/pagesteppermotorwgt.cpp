@@ -204,6 +204,7 @@ void PageStepperMotorWgt::FromUiToClass(MotorSettings *lmStgs)
 {
 	lmStgs->engine.EngineFlags = 0;
 	lmStgs->feedback.FeedbackFlags = 0;
+	lmStgs->move.MoveFlags = 0;
 
 	setUnsetBit(m_ui->limitSpeedChk->isChecked(), &lmStgs->engine.EngineFlags, ENGINE_LIMIT_RPM);
 	setUnsetBit(m_ui->playChk->isChecked(), &lmStgs->engine.EngineFlags, ENGINE_ANTIPLAY);

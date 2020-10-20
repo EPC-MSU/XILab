@@ -102,6 +102,7 @@ void PageDCMotorWgt::FromUiToClass(MotorSettings *lmStgs)
 {
 	lmStgs->engine.EngineFlags = 0;
 	lmStgs->feedback.FeedbackFlags = 0;
+	lmStgs->move.MoveFlags = 0;
 
 	setUnsetBit(m_ui->voltageChk->isChecked(), &lmStgs->engine.EngineFlags, ENGINE_LIMIT_VOLT);
 	setUnsetBit(m_ui->currentChk->isChecked(), &lmStgs->engine.EngineFlags, ENGINE_LIMIT_CURR);

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
+    <width>555</width>
     <height>873</height>
    </rect>
   </property>
@@ -134,48 +134,20 @@
    </item>
    <item>
     <widget class="QGroupBox" name="groupBox_3">
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
      <property name="title">
       <string>Motion setup</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0">
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0">
       <property name="horizontalSpacing">
        <number>12</number>
       </property>
-      <item row="0" column="1">
-       <widget class="StepSpinBox" name="speedBox" native="true">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="suffix" stdset="0">
-         <string> rpm</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="StepSpinBox" name="accelBox" native="true">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="suffix" stdset="0">
-         <string> rpm/s</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>     Backlash compensation speed</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>     Deceleration</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
+      <item row="6" column="2">
        <widget class="StepSpinBox" name="antiplaySpeedBox" native="true">
         <property name="enabled">
          <bool>false</bool>
@@ -185,31 +157,47 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="StepSpinBox" name="decelBox" native="true">
+      <item row="0" column="2">
+       <widget class="StepSpinBox" name="speedBox" native="true">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="suffix" stdset="0">
-         <string> rpm/s</string>
+         <string> rpm</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QCheckBox" name="accelChk">
-        <property name="text">
-         <string>Acceleration</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
        <widget class="QCheckBox" name="playChk">
         <property name="text">
          <string>Backlash compensation</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="7" column="0">
+       <widget class="QCheckBox" name="accelChk">
+        <property name="text">
+         <string>Acceleration</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="workingSpeedLbl">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>     Working speed</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
        <widget class="StepSpinBox" name="playBox" native="true">
         <property name="enabled">
          <bool>false</bool>
@@ -219,26 +207,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="workingSpeedLbl">
-        <property name="text">
-         <string>     Working speed</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0" colspan="2">
+      <item row="9" column="0" colspan="3">
        <widget class="QFrame" name="frame">
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
+         <property name="margin">
           <number>0</number>
          </property>
          <item>
@@ -258,6 +230,53 @@
         </layout>
        </widget>
       </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>     Backlash compensation speed</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="StepSpinBox" name="accelBox" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> rpm/s</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="2">
+       <widget class="StepSpinBox" name="decelBox" native="true">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix" stdset="0">
+         <string> rpm/s</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>     Deceleration</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="div1000Chk">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>1/1000</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -273,16 +292,7 @@
       <item row="5" column="0" colspan="2">
        <widget class="QFrame" name="encoderFrame">
         <layout class="QGridLayout" name="gridLayout_5">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
+         <property name="margin">
           <number>0</number>
          </property>
          <item row="0" column="0">

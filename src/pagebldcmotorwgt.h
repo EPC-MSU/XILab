@@ -43,6 +43,7 @@ private slots:
 
 public slots:
 	void OnSpeedChkUnchecked();
+	void div1000ChkUnchecked();
 	void OnEncoderRadioChecked(bool checked);
 	void OnLinearMotorSettings(uint32_t, uint32_t);
 signals:

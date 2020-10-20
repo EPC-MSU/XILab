@@ -53,6 +53,7 @@ MotorSettings::MotorSettings(DeviceInterface *_devinterface)
 	devinterface = _devinterface;
 	//инициализация флагов
 	engine.EngineFlags = 0;
+	move.MoveFlags = 0;
 	sync_in.SyncInFlags = 0;
 	sync_out.SyncOutFlags = 0;
 	edges.BorderFlags = 0;
@@ -326,6 +327,7 @@ void MotorSettings::FromSettingsToClass(QSettings *settings, QString *errors)
 	settings->endGroup();
 // --------------------------------------
 	engine.EngineFlags = 0;
+	move.MoveFlags = 0;
 	feedback.FeedbackFlags = 0;
 	// Stepper or DC
 	settings->beginGroup("Engine");
@@ -351,6 +353,7 @@ void MotorSettings::FromSettingsToClass(QSettings *settings, QString *errors)
 	LoadHelperUInt(settings, errors, "Antiplay_speed_usteps", &move.uAntiplaySpeed);
 	LoadHelperUInt(settings, errors, "Acceleration", &move.Accel);
 	LoadHelperUInt(settings, errors, "Deceleration", &move.Decel);
+	LoadHelperFlag(settings, errors, "Divider_RPM", &move.MoveFlags, RPM_DIV_1000);
 
 	LoadHelperList(settings, errors, "Feedback_type", &feedback.FeedbackType, feedbackTypeList);
 	LoadHelperList(settings, errors, "Feedback_enc_type", &feedback.FeedbackFlags, feedbackEncTypeList); // should happen before flag loads below
@@ -607,6 +610,7 @@ bool MotorSettings::FromClassToSettings(QSettings *settings, unsigned int curren
 	settings->setValue("Antiplay_speed_usteps", move.uAntiplaySpeed);
 	settings->setValue("Acceleration", move.Accel);
 	settings->setValue("Deceleration", move.Decel);
+	settings->setValue("Divider_RPM", (move.MoveFlags & RPM_DIV_1000) != 0);
 
 	SAVE_KEY(feedbackTypeList, feedback.FeedbackType, INT_MAX, "Feedback_type");
 	settings->setValue("Encoder_CPT", feedback.CountsPerTurn);

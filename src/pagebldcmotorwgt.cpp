@@ -11,6 +11,7 @@ PageBLDCMotorWgt::PageBLDCMotorWgt(QWidget *parent, MotorSettings *motorStgs) :
 
 	QObject::connect(m_ui->limitSpeedChk,	SIGNAL(toggled(bool)), this, SLOT(OnSpeedChkUnchecked()));
 	QObject::connect(m_ui->useMaxSpeedChk,	SIGNAL(toggled(bool)), this, SLOT(OnSpeedChkUnchecked()));
+	QObject::connect(m_ui->div1000Chk, SIGNAL(toggled(bool)), this, SLOT(div1000ChkUnchecked()));
 	QObject::connect(m_ui->encoderRadio,   SIGNAL(toggled(bool)),  this, SLOT(OnEncoderRadioChecked(bool)));
 	QObject::connect(m_ui->wizardBtn, SIGNAL(clicked()), this, SLOT(OnWizard()));
 	QObject::connect(&(this->linearDlg), SIGNAL(sendLinearMotorSettings(uint32_t, uint32_t)), this, SLOT(OnLinearMotorSettings(uint32_t, uint32_t)));
@@ -78,6 +79,7 @@ void PageBLDCMotorWgt::FromClassToUi(bool _emit)
     m_ui->rpmBox->setBaseValue(mStgs->engine.NomSpeed);
     m_ui->playBox->setBaseValue(mStgs->engine.Antiplay);
 
+	m_ui->div1000Chk->setChecked(mStgs->move.MoveFlags & RPM_DIV_1000);
 	m_ui->speedBox->setBaseValue(mStgs->move.Speed);
 
 	m_ui->antiplaySpeedBox->setBaseValue(mStgs->move.AntiplaySpeed);
@@ -107,6 +109,7 @@ void PageBLDCMotorWgt::FromUiToClass(MotorSettings *lmStgs)
 {
 	lmStgs->engine.EngineFlags = 0;
 	lmStgs->feedback.FeedbackFlags = 0;
+	lmStgs->move.MoveFlags = 0;
 
 	setUnsetBit(m_ui->voltageChk->isChecked(), &lmStgs->engine.EngineFlags, ENGINE_LIMIT_VOLT);
 	setUnsetBit(!m_ui->amplitudeChk->isChecked(), &lmStgs->engine.EngineFlags, ENGINE_CURRENT_AS_RMS);  // set RMS if not amplitude current (#20604)
@@ -121,6 +124,7 @@ void PageBLDCMotorWgt::FromUiToClass(MotorSettings *lmStgs)
     lmStgs->engine.NomSpeed = m_ui->rpmBox->basevalueInt();
     lmStgs->engine.Antiplay = m_ui->playBox->basevalueInt();
 
+	setUnsetBit(m_ui->div1000Chk->isChecked(), &lmStgs->move.MoveFlags, RPM_DIV_1000);
 	lmStgs->move.Speed = round(m_ui->speedBox->basevalueInt());
 	lmStgs->move.AntiplaySpeed = m_ui->antiplaySpeedBox->basevalueInt();
     lmStgs->move.Accel = m_ui->accelBox->basevalueInt();
@@ -146,6 +150,12 @@ void PageBLDCMotorWgt::OnSpeedChkUnchecked()
 		m_ui->rpmBox->setDisabled(true);
 	else 
 		m_ui->rpmBox->setEnabled(true);
+}
+
+void PageBLDCMotorWgt::div1000ChkUnchecked()
+{
+	if (!m_ui->div1000Chk->isChecked() && m_ui->speedBox->basevalue()>m_ui->rpmBox->basevalue())
+		m_ui->speedBox->setBaseValue(m_ui->rpmBox->basevalue());
 }
 
 void PageBLDCMotorWgt::OnEncoderRadioChecked(bool checked)

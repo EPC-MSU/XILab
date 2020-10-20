@@ -453,6 +453,8 @@ void SettingsDlg::AllPagesFromUiToClassToDevice()
 	motorStgs->need_engine_save = !(motorStgs->engine == tmpStgs.engine);
 	motorStgs->need_entype_save = !(motorStgs->entype == tmpStgs.entype);
 	motorStgs->need_move_save = !(motorStgs->move == tmpStgs.move);
+	if (!motorStgs->need_move_save)
+		motorStgs->need_move_save = !(motorStgs->move.MoveFlags == tmpStgs.move.MoveFlags);
 	motorStgs->need_feedback_save = !(motorStgs->feedback == tmpStgs.feedback);
 	motorStgs->need_power_save = !(motorStgs->power == tmpStgs.power);
 	motorStgs->need_brake_save = !(motorStgs->brake == tmpStgs.brake);
