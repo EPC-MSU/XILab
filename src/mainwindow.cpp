@@ -1285,14 +1285,6 @@ void MainWindow::AttenuatorMotion()
 			if (attenuator->should_move && attenuator->getCalibrationStatus() == Calibration::OK) { // skip phase 1 (calibration) of the 1+2 combination
 				state_atten = WAIT_CALIBRATE;
 			} else { // perform phase 1 (calibration) and phase 2 (movement) of the 1+2 combination
-				devinterface->command_movr_calb(FILTER_COUNT, calb);
-				state_atten = CONTINUE_CALIBRATE;
-			}
-			break;
-		case CONTINUE_CALIBRATE:
-			if ((cs->statusCalb().MvCmdSts)&(MVCMD_RUNNING))
-				break;
-			{
 				attenuator->setCalibrationStatus(Calibration::IN_PROGRESS);
 				//set attenuator default position 
 				//Positions for first filters [1 ... 8]
@@ -1302,16 +1294,15 @@ void MainWindow::AttenuatorMotion()
 				//offset of positions
 				prev_steps_y = 0;
 				posit_steps_x = 0;
-				devinterface->command_home();
+				devinterface->command_homezero();
+				state_atten = WAIT_CALIBRATE;
 			}
-			state_atten = WAIT_CALIBRATE;
 			break;
 		case WAIT_CALIBRATE:
 			if(!((cs->statusCalb().MvCmdSts)&(MVCMD_RUNNING))) {
 				attenuator->setCalibrationStatus(Calibration::OK);
 				if (!attenuator->should_move){ // skip phase 2 (movement) of the 1+2 combination
 					state_atten = WAIT_STOP2;
-					devinterface->command_zero();
 				}
 				else { 
 					unsigned int Pos1 = 0;//position of filters in first wheel in range [1...8]
@@ -1864,7 +1855,7 @@ void MainWindow::OnGoHomeBtnPressed()
 {
 	cyclic = false;
 	devinterface->command_home();
-	attenuator->setCalibrationStatus(Calibration::NO_CALIBRATION);
+	//attenuator->setCalibrationStatus(Calibration::NO_CALIBRATION);
 }
 
 void MainWindow::stopByCancel()
