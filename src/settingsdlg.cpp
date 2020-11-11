@@ -1777,12 +1777,19 @@ QString SettingsDlg::getFormattedSpeed()
 		if (isSpeedUnitRotation(motorStgs->feedback.FeedbackType)) {
 			speed *= (float)motorStgs->feedback.CountsPerTurn / 60.0F;
 		}
-		str = QString("%1 %2").arg(speed, 0, 'f', uuStgs->precision).arg(speed_unit);
+		if (((cs->statusCalb().MvCmdSts & MVCMD_RUNNING) != 0) && (speed == 0))
+			str = QString("~%1 %2").arg(speed, 0, 'f', uuStgs->precision).arg(speed_unit);
+		else
+			str = QString("%1 %2").arg(speed, 0, 'f', uuStgs->precision).arg(speed_unit);
 	} else {
+		int speed = cs->status().CurSpeed;
 		if (isSpeedUnitRotation(motorStgs->feedback.FeedbackType)) {
-			str = QString("%1 %2").arg(cs->status().CurSpeed).arg(speed_unit);
+			if (((cs->statusCalb().MvCmdSts & MVCMD_RUNNING) != 0) && (speed == 0))
+				str = QString("~%1 %2").arg(speed).arg(speed_unit);
+			else
+				str = QString("%1 %2").arg(speed).arg(speed_unit);
 		} else {
-			str = getStepFracString(cs->status().CurSpeed, cs->status().uCurSpeed, false) + speed_unit;
+			str = getStepFracString(speed, cs->status().uCurSpeed, false) + speed_unit;
 		}
 	}
 	return str;
