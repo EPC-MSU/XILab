@@ -218,15 +218,15 @@ void  StartWindow::ShowDeviseSelClic()
 
 	if (count_row == 0)
 	{
-		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()+20), "No axes are selected.");
+		QToolTip::showText(QPoint(cursor().pos().x(), cursor().pos().y() + 20), "No axes are selected.");
 	}
 	if (count_row == 1)
 	{
-		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()+20), "The app will run in single-axis mode.");
+		QToolTip::showText(QPoint(cursor().pos().x(), cursor().pos().y() + 20), "The app will run in single-axis mode.");
 	}
 	else
 	{
-		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()+20), "The app will run in multi-axis mode.");
+		QToolTip::showText(QPoint(cursor().pos().x(), cursor().pos().y() + 20), "The app will run in multi-axis mode.");
 	}
 
 	timer2.start(TIME_SHOW);
@@ -377,7 +377,7 @@ void StartWindow::timer1Full()
 
 void StartWindow::timer2Full()
 {
-	QWhatsThis::hideText();
+	QToolTip::hideText();
 	timer2.stop();
 }
 
