@@ -214,7 +214,7 @@ void PageAboutDeviceWgt::OnTechSupportClicked()
 	}
 
 	QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
-	QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "Opens the mail client if it is installed.");
+	QToolTip::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "Opens the mail client, if it is installed.");
 }
 
 void PageAboutDeviceWgt::OnUpdateFirmwareFinished(result_t result)
