@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>455</width>
-    <height>540</height>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -260,10 +260,16 @@
    <item row="3" column="0">
     <widget class="QLabel" name="msgLbl">
      <property name="text">
-      <string/>
+      <string>When you click the technical support button, the mail client will open, if it is installed. If it is not possible to identify the email client, the technical support page will open, where you can register if you have not yet contacted the technical support service and ask questions.</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
