@@ -108,13 +108,15 @@ cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/
 sed "s/%qwtver/$QWT_VER/" --in-place ./linux_*_XILab_*.pro
 
 # compile
-qmake linux_servicemode_XILab_${bits}.pro
-make
-mv release_${bits}/XILab_${bits}_service ../$r_dir
-strip ../$r_dir/XILab_${bits}_service
-ls -l ../$r_dir/XILab_${bits}_service
-
-make clean
+if [ "$1" = "add_service_build" ] ; then
+	qmake linux_servicemode_XILab_${bits}.pro
+	make
+	mv release_${bits}/XILab_${bits}_service ../$r_dir
+	strip ../$r_dir/XILab_${bits}_service
+	ls -l ../$r_dir/XILab_${bits}_service
+	
+	make clean
+fi
 
 qmake linux_usermode_XILab_${bits}.pro
 make

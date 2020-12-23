@@ -2,7 +2,8 @@
 set BASEDIR=%CD%
 @cmd /C exit 0
 
-@if "%1" == "cleandist" call :CLEAN && exit /B 0
+set FIRSTPARAM="%1"
+@if %FIRSTPARAM% == "cleandist" call :CLEAN && exit /B 0
 
 :: skip checkout magic for pipeline builds
 @if not "%BUILDOS%" == "" goto END_REFRESH
@@ -116,11 +117,11 @@ goto :eof
 :APP
 cd %BASEDIR%
 @if not %errorlevel% == 0 goto FAIL
-call :XILAB win32 servicemode Win32
+@if %FIRSTPARAM% == "add_service_build" call :XILAB win32 servicemode Win32
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win32 usermode Win32
 @if not %errorlevel% == 0 goto FAIL
-call :XILAB win64 servicemode x64
+@if %FIRSTPARAM% == "add_service_build" call :XILAB win64 servicemode x64
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win64 usermode x64
 @if not %errorlevel% == 0 goto FAIL
