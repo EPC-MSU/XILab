@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+param1=$1
+
 # update to hg revision
 [ -n "$MERCURIAL" ] || MERCURIAL=hg
 
@@ -18,7 +20,7 @@ else
 		echo Use old-style MERCURIAL_REVISION
 		$MERCURIAL update --clean --rev "$MERCURIAL_REVISION"
 	fi
-	if [ "$1" = "refresh" ] ; then
+	if [ "$param1" = "refresh" ] ; then
 		shift
 		echo Refreshing done
 	else
@@ -108,7 +110,7 @@ cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/
 sed "s/%qwtver/$QWT_VER/" --in-place ./linux_*_XILab_*.pro
 
 # compile
-if [[ "$1" -eq "add_service_build" ]] then
+if [ "$param1" = "add_service_build" ] ; then
 	qmake linux_servicemode_XILab_${bits}.pro
 	make
 	mv release_${bits}/XILab_${bits}_service ../$r_dir
