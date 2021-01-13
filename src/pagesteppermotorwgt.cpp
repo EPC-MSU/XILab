@@ -33,10 +33,8 @@ PageStepperMotorWgt::PageStepperMotorWgt(QWidget *parent, MotorSettings *motorSt
 	m_ui->accelBox->setUnitType(UserUnitSettings::TYPE_ACCEL);
 	m_ui->decelBox->setUnitType(UserUnitSettings::TYPE_ACCEL);
 #ifndef SERVICEMODE
-	m_ui->resistanceChk->setDisabled(true);
-	m_ui->inductanceChk->setDisabled(true);
-	//m_ui->feedbackEmfRadio->setHidden(true);
-	//m_ui->backEMFestimator->setHidden(true);
+	//m_ui->resistanceChk->setDisabled(true);
+	//m_ui->inductanceChk->setDisabled(true);
 #endif
 }
 
