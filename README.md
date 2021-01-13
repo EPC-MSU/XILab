@@ -14,7 +14,9 @@
    - Unpack the **ximc** folder from it to **C:\projects\libximc-win**
    - Inside the copied **ximc** folder, copy the **ximc.h** file to the **win32** and **win64** folders.
 
-3. Deploying **Qt**
+3. Clone the **XILab-dependencies** repository https://github.com/EPC-MSU/XILab-dependencies to the **C:\Projects\dependency_files** 
+
+4. Deploying **Qt**
 
    - Place the **Qt** and **Qwt** folders on the C: \ drive.
    - **Qt** - **C:\Qt\msvc2013\4.8.6** and **C:\Qt\msvc2013\4.8.6_x64**
@@ -24,25 +26,33 @@
    - Add to **Path**
      C:\Qwt\msvc2013\qwt-6.0.0\lib32;C:\Qwt\msvc2013\qwt-6.0.0\lib64;C:\Qt\msvc2013\4.8.6\bin;C:\Qt\msvc2013\4.8.6_x64\bin
 
-4. Additional dependencies
-
-   Create a folder C:\dependency_files It is necessary to place
-
-| dependency_files          | win64        | win32        |
-| :------------------------ | ------------ | ------------ |
-| win32      ->             | ->           | msvcm90.dll  |
-| win64      ->             | msvcm90.dll  | msvcp90.dll  |
-| cfgmgr32.lib              | msvcp90.dll  | msvcp120.dll |
-| setupapi.lib              | msvcp120.dll | msvcr90.dll  |
-| SignTool.exe              | msvcr90.dll  | msvcr90.dll  |
-| vcredist_x64_2008_SP1.exe | msvcr120.dll |              |
-| vcredist_x64_2013.exe     |              |              |
-| vcredist_x86_2008_SP1.exe |              |              |
-| vcredist_x86_2013.exe     |              |              |
-| x64_cfgmgr32.lib          |              |              |
-| x64_setupapi.lib          |              |              |
-
+   
 
 
 ## Editing and debugging
 
+For editing and debugging you need to install development software such as **MSVC2013** and **QtCreator**.
+
+In **QtCreator**, it is convenient to perform visual editing of Windows.
+
+In **MSVC2013**, you can edit and debug code, as well as build it. 
+
+
+
+## Build a release using a build script
+
+To build releases for Windows, you can use the **build.bat** build script.
+
+- To create a distribution, you need to install **NSIS**:
+
+- You must specify the path of the file location **makensis.exe** in PATH.
+
+- Run the **build.bat**. 
+
+- Portable software packages for different bit sizes are located in the folder **C:\Projects\xilab\dist_dir**.
+
+- The installer after the build is located in the folder **C:\Projects\xilab**.
+
+  
+
+Building **XiLab** is also possible under **linux** and **Mac**.
