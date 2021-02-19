@@ -1558,6 +1558,13 @@ void SettingsDlg::motorTypeChanged(unsigned int entype)
 	treeWgtsLst[PagePowerNum]->setFlags((entype == ENGINE_TYPE_STEP) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
 
 	((PagePidWgt*)pageWgtsLst[PagePidNum])->SetMotorType(entype);
+
+	if (entype == ENGINE_TYPE_DC || entype == ENGINE_TYPE_BRUSHLESS)
+	{
+		OnSwitchCTP(FEEDBACK_ENCODER);
+//		((PageBLDCMotorWgt*)pageWgtsLst[PageBLDCMotorNum])->FromClassToUi(true);
+//		setStyles();
+	}
 }
 
 //вызывается при переключении радиобаттонов feedback в StepperMotorWgt
