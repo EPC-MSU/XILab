@@ -104,7 +104,7 @@ result_t DeviceInterface::close_device ()
 
 result_t DeviceInterface::load_calibration_table(const char* namefile)
 {
-	result = libximc::loader_correction_table(id, namefile);
+	result = libximc::set_correction_table(id, namefile);
 	if (result != result_ok)
 		emit errorSignal("load_correction_table", result);
 	return result;
