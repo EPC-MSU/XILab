@@ -18,6 +18,6 @@ struct state_vars_t{
 
 QString compileDate();
 
-#define XILAB_VERSION "1.17.11"
+#define XILAB_VERSION "1.17.12"
 
 #endif //MAIN_H
