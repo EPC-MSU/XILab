@@ -16,9 +16,9 @@
 3.  Installing dependencies.
 
    - Clone the **XILab-dependencies** repository https://github.com/EPC-MSU/XILab-dependencies to the **C:\Projects\dependency_files**
-- Move **Qwt** folder from the repository  on the C: \ drive.
+   - Move **Qwt** folder from the repository  on the C: \ drive.
    - Unpack the archive in them **Qwt** - **C:\Qwt\msvc2013\qwt-6.0.0**. 
-   - Download the Qt 4.8.6 archive https://download.qt.io/archive/qt/4.8/4.8.6/.
+   - Download the Qt 4.8.6. Qt no longer supports version 4.8.6, but a saved copy can be downloaded from our server as an archive http://files.xisupport.com/XiLab_dependencies/Qt/msvc2013.7z.
    - Unpack the archive in them **Qt** - **C:\Qt\msvc2013\4.8.6** and **C:\Qt\msvc2013\4.8.6_x64**
    - Set the appropriate environment variables **QTDIR->C:\Qt\msvc2013\4.8.6**
      **QWTDIR->C:\Qwt\msvc2013\qwt-6.0.0**
