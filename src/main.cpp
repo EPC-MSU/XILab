@@ -15,6 +15,11 @@
 #include <attenuator.h>
 #include <devicesearchsettings.h>
 
+namespace urmc
+{
+#include <urmc.h>
+}
+
 QString xilab_ver = XILAB_VERSION;
 Cactus cs;
 DeviceInterface *devinterface;
@@ -27,6 +32,7 @@ MessageLog *mlog;
 QThread *messageLogThread;
 bool singleaxis;
 const char* valid_manufacturer = "XIMC";
+const int retry_open_timeout_ms = 400;
 
 static void XIMC_CALLCONV myCallback(int loglevel, const wchar_t* message, void *user_data)
 {
@@ -79,6 +85,13 @@ void signal_handler(int signum)
 	throw critical_exception("Segmentation fault");
 }
 
+size_t glob_size;
+void* myalloc (size_t size)
+{
+	glob_size = size;
+	return malloc(size);
+}
+
 int main(int argc, char *argv[])
 {
 	signal(SIGSEGV, signal_handler); // set signal handler to handle SIGSEGV
@@ -89,6 +102,129 @@ int main(int argc, char *argv[])
 #endif
 
 	devinterface = new DeviceInterface();
+
+	// Feature #17299 - json profile generator
+	QStringList args = QCoreApplication::arguments();
+	const int notfound = -1;
+	int indexConvert = args.indexOf("--convert");
+	int indexDevice = args.indexOf("--comport");
+	if (indexConvert != notfound && args.size() > indexConvert+1) {
+		QString paramConvert = args.at(indexConvert+1);
+		QString paramDevice, urmcDevice;
+		if (indexDevice != notfound && args.size() > indexDevice+1) {
+			paramDevice = QString("xi-com:\\\\.\\COM%1").arg(args.at(indexDevice+1));
+		} else { // pick first available device
+			device_enumeration_t dev_enum = devinterface->enumerate_devices(ENUMERATE_PROBE, "");
+			paramDevice = get_device_name(dev_enum, 0);
+			free_enumerate_devices(dev_enum);
+		}
+		urmcDevice = paramDevice;
+		urmcDevice.replace(QRegExp("^xi-") ,"");
+		QByteArray qb = paramDevice.toLocal8Bit();
+		char* deviceName = qb.data();
+		QByteArray qb_urmc = urmcDevice.toLocal8Bit();
+		char* urmcName = qb_urmc.data();
+		// convert
+		retry_open(devinterface, deviceName, retry_open_timeout_ms);
+		if (!devinterface->is_open()) {
+			QMessageBox::warning(0, "Error", "Failed to open device " + paramDevice + "\nPress OK to exit.");
+			exit(0);
+		}
+		devinterface->close_device();
+		// declare local vars
+		const char* src_extension = "cfg";
+		const char* tgt_extension = "json";
+		int profiles_found = 0, profiles_processed = 0, profiles_converted = 0;
+		result_t result;
+		QString readprofile, writeprofile;
+		QString restoreErrors;
+
+		// init stuff
+		MotorSettings motorStgs(devinterface);
+		StageSettings stageStgs(devinterface);
+		QStringList config_filter = QStringList() << QString("*.%1").arg(src_extension);
+		QDirIterator it(paramConvert, config_filter, QDir::Files, QDirIterator::IteratorFlag::Subdirectories);
+		QDirIterator itcount(paramConvert, config_filter, QDir::Files, QDirIterator::IteratorFlag::Subdirectories);
+		// fixme iter copy
+		while (itcount.hasNext()) {
+			profiles_found++;
+			itcount.next();
+		}
+		urmc::device_t urmc_id = urmc::urmc_open_device(urmcName);
+		if (urmc_id == device_undefined) {
+			QMessageBox::warning(0, "Error", "Failed to open device " + urmcDevice + " as urmc.\nPress OK to exit.");
+			exit(0);
+		}
+		urmc::urmc_close_device(&urmc_id);
+
+		QProgressDialog progress("Converting...", "Abort", 0, profiles_found, NULL);
+		progress.setMinimumDuration(1000);
+		progress.show();
+		while (it.hasNext()) { // iterate over all profile files
+	        if (progress.wasCanceled()) {
+				break;
+			}
+			progress.setValue(profiles_processed);
+			QApplication::processEvents();
+
+			// get/set file names
+			it.next();
+			profiles_processed++;
+			writeprofile = readprofile = it.filePath();
+			writeprofile.replace(QRegExp(QString(".%1$").arg(src_extension)), QString(".%1").arg(tgt_extension));
+			qDebug() << "reading" << readprofile << ", writing" << writeprofile;
+
+			// open with libximc
+			devinterface->open_device(deviceName);
+			if (!devinterface->is_open()) {
+				continue;
+			}
+			
+			// load profile
+			XSettings settings(readprofile, QSettings::IniFormat, QIODevice::ReadOnly);
+			motorStgs.FromSettingsToClass(&settings, &restoreErrors);
+			stageStgs.FromSettingsToClass(&settings, &restoreErrors);
+
+			// apply profile
+			motorStgs.FromClassToDevice();
+			stageStgs.FromClassToDevice();
+
+			// close with libximc
+			devinterface->close_device();
+
+			// open with liburmc
+			urmc::device_t urmc_id = urmc::urmc_open_device(urmcName);
+			if (urmc_id == device_undefined) {
+				continue;
+			}
+
+			// urmc_get_profile
+			char* buffer = nullptr;
+			result = urmc::urmc_get_profile(urmc_id, &buffer, myalloc);
+
+			// close with liburmc
+			urmc::urmc_close_device(&urmc_id);
+
+			// save profile and free allocation
+			// we were asked to save even if get_profile result was failure, in this case file may contain garbage
+			QFile file(writeprofile);
+			if (file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
+				// we don't write 0 symbol in file
+				if (file.write(buffer, glob_size - 1) == glob_size - 1) {
+					profiles_converted++;
+				}
+				file.close();
+			}
+			free(buffer);
+		}
+		QMessageBox::information(0, "Info", "Conversion complete.\n"
+			"Found " + toStr(profiles_found) + " profiles.\n"
+			"Read " + toStr(profiles_processed) + " profiles.\n"
+			"Created " + toStr(profiles_converted) + " profiles.\n"
+			"Press OK to exit.");
+		exit(0);
+	}
+	// Feature #17299 end
 
 	mlog = new MessageLog();
 	messageLogThread = new QThread();
@@ -163,7 +299,7 @@ do {
 			return 0;
 		singleaxis = (devices.size() == 1);
 		if (singleaxis) {// One device selected, single axis interface
-			retry_open(devinterface, devices.at(0).toLocal8Bit().data(), 400);
+			retry_open(devinterface, devices.at(0).toLocal8Bit().data(), retry_open_timeout_ms);
 			if (!devinterface->is_open()) {
 				startWnd->hide();
 				throw my_exception("Error calling open_device");
@@ -189,7 +325,7 @@ do {
 			for (i = names.begin(); i != names.end(); ++i) {
 				DeviceInterface* iface = new DeviceInterface();
 				ifaces.push_back(iface);
-				retry_open(iface, (*i).toLocal8Bit().data(), 400);
+				retry_open(iface, (*i).toLocal8Bit().data(), retry_open_timeout_ms);
 #ifndef SERVICEMODE
 				device_information_t dev_info;
 				if (iface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
