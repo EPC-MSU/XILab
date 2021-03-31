@@ -1543,7 +1543,7 @@ void SettingsDlg::motorTypeChanged(unsigned int entype)
 	}
 	else
 	{
-		treeWgtsLst[PagePidNum]->setFlags((feedback_type == FEEDBACK_ENCODER || feedback_type == FEEDBACK_EMF) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
+		treeWgtsLst[PagePidNum]->setFlags((feedback_type == FEEDBACK_ENCODER/* || feedback_type == FEEDBACK_EMF*/) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
 	}
 
 	treeWgtsLst[PageDCMotorNum]->setFlags((entype == ENGINE_TYPE_DC) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
@@ -1570,7 +1570,7 @@ void SettingsDlg::motorTypeChanged(unsigned int entype)
 //вызывается при переключении радиобаттонов feedback в StepperMotorWgt
 void SettingsDlg::StepperMotorChanged(unsigned int feedback_type)
 {
-	treeWgtsLst[PagePidNum]->setFlags((feedback_type == FEEDBACK_EMF || feedback_type == FEEDBACK_ENCODER) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
+	treeWgtsLst[PagePidNum]->setFlags((/*feedback_type == FEEDBACK_EMF ||*/ feedback_type == FEEDBACK_ENCODER) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
 #ifdef SERVICEMODE  // refs to #23173
 	treeWgtsLst[PagePidNum]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 #endif
