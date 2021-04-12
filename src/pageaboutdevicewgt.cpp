@@ -284,7 +284,7 @@ void PageAboutDeviceWgt::slotFinished(QNetworkReply* reply)
 	QString string_url =reply->request().url().toString(); 
 
 	if(bytes == "") {
-		emit networkResultSgn("Error: cannot connect to the internet.", false, LOGLEVEL_WARNING);
+		emit networkResultSgn("Internet connection error, firmware update service is disabled. Motion control will not be affected.", false, LOGLEVEL_WARNING);
 		return;
 	}
 	else if (reply->request().url() == QUrl(update_xml_addr)) { // we got a list of firmwares !
