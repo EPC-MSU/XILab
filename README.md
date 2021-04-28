@@ -18,6 +18,8 @@
    - Clone the **XILab-dependencies** repository https://github.com/EPC-MSU/XILab-dependencies to the **C:\Projects\dependency_files**
    - Move **Qwt** folder from the repository  on the C: \ drive.
    - Unpack the archive in them **Qwt** - **C:\Qwt\msvc2013\qwt-6.0.0**. 
+   - To run XiLab, you also need some system libraries. For this purpose, you can set **vcredist_xXX_2013.exe**  version 12.0.30501, which can be taken from the repository with dependencies, or downloaded from the link https://www.microsoft.com/en-us/download/details.aspx?id=40784 .
+   - If you do not want to install the entire package, you can copy the necessary files from the WinXX folders to the assembly directory.  Files msvcm90.dll, msvcp90.dll, msvcr90.dll have a product version 9.00.30729.6161. Files msvcp120.dll, msvcr120.dll have a product version 12.00.21005.1.
    - Download the Qt 4.8.6. Qt no longer supports version 4.8.6, but a saved copy can be downloaded from our server as an archive http://files.xisupport.com/XiLab_dependencies/Qt/msvc2013.7z.
    - Unpack the archive in them **Qt** - **C:\Qt\msvc2013\4.8.6** and **C:\Qt\msvc2013\4.8.6_x64**
    - Set the appropriate environment variables **QTDIR->C:\Qt\msvc2013\4.8.6**
