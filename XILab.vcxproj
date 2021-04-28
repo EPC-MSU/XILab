@@ -3552,6 +3552,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\bindyusermodel.cpp" />
     <ClCompile Include="src\chartdlg.cpp" />
     <ClCompile Include="src\chartlog.cpp" />
+    <ClCompile Include="src\checkcompatibility.cpp" />
     <ClCompile Include="src\choosefirmware.cpp" />
     <ClCompile Include="src\colorbutton.cpp" />
     <ClCompile Include="src\comparesettingsdialog.cpp" />
@@ -4136,6 +4137,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </CustomBuild>
     <ClInclude Include="src\bindy.h" />
     <ClInclude Include="src\bindyusermodel.h" />
+    <ClInclude Include="src\checkcompatibility.h" />
     <ClInclude Include="src\commonvars.h" />
     <ClInclude Include="src\comparesettingsdialog.h" />
     <CustomBuild Include="src\controllersettings.h">

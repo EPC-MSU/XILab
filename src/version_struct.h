@@ -26,6 +26,7 @@ typedef struct
 	QString SHA1_string;
 	QDateTime UTCTime;
 	QUrl URL;
+	//version_t protocol;
 } leaf_element_t;
 
 #endif //VERSION_STRUCT_H

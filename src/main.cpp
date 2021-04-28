@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QDebug>
 #include <main.h>
+#include <QMessageBox>
 #include <startwindow.h>
 #include <mainwindow.h>
 #include <multiaxis.h>
@@ -14,6 +15,7 @@
 #include <signal.h>
 #include <attenuator.h>
 #include <devicesearchsettings.h>
+#include "checkcompatibility.h"
 
 QString xilab_ver = XILAB_VERSION;
 Cactus cs;
@@ -148,61 +150,79 @@ int main(int argc, char *argv[])
 	}
 
 	/*StartWindow**/ startWnd = new StartWindow();
-do {
-	init_success = true;
-	startWnd->show();
-	startWnd->startSearching();
-	QList<QString> devices;
 	do {
-		devices = startWnd->getSelectedDevices();
-		QApplication::processEvents();
-		msleep(10);
-	} while (devices.isEmpty());
-	try {
-		if (devices.at(0) == "nodevices")
-			return 0;
-		singleaxis = (devices.size() == 1);
-		if (singleaxis) {// One device selected, single axis interface
-			retry_open(devinterface, devices.at(0).toLocal8Bit().data(), 400);
-			if (!devinterface->is_open()) {
-				startWnd->hide();
-				throw my_exception("Error calling open_device");
-			}
-#ifndef SERVICEMODE
-			device_information_t dev_info;
-			if (devinterface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
-				startWnd->hide();
-				devinterface->close_device();
-				throw my_exception("Error: device identification failed");
-			}
-#endif
+		init_success = true;
+		startWnd->show();
+		startWnd->startSearching();
+		QList<QString> devices;
+		do {
+			devices = startWnd->getSelectedDevices();
 			QApplication::processEvents();
-			MainWindow* mainWnd = new MainWindow(NULL, devices.at(0), devinterface);
-			QApplication::processEvents();
-			mainWnd->Init();
-			p_mainWnd = mainWnd;
-			QApplication::processEvents();
-		} else { // Multi-axis interface
-			QList<DeviceInterface*> ifaces;
-			QList<QString> names = devices;
-			QList<QString>::iterator i;
-			for (i = names.begin(); i != names.end(); ++i) {
-				DeviceInterface* iface = new DeviceInterface();
-				ifaces.push_back(iface);
-				retry_open(iface, (*i).toLocal8Bit().data(), 400);
-#ifndef SERVICEMODE
-				device_information_t dev_info;
-				if (iface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
+			msleep(10);
+		} while (devices.isEmpty());
+		try {
+			if (devices.at(0) == "nodevices")
+				return 0;
+			singleaxis = (devices.size() == 1);
+			QString MsgCompatList;
+			if (singleaxis) {// One device selected, single axis interface
+				retry_open(devinterface, devices.at(0).toLocal8Bit().data(), 400);
+				if (!devinterface->is_open()) {
 					startWnd->hide();
-					throw my_exception("Error: devices identification failed");
+					throw my_exception("Error calling open_device");
 				}
-#endif
+//#ifndef SERVICEMODE
+				device_information_t dev_info;
+				if (devinterface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
+					startWnd->hide();
+					devinterface->close_device();
+					throw my_exception("Error: device identification failed");
+				}
+//#endif
+				QApplication::processEvents();
+				MainWindow* mainWnd = new MainWindow(NULL, devices.at(0), devinterface);
+				QApplication::processEvents();
+				mainWnd->Init();
+				p_mainWnd = mainWnd;
 				QApplication::processEvents();
 			}
-			Multiaxis* mainMulti = new Multiaxis(NULL, NULL, names, ifaces);
-			p_mainWnd = mainMulti;
+			else { // Multi-axis interface
+				QList<DeviceInterface*> ifaces;
+				QList<QString> names = devices;
+				QList<QString>::iterator i;
+				for (i = names.begin(); i != names.end(); ++i) {
+					DeviceInterface* iface = new DeviceInterface();
+					ifaces.push_back(iface);
+					retry_open(iface, (*i).toLocal8Bit().data(), 400);
+//#ifndef SERVICEMODE
+					uint32_t SerialNumber;
+					unsigned int FirmMajor, FirmMinor, FirmRelease;
+					device_information_t dev_info;
+					if (iface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
+						startWnd->hide();
+						throw my_exception("Error: devices identification failed");
+					}
+					else
+					{
+						iface->get_serial_number(&SerialNumber);
+						iface->get_firmware_version(&FirmMajor, &FirmMinor, &FirmRelease);
+
+						// Adding the controller to the incompatibility list.
+						MsgCompatList += QString::number(SerialNumber) + "\n";
+						
+					}
+//#endif
+					QApplication::processEvents();
+				}
+				Multiaxis* mainMulti = new Multiaxis(NULL, NULL, names, ifaces);
+				p_mainWnd = mainMulti;
+			}
+
+			// Displays a compatibility message.
+			//MessageCompatibility(MsgCompatList);
+			chek();
+
 		}
-	}
 
 	catch (my_exception& e)
 	{
@@ -236,6 +256,8 @@ do {
 	startWnd->~StartWindow();
 	return result;
 }
+
+
 
 QString compileDate()
 {
