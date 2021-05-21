@@ -2,6 +2,8 @@
 #include <ui_pagesteppermotorwgt.h>
 #include <ctime>
 #include <QSettings>
+#include <QMessageBox>
+#include <qpixmap>
 #include <mainwindow.h>
 #include <settingsdlg.h>
 #include <cyclicsettings.h>
@@ -15,6 +17,7 @@
 #include <mainwindow.h>
 #include <main.h>
 #include <status.h>
+#include <messwarning.h>
 
 
 //константы меню
@@ -150,7 +153,8 @@ SettingsDlg::SettingsDlg(QWidget *parent, UpdateThread *_updateThread, DeviceInt
     QObject::connect(((PageUiConfigWgt*)pageWgtsLst[PageUiConfigNum]),  SIGNAL(ChangeInterface(SkinType)), this, SLOT(SkinTypeChanged(SkinType)));
 	QObject::connect(this, SIGNAL(finished(int)), this, SLOT(saveWindowParams()));
 	QObject::connect(firmwareUpdate, SIGNAL(update_finished(result_t)), this, SLOT(firmwareUploaded(result_t)));
-
+	QObject::connect(&timer3, SIGNAL(timeout()), this, SLOT(timer3full()), Qt::DirectConnection);
+		
 	m_ui->reconnectDelaySpin->hide();
 
 	old_feedback_type = 0;
@@ -1318,6 +1322,15 @@ bool SettingsDlg::FirmwareVersionValid(QSettings *settings, firmware_version_t f
 	return VersionValid(settings, v, QString("Supported_firmware"), fw_ok_ranges);
 }
 
+bool SettingsDlg::CheckCompatibility(QString xilab_ver, firmware_version_t fw_info)
+{
+	bool res = false;
+	unsigned int minor = xilab_ver.split(".")[1].toInt();
+	if ((fw_info.major == 3) && (minor <= 14)) res = true;
+	if ((fw_info.major == 4) && (minor >= 17)) res = true;
+	return res;
+}
+
 void SettingsDlg::CheckProfileFwHwVersions(XSettings *settings)
 {
 	// First we should check if the profile is compatible with current hardware and firmware versions
@@ -1338,6 +1351,23 @@ void SettingsDlg::CheckProfileFwHwVersions()
 	CheckProfileFwHwVersions(&settings);
 }
 
+void SettingsDlg::timer3full()
+{
+	//movie.stop();
+	
+	//movie.start();
+	timer3.stop();
+	//movie.connect(&movie, SIGNAL(finished()), this, SLOT(SettingsDlg::restart_movie()));
+	/*
+	//if (movie.isValid())
+	{
+		movie.start();
+		movie.connect(this, SIGNAL(finished()), this, SLOT(SettingsDlg::restart_movie()));
+	}
+	*/
+	
+}
+
 void SettingsDlg::OnRestoreFileBtnClicked()
 {
 	QString restoreErrors;
@@ -1349,7 +1379,35 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 	
 	filename = QFileDialog::getOpenFileName(this, tr("Open config file"), load_path, tr("Config files (*.cfg);;All files (*.*)"));
 	
-	if(!filename.isEmpty()){
+	bool err_vers = !CheckCompatibility(QString(XILAB_VERSION), controllerStgs->firmware_version);
+	bool err_path = !filename.contains(load_path, Qt::CaseInsensitive);
+	int ret_messg = QMessageBox::Ok;
+	QMessageBox mes1;
+	QLabel lab1;	
+	
+	if ((err_vers && !err_path) || (err_path)) {
+
+		movie.setFileName("C:/Projects/xilab_git/Resources/images/settingsdlg/warning.gif");
+		movie.setSpeed(25);
+		//QObject::connect(&movie, SIGNAL(finished()), this, SLOT(SettingsDlg::restart_movie()));
+		
+		lab1.setMovie(&movie); // label имеет тип QLabel*
+
+		mes1.layout()->addWidget(&lab1);
+		mes1.setText("Warning");
+		if (err_path) mes1.setInformativeText("You are using a profile that is not from the standard XiLab kit. This may cause equipment failure. Continue?");
+		else mes1.setInformativeText("This XiLab is not compatible with the controller firmware version. Using profiles from the standard XiLab kit may cause hardware failure. Continue?");
+		mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
+		mes1.setDefaultButton(QMessageBox::Ok);
+		mes1.setIcon(QMessageBox::Warning);
+
+		//timer3.start(1000);
+		movie.start();
+		mes1.show();
+		ret_messg = mes1.exec();
+	}
+
+	if (!filename.isEmpty() && (ret_messg == QMessageBox::Ok)){
 		temp_config_file = filename;
 		firstLoadConfig = true;
 		QPalette pt;
@@ -1431,6 +1489,9 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 			default_load_path = dir.path();
 		}
 	}
+	MessWarning dlg(this, "No devices found? Check these settings.");
+	//dlg.enableWin();
+	dlg.exec();
 }
 
 void SettingsDlg::OnCompareFileBtnClicked()

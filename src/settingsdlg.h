@@ -51,6 +51,7 @@
 	#include <pagedebugwgt.h>
 #endif
 
+#define TIME_MOVIE 2000
 
 //константы меню
 extern int PageRootDeviceConfigurationNum;
@@ -151,6 +152,7 @@ public:
 
 	QList<QTreeWidgetItem*> treeWgtsLst;
 	QList<QWidget*> pageWgtsLst;
+	QMovie movie;
 
 	bool force_save_all;
 
@@ -166,6 +168,7 @@ private:
 	bool isMultiaxis;
     Ui::SettingsDlg *m_ui;
 	unsigned int old_feedback_type;
+	QTimer timer3;
 public: // temporary plug for multiaxis ui until device interface class gets obsoleted by libximc syncs and we get rid of it entirely
 	UpdateThread *updateThread;
 private:
@@ -182,6 +185,7 @@ private:
 	bool VersionValid(QSettings *settings, version_t v, QString groupname, QList<VersionRange> ok_ranges);
 	bool HardwareVersionValid(QSettings *settings, device_information_t device_info);
 	bool FirmwareVersionValid(QSettings *settings, firmware_version_t fw_info);
+	bool CheckCompatibility(QString xilab_ver, firmware_version_t fw_info);
 
 	void FromUiToClass(MotorSettings* stgs);
 	void FromUiToClass(StageSettings* stgs);
@@ -195,6 +199,7 @@ public slots:
     void OnRestoreFlashBtnClicked();
     void OnSaveFlashBtnClicked();
 	void OnSaveFileBtnClicked();
+	void timer3full();
 	void OnRestoreFileBtnClicked();
 	void OnCompareFileBtnClicked();
     bool AllPagesFromDeviceToClassToUi(bool load_settings = true, bool load_all_settings = true);
