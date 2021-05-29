@@ -44,9 +44,7 @@ set QWTDIR=C:\Qwt\msvc2013\qwt-%QWT_VER%
 set QTBASEDIR=C:\Qt\msvc2013
 set QMAKESPEC=win32-msvc2013
 
-:: use environment variable CERTNAME if specified
-@if 'x%CERTNAME%'=='x' set CERTNAME="TSIF MGU IMENI M.V. LOMONOSOVA, OOO"
-
+echo "CERTNAME=%CERTNAME%"
 echo "XIMC_RELEASE_TYPE=%XIMC_RELEASE_TYPE%"
 
 call :LIB
@@ -158,8 +156,8 @@ devenv /nologo /build %SOLCONF% XILab.sln
 @if not %errorlevel% == 0 goto FAIL
 move /Y %ARCH%\%BINDIR%\"XILab "[%BINDIR%].exe a.exe
 @if not %errorlevel% == 0 goto FAIL
-:: Sign binaries only in release build
-@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' SignTool.exe sign /v /n %CERTNAME% a.exe
+:: Sign binaries only in release build and if CERTNAME is given
+@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' if 'x%CERTNAME%' NEQ 'x' SignTool.exe sign /v /n %CERTNAME% a.exe
 
 @if not %errorlevel% == 0 goto FAIL
 move /Y a.exe %ARCH%\%BINDIR%\"XILab "[%BINDIR%].exe
