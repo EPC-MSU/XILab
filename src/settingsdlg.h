@@ -199,7 +199,6 @@ public slots:
     void OnRestoreFlashBtnClicked();
     void OnSaveFlashBtnClicked();
 	void OnSaveFileBtnClicked();
-	void timer3full();
 	void OnRestoreFileBtnClicked();
 	void OnCompareFileBtnClicked();
     bool AllPagesFromDeviceToClassToUi(bool load_settings = true, bool load_all_settings = true);

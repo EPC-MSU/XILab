@@ -45,6 +45,7 @@
         <file>images/settingsdlg/settings.png</file>
         <file>images/settingsdlg/x.png</file>
         <file>images/settingsdlg/wrench.png</file>
+        <file>images/settingsdlg/warning.gif</file>
     </qresource>
     <qresource prefix="/multiaxis">
         <file>images/multiaxis/Stop_sign_light_red.png</file>
