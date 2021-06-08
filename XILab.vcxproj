@@ -3698,7 +3698,6 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     <ClInclude Include="GeneratedFiles\ui_scriptdlg.h" />
     <ClInclude Include="GeneratedFiles\ui_settingsdlg.h" />
     <ClInclude Include="GeneratedFiles\ui_startwindow.h" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="src\aes.h" />
     <ClInclude Include="src\attensettings.h" />
     <CustomBuild Include="src\attenuator.h">

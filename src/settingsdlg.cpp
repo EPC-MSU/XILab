@@ -3,7 +3,6 @@
 #include <ctime>
 #include <QSettings>
 #include <QMessageBox>
-#include <qpixmap>
 #include <mainwindow.h>
 #include <settingsdlg.h>
 #include <cyclicsettings.h>
@@ -17,7 +16,6 @@
 #include <mainwindow.h>
 #include <main.h>
 #include <status.h>
-
 
 //константы меню
 int PageRootDeviceConfigurationNum;
