@@ -17,7 +17,6 @@
 #include <mainwindow.h>
 #include <main.h>
 #include <status.h>
-#include <messwarning.h>
 
 
 //константы меню
