@@ -2,6 +2,8 @@
 #include <ui_pagesteppermotorwgt.h>
 #include <ctime>
 #include <QSettings>
+#include <QMessageBox>
+#include <qpixmap>
 #include <mainwindow.h>
 #include <settingsdlg.h>
 #include <cyclicsettings.h>
@@ -15,6 +17,7 @@
 #include <mainwindow.h>
 #include <main.h>
 #include <status.h>
+#include <messwarning.h>
 
 
 //константы меню
@@ -150,7 +153,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, UpdateThread *_updateThread, DeviceInt
     QObject::connect(((PageUiConfigWgt*)pageWgtsLst[PageUiConfigNum]),  SIGNAL(ChangeInterface(SkinType)), this, SLOT(SkinTypeChanged(SkinType)));
 	QObject::connect(this, SIGNAL(finished(int)), this, SLOT(saveWindowParams()));
 	QObject::connect(firmwareUpdate, SIGNAL(update_finished(result_t)), this, SLOT(firmwareUploaded(result_t)));
-
+		
 	m_ui->reconnectDelaySpin->hide();
 
 	old_feedback_type = 0;
@@ -1318,6 +1321,15 @@ bool SettingsDlg::FirmwareVersionValid(QSettings *settings, firmware_version_t f
 	return VersionValid(settings, v, QString("Supported_firmware"), fw_ok_ranges);
 }
 
+bool SettingsDlg::CheckCompatibility(QString xilab_ver, firmware_version_t fw_info)
+{
+	bool res = false;
+	unsigned int minor = xilab_ver.split(".")[1].toInt();
+	if ((fw_info.major == 3) && (minor <= 14)) res = true;
+	if ((fw_info.major == 4) && (minor >= 17)) res = true;
+	return res;
+}
+
 void SettingsDlg::CheckProfileFwHwVersions(XSettings *settings)
 {
 	// First we should check if the profile is compatible with current hardware and firmware versions
@@ -1349,86 +1361,114 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 	
 	filename = QFileDialog::getOpenFileName(this, tr("Open config file"), load_path, tr("Config files (*.cfg);;All files (*.*)"));
 	
-	if(!filename.isEmpty()){
-		temp_config_file = filename;
-		firstLoadConfig = true;
-		QPalette pt;
-		pt.setColor(QPalette::Normal, QPalette::WindowText, QColor(127,127,127,255));
-		m_ui->configLbl->setPalette(pt);
-		m_ui->configLbl->setText(getFileName(filename));
-		m_ui->configLbl->setToolTip("Settings will be saved into the device when you click OK or Apply button");
+	bool err_vers = !CheckCompatibility(QString(XILAB_VERSION), controllerStgs->firmware_version);
+	bool err_path = !filename.contains(load_path, Qt::CaseInsensitive);
+	int ret_messg = QMessageBox::Ok;
+	QMessageBox mes1;
+	QLabel lab1;	
 
-		XSettings settings(filename, QSettings::IniFormat, QIODevice::ReadOnly);
-		CheckProfileFwHwVersions(&settings);
+	if (!filename.isEmpty()) {
+		if ((err_vers && !err_path) || (err_path)) {
 
-		for (int i=0; i<2; i++) { // We repeat this block twice in a hacky attempt to avoid recalc errors on potential simultaneous change in userunits and feedback when loading settings from file
-		// These "1-2-3-4" lines save a copy of motorStgs, load settings from cfg file into motorStgs, load Ui from motorStgs and restore motorStgs to initial state
-		MotorSettings saveStgs = *motorStgs; // 1
-		motorStgs->FromSettingsToClass(&settings, &restoreErrors); // 2
-#ifdef SERVICEMODE
-		StageSettings saveStageStgs = *stageStgs;
-		stageStgs->FromSettingsToClass(&settings, &restoreErrors);
-		((PagePositionerNameWgt*)pageWgtsLst[PagePositionerNameNum])->FromClassToUi();
-		((PageStageWgt*)pageWgtsLst[PageStageNum])->FromClassToUi();
-		((PageStageDCMotorWgt*)pageWgtsLst[PageStageDCMotorNum])->FromClassToUi();
-		((PageStageEncoderWgt*)pageWgtsLst[PageStageEncoderNum])->FromClassToUi();
-		((PageStageHallsensorWgt*)pageWgtsLst[PageStageHallsensorNum])->FromClassToUi();
-		((PageStageGearWgt*)pageWgtsLst[PageStageGearNum])->FromClassToUi();
-		((PageStageAccessoriesWgt*)pageWgtsLst[PageStageAccessoriesNum])->FromClassToUi();
-#endif
-		AllPagesFromDeviceToClassToUi(false, false); // 3 -- note: contains UserUnits->FromClassToUi (emit ?)
-		((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->SetChecked();
+			movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
+			movie.setSpeed(25);
 
-		*motorStgs = saveStgs; // 4
-#ifdef SERVICEMODE
-		*stageStgs = saveStageStgs;
-#endif
-		//Interface settings
-		restoreErrors+=((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->FromSettingsToUi(&settings); // load the userunits first
-		setStyles(false); // this is required for settings load after the switch to userunits everywhere in settings
-		} // block end
+			lab1.setMovie(&movie); // label имеет тип QLabel*
 
-        restoreErrors+=((PageIntrfSettingsWgt*)pageWgtsLst[PageIntrfSettingsNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageCyclicWgt*)pageWgtsLst[PageCyclicNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageUiConfigWgt*)pageWgtsLst[PageUiConfigNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageSliderSetupWgt*)pageWgtsLst[PageSliderSetupNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageLogSettingsWgt*)pageWgtsLst[PageLogSettingsNum])->FromSettingsToUi(&settings);
+			mes1.layout()->addWidget(&lab1);
+			mes1.setText("Warning");
+			if (err_path) mes1.setInformativeText("You are using a profile that is not from the standard XiLab kit. This may cause equipment failure. Continue?");
+			else mes1.setInformativeText("This XiLab is not compatible with the controller firmware version. Using profiles from the standard XiLab kit may cause hardware failure. Continue?");
+			mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
+			mes1.setDefaultButton(QMessageBox::Ok);
+			mes1.setIcon(QMessageBox::Warning);
 
-		//Graph setup
-		restoreErrors+=((PageGraphCommonWgt*)pageWgtsLst[PageGraphNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphPosNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphSpeedNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphEncoderNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphFlagsNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphEnVoltNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphEnCurrNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphPwrVoltNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphPwrCurrNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphUsbVoltNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphUsbCurrNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphVoltANum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphVoltBNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphVoltCNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphCurrANum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphCurrBNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphCurrCNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphPwmNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphTempNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphJoyNum])->FromSettingsToUi(&settings);
-		restoreErrors+=((PageGraphWgt*)pageWgtsLst[PageGraphPotNum])->FromSettingsToUi(&settings);
-
-		if(restoreErrors != ""){
-			RestoreErrorsDialog *dialog = new RestoreErrorsDialog(this, restoreErrors.split("\n"));
-			dialog->exec();
-
+			movie.start();
+			mes1.show();
+			ret_messg = mes1.exec();
 		}
 
-		if(!m_ui->defaultLocationChk->isChecked()){
-			//обновляем дефолтные пути
-			QDir dir;
-			dir.setPath(filename);
-			dir.cdUp();
-			default_load_path = dir.path();
+		if ((ret_messg == QMessageBox::Ok)){
+			temp_config_file = filename;
+			firstLoadConfig = true;
+			QPalette pt;
+			pt.setColor(QPalette::Normal, QPalette::WindowText, QColor(127, 127, 127, 255));
+			m_ui->configLbl->setPalette(pt);
+			m_ui->configLbl->setText(getFileName(filename));
+			m_ui->configLbl->setToolTip("Settings will be saved into the device when you click OK or Apply button");
+
+			XSettings settings(filename, QSettings::IniFormat, QIODevice::ReadOnly);
+			CheckProfileFwHwVersions(&settings);
+
+			for (int i = 0; i < 2; i++) { // We repeat this block twice in a hacky attempt to avoid recalc errors on potential simultaneous change in userunits and feedback when loading settings from file
+				// These "1-2-3-4" lines save a copy of motorStgs, load settings from cfg file into motorStgs, load Ui from motorStgs and restore motorStgs to initial state
+				MotorSettings saveStgs = *motorStgs; // 1
+				motorStgs->FromSettingsToClass(&settings, &restoreErrors); // 2
+#ifdef SERVICEMODE
+				StageSettings saveStageStgs = *stageStgs;
+				stageStgs->FromSettingsToClass(&settings, &restoreErrors);
+				((PagePositionerNameWgt*)pageWgtsLst[PagePositionerNameNum])->FromClassToUi();
+				((PageStageWgt*)pageWgtsLst[PageStageNum])->FromClassToUi();
+				((PageStageDCMotorWgt*)pageWgtsLst[PageStageDCMotorNum])->FromClassToUi();
+				((PageStageEncoderWgt*)pageWgtsLst[PageStageEncoderNum])->FromClassToUi();
+				((PageStageHallsensorWgt*)pageWgtsLst[PageStageHallsensorNum])->FromClassToUi();
+				((PageStageGearWgt*)pageWgtsLst[PageStageGearNum])->FromClassToUi();
+				((PageStageAccessoriesWgt*)pageWgtsLst[PageStageAccessoriesNum])->FromClassToUi();
+#endif
+				AllPagesFromDeviceToClassToUi(false, false); // 3 -- note: contains UserUnits->FromClassToUi (emit ?)
+				((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->SetChecked();
+
+				*motorStgs = saveStgs; // 4
+#ifdef SERVICEMODE
+				*stageStgs = saveStageStgs;
+#endif
+				//Interface settings
+				restoreErrors += ((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->FromSettingsToUi(&settings); // load the userunits first
+				setStyles(false); // this is required for settings load after the switch to userunits everywhere in settings
+			} // block end
+
+			restoreErrors += ((PageIntrfSettingsWgt*)pageWgtsLst[PageIntrfSettingsNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageCyclicWgt*)pageWgtsLst[PageCyclicNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageUiConfigWgt*)pageWgtsLst[PageUiConfigNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageSliderSetupWgt*)pageWgtsLst[PageSliderSetupNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageLogSettingsWgt*)pageWgtsLst[PageLogSettingsNum])->FromSettingsToUi(&settings);
+
+			//Graph setup
+			restoreErrors += ((PageGraphCommonWgt*)pageWgtsLst[PageGraphNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphPosNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphSpeedNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphEncoderNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphFlagsNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphEnVoltNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphEnCurrNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphPwrVoltNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphPwrCurrNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphUsbVoltNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphUsbCurrNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphVoltANum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphVoltBNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphVoltCNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphCurrANum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphCurrBNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphCurrCNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphPwmNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphTempNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphJoyNum])->FromSettingsToUi(&settings);
+			restoreErrors += ((PageGraphWgt*)pageWgtsLst[PageGraphPotNum])->FromSettingsToUi(&settings);
+
+			if (restoreErrors != ""){
+				RestoreErrorsDialog *dialog = new RestoreErrorsDialog(this, restoreErrors.split("\n"));
+				dialog->exec();
+
+			}
+
+			if (!m_ui->defaultLocationChk->isChecked()){
+				//обновляем дефолтные пути
+				QDir dir;
+				dir.setPath(filename);
+				dir.cdUp();
+				default_load_path = dir.path();
+			}
 		}
 	}
 }
