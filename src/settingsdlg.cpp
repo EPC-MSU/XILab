@@ -1361,11 +1361,11 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 	bool err_vers = !CheckCompatibility(QString(XILAB_VERSION), controllerStgs->firmware_version);
 	bool err_path = !filename.contains(load_path, Qt::CaseInsensitive);
 	int ret_messg = QMessageBox::Ok;
-	QMessageBox mes1;
-	QLabel lab1;	
+	//QMessageBox mes1;
+	//QLabel lab1;	
 
 	if (!filename.isEmpty()) {
-		if ((err_vers && !err_path) || (err_path)) {
+		/*if ((err_vers && !err_path) || (err_path)) {
 
 			movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
 			movie.setSpeed(25);
@@ -1383,7 +1383,7 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 			movie.start();
 			mes1.show();
 			ret_messg = mes1.exec();
-		}
+		}*/
 
 		if ((ret_messg == QMessageBox::Ok)){
 			temp_config_file = filename;
