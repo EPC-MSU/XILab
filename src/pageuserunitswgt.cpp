@@ -62,12 +62,18 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 	if(default_stgs != NULL)
 		default_stgs->beginGroup("User_units");
 
-	if(settings->contains("Enable"))
-		m_ui->enableChk->setChecked(settings->value("Enable", false).toBool());
-	else if(default_stgs != NULL)
-		m_ui->enableChk->setChecked(default_stgs->value("Enable", false).toBool());
-	else 
-		errors+="\"Enable\" key is not found\n";
+	if (settings->value("Unit", "mm").toString() != "n/a")
+	{
+		m_ui->enableChk->setEnabled(true);
+		if (settings->contains("Enable"))
+			m_ui->enableChk->setChecked(settings->value("Enable", false).toBool());
+		else if (default_stgs != NULL)
+			m_ui->enableChk->setChecked(default_stgs->value("Enable", false).toBool());
+		else
+			errors += "\"Enable\" key is not found\n";
+	}
+	else
+		m_ui->enableChk->setDisabled(true);
 
 	if(settings->contains("Step_multiplier"))
 		m_ui->stepMultiplier->setValue(settings->value("Step_multiplier", 0).toDouble());
