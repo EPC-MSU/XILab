@@ -152,7 +152,7 @@ public:
 
 	QList<QTreeWidgetItem*> treeWgtsLst;
 	QList<QWidget*> pageWgtsLst;
-	QMovie movie;
+	//QMovie movie;
 
 	bool force_save_all;
 

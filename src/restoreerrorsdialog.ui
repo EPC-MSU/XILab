@@ -55,6 +55,13 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QListWidget" name="listWidget">
      <property name="font">
       <font>

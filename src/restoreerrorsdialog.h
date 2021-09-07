@@ -3,6 +3,8 @@
 
 #include <QtGui/QWidget>
 #include <QDialog>
+#include <QMovie>
+#include <QTimer>
 
 namespace Ui {
 	class RestoreErrorsDialogClass;
@@ -13,7 +15,15 @@ public:
 	RestoreErrorsDialog(QWidget *parent, QStringList items);
 	~RestoreErrorsDialog();
 
+	
 	Ui::RestoreErrorsDialogClass *m_ui;
+	QMovie movie;
+
+private:
+	QTimer *timer;
+
+private slots:
+	void restartmovie();
 };
 
 #endif // RESTOREERRORSDIALOG_H
