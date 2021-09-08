@@ -1,6 +1,8 @@
 #include <ui_restoreerrorsdialog.h>
 #include <restoreerrorsdialog.h>
 #include <QTimer>
+#include "windows.h"
+
 
 RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	QDialog(parent),
@@ -19,18 +21,20 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	
 	movie.start();
 
-
+	//Sleep(5000);
 	//timer = new QTimer();
 	//connect(timer, SIGNAL(timeout()), this, SLOT(restartmovie()));
-	//timer->start(2000);
-
 	//movie.start();
 
-	while (movie.state() == QMovie::NotRunning)
+	timer.start(4000);
+	connect(&timer, SIGNAL(timeout()), this, SLOT(restartmovie()), Qt::DirectConnection);
+	//movie.start();
+
+	/*while (movie.state() == QMovie::NotRunning)
 	{
 		movie.start();
 	}
-	
+	*/
 }
 
 RestoreErrorsDialog::~RestoreErrorsDialog()

@@ -1361,31 +1361,9 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 	bool err_vers = !CheckCompatibility(QString(XILAB_VERSION), controllerStgs->firmware_version);
 	bool err_path = !filename.contains(load_path, Qt::CaseInsensitive);
 	int ret_messg = QMessageBox::Ok;
-	//QMessageBox mes1;
-	//QLabel lab1;	
 
 	if (!filename.isEmpty()) {
-		/*if ((err_vers && !err_path) || (err_path)) {
-
-			movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
-			movie.setSpeed(25);
-
-			lab1.setMovie(&movie); // label имеет тип QLabel*
-
-			mes1.layout()->addWidget(&lab1);
-			mes1.setText("Warning");
-			if (err_path) mes1.setInformativeText("You are using a profile that is not from the standard XiLab kit. This may cause equipment failure. Continue?");
-			else mes1.setInformativeText("This XiLab is not compatible with the controller firmware version. Using profiles from the standard XiLab kit may cause hardware failure. Continue?");
-			mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
-			mes1.setDefaultButton(QMessageBox::Ok);
-			mes1.setIcon(QMessageBox::Warning);
-
-			movie.start();
-			mes1.show();
-			ret_messg = mes1.exec();
-		}*/
-
-		if ((ret_messg == QMessageBox::Ok)){
+		
 			temp_config_file = filename;
 			firstLoadConfig = true;
 			QPalette pt;
@@ -1455,8 +1433,9 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 
 			if (restoreErrors != ""){
 				RestoreErrorsDialog *dialog = new RestoreErrorsDialog(this, restoreErrors.split("\n"));
-				dialog->exec();
-
+				dialog->show();// >exec();
+				//while (dialog->isEnabled())
+				//	;
 			}
 
 			if (!m_ui->defaultLocationChk->isChecked()){
@@ -1466,7 +1445,6 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 				dir.cdUp();
 				default_load_path = dir.path();
 			}
-		}
 	}
 }
 

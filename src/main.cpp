@@ -79,6 +79,55 @@ void signal_handler(int signum)
 	throw critical_exception("Segmentation fault");
 }
 
+int chek_hwmajor(unsigned int major, unsigned int minor)
+{
+	int ret_messg = QMessageBox::Ok;
+	if (major == 2 && minor ==2 )
+	{
+		
+		QMessageBox mes1;
+		QLabel lab1, lab2;
+		QTextBrowser text1;
+		QMovie movie;
+
+		movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
+		movie.setSpeed(25);
+
+		lab1.setMovie(&movie); // label имеет тип QLabel*
+		//text1.setFixedWidth(600);
+		//text1.setFixedHeight(115);
+		//text1.setText("This version of xilab is not compatible with your version of the controller. \n To check the compatibility of the controller and the xilab software, use the compatibility table \n If you still want to open the controller, click OK. To exit, click Cancel.");
+		
+		lab2.setText("<html><head/><body><p><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;>For more information on hardware-software compatibility, see ...</span></a></p></body></html>");
+		lab2.setTextFormat(Qt::RichText);
+		lab2.setTextInteractionFlags(Qt::TextBrowserInteraction);
+		lab2.setOpenExternalLinks(true);
+		lab2.setFixedWidth(600);
+		
+		//mes1.layout()->addWidget(&lab1);
+		
+		//mes1.layout()->addWidget(&text1);
+		//mes1.layout()->addWidget(&lab2);
+		mes1.setText("Warning: This version of xilab is not compatible with your version of the controller. \n To check the compatibility of the controller and the xilab software, use the compatibility table. \n If you still want to open the controller, click OK. To exit, click Cancel.");
+		mes1.setInformativeText("<html><head/><body><p><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;>For more information on hardware-software compatibility, see ...</span></a></p></body></html>");
+		mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
+		mes1.setDefaultButton(QMessageBox::Ok);
+		QPixmap exportSuccess(":/settingsdlg/images/settingsdlg/warning.gif");
+		mes1.setIconPixmap(exportSuccess);
+		
+		//mes1.setIcon(QMessageBox::Warning);
+		
+		//QSpacerItem *horizontalSpacer = new QSpacerItem(400, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+		//QGridLayout *layout = (QGridLayout *)mes1.layout();
+		//layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+
+		movie.start();
+		mes1.show();
+		ret_messg = mes1.exec();
+	}
+	return ret_messg;
+}
+
 int main(int argc, char *argv[])
 {
 	signal(SIGSEGV, signal_handler); // set signal handler to handle SIGSEGV
@@ -174,6 +223,12 @@ do {
 				startWnd->hide();
 				devinterface->close_device();
 				throw my_exception("Error: device identification failed");
+			}
+			if (chek_hwmajor(dev_info.Major, dev_info.Minor) != QMessageBox::Ok)
+			{
+				//throw my_exception("The opening of the controller was rejected by the user.");
+				//devinterface->close_device();
+				return 0;
 			}
 #endif
 			QApplication::processEvents();

@@ -2,6 +2,7 @@
 #define RESTOREERRORSDIALOG_H
 
 #include <QtGui/QWidget>
+#include <QWidget>
 #include <QDialog>
 #include <QMovie>
 #include <QTimer>
@@ -20,9 +21,9 @@ public:
 	QMovie movie;
 
 private:
-	QTimer *timer;
+	QTimer timer;
 
-private slots:
+public slots:
 	void restartmovie();
 };
 
