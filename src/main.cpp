@@ -94,20 +94,11 @@ int chek_hwmajor(unsigned int major, unsigned int minor)
 		movie.setSpeed(25);
 
 		lab1.setMovie(&movie); // label имеет тип QLabel*
-		//text1.setFixedWidth(600);
-		//text1.setFixedHeight(115);
-		//text1.setText("This version of xilab is not compatible with your version of the controller. \n To check the compatibility of the controller and the xilab software, use the compatibility table \n If you still want to open the controller, click OK. To exit, click Cancel.");
-		
-		//lab2.setText("<html><head/><body><p><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;>For more information on hardware-software compatibility, see ...</span></a></p></body></html>");
+
 		lab2.setText(" ");
-		//lab2.setTextFormat(Qt::RichText);
-		//lab2.setTextInteractionFlags(Qt::TextBrowserInteraction);
-		//lab2.setOpenExternalLinks(true);
+
 		lab2.setFixedWidth(50);
-		
-		//
-		
-		//mes1.layout()->addWidget(&text1);
+
 		mes1.layout()->addWidget(&lab2);
 		mes1.layout()->addWidget(&lab1);
 		
@@ -118,14 +109,8 @@ int chek_hwmajor(unsigned int major, unsigned int minor)
 		mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
 		
 		mes1.setDefaultButton(QMessageBox::NoButton);
-		//QPixmap exportSuccess(":/settingsdlg/images/settingsdlg/warning.gif");
-		//mes1.setIconPixmap(exportSuccess);
 		
 		mes1.setIcon(QMessageBox::Warning);
-		
-		//QSpacerItem *horizontalSpacer = new QSpacerItem(400, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-		//QGridLayout *layout = (QGridLayout *)mes1.layout();
-		//layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
 
 		movie.start();
 		mes1.show();
@@ -232,8 +217,6 @@ do {
 			}
 			if (chek_hwmajor(dev_info.Major, dev_info.Minor) != QMessageBox::Ok)
 			{
-				//throw my_exception("The opening of the controller was rejected by the user.");
-				//devinterface->close_device();
 				return 0;
 			}
 #endif
@@ -256,6 +239,10 @@ do {
 				if (iface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
 					startWnd->hide();
 					throw my_exception("Error: devices identification failed");
+				}
+				if (chek_hwmajor(dev_info.Major, dev_info.Minor) != QMessageBox::Ok)
+				{
+					return 0;
 				}
 #endif
 				QApplication::processEvents();

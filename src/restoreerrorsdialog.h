@@ -18,10 +18,7 @@ public:
 
 	
 	Ui::RestoreErrorsDialogClass *m_ui;
-	QMovie movie;
-
-private:
-	QTimer timer;
+	QMovie *movie;
 
 public slots:
 	void restartmovie();
