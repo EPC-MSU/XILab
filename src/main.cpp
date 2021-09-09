@@ -98,24 +98,30 @@ int chek_hwmajor(unsigned int major, unsigned int minor)
 		//text1.setFixedHeight(115);
 		//text1.setText("This version of xilab is not compatible with your version of the controller. \n To check the compatibility of the controller and the xilab software, use the compatibility table \n If you still want to open the controller, click OK. To exit, click Cancel.");
 		
-		lab2.setText("<html><head/><body><p><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;>For more information on hardware-software compatibility, see ...</span></a></p></body></html>");
-		lab2.setTextFormat(Qt::RichText);
-		lab2.setTextInteractionFlags(Qt::TextBrowserInteraction);
-		lab2.setOpenExternalLinks(true);
-		lab2.setFixedWidth(600);
+		//lab2.setText("<html><head/><body><p><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;>For more information on hardware-software compatibility, see ...</span></a></p></body></html>");
+		lab2.setText(" ");
+		//lab2.setTextFormat(Qt::RichText);
+		//lab2.setTextInteractionFlags(Qt::TextBrowserInteraction);
+		//lab2.setOpenExternalLinks(true);
+		lab2.setFixedWidth(50);
 		
-		//mes1.layout()->addWidget(&lab1);
+		//
 		
 		//mes1.layout()->addWidget(&text1);
-		//mes1.layout()->addWidget(&lab2);
+		mes1.layout()->addWidget(&lab2);
+		mes1.layout()->addWidget(&lab1);
+		
+
+
 		mes1.setText("Warning: This version of xilab is not compatible with your version of the controller. \n To check the compatibility of the controller and the xilab software, use the compatibility table. \n If you still want to open the controller, click OK. To exit, click Cancel.");
 		mes1.setInformativeText("<html><head/><body><p><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;>For more information on hardware-software compatibility, see ...</span></a></p></body></html>");
 		mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
-		mes1.setDefaultButton(QMessageBox::Ok);
-		QPixmap exportSuccess(":/settingsdlg/images/settingsdlg/warning.gif");
-		mes1.setIconPixmap(exportSuccess);
 		
-		//mes1.setIcon(QMessageBox::Warning);
+		mes1.setDefaultButton(QMessageBox::NoButton);
+		//QPixmap exportSuccess(":/settingsdlg/images/settingsdlg/warning.gif");
+		//mes1.setIconPixmap(exportSuccess);
+		
+		mes1.setIcon(QMessageBox::Warning);
 		
 		//QSpacerItem *horizontalSpacer = new QSpacerItem(400, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 		//QGridLayout *layout = (QGridLayout *)mes1.layout();
