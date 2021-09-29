@@ -104,12 +104,12 @@ int chek_hwmajor(unsigned int major, unsigned int minor)
 		
 
 
-		mes1.setText("Warning: This version of xilab is not compatible with your version of the controller. \n To check the compatibility of the controller and the xilab software, use the compatibility table. \n If you still want to open the controller, click OK. To exit, click Cancel.");
-		mes1.setInformativeText("<html><head/><body><p><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;>For more information on hardware-software compatibility, see ...</span></a></p></body></html>");
+		mes1.setText("Warning: This version of XILab added new features that are not present in the 8SMC4 controller. Therefore, this version of XILab is not fully compatible with your 8SMC4 controller. For full compatibility and proper operation of the controller, please install XILab 1.14.12 and firmware 3.9.22 or use the  <html><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;> compatibility table.</span></a></html>");
+		mes1.setInformativeText("If you still want to open the controller, click OK. To exit, click Cancel");
 		mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
-		
+
 		mes1.setDefaultButton(QMessageBox::NoButton);
-		
+
 		mes1.setIcon(QMessageBox::Warning);
 
 		movie.start();
