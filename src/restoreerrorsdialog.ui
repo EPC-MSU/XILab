@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>650</height>
+    <width>650</width>
+    <height>440</height>
    </rect>
   </property>
   <property name="font">
@@ -44,7 +44,7 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>210</height>
+       <height>160</height>
       </size>
      </property>
      <property name="html">
@@ -52,8 +52,7 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In this version of XiLab could have been added new fields. These fields are missing from your profile. Since your profile is not verified and does not correspond to this version of XiLab, the missing fields from your profile will be filled with zeros. The correct operation of the movement is not guaranteed! &lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;New fields could have been added in this version of XILab. These fields are missing from the uploaded profile. Since the profile you are uploading is not fully compatible with this version of XILab. The missing fields in the uploaded profile will be filled with zeros. The correct operation of the stage is not guaranteed! &lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Click Apply in the main settings window &lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;to use your profile&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;or Cancel to cancel the download&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -68,7 +67,7 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout" rowstretch="0,0" columnstretch="0,0,0,0" rowminimumheight="0,0" columnminimumwidth="0,0,0,0">
+    <layout class="QGridLayout" name="gridLayout" rowstretch="0,0" columnstretch="0,0" rowminimumheight="0,0" columnminimumwidth="0,0">
      <property name="bottomMargin">
       <number>5</number>
      </property>

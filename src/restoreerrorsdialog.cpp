@@ -10,10 +10,9 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 {
 	m_ui->setupUi(this);
 	m_ui->listWidget->addItems(items);
-
-
 	//movie->setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
 	movie->setSpeed(25);
+	//movie->setScaledSize(QSize(1.25, 1.25));
 	m_ui->label->setMovie(movie); // label имеет тип QLabel*
 	//connect(movie, SIGNAL(finished()), this, SLOT(restartmovie()));
 	movie->start();
