@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>650</width>
-    <height>440</height>
+    <height>472</height>
    </rect>
   </property>
   <property name="font">
@@ -62,7 +62,10 @@ p, li { white-space: pre-wrap; }
    <item alignment="Qt::AlignHCenter">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../Resources/images/settingsdlg/warning.gif</pixmap>
      </property>
     </widget>
    </item>

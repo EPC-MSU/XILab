@@ -12,16 +12,21 @@ namespace Ui {
 }
 
 class RestoreErrorsDialog : public QDialog {
+
+
 public:
 	RestoreErrorsDialog(QWidget *parent, QStringList items);
 	~RestoreErrorsDialog();
 
 	
 	Ui::RestoreErrorsDialogClass *m_ui;
-	QMovie *movie;
+	//QMovie *movie;
 
 public slots:
 	void restartmovie();
+
+private:
+	QMovie movie;
 };
 
 #endif // RESTOREERRORSDIALOG_H

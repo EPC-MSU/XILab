@@ -27,6 +27,7 @@ MessageLog *mlog;
 QThread *messageLogThread;
 bool singleaxis;
 const char* valid_manufacturer = "XIMC";
+//QMovie movie;
 
 static void XIMC_CALLCONV myCallback(int loglevel, const wchar_t* message, void *user_data)
 {
@@ -91,9 +92,12 @@ int chek_hwmajor(unsigned int major, unsigned int minor)
 		QMovie movie;
 
 		movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
-		movie.setSpeed(25);
 
 		lab1.setMovie(&movie); // label имеет тип QLabel*
+		movie.setSpeed(25);
+		movie.setCacheMode(QMovie::CacheAll);
+
+		movie.start();
 
 		lab2.setText(" ");
 
@@ -112,7 +116,7 @@ int chek_hwmajor(unsigned int major, unsigned int minor)
 
 		mes1.setIcon(QMessageBox::Warning);
 
-		movie.start();
+
 		mes1.show();
 		ret_messg = mes1.exec();
 	}
