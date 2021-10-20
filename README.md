@@ -10,6 +10,7 @@
 
    - In the repository, install the commit corresponding to the state specified in the XiLab Version file XIMC_VER==
    - Download the collected library archive of the desired version, for example, from the SOFTWARE download page:http://files.xisupport.com/Software.en.html#all-libximc-microsmc-and-ximc-labview-versions
+   - Copy the downloaded archive to a folder ***C:\Projects\xilab***.
    - Unpack from the downloaded archive the **ximc** folder from it to **C:\projects\libximc-win**
    - Inside the copied **ximc** folder, copy the **ximc.h** file to the **win32** and **win64** folders.
 
@@ -42,13 +43,27 @@ In **MSVC2013**, you can edit and debug code, as well as build it.
 
 
 
+
+
+## Build a release using a Microsoft Visual Studio 2013
+
+To build releases for Windows, you can use the  Microsoft Visual Studio 
+
+- Open **XILab.sln** file  in Microsoft Visual Studio.
+
+- In the **Project Properties** menu, select the build type and platform.
+
+- In the **Build** menu, select **Build Solution**.
+
+  
+
 ## Build a release using a build script
 
 To build releases for Windows, you can use the **build.bat** build script.
 
-- Run the **build.bat**. 
+- Run the **build.bat git**. If the build is not successful for all platforms then run the full build command **build.bat git add_service_build**.
 
-- Portable software packages for different bit sizes are located in the folder **C:\Projects\xilab\dist_dir**.
+- Portable software packages for different bit sizes after the build are located in the folder **C:\Projects\xilab\dist_dir**.
 
 - The installer after the build is located in the folder **C:\Projects\xilab**.
 

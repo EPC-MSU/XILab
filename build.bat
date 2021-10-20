@@ -3,10 +3,15 @@ set BASEDIR=%CD%
 @cmd /C exit 0
 
 set FIRSTPARAM="%1"
+@if '%2' == 'add_service_build' set FIRSTPARAM="%2"
 @if %FIRSTPARAM% == "cleandist" call :CLEAN && exit /B 0
 
 :: skip checkout magic for pipeline builds
 @if not "%BUILDOS%" == "" goto END_REFRESH
+
+:: skip checkout magic for git repository builds
+@if '%1' == 'git' goto END_REFRESH
+@if '%2' == 'git' goto END_REFRESH
 
 :: Prefer XIMC_REVISION
 @if NOT 'x%XIMC_REVISION%' == 'x' (@set MERCURIAL_SUFFIX=-r %XIMC_REVISION%
