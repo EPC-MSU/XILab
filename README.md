@@ -4,6 +4,8 @@
 
 ## How to deploy a XiLab project on a Windows computer
 
+**Important**: For Windows 10, XILab can only be build with administrator rights or by the administrator himself, otherwise you will get errors during the build
+
 1. Clone the XiLab repository https://github.com/EPC-MSU/XILab to ***C:\Projects\xilab***. Go to the desired branch and the required state in it. Or on https://github.com/EPC-MSU/XILab select the desired state and download the archive. Which to unpack in  ***C:\Projects\xilab***. 
 
 2. Clone the **libximc** repository https://github.com/EPC-MSU/libximc to the **C:\Projects\libximc-win** folder
@@ -11,8 +13,8 @@
    - In the repository, install the commit corresponding to the state specified in the XiLab Version file XIMC_VER==
    - Download the collected library archive of the desired version, for example, from the SOFTWARE download page:http://files.xisupport.com/Software.en.html#all-libximc-microsmc-and-ximc-labview-versions
    - Copy the downloaded archive to a folder ***C:\Projects\xilab***.
-   - Unpack from the downloaded archive the **ximc** folder from it to **C:\projects\libximc-win**
-   - Inside the copied **ximc** folder, copy the **ximc.h** file to the **win32** and **win64** folders.
+   - Unpack the **ximc** folder from the downloaded archive to **C:\projects\libximc-win**
+   - Inside **ximc** folder, copy the **ximc.h** file to the **win32** and **win64** folders.
 
 3.  Installing dependencies.
 
@@ -70,3 +72,4 @@ To build releases for Windows, you can use the **build.bat** build script.
   
 
 Building **XiLab** is also possible under **linux** and **Mac**.
+
