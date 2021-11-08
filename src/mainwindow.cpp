@@ -256,7 +256,7 @@ void MainWindow::InitUI()
 
 	eeprLbl.setFixedWidth(ST_PANE_WIDTH);
 	eeprLbl.setAlignment(Qt::AlignHCenter);
-	eeprLbl.setToolTip(tr("Lights up when EEPROM is connected."));
+	eeprLbl.setToolTip(tr("Lights up green when the stage is equipped with EEPROM memory chip. \nThe built - in stage profile is uploaded from the EEPROM memory chip if the EEPROM_PRECEDENCE flag(XILab Settings->About device tab) is enabled, allowing you to connect various stages to the controller with automatic setup."));
 	eeprLbl.setFont(font);
 	eeprLbl.setPalette(palette_green);
 	eeprLbl.setText("EEPR");
@@ -265,7 +265,7 @@ void MainWindow::InitUI()
 
 	homdLbl.setFixedWidth(ST_PANE_WIDTH);
 	homdLbl.setAlignment(Qt::AlignHCenter);
-	homdLbl.setToolTip(tr("Lights up when the controller is homed."));
+	homdLbl.setToolTip(tr("Lights up after successful execution of home() command meaning that relative position scale is calibrated against a hardware absolute position sensor like a limit switch. Drops after loss of calibration like harsh stop and possibly skipped steps."));
 	homdLbl.setFont(font);
 	homdLbl.setPalette(palette_green);
 	homdLbl.setText("HOMD");
@@ -274,7 +274,7 @@ void MainWindow::InitUI()
 
 	wnd1Lbl.setFixedWidth(ST_PANE_WIDTH);
 	wnd1Lbl.setAlignment(Qt::AlignHCenter);
-	wnd1Lbl.setToolTip(tr("Winding A status."));
+	wnd1Lbl.setToolTip(tr("The winding A status has 1 of 4 statuses: \nWinding A is disconnected. \nWinding A state is unknown. \nWinding A is short - circuited. \nWinding A is connected and working properly.\nStatus is determined using statistical data while moving, taking its time, and turning this status rather useless in common applications.Therefore this function have been disabled for the moment."));
 	wnd1Lbl.setFont(font);
 	wnd1Lbl.setPalette(palette_grey);
 	wnd1Lbl.setText("WndA");
@@ -283,7 +283,7 @@ void MainWindow::InitUI()
 
 	wnd2Lbl.setFixedWidth(ST_PANE_WIDTH);
 	wnd2Lbl.setAlignment(Qt::AlignHCenter);
-	wnd2Lbl.setToolTip(tr("Winding B status."));
+	wnd2Lbl.setToolTip(tr("The winding B status has 1 of 4 statuses: \nWinding B is disconnected. \nWinding B state is unknown. \nWinding B is short - circuited. \nWinding B is connected and working properly.\nStatus is determined using statistical data while moving, taking its time, and turning this status rather useless in common applications.Therefore this function have been disabled for the moment."));
 	wnd2Lbl.setFont(font);
 	wnd2Lbl.setPalette(palette_grey);
 	wnd2Lbl.setText("WndB");
@@ -292,7 +292,7 @@ void MainWindow::InitUI()
 
 	encdLbl.setFixedWidth(ST_PANE_WIDTH);
 	encdLbl.setAlignment(Qt::AlignHCenter);
-	encdLbl.setToolTip(tr("Encoder status."));
+	encdLbl.setToolTip(tr("Encoder state has 1 of 5 statuses: \nEncoder is absent. \nEncoder state is unknown. \nEncoder is connected and malfunctioning. \nEncoder is connected and operational but counts in other direction. \nEncoder is connected and working properly."));
 	encdLbl.setFont(font);
 	encdLbl.setPalette(palette_grey);
 	encdLbl.setText("ENCD");
@@ -301,7 +301,7 @@ void MainWindow::InitUI()
 
 	pwhtLbl.setFixedWidth(ST_PANE_WIDTH);
 	pwhtLbl.setAlignment(Qt::AlignHCenter);
-	pwhtLbl.setToolTip(tr("Lights up when power overheat is detected."));
+	pwhtLbl.setToolTip(tr("Power driver overheat. Motor control is disabled until some cooldown. This should not happen in boxed versions of controller. This may happen in bare board version of controller with a custom radiator. Redesign your radiator then."));
 	pwhtLbl.setFont(font);
 	pwhtLbl.setPalette(palette_red);
 	pwhtLbl.setText("PWHT");
@@ -310,7 +310,7 @@ void MainWindow::InitUI()
 
 	slipLbl.setFixedWidth(ST_PANE_WIDTH);
 	slipLbl.setAlignment(Qt::AlignHCenter);
-	slipLbl.setToolTip(tr("Lights up when engine slip error is detected."));
+	slipLbl.setToolTip(tr("Motor slip detected. Flag is set when encoder position and step position are too far apart. You can disable the \"Position control\" flag or increase the error in the \"threshold\" field on the XILab Settings->Position control tab to stop these error from happening."));
 	slipLbl.setFont(font);
 	slipLbl.setPalette(palette_red);
 	slipLbl.setText("SLIP");
@@ -319,7 +319,7 @@ void MainWindow::InitUI()
 
 	wrmLbl.setFixedWidth(ST_PANE_WIDTH);
 	wrmLbl.setAlignment(Qt::AlignHCenter);
-	wrmLbl.setToolTip(tr("Lights up when error is detected the difference between winding resistances."));
+	wrmLbl.setToolTip(tr("Lights up when there is a substantial difference between stepper motor windings resistances. This usually happens with a damaged stepper motor with partially short-circuited windings. \nYou can diagnose the problem according to the instructions in our manual"));
 	wrmLbl.setFont(font);
 	wrmLbl.setPalette(palette_red);
 	wrmLbl.setText("WRM");
@@ -328,7 +328,7 @@ void MainWindow::InitUI()
 
 	engLbl.setFixedWidth(ST_PANE_WIDTH);
 	engLbl.setAlignment(Qt::AlignHCenter);
-	engLbl.setToolTip(tr("Error response of the engine control action."));
+	engLbl.setToolTip(tr("Lights up red when the motor control error occurs. Motor control algorithm failure means that it can't define the correct decisions with the feedback data it receives. Single failure may be caused by mechanical problem. A repeating failure can be caused by incorrect motor settings."));
 	engLbl.setFont(font);
 	engLbl.setPalette(palette_red);
 	engLbl.setText("ENGR");
@@ -337,7 +337,7 @@ void MainWindow::InitUI()
 
 	extLbl.setFixedWidth(ST_PANE_WIDTH);
 	extLbl.setAlignment(Qt::AlignHCenter);
-	extLbl.setToolTip(tr("The error is caused by the input signal."));
+	extLbl.setToolTip(tr("The error is caused by the external EXTIO input signal set to cause this error in the settings (XILab Settings->EXTIO tab)."));
 	extLbl.setFont(font);
 	extLbl.setPalette(palette_red);
 	extLbl.setText("EXTi");
@@ -346,7 +346,7 @@ void MainWindow::InitUI()
 
 	errcLbl.setFixedWidth(ST_PANE_WIDTH);
 	errcLbl.setAlignment(Qt::AlignHCenter);
-	errcLbl.setToolTip(tr("Lights up when command error is detected."));
+	errcLbl.setToolTip(tr("Command error encountered. The command received is not in the list of controller known commands. Most possible reason is the outdated firmware that can be updated in XILab Settings->About device tab->Autoupdate button."));
 	errcLbl.setFont(font);
 	errcLbl.setPalette(palette_red);
 	errcLbl.setText("ErrC");
@@ -355,7 +355,7 @@ void MainWindow::InitUI()
     
 	errdLbl.setFixedWidth(ST_PANE_WIDTH);
 	errdLbl.setAlignment(Qt::AlignHCenter);
-	errdLbl.setToolTip(tr("Lights up when data error is detected."));
+	errdLbl.setToolTip(tr("Data integrity error encountered. The data inside command and its CRC code do not correspond, therefore data can't be considered valid. This error may be caused by EMI in UART/RS232 interface."));
 	errdLbl.setFont(font);
 	errdLbl.setPalette(palette_red);
 	errdLbl.setText("ErrD");
@@ -364,7 +364,7 @@ void MainWindow::InitUI()
 
 	errvLbl.setFixedWidth(ST_PANE_WIDTH);
 	errvLbl.setAlignment(Qt::AlignHCenter);
-	errvLbl.setToolTip(tr("Lights up when incorrect value error is detected."));
+	errvLbl.setToolTip(tr("Value error encountered. The values in the command can't be applied without correction because they fall out the valid range. Corrected values were used instead of the orginal ones."));
 	errvLbl.setFont(font);
 	errvLbl.setPalette(palette_red);
 	errvLbl.setText("ErrV");
