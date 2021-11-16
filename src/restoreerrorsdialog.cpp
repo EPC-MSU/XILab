@@ -11,6 +11,15 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	m_ui->setupUi(this);
 	m_ui->listWidget->addItems(items);
 
+#if defined(__LINUX__) || defined(__APPLE__)
+	m_ui->textBrowser->setMinimumHeight(100);
+	parent->resize(550, 350);
+	parent->setMinimumSize(QSize(500, 476));
+	parent->setMaximumSize(QSize(600, 16777215));
+#endif
+	
+
+
 	//movie->setSpeed(25);
 	//m_ui->label->setMovie(movie); // label имеет тип QLabel*
 	//movie->setCacheMode(QMovie::CacheAll);
