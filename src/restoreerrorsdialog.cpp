@@ -13,9 +13,10 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 
 #if defined(__LINUX__) || defined(__APPLE__)
 	m_ui->textBrowser->setMinimumHeight(100);
-	parent->resize(550, 350);
-	parent->setMinimumSize(QSize(500, 476));
-	parent->setMaximumSize(QSize(600, 16777215));
+	m_ui->textBrowser ->setMaximumHeight(100);
+	this->resize(550, 350);
+	this->setMinimumSize(QSize(500, 320));
+	this->setMaximumSize(QSize(600, 16777215));
 #endif
 	
 
