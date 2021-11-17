@@ -11,14 +11,23 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	m_ui->setupUi(this);
 	m_ui->listWidget->addItems(items);
 
-#if defined(__LINUX__) || defined(__APPLE__)
+#if defined(__LINUX__)
 	m_ui->textBrowser->setMinimumHeight(100);
 	m_ui->textBrowser ->setMaximumHeight(100);
-	this->resize(550, 350);
-	this->setMinimumSize(QSize(500, 320));
+	this->resize(550, 280);
+	this->setMinimumSize(QSize(550, 280));
+	this->setMaximumSize(QSize(600, 280));
 	this->setMaximumSize(QSize(600, 16777215));
 #endif
-	
+
+#if defined(__APPLE__)
+	m_ui->textBrowser->setMinimumHeight(100);
+	m_ui->textBrowser->setMaximumHeight(100);
+	this->resize(550, 350);
+	this->setMinimumSize(QSize(550, 350));
+	this->setMaximumSize(QSize(600, 350));
+	this->setMaximumSize(QSize(600, 16777215));
+#endif
 
 
 	//movie->setSpeed(25);
