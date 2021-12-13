@@ -50,6 +50,8 @@ PageAboutDeviceWgt::PageAboutDeviceWgt(QWidget *parent, MotorSettings *_motorStg
 	request.setRawHeader("User-Agent", QString("XiLab %1").arg(xilab_ver).toUtf8());
 	manager->get(request);
 	m_ui->progressBar->hide();
+	m_ui->doc_label->setOpenExternalLinks(true);
+	m_ui->prog_label->setOpenExternalLinks(true);
 }
 
 PageAboutDeviceWgt::~PageAboutDeviceWgt()
