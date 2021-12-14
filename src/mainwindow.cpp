@@ -1150,7 +1150,9 @@ void MainWindow::UpdateState()
 
 	// EXTIO stop (see #17427)
 	// (3 conditions: hight level, stop on hight level, extio mode is input)
-	if ((cs->status().GPIOFlags & STATE_GPIO_LEVEL) && (settingsDlg->motorStgs->extio.EXTIOModeFlags & EXTIO_SETUP_MODE_IN_STOP) && !(settingsDlg->motorStgs->extio.EXTIOSetupFlags & EXTIO_SETUP_OUTPUT))
+	// Bug #57092 Spontaneous reset of alarm
+	// | EXTIO_SETUP_MODE_IN_BITS added to exclude EXTIO_SETUP_MODE_IN_ALARM and EXTIO_SETUP_MODE_IN_MOVR
+	if ((cs->status().GPIOFlags & STATE_GPIO_LEVEL) && ((settingsDlg->motorStgs->extio.EXTIOModeFlags | EXTIO_SETUP_MODE_IN_BITS) == EXTIO_SETUP_MODE_IN_STOP) && !(settingsDlg->motorStgs->extio.EXTIOSetupFlags & EXTIO_SETUP_OUTPUT))
 	{
 		cyclic = false;
 		devinterface->command_stop();
