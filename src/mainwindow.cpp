@@ -656,10 +656,13 @@ void MainWindow::UpdateLogTable()
 
 	// Update log
 	LogItem next_item;
+	QString message_old = "";
+	int counter_mess = 1;
 	while (mlog->pop(&next_item) && (tick2 - tick1 < 50) ) { // gathers data for 50ms max (out of 100ms limit for a single update)
 		tick2 = t.getElapsedTimeInMilliSec();
 		QDateTime datetime = next_item.datetime;
 		QString message = next_item.message;
+		
 		QString source = next_item.source;
 		int loglevel = next_item.loglevel;
 
@@ -672,8 +675,17 @@ void MainWindow::UpdateLogTable()
 			(source == SOURCE_LIBRARY && loglevel <= ls->lll_index)) {
 
 			int row = ui->logEdit->rowCount();
-			ui->logEdit->insertRow(row);
-			ui->logEdit->setRowCount(row+1);
+			if (message_old != message) {
+				ui->logEdit->insertRow(row);
+				ui->logEdit->setRowCount(row + 1);
+				message_old = message;
+				counter_mess = 1;
+			}
+			else
+			{
+				row--;
+				counter_mess++;
+			}
 
 			QColor color = QColor("black");
 			switch (loglevel)
@@ -693,7 +705,10 @@ void MainWindow::UpdateLogTable()
 			QTableWidgetItem *item2 = new QTableWidgetItem(source);
 			clearEditableFlag(item2);
 			ui->logEdit->setItem(row, 2, item2);
-			QTableWidgetItem *item3 = new QTableWidgetItem(message);
+			QString count = "";
+			if (counter_mess > 1)
+				count = " [" + QString::number(counter_mess) + "]";
+			QTableWidgetItem *item3 = new QTableWidgetItem((QString) (message + count));
 			clearEditableFlag(item3);
 			item3->setTextColor(color);
 			ui->logEdit->setItem(row, 3, item3);
