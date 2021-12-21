@@ -707,7 +707,7 @@ void MainWindow::UpdateLogTable()
 			ui->logEdit->setItem(row, 2, item2);
 			QString count = "";
 			if (counter_mess > 1)
-				count = " [" + QString::number(counter_mess) + "]";
+				count = " [duplicated " + QString::number(counter_mess) + " times]";
 			QTableWidgetItem *item3 = new QTableWidgetItem((QString) (message + count));
 			clearEditableFlag(item3);
 			item3->setTextColor(color);
