@@ -870,7 +870,6 @@ void MainWindow::UpdateState()
 		return;
 	}
 	bool currentStateIsAlarm = ((cs->status().Flags & STATE_ALARM) != 0);
-	unsigned long currentAlarmFlags = (cs->status().Flags | ~STATE_ALARM);
 	QPalette mainpal = ui->centralWidget->palette();
 	mainpal.setColor(QPalette::Window, (currentStateIsAlarm ? alarm_bk_color : saved_bk_color));
 	ui->centralWidget->setPalette(mainpal);
@@ -880,18 +879,7 @@ void MainWindow::UpdateState()
 
 	if (currentStateIsAlarm && !previousStateIsAlarm)
 		Log("ALARM Signal: Press \"Stop\" button to continue.", SOURCE_XILAB, LOGLEVEL_ERROR);
-
-	// Feature #54146 We output a message about a short-term alarm to the xilab log
-	if (!currentStateIsAlarm && previousStateIsAlarm) {
-		if (!(settingsDlg->motorStgs->secure.Flags & ALARM_FLAGS_STICKING) && (previousAlarmFlags & (STATE_SECUR | ~STATE_ALARM))) {
-			Log("A failure occurred, but the reason of the failure seems to be nonexistent already. You can store even shortest failure conditions in the alarm flags section making them visible afterwards by enabling the \"Sticky Alarm flags\" in XILab Settings->Maximum ratings", SOURCE_XILAB, LOGLEVEL_WARNING);
-		}
-	}
-
 	previousStateIsAlarm = currentStateIsAlarm;
-	previousAlarmFlags = currentAlarmFlags;
-	
-
 
 	if(devinterface->getMode() == BOOTLOADER_MODE)
 	{
@@ -1226,14 +1214,8 @@ void MainWindow::UpdateState()
 	{
 		case ENC_STATE_ABSENT	: encdLbl.setPalette(palette_grey); break;
 		case ENC_STATE_UNKNOWN	: encdLbl.setPalette(palette_grey); break;
-		case ENC_STATE_MALFUNC	: 
-			encdLbl.setPalette(palette_red); 
-
-			break;
-		case ENC_STATE_REVERS	: 
-			encdLbl.setPalette(palette_yellow);
- 
-			break;
+		case ENC_STATE_MALFUNC	: encdLbl.setPalette(palette_red); break;
+		case ENC_STATE_REVERS	: encdLbl.setPalette(palette_yellow); break;
 		case ENC_STATE_OK		: encdLbl.setPalette(palette_green); break;
 		default					: encdLbl.setPalette(palette_grey); break;
 	}

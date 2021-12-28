@@ -182,7 +182,6 @@ private:
 	bool positionerNeedsUpdate;
 	bool deviceLost;
 	bool previousStateIsAlarm;
-	unsigned long previousAlarmFlags;
 
 	//attenuator position
 	State_Atten state_atten;
