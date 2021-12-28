@@ -878,21 +878,8 @@ void MainWindow::UpdateState()
 	stopfont.setBold(currentStateIsAlarm);
 	ui->stopBtn->setFont(stopfont);
 
-	if (currentStateIsAlarm && !previousStateIsAlarm) {
+	if (currentStateIsAlarm && !previousStateIsAlarm)
 		Log("ALARM Signal: Press \"Stop\" button to continue.", SOURCE_XILAB, LOGLEVEL_ERROR);
-		if (cs->status().Flags & STATE_POWER_OVERHEAT)
-			Log("Power driver overheat. Motor control is disabled until some cooldown. This should not happen in boxed versions of controller. This may happen in bare board version of controller with a custom radiator. Redesign your radiator then", SOURCE_XILAB, LOGLEVEL_ERROR);
-		if (cs->status().Flags & STATE_WINDING_RES_MISMATCH)
-			Log("Lights up when there is a substantial difference between stepper motor windings resistances. This usually happens with a damaged stepper motor with partially short-circuited windings.", SOURCE_XILAB, LOGLEVEL_ERROR);
-		if (cs->status().Flags & STATE_ENGINE_RESPONSE_ERROR)
-			Log("Lights up red when the motor control error occurs. Motor control algorithm failure means that it can't define the correct decisions with the feedback data it receives. Single failure may be caused by mechanical problem. A repeating failure can be caused by incorrect motor settings.", SOURCE_XILAB, LOGLEVEL_ERROR);
-		if (cs->status().Flags & STATE_ERRC)
-			Log("Command error encountered. The command received is not in the list of controller known commands. Most possible reason is the outdated firmware that can be updated in XILab Settings->About device tab->Autoupdate button", SOURCE_XILAB, LOGLEVEL_ERROR);
-		if (cs->status().Flags & STATE_ERRD)
-			Log("Data integrity error encountered. The data inside command and its CRC code do not correspond, therefore data can't be considered valid. This error may be caused by EMI in UART/RS232 interface", SOURCE_XILAB, LOGLEVEL_ERROR);
-		if (cs->status().Flags & STATE_ERRV)
-			Log("Value error encountered. The values in the command can't be applied without correction because they fall out the valid range. Corrected values were used instead of the orginal ones", SOURCE_XILAB, LOGLEVEL_ERROR);
-	}
 
 	// Feature #54146 We output a message about a short-term alarm to the xilab log
 	if (!currentStateIsAlarm && previousStateIsAlarm) {
