@@ -28,7 +28,7 @@ public:
 private:
     Ui::PageProgramConfigWgt* ui;
 	DeviceSearchSettings* dss;
-	void SetTable(QList<QString> list);
+	void SetTable(QList<QString> list, QList<QString> list_protocol);
 	QIcon x_icon, w_icon;
 	bindy::Bindy *bindy;
 	bindy::conn_id_t conn_id;

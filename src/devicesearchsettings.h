@@ -15,6 +15,7 @@ public:
 	bool Enumerate_network;
 	QList<QString> Server_hosts;
 	unsigned int Virtual_devices;
+	QList<QString> Protocol_list;
 
 private:
 	QString filename;

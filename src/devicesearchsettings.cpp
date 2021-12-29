@@ -30,6 +30,15 @@ void DeviceSearchSettings::load()
 	}
 	settings.endArray();
 
+	int size1 = settings.beginReadArray("Protocol_list");
+	Protocol_list.clear();
+	for (int i = 0; i < size1; i++) {
+		settings.setArrayIndex(i);
+		QString protocol = settings.value("protocol").toString();
+		Protocol_list.append(protocol);
+	}
+	settings.endArray();
+
 	Virtual_devices = settings.value("Virtual_devices", 2).toUInt();
 	settings.endGroup();
 }
@@ -48,6 +57,14 @@ void DeviceSearchSettings::save()
 	for (int i = 0; i < Server_hosts.size(); i++) {
 		settings.setArrayIndex(i);
 		settings.setValue("hostname", Server_hosts.at(i));
+	}
+	settings.endArray();
+
+	settings.remove("Protocol_list");
+	settings.beginWriteArray("Protocol_list");
+	for (int i = 0; i < Protocol_list.size(); i++) {
+		settings.setArrayIndex(i);
+		settings.setValue("protocol", Protocol_list.at(i));
 	}
 	settings.endArray();
 

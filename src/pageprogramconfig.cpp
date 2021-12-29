@@ -109,7 +109,8 @@ void PageProgramConfigWgt::DetectHosts()
     v.erase(std::unique(v.begin(), v.end()), v.end());
 	
 	QList<QString> list = QList<QString>::fromVector( QVector<QString>::fromStdVector(v) );
-	SetTable(list);
+
+	SetTable(list, dss->Protocol_list);
 
 	libximc::free_enumerate_devices(tmp_enum);
 	displayStatusServerCount(v_size);
@@ -126,9 +127,11 @@ void PageProgramConfigWgt::FromUiToClass()
 	dss->Virtual_devices = ui->virtualDevicesSpinBox->value();
 
 	dss->Server_hosts.clear();
+	dss->Protocol_list.clear();
 
 	for (int i = 0; i < ui->tableWidget->rowCount()-1; ++i) { // last row is edit row which has no items
 		dss->Server_hosts.append(ui->tableWidget->item(i,0)->text() );
+		dss->Protocol_list.append(ui->tableWidget->item(i, 1)->text());
 	}
 }
 
@@ -139,7 +142,7 @@ void PageProgramConfigWgt::FromClassToUi()
 	ui->networkChk->setChecked(dss->Enumerate_network);
 	ui->virtualDevicesSpinBox->setValue(dss->Virtual_devices);
 
-	SetTable(dss->Server_hosts);
+	SetTable(dss->Server_hosts, dss->Protocol_list);
 }
 
 void PageProgramConfigWgt::FromUiToSettings()
@@ -191,10 +194,10 @@ void PageProgramConfigWgt::refreshUserLists()
 
 void PageProgramConfigWgt::slotCellClicked ( int row, int column )
 {
-	if (column == 1 && row != ui->tableWidget->rowCount()-1)
+	if (column == 2 && row != ui->tableWidget->rowCount()-1)
 		ui->tableWidget->removeRow(row);
 
-	if (column == 2 && row != ui->tableWidget->rowCount()-1) {
+	if (column == 3 && row != ui->tableWidget->rowCount()-1) {
 		// First clear the old models so that lists become greyed out
 		delete ui->localUserTableView->model();
 		delete ui->remoteUserTableView->model();
@@ -235,34 +238,34 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 		QTableWidgetItem* icon_item = new QTableWidgetItem();
 		icon_item->setIcon(x_icon);
 		icon_item->setFlags(Qt::ItemIsEnabled);
-		tw->setItem(row, 1, icon_item);
+		tw->setItem(row, 2, icon_item);
 
 		// Add "wrench" icon in the edited row (right column)
 		QTableWidgetItem* icon_item2 = new QTableWidgetItem();
 		icon_item2->setIcon(w_icon);
 		icon_item2->setFlags(Qt::ItemIsEnabled);
-		tw->setItem(row, 2, icon_item2);
+		tw->setItem(row, 3, icon_item2);
 
 		// Disable right column of the new row
-		tw->setItem(row+1, 1, new QTableWidgetItem());
-		tw->item(row+1, 1)->setFlags(Qt::NoItemFlags);
+		tw->setItem(row+1, 2, new QTableWidgetItem());
+		tw->item(row+1, 2)->setFlags(Qt::NoItemFlags);
 	} else if (column == 0 && row != tw->rowCount()-1 && tw->item(row, column)->text().trimmed() == QString("") ) { // remove empty line
 		tw->removeRow(row);
 	}
 	tw->blockSignals(false);
 }
 
-void PageProgramConfigWgt::SetTable(QList<QString> list)
+void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_protocol)
 {
 	QTableWidget *tw = ui->tableWidget;
 	tw->blockSignals(true);
 
 	tw->clearContents();
 	tw->setRowCount(list.size()+1);
-	tw->setColumnCount(3);
+	tw->setColumnCount(4);
 
 	QStringList qslist;
-	qslist << QString("IP/Host") << QString() << QString();
+	qslist << QString("IP/Host") << QString("Protocol") << QString() << QString() ;
 	ui->tableWidget->setHorizontalHeaderLabels(qslist);
 	QHeaderView * h = ui->tableWidget->horizontalHeader();
 	QHeaderView * v = ui->tableWidget->verticalHeader();
@@ -270,26 +273,29 @@ void PageProgramConfigWgt::SetTable(QList<QString> list)
 	h->setResizeMode(0, QHeaderView::Stretch);
 	h->setResizeMode(1, QHeaderView::ResizeToContents);
 	h->setResizeMode(2, QHeaderView::ResizeToContents);
+	h->setResizeMode(3, QHeaderView::ResizeToContents);
 	v->hide();
 
 	for (int i=0; i<list.size(); ++i) {
 		tw->setItem(i, 0, new QTableWidgetItem( list.at(i) ) );
+		tw->setItem(i, 1, new QTableWidgetItem( list_protocol.at(i) ) );
 
 		QTableWidgetItem* icon_item = new QTableWidgetItem();
 		icon_item->setIcon(x_icon);
 		icon_item->setFlags(Qt::ItemIsEnabled);
-		tw->setItem(i, 1, icon_item );
+		tw->setItem(i, 2, icon_item );
 
 		QTableWidgetItem* icon_item2 = new QTableWidgetItem();
 		icon_item2->setIcon(w_icon);
 		icon_item2->setFlags(Qt::ItemIsEnabled);
-		tw->setItem(i, 2, icon_item2 );
+		tw->setItem(i, 3, icon_item2 );
 	}
+
 	// this is the edit line
-	tw->setItem(list.size(), 1, new QTableWidgetItem());
 	tw->setItem(list.size(), 2, new QTableWidgetItem());
-	tw->item(list.size(), 1)->setFlags(Qt::NoItemFlags);
+	tw->setItem(list.size(), 3, new QTableWidgetItem());
 	tw->item(list.size(), 2)->setFlags(Qt::NoItemFlags);
+	tw->item(list.size(), 3)->setFlags(Qt::NoItemFlags);
 
 	tw->blockSignals(false);
 }

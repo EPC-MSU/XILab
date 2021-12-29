@@ -58,6 +58,7 @@ void DeviceThread::run()
 	 * Getting a list of network interfaces.
 	*/
 	QStringList list_interfase = DeviceThread::SearchAdapters();
+	QStringList udp_list;
 
 	if (dss->Enumerate_network)
 	{
@@ -79,7 +80,11 @@ void DeviceThread::run()
 			*/
 			qs = QString("addr=");
 			for (int i = 0; i < dss->Server_hosts.size(); i++) {
-				qs.append(dss->Server_hosts.at(i)).append(",");
+				if (dss->Protocol_list.at(i) == QString("udp"))
+					udp_list.append(QString("xi-udp:////") + dss->Server_hosts.at(i));
+				else
+					qs.append(dss->Server_hosts.at(i)).append(",");
+				
 			}
 			qs.chop(1);
 		}
@@ -163,7 +168,14 @@ void DeviceThread::run()
 		}
 		free_enumerate_devices(dev_enum);
 	}
-
+	for (int i = 0; i < udp_list.size(); i++) {
+		urls.append(udp_list.at(i));
+		descriptions.append("Description?");
+		friendlyNames.append("");
+		positionerNames.append("");
+		serials.append(0);
+		flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
+	}
 	emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 }
 
