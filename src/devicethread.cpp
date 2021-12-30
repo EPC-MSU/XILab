@@ -81,7 +81,7 @@ void DeviceThread::run()
 			qs = QString("addr=");
 			for (int i = 0; i < dss->Server_hosts.size(); i++) {
 				if (dss->Protocol_list.at(i) == QString("udp"))
-					udp_list.append(QString("xi-udp:////") + dss->Server_hosts.at(i));
+					udp_list.append(QString("xi-udp://") + dss->Server_hosts.at(i));
 				else
 					qs.append(dss->Server_hosts.at(i)).append(",");
 				
