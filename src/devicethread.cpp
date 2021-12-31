@@ -120,7 +120,6 @@ void DeviceThread::run()
 		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
 		if (dev_enum == NULL) {
-			//emit finished(false, QStringList(), QStringList(), QStringList(), QStringList(), QList<uint32_t>(), flags);
 			emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 			return;
 		}
@@ -132,7 +131,6 @@ void DeviceThread::run()
 		qDebug() << "Found " << namesCount << " devices";
 
 		if (namesCount == 0){
-			//emit finished(true, QStringList(), QStringList(), QStringList(), QStringList(), QList<uint32_t>(), flags);
 			emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 			return;
 		}
@@ -181,14 +179,7 @@ void DeviceThread::run()
 		}
 		free_enumerate_devices(dev_enum);
 	}
-	/*for (int i = 0; i < udp_list.size(); i++) {
-		urls.append(udp_list.at(i));
-		descriptions.append("Description?");
-		friendlyNames.append("");
-		positionerNames.append("");
-		serials.append(0);
-		flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-	}*/
+
 	emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 }
 
