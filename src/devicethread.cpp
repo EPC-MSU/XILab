@@ -82,7 +82,7 @@ void DeviceThread::run()
 			for (int i = 0; i < dss->Server_hosts.size(); i++) {
 				//if (dss->Protocol_list.at(i) == QString("udp"))
 				if (QString::compare(dss->Protocol_list.at(i), QString("udp"), Qt::CaseInsensitive) == 0)
-					udp_list.append(QString("xi-udp://") + dss->Server_hosts.at(i));
+					udp_list.append(QString("xi-udp://").append(dss->Server_hosts.at(i)));
 				else
 					qs.append(dss->Server_hosts.at(i)).append(",");
 				
@@ -95,7 +95,17 @@ void DeviceThread::run()
 	QList<Qt::ItemFlags> flags;
 	QStringList urls, descriptions, friendlyNames, positionerNames;
 	QList<uint32_t> serials;
+	bool full_enum = false;
 
+	for (int i = 0; i < udp_list.size(); i++) {
+		urls.append(udp_list.at(i));
+		descriptions.append("Description?");
+		friendlyNames.append("");
+		positionerNames.append("");
+		serials.append(0);
+		flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
+		full_enum = true;
+	}
 	/*
 	 * Search cycle for all interfaces.
 	*/
@@ -110,7 +120,8 @@ void DeviceThread::run()
 		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
 		if (dev_enum == NULL) {
-			emit finished(false, QStringList(), QStringList(), QStringList(), QStringList(), QList<uint32_t>(), flags);
+			//emit finished(false, QStringList(), QStringList(), QStringList(), QStringList(), QList<uint32_t>(), flags);
+			emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 			return;
 		}
 		namesCount = get_device_count(dev_enum);
@@ -121,7 +132,8 @@ void DeviceThread::run()
 		qDebug() << "Found " << namesCount << " devices";
 
 		if (namesCount == 0){
-			emit finished(true, QStringList(), QStringList(), QStringList(), QStringList(), QList<uint32_t>(), flags);
+			//emit finished(true, QStringList(), QStringList(), QStringList(), QStringList(), QList<uint32_t>(), flags);
+			emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 			return;
 		}
 
@@ -169,14 +181,14 @@ void DeviceThread::run()
 		}
 		free_enumerate_devices(dev_enum);
 	}
-	for (int i = 0; i < udp_list.size(); i++) {
+	/*for (int i = 0; i < udp_list.size(); i++) {
 		urls.append(udp_list.at(i));
 		descriptions.append("Description?");
 		friendlyNames.append("");
 		positionerNames.append("");
 		serials.append(0);
 		flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-	}
+	}*/
 	emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 }
 
