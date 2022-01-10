@@ -658,6 +658,23 @@ void MainWindow::UpdateLogTable()
 	LogItem next_item;
 	QString message_old = "";
 	int counter_mess = 1;
+	int row1 = ui->logEdit->rowCount();
+
+	if (row1 > 0) {
+		row1--;
+		message_old = ui->logEdit->item(row1, 3)->text();
+	}		
+	int inddupl = message_old.lastIndexOf(" [duplicated ");
+	int indint = message_old.lastIndexOf(" times]");
+	if ((inddupl > -1)) {		
+		QString strint = message_old.mid(inddupl + 13, indint - (inddupl + 13));
+		counter_mess = strint.toInt();
+		message_old.truncate(inddupl);
+	}
+	
+	
+	int counter_all = 0;
+
 	while (mlog->pop(&next_item) && (tick2 - tick1 < 50) ) { // gathers data for 50ms max (out of 100ms limit for a single update)
 		tick2 = t.getElapsedTimeInMilliSec();
 		QDateTime datetime = next_item.datetime;
@@ -675,6 +692,7 @@ void MainWindow::UpdateLogTable()
 			(source == SOURCE_LIBRARY && loglevel <= ls->lll_index)) {
 
 			int row = ui->logEdit->rowCount();
+
 			if (message_old != message) {
 				ui->logEdit->insertRow(row);
 				ui->logEdit->setRowCount(row + 1);
