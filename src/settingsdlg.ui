@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>962</width>
+    <width>1016</width>
     <height>525</height>
    </rect>
   </property>
@@ -80,7 +80,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>671</width>
+            <width>725</width>
             <height>279</height>
            </rect>
           </property>
@@ -93,7 +93,7 @@
          <item row="1" column="2">
           <widget class="QPushButton" name="restoreFlashBtn">
            <property name="text">
-            <string>Load settings from flash</string>
+            <string> Load settings from flash </string>
            </property>
           </widget>
          </item>
@@ -103,7 +103,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Load settings from profile...</string>
+            <string> Load settings from file... </string>
            </property>
           </widget>
          </item>
@@ -113,7 +113,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Compare two profiles</string>
+            <string>Compare two files</string>
            </property>
           </widget>
          </item>
