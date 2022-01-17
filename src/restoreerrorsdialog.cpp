@@ -29,7 +29,32 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	this->setMaximumSize(QSize(600, 16777215));
 #endif
 
+	QFontMetrics font_metrics(m_ui->textBrowser->font());
+	int font_height = font_metrics.height();
 
+	// Get the height by multiplying number of lines by font height, Maybe add to this a bit for a slight margin?
+	int height = font_height * 7.5;
+
+	// Set the height to the text broswer
+	m_ui->textBrowser->setMinimumHeight(height);
+	m_ui->textBrowser->setMaximumHeight(height);
+	
+
+	QFontMetrics font_metricslist(m_ui->listWidget->font());
+	int font_heightlist = font_metricslist.height();
+
+	// Get the height by multiplying number of lines by font height, Maybe add to this a bit for a slight margin?
+	int heightlist = font_heightlist * 5;
+
+	int widgheigt = height + /*m_ui->label->size().height()*/110 + heightlist + 80;
+	this->resize(550, widgheigt);
+
+	this->setMinimumSize(QSize(this->width(), widgheigt));
+	this->setMaximumSize(QSize(this->width()+50, widgheigt));
+	this->setMaximumSize(QSize(this->width()+50, 16777215));
+
+	//m_ui->textBrowser->setFixedHeight(m_ui->textBrowser->document()->size().height());
+	
 	//movie->setSpeed(25);
 	//m_ui->label->setMovie(movie); // label имеет тип QLabel*
 	//movie->setCacheMode(QMovie::CacheAll);
