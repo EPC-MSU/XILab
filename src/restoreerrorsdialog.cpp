@@ -17,25 +17,13 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	movie.setSpeed(25);
 	movie.setCacheMode(QMovie::CacheAll);
 	int height_label = 4 * m_ui->label->height();
-	float Kos = 1.0;
+	float Kos(1.0f);
 #if defined(__LINUX__)
-	/*m_ui->textBrowser->setMinimumHeight(100);
-	m_ui->textBrowser ->setMaximumHeight(100);
-	this->resize(550, 265);
-	this->setMinimumSize(QSize(550, 265));
-	this->setMaximumSize(QSize(600, 265));
-	this->setMaximumSize(QSize(600, 16777215));*/
-	//height_label = 0;
+	height_label = 20;
 #endif
 
 #if defined(__APPLE__)
-	/*m_ui->textBrowser->setMinimumHeight(100);
-	m_ui->textBrowser->setMaximumHeight(100);
-	this->resize(550, 330);
-	this->setMinimumSize(QSize(550, 330));
-	this->setMaximumSize(QSize(600, 330));
-	this->setMaximumSize(QSize(600, 16777215));*/
-	Kos = 1.3;
+	Kos = 1.25f;
 #endif
 
 	QFontMetrics font_metrics(m_ui->textBrowser->font());
@@ -65,17 +53,6 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	this->setMaximumSize(QSize((int) (scale_font*this->width() + 50), widgheigt));
 	this->setMaximumSize(QSize((int) (scale_font*this->width() + 50), 16777215));
 
-	//m_ui->textBrowser->setFixedHeight(m_ui->textBrowser->document()->size().height());
-	
-	//movie->setSpeed(25);
-	//m_ui->label->setMovie(movie); // label имеет тип QLabel*
-	//movie->setCacheMode(QMovie::CacheAll);
-	//movie->start();
-
-	/*movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
-	m_ui->label->setMovie(&movie);
-	movie.setSpeed(25);
-	movie.setCacheMode(QMovie::CacheAll);*/
 	movie.start();
 }
 
