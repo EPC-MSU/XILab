@@ -11,29 +11,38 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	m_ui->setupUi(this);
 	m_ui->listWidget->addItems(items);
 
+
+	movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
+	m_ui->label->setMovie(&movie);
+	movie.setSpeed(25);
+	movie.setCacheMode(QMovie::CacheAll);
+	int height_label = 4 * m_ui->label->height();
+
 #if defined(__LINUX__)
-	m_ui->textBrowser->setMinimumHeight(100);
+	/*m_ui->textBrowser->setMinimumHeight(100);
 	m_ui->textBrowser ->setMaximumHeight(100);
 	this->resize(550, 265);
 	this->setMinimumSize(QSize(550, 265));
 	this->setMaximumSize(QSize(600, 265));
-	this->setMaximumSize(QSize(600, 16777215));
+	this->setMaximumSize(QSize(600, 16777215));*/
+	height_label = 0;
 #endif
 
 #if defined(__APPLE__)
-	m_ui->textBrowser->setMinimumHeight(100);
+	/*m_ui->textBrowser->setMinimumHeight(100);
 	m_ui->textBrowser->setMaximumHeight(100);
 	this->resize(550, 330);
 	this->setMinimumSize(QSize(550, 330));
 	this->setMaximumSize(QSize(600, 330));
-	this->setMaximumSize(QSize(600, 16777215));
+	this->setMaximumSize(QSize(600, 16777215));*/
 #endif
 
 	QFontMetrics font_metrics(m_ui->textBrowser->font());
 	int font_height = font_metrics.height();
 
 	// Get the height by multiplying number of lines by font height, Maybe add to this a bit for a slight margin?
-	int height = font_height * 7.5;
+	int height = font_height * 8;
+	float scale_font = 1.0 * font_height / 15;
 
 	// Set the height to the text broswer
 	m_ui->textBrowser->setMinimumHeight(height);
@@ -44,14 +53,16 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	int font_heightlist = font_metricslist.height();
 
 	// Get the height by multiplying number of lines by font height, Maybe add to this a bit for a slight margin?
-	int heightlist = font_heightlist * 5;
+	int heightlist = scale_font*font_heightlist * 5;
 
-	int widgheigt = height + /*m_ui->label->size().height()*/110 + heightlist + 80;
-	this->resize(550, widgheigt);
+	//int height_label = 4*m_ui->label->height();
 
-	this->setMinimumSize(QSize(this->width(), widgheigt));
-	this->setMaximumSize(QSize(this->width()+50, widgheigt));
-	this->setMaximumSize(QSize(this->width()+50, 16777215));
+	int widgheigt = height + height_label + heightlist + (int)(scale_font * 50) + m_ui->buttonBox->height();
+	this->resize((int)(scale_font*this->width()), widgheigt);
+
+	this->setMinimumSize(QSize((int) (scale_font*this->width()), widgheigt));
+	this->setMaximumSize(QSize((int) (scale_font*this->width() + 50), widgheigt));
+	this->setMaximumSize(QSize((int) (scale_font*this->width() + 50), 16777215));
 
 	//m_ui->textBrowser->setFixedHeight(m_ui->textBrowser->document()->size().height());
 	
@@ -60,10 +71,10 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	//movie->setCacheMode(QMovie::CacheAll);
 	//movie->start();
 
-	movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
+	/*movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
 	m_ui->label->setMovie(&movie);
 	movie.setSpeed(25);
-	movie.setCacheMode(QMovie::CacheAll);
+	movie.setCacheMode(QMovie::CacheAll);*/
 	movie.start();
 }
 
