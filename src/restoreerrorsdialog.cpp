@@ -17,7 +17,7 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	movie.setSpeed(25);
 	movie.setCacheMode(QMovie::CacheAll);
 	int height_label = 4 * m_ui->label->height();
-
+	float Kos = 1.0;
 #if defined(__LINUX__)
 	/*m_ui->textBrowser->setMinimumHeight(100);
 	m_ui->textBrowser ->setMaximumHeight(100);
@@ -25,7 +25,7 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	this->setMinimumSize(QSize(550, 265));
 	this->setMaximumSize(QSize(600, 265));
 	this->setMaximumSize(QSize(600, 16777215));*/
-	height_label = 0;
+	//height_label = 0;
 #endif
 
 #if defined(__APPLE__)
@@ -35,6 +35,7 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	this->setMinimumSize(QSize(550, 330));
 	this->setMaximumSize(QSize(600, 330));
 	this->setMaximumSize(QSize(600, 16777215));*/
+	Kos = 1.3;
 #endif
 
 	QFontMetrics font_metrics(m_ui->textBrowser->font());
@@ -42,7 +43,7 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 
 	// Get the height by multiplying number of lines by font height, Maybe add to this a bit for a slight margin?
 	int height = font_height * 8;
-	float scale_font = 1.0 * font_height / 15;
+	float scale_font = Kos * font_height / 15;
 
 	// Set the height to the text broswer
 	m_ui->textBrowser->setMinimumHeight(height);
