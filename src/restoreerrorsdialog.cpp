@@ -11,34 +11,47 @@ RestoreErrorsDialog::RestoreErrorsDialog(QWidget *parent, QStringList items) :
 	m_ui->setupUi(this);
 	m_ui->listWidget->addItems(items);
 
-#if defined(__LINUX__)
-	m_ui->textBrowser->setMinimumHeight(100);
-	m_ui->textBrowser ->setMaximumHeight(100);
-	this->resize(550, 265);
-	this->setMinimumSize(QSize(550, 265));
-	this->setMaximumSize(QSize(600, 265));
-	this->setMaximumSize(QSize(600, 16777215));
-#endif
-
-#if defined(__APPLE__)
-	m_ui->textBrowser->setMinimumHeight(100);
-	m_ui->textBrowser->setMaximumHeight(100);
-	this->resize(550, 330);
-	this->setMinimumSize(QSize(550, 330));
-	this->setMaximumSize(QSize(600, 330));
-	this->setMaximumSize(QSize(600, 16777215));
-#endif
-
-
-	//movie->setSpeed(25);
-	//m_ui->label->setMovie(movie); // label имеет тип QLabel*
-	//movie->setCacheMode(QMovie::CacheAll);
-	//movie->start();
 
 	movie.setFileName(":/settingsdlg/images/settingsdlg/warning.gif");
 	m_ui->label->setMovie(&movie);
 	movie.setSpeed(25);
 	movie.setCacheMode(QMovie::CacheAll);
+	int height_label = 4 * m_ui->label->height();
+	double Kos = 1.0;
+
+#if defined(__LINUX__)
+	height_label = 20;
+#endif
+
+#if defined(__APPLE__)
+	Kos = 1.25;
+#endif
+
+	QFontMetrics font_metrics(m_ui->textBrowser->font());
+	int font_height = font_metrics.height();
+
+	// Get the height by multiplying number of lines by font height, Maybe add to this a bit for a slight margin?
+	int height = font_height * 8;
+	double scale_font = Kos * font_height / 15;
+
+	// Set the height to the text broswer
+	m_ui->textBrowser->setMinimumHeight(height);
+	m_ui->textBrowser->setMaximumHeight(height);
+	
+
+	QFontMetrics font_metricslist(m_ui->listWidget->font());
+	int font_heightlist = font_metricslist.height();
+
+	// Get the height by multiplying number of lines by font height, Maybe add to this a bit for a slight margin?
+	int heightlist = scale_font*font_heightlist * 5;
+
+	int widgheigt = height + height_label + heightlist + (int)(scale_font * 50) + m_ui->buttonBox->height();
+	this->resize((int)(scale_font*this->width()), widgheigt);
+
+	this->setMinimumSize(QSize((int) (scale_font*this->width()), widgheigt));
+	this->setMaximumSize(QSize((int) (scale_font*this->width() + 50), widgheigt));
+	this->setMaximumSize(QSize((int) (scale_font*this->width() + 50), 16777215));
+
 	movie.start();
 }
 
