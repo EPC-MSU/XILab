@@ -84,8 +84,8 @@ void DeviceThread::run()
 				if (QString::compare(dss->Protocol_list.at(i), QString("udp"), Qt::CaseInsensitive) == 0)
 					protocol_list.append(QString("xi-udp://").append(dss->Server_hosts.at(i)));
 				else
-					if (QString::compare(dss->Protocol_list.at(i), QString("tpc"), Qt::CaseInsensitive) == 0)
-						protocol_list.append(QString("xi-tpc://").append(dss->Server_hosts.at(i)));
+					if (QString::compare(dss->Protocol_list.at(i), QString("tcp"), Qt::CaseInsensitive) == 0)
+						protocol_list.append(QString("xi-tcp://").append(dss->Server_hosts.at(i)));
 					else
 						qs.append(dss->Server_hosts.at(i)).append(",");
 				
