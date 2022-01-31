@@ -21,7 +21,15 @@ void DeviceSearchSettings::load()
 	Enumerate_all_com = settings.value("Enumerate_all_com", false).toBool();
 	Enumerate_network = settings.value("Enumerate_network", false).toBool();
 
-	int size = settings.beginReadArray("Server_hosts");
+	int size = 0;
+	int sizehosts = settings.beginReadArray("Server_hosts");
+	settings.endArray();
+	int sizeprotocol = settings.beginReadArray("Protocol_list");
+	settings.endArray();
+	if (sizehosts > sizeprotocol) size = sizeprotocol;
+	else size = sizehosts;
+
+	int size1 = settings.beginReadArray("Server_hosts");
 	Server_hosts.clear();
 	for (int i = 0; i < size; i++) {
 		settings.setArrayIndex(i);
@@ -30,9 +38,9 @@ void DeviceSearchSettings::load()
 	}
 	settings.endArray();
 
-	int size1 = settings.beginReadArray("Protocol_list");
+	int size2 = settings.beginReadArray("Protocol_list");
 	Protocol_list.clear();
-	for (int i = 0; i < size1; i++) {
+	for (int i = 0; i < size; i++) {
 		settings.setArrayIndex(i);
 		QString protocol = settings.value("protocol").toString();
 		Protocol_list.append(protocol);

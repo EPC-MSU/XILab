@@ -128,10 +128,10 @@ void PageProgramConfigWgt::FromUiToClass()
 
 	dss->Server_hosts.clear();
 	dss->Protocol_list.clear();
-
+	
 	for (int i = 0; i < ui->tableWidget->rowCount()-1; ++i) { // last row is edit row which has no items
 		dss->Server_hosts.append(ui->tableWidget->item(i,0)->text() );
-		dss->Protocol_list.append(ui->tableWidget->item(i, 1)->text());
+		dss->Protocol_list.append(ui->tableWidget->item(i, 1) == 0 ? QString(" ") : ui->tableWidget->item(i, 1)->text());
 	}
 }
 
