@@ -228,7 +228,11 @@ void SettingsDlg::firmwareUploaded(result_t result)
 
 	treeWgtsLst[PageCyclicNum]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 	treeWgtsLst[PageUserUnitsNum]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+
+#ifdef SERVICEMODE
 	treeWgtsLst[PageStageNum]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+#endif
+
 	treeWgtsLst[PagePositionerNameNum]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
 	treeWgtsLst[PageSliderSetupNum]->setFlags(isMultiaxis ? (Qt::NoItemFlags) : (Qt::ItemIsSelectable | Qt::ItemIsEnabled) );
@@ -569,12 +573,15 @@ void SettingsDlg::StageSettingsFromDeviceToClassToUi()
 {
 	stageStgs->FromDeviceToClass();
 	((PagePositionerNameWgt*)pageWgtsLst[PagePositionerNameNum])->FromClassToUi();
+
+#ifdef SERVICEMODE
 	((PageStageWgt*)pageWgtsLst[PageStageNum])->FromClassToUi();
 	((PageStageDCMotorWgt*)pageWgtsLst[PageStageDCMotorNum])->FromClassToUi();
 	((PageStageEncoderWgt*)pageWgtsLst[PageStageEncoderNum])->FromClassToUi();
 	((PageStageHallsensorWgt*)pageWgtsLst[PageStageHallsensorNum])->FromClassToUi();
 	((PageStageGearWgt*)pageWgtsLst[PageStageGearNum])->FromClassToUi();
 	((PageStageAccessoriesWgt*)pageWgtsLst[PageStageAccessoriesNum])->FromClassToUi();
+#endif
 }
 
 void SettingsDlg::OnPrecedenceChecked(bool checked)
@@ -654,12 +661,15 @@ void SettingsDlg::FromUiToClass(StageSettings *stgs)
 {
 	//StageConfiguration
 	((PagePositionerNameWgt*)pageWgtsLst[PagePositionerNameNum])->FromUiToClass(stgs);
+
+#ifdef SERVICEMODE
 	((PageStageWgt*)pageWgtsLst[PageStageNum])->FromUiToClass(stgs);
 	((PageStageDCMotorWgt*)pageWgtsLst[PageStageDCMotorNum])->FromUiToClass(stgs);
 	((PageStageEncoderWgt*)pageWgtsLst[PageStageEncoderNum])->FromUiToClass(stgs);
 	((PageStageHallsensorWgt*)pageWgtsLst[PageStageHallsensorNum])->FromUiToClass(stgs);
 	((PageStageGearWgt*)pageWgtsLst[PageStageGearNum])->FromUiToClass(stgs);
 	((PageStageAccessoriesWgt*)pageWgtsLst[PageStageAccessoriesNum])->FromUiToClass(stgs);
+#endif
 }
 
 void SettingsDlg::InitControls()
@@ -1090,6 +1100,9 @@ void SettingsDlg::InitControls()
     treeWgtsLst.push_back(childItem);
     pageWgtsLst.push_back((QWidget*)new PagePositionerNameWgt(NULL, stageStgs));
 
+
+#ifdef SERVICEMODE
+
 	//Stage configuration->stage
 	PageStageNum=i++;
 	childItem = new QTreeWidgetItem(parentItem);
@@ -1131,12 +1144,14 @@ void SettingsDlg::InitControls()
     childItem->setText(0, tr("Accessories"));
 	treeWgtsLst.push_back(childItem);
 	pageWgtsLst.push_back((QWidget*)new PageStageAccessoriesWgt(NULL, stageStgs));
+#endif
 
     m_ui->treeWgt->expandAll();
 	treeWgtsLst[PageGraphNum]->setExpanded(false);
 	treeWgtsLst[PageUiConfigNum]->setExpanded(false);
 	m_ui->treeWgt->setCurrentItem(treeWgtsLst[PageADNum]);
 	OnCurItemChanged(treeWgtsLst[PageADNum], m_ui->treeWgt->currentItem());
+
 }
 
 void SettingsDlg::OnCurItemChanged(QTreeWidgetItem *curItem, QTreeWidgetItem *prevItem)
@@ -1379,10 +1394,13 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 				// These "1-2-3-4" lines save a copy of motorStgs, load settings from cfg file into motorStgs, load Ui from motorStgs and restore motorStgs to initial state
 				MotorSettings saveStgs = *motorStgs; // 1
 				motorStgs->FromSettingsToClass(&settings, &restoreErrors); // 2
+
+				((PagePositionerNameWgt*)pageWgtsLst[PagePositionerNameNum])->FromClassToUi();
+
 #ifdef SERVICEMODE
 				StageSettings saveStageStgs = *stageStgs;
 				stageStgs->FromSettingsToClass(&settings, &restoreErrors);
-				((PagePositionerNameWgt*)pageWgtsLst[PagePositionerNameNum])->FromClassToUi();
+				
 				((PageStageWgt*)pageWgtsLst[PageStageNum])->FromClassToUi();
 				((PageStageDCMotorWgt*)pageWgtsLst[PageStageDCMotorNum])->FromClassToUi();
 				((PageStageEncoderWgt*)pageWgtsLst[PageStageEncoderNum])->FromClassToUi();
