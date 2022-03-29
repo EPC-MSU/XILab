@@ -679,7 +679,6 @@ void MainWindow::UpdateLogTable()
 		tick2 = t.getElapsedTimeInMilliSec();
 		QDateTime datetime = next_item.datetime;
 		QString message = next_item.message;
-		
 		QString source = next_item.source;
 		int loglevel = next_item.loglevel;
 
