@@ -274,7 +274,7 @@ void MainWindow::InitUI()
 
 	wnd1Lbl.setFixedWidth(ST_PANE_WIDTH);
 	wnd1Lbl.setAlignment(Qt::AlignHCenter);
-	wnd1Lbl.setToolTip(tr("The winding A status has 1 of 4 statuses: \nWinding A is disconnected. \nWinding A state is unknown. \nWinding A is short - circuited. \nWinding A is connected and working properly.\nStatus is determined using statistical data while moving, taking its time, \nand turning this status rather useless in common applications.\nTherefore this function have been disabled for the moment."));
+	wnd1Lbl.setToolTip(QString("<body> The winding A status has 1 of 4 statuses: <br><font color = grey> Winding A is disconnected. </font></br> <br><font color = grey> Winding A state is unknown. </font></br> <br> <font color = red> Winding A is short - circuited. </font></br> <br><font color = green> Winding A is connected and working properly. </font></br> <br>Status is determined using statistical data while moving, taking its time, and turning this status rather useless in common applications. Therefore this function have been disabled for the moment.</br>"));
 	wnd1Lbl.setFont(font);
 	wnd1Lbl.setPalette(palette_grey);
 	wnd1Lbl.setText("WndA");
@@ -283,7 +283,7 @@ void MainWindow::InitUI()
 
 	wnd2Lbl.setFixedWidth(ST_PANE_WIDTH);
 	wnd2Lbl.setAlignment(Qt::AlignHCenter);
-	wnd2Lbl.setToolTip(tr("The winding B status has 1 of 4 statuses: \nWinding B is disconnected. \nWinding B state is unknown. \nWinding B is short - circuited. \nWinding B is connected and working properly.\nStatus is determined using statistical data while moving, taking its time, \nand turning this status rather useless in common applications.\nTherefore this function have been disabled for the moment."));
+	wnd2Lbl.setToolTip(QString("<body> The winding B status has 1 of 4 statuses: <br><font color = grey> Winding B is disconnected. </font></br> <br><font color = grey> Winding B state is unknown. </font></br> <br> <font color = red> Winding B is short - circuited. </font></br> <br><font color = green> Winding B is connected and working properly. </font></br> <br>Status is determined using statistical data while moving, taking its time, and turning this status rather useless in common applications. Therefore this function have been disabled for the moment.</br>"));
 	wnd2Lbl.setFont(font);
 	wnd2Lbl.setPalette(palette_grey);
 	wnd2Lbl.setText("WndB");
@@ -292,7 +292,7 @@ void MainWindow::InitUI()
 
 	encdLbl.setFixedWidth(ST_PANE_WIDTH);
 	encdLbl.setAlignment(Qt::AlignHCenter);
-	encdLbl.setToolTip(tr("Encoder state has 1 of 5 statuses: \nEncoder is absent. \nEncoder state is unknown. \nEncoder is connected and malfunctioning. \nEncoder is connected and operational but counts in other direction. \nEncoder is connected and working properly."));
+	encdLbl.setToolTip(QString("<body> Encoder state has 1 of 5 statuses: <br><font color = grey>Encoder is absent. </font></br> <br><font color = grey> Encoder state is unknown. </font></br> <br><font color = red>Encoder is connected and malfunctioning.</font></br> <br><font color = yellow> Encoder is connected and operational but counts in other direction.</font></br> <br><font color = green> Encoder is connected and working properly. </font></br> </body>"));
 	encdLbl.setFont(font);
 	encdLbl.setPalette(palette_grey);
 	encdLbl.setText("ENCD");
