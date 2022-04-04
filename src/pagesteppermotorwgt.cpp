@@ -19,12 +19,12 @@ PageStepperMotorWgt::PageStepperMotorWgt(QWidget *parent, MotorSettings *motorSt
 	QObject::connect(m_ui->feedbackEmfRadio,  SIGNAL(toggled(bool)),         this, SLOT(OnEmfRadioChecked(bool)));
 	OnSpeedChkUnchecked();
 
-	m_ui->label_3->setStyleSheet("QLabel { color : red; }");
-	m_ui->feedbackNoneRadio->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->feedbackEmfRadio->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->encoderRadio->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->encoderMediatedRadio->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->reversChk->setStyleSheet("QCheckBox { color : red; }");
+	m_ui->label_3->setStyleSheet("QLabel { color : #B0A000; }");
+	m_ui->feedbackNoneRadio->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->feedbackEmfRadio->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->encoderRadio->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->encoderMediatedRadio->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->reversChk->setStyleSheet("QCheckBox { color : #B0A000; }");
 
 	m_ui->playBox->setUnitType(UserUnitSettings::TYPE_COORD);
 	m_ui->speedBox->setUnitType(UserUnitSettings::TYPE_SPEED);

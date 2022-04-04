@@ -20,15 +20,15 @@ PageMotorTypeWgt::PageMotorTypeWgt(QWidget *parent, MotorSettings *motorStgs) :
 	m_ui->discreteDriverBtn->setDisabled(true);
 #endif
 
-	m_ui->dcMotorBtn->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->stepperMotorBtn->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->bldcMotorBtn->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->unknownMotorBtn->setStyleSheet("QRadioButton { color : red; }");
+	m_ui->dcMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->stepperMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->bldcMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->unknownMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
 
-	m_ui->discreteDriverBtn->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->integrateDriverBtn->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->extDriverBtn->setStyleSheet("QRadioButton { color : red; }");
-	m_ui->unknownDriverBtn->setStyleSheet("QRadioButton { color : red; }");
+	m_ui->discreteDriverBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->integrateDriverBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->extDriverBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
+	m_ui->unknownDriverBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
 }
 
 PageMotorTypeWgt::~PageMotorTypeWgt()

@@ -40,7 +40,7 @@
              <string>Attenuator mode for models only: 10MCWA168, 10MWA168, 8MRU</string>
            </property>
            <property name="styleSheet">
-             <set>"QLabel { color : red; }"</set>
+             <set>"QLabel { color : #B0A000; }"</set>
            </property>
            <property name="alignment">
              <set>Qt::AlignLeft|Qt::AlignLeading|Qt::AlignVCenter</set>
