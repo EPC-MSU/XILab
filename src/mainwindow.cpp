@@ -292,7 +292,7 @@ void MainWindow::InitUI()
 
 	encdLbl.setFixedWidth(ST_PANE_WIDTH);
 	encdLbl.setAlignment(Qt::AlignHCenter);
-	encdLbl.setToolTip(QString("<body> Encoder state has 1 of 5 statuses: <br><font color = grey>Encoder is absent. </font></br> <br><font color = grey> Encoder state is unknown. </font></br> <br><font color = red>Encoder is connected and malfunctioning.</font></br> <br><font color = yellow> Encoder is connected and operational but counts in other direction.</font></br> <br><font color = green> Encoder is connected and working properly. </font></br> </body>"));
+	encdLbl.setToolTip(QString("<body> Encoder state has 1 of 5 statuses: <br><font color = grey>Encoder is absent. </font></br> <br><font color = grey> Encoder state is unknown. </font></br> <br><font color = red>Encoder is connected and malfunctioning.</font></br> <br><font color = #B0A000> Encoder is connected and operational but counts in other direction.</font></br> <br><font color = green> Encoder is connected and working properly. </font></br> </body>"));
 	encdLbl.setFont(font);
 	encdLbl.setPalette(palette_grey);
 	encdLbl.setText("ENCD");
