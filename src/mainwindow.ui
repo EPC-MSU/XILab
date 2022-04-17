@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
-    <height>561</height>
+    <width>703</width>
+    <height>660</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -382,6 +382,29 @@
             </widget>
            </item>
           </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="TechSupport">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When you click the technical support button, the mail client will open, if it is installed. If it is not possible to identify the email client, the technical support page will open, where you can register if you have not yet contacted the technical support service and ask questions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Technical support</string>
+          </property>
          </widget>
         </item>
         <item>
