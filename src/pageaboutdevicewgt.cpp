@@ -168,8 +168,9 @@ QString mail_data;
 	const unsigned short WIN_10 = 0x00c0;
 
 	if (QSysInfo::WindowsVersion >= QSysInfo::WV_WINDOWS8/*160*/) {
-		mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new";
+		mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new?issue[description]=<The text of the letter>";
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "You will be directed to the technical support page.");
+		sep = "\n";
 	}
 	else 
 #endif		
