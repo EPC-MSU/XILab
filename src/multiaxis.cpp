@@ -202,12 +202,13 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 
 	hidden = new HiddenWidget(); // proxy for focus in/out events for plotXY and plotZ
 	hidden->setFixedSize(0,0); // can't hide because hidden widgets don't receive focus events
-	hidden->setFocusPolicy(Qt::StrongFocus);
+	hidden->setFocusPolicy(Qt::StrongFocus);// Qt::NoFocus//Qt::StrongFocus
 
 	plotXY = new QwtPlot(parent);
 	plotXY->setCanvasBackground(Qt::white);
 	((QwtPlotCanvas*)plotXY->canvas())->setFocusIndicator(QwtPlotCanvas::CanvasFocusIndicator);
 	plotXY->canvas()->setFocusProxy( hidden );
+	plotXY->canvas()->setFocusPolicy(Qt::NoFocus);
 	hidden->addtolist(plotXY);
 
 	plotZ = new QwtPlot(parent);
@@ -217,11 +218,12 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 		plotZ->setCanvasBackground(Qt::white);
 		((QwtPlotCanvas*)plotZ->canvas())->setFocusIndicator(QwtPlotCanvas::CanvasFocusIndicator);
 		plotZ->canvas()->setFocusProxy( hidden );
+		plotZ->canvas()->setFocusPolicy(Qt::NoFocus);
 		hidden->addtolist(plotZ);
 	} else {
 		plotZ->setCanvasBackground(this->palette().color(QWidget::backgroundRole()));
 	}
-	plotZ->canvas()->setFocusPolicy(Qt::NoFocus);
+	//plotZ->canvas()->setFocusPolicy(Qt::NoFocus);
 
 	this->layout()->addWidget(hidden);
 
@@ -296,10 +298,13 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	}
 
 	QwtPlotPicker* pickerXY = new /*My*/QwtPlotPicker((QwtPlotCanvas*)plotXY->canvas());
+	pickerXY->setMousePattern(QwtEventPattern::MouseSelect1, Qt::LeftButton, Qt::ControlModifier);
 	connect(pickerXY, SIGNAL(selected(const QPointF &)), this, SLOT(OnPickerXYPointSelected(const QPointF &)));
 	pickerXY->setStateMachine(new QwtPickerClickPointMachine());
+
 	if (devcount > 2) {
 		QwtPlotPicker* pickerZ = new /*My*/QwtPlotPicker((QwtPlotCanvas*)plotZ->canvas());
+		pickerZ->setMousePattern(QwtEventPattern::MouseSelect1, Qt::LeftButton, Qt::ControlModifier);
 		connect(pickerZ, SIGNAL(selected(const QPointF &)), this, SLOT(OnPickerZPointSelected(const QPointF &)));
 		pickerZ->setStateMachine(new QwtPickerClickPointMachine());
 	}
@@ -321,6 +326,8 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	exitBox->setButtons(QDialogButtonBox::Cancel);
 	exitBox->setText("Stopping, please wait...");
 	exitBox->setClosingOnReject(false);
+
+	hidden->setFocusPolicy(Qt::NoFocus);// Qt::NoFocus//Qt::StrongFocus
 
 	exiting = false;
 	inited = true;
@@ -759,6 +766,26 @@ void Multiaxis::UpdateState() {
 		scriptLoadBtn->setDisabled(evaling);
 		scriptSaveBtn->setDisabled(evaling);
 		codeEdit->setTextInteractionFlags(evaling ? Qt::NoTextInteraction : Qt::TextEditorInteraction);
+	}
+	static int fixfocus = 0;
+	if (QApplication::keyboardModifiers() == Qt::ControlModifier)
+	{
+		// ≈сли нажата клавиша CTRL этот код выполнитс€
+		plotXY->canvas()->setFocusProxy(hidden);
+		plotXY->canvas()->setFocus();
+		plotZ->canvas()->setFocusProxy(hidden);
+		plotZ->canvas()->setFocus();
+		fixfocus = 1;
+	}
+	else
+	{
+		if (fixfocus) {
+			this->focusNextChild();
+			this->focusNextChild();
+			plotXY->canvas()->setFocusPolicy(Qt::NoFocus);
+			plotZ->canvas()->setFocusPolicy(Qt::NoFocus);
+			fixfocus = 0;
+		}
 	}
 }
 
