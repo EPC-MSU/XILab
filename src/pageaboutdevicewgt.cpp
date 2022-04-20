@@ -184,6 +184,13 @@ QString mail_data;
 		mail_data.append(" >> XiLab version -- ");
 		mail_data.append(xilab_ver);
 
+		result_t result;
+		libximc::device_information_t inf1;
+		mail_data.append(sep);
+		mail_data.append(" >> Hardware version -- ");
+		result = devinterface->get_device_information(&inf1);
+		mail_data.append(QString::number(inf1.Major) + "." + QString::number(inf1.Minor) + "." + QString::number(inf1.Release));
+
 		mail_data.append(sep);
 		mail_data.append(" >> Firmware version -- ");
 		QString data1;
@@ -202,7 +209,7 @@ QString mail_data;
 		mail_data.append(data1);
 
 		status_t state1;
-		result_t result = devinterface->get_status(&state1);
+		result = devinterface->get_status(&state1);
 
 		if ((result == result_ok) && (state1.Flags & STATE_EEPROM_CONNECTED))
 
