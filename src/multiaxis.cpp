@@ -780,8 +780,8 @@ void Multiaxis::UpdateState() {
 	else
 	{
 		if (fixfocus) {
-			this->focusNextChild();
-			this->focusNextChild();
+			this->focusPreviousChild();
+			this->focusPreviousChild();
 			plotXY->canvas()->setFocusPolicy(Qt::NoFocus);
 			plotZ->canvas()->setFocusPolicy(Qt::NoFocus);
 			fixfocus = 0;
