@@ -782,6 +782,7 @@ void Multiaxis::UpdateState() {
 		if (fixfocus) {
 			this->focusPreviousChild();
 			this->focusPreviousChild();
+			this->focusPreviousChild();
 			plotXY->canvas()->setFocusPolicy(Qt::NoFocus);
 			plotZ->canvas()->setFocusPolicy(Qt::NoFocus);
 			fixfocus = 0;
@@ -965,6 +966,8 @@ void Multiaxis::keyPressEvent( QKeyEvent* event ) {
 	int i;
 	if (event->isAutoRepeat())
 		event->accept();
+
+	if (QApplication::keyboardModifiers() == Qt::ControlModifier)	
 	switch ( event->key() ) {
 	case Qt::Key_Left:
 		i = translate(0);
