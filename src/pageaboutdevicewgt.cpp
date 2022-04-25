@@ -168,13 +168,15 @@ QString mail_data;
 	const unsigned short WIN_10 = 0x00c0;
 
 	if (QSysInfo::WindowsVersion >= QSysInfo::WV_WINDOWS8/*160*/) {
-		mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new";
+		mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new?issue[description]=<The text of the letter>";
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "You will be directed to the technical support page.");
+		sep = "\n";
 	}
-	else 
+	else
 #endif		
 	{
 		mail_data = "mailto:8smc4@standa.lt?subject= &body=<The text of the letter>";
+	}
 		mail_data.append(sep);
 		mail_data.append(sep);
 		mail_data.append("Service information ");
@@ -182,6 +184,13 @@ QString mail_data;
 		mail_data.append(sep);
 		mail_data.append(" >> XiLab version -- ");
 		mail_data.append(xilab_ver);
+
+		result_t result;
+		libximc::device_information_t inf1;
+		mail_data.append(sep);
+		mail_data.append(" >> Hardware version -- ");
+		result = devinterface->get_device_information(&inf1);
+		mail_data.append(QString::number(inf1.Major) + "." + QString::number(inf1.Minor) + "." + QString::number(inf1.Release));
 
 		mail_data.append(sep);
 		mail_data.append(" >> Firmware version -- ");
@@ -201,7 +210,7 @@ QString mail_data;
 		mail_data.append(data1);
 
 		status_t state1;
-		result_t result = devinterface->get_status(&state1);
+		result = devinterface->get_status(&state1);
 
 		if ((result == result_ok) && (state1.Flags & STATE_EEPROM_CONNECTED))
 
@@ -225,7 +234,7 @@ QString mail_data;
 			mail_data.append(" >> EEPROM no connect   ");
 		}
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "Opens the mail client if it is installed.");
-	}
+	
 
 	QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
 }

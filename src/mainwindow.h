@@ -240,6 +240,7 @@ public slots:
 	void OnScriptStopBtnPressed(); // a wrapper for dialog close signal, calls OnScriptStopBtnPressed(false)
 	void OnScriptStopBtnPressed(bool hardstop);
 	void CheckForceStopCondition();
+	void OnTechSupportClicked();
 
     void OnLeftBdrBtnPressed();
     void OnLeftBtnPressed();
