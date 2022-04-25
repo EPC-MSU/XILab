@@ -172,10 +172,11 @@ QString mail_data;
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "You will be directed to the technical support page.");
 		sep = "\n";
 	}
-	else 
+	else
 #endif		
 	{
 		mail_data = "mailto:8smc4@standa.lt?subject= &body=<The text of the letter>";
+	}
 		mail_data.append(sep);
 		mail_data.append(sep);
 		mail_data.append("Service information ");
@@ -233,7 +234,7 @@ QString mail_data;
 			mail_data.append(" >> EEPROM no connect   ");
 		}
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "Opens the mail client if it is installed.");
-	}
+	
 
 	QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
 }

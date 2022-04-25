@@ -2152,6 +2152,7 @@ void MainWindow::OnTechSupportClicked()
 	{
 		mail_data = "mailto:8smc4@standa.lt?subject= &body=<The text of the letter>";
 		//mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new?issue[description]=<The text of the letter>";
+	}
 		mail_data.append(sep);
 		mail_data.append(sep);
 		mail_data.append("Service information ");
@@ -2209,7 +2210,7 @@ void MainWindow::OnTechSupportClicked()
 			mail_data.append(" >> EEPROM no connect   ");
 		}
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "Opens the mail client if it is installed.");
-	}
+	
 
 	QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
 }
