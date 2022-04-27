@@ -77,6 +77,7 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 		m_ui->enableChk->setDisabled(true);
 
 	int chekValUU = 0;
+	static int stateUU = 0;
 	if(settings->contains("Step_multiplier"))
 		if(settings->value("Step_multiplier", 1).toDouble() >= 1)
 			m_ui->stepMultiplier->setValue(settings->value("Step_multiplier", 1).toDouble());
@@ -107,17 +108,20 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 	else 
 		errors+="\"Unit_multiplier\" key is not found\n";
 
-	if (chekValUU) {
+	if (chekValUU && stateUU) {
 		m_ui->enableChk->setChecked(false);
 		QMessageBox msgBox;
 		msgBox.setText("Warning");
-		msgBox.setInformativeText("The settings of the user units in the profile are incorrect. They were turned off to prevent data distortion.");
+		msgBox.setInformativeText("The settings of the user units in the profile are incorrect. They were turned off on the User unit page to prevent data corruption.");
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.setDefaultButton(QMessageBox::Ok);
 		msgBox.setIcon(QMessageBox::Warning);
 		int ret = msgBox.exec();
 		chekValUU = 0;
-		}
+		stateUU = 0;
+	}
+	else
+		stateUU = 1;
 
 	if(settings->contains("Precision"))
 		m_ui->precisionValue->setValue(settings->value("Precision", 3).toUInt());
