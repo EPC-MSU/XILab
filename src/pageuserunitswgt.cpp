@@ -3,6 +3,7 @@
 #include <float.h>
 #include "functions.h"
 #include <QFileDialog>
+#include <QMessageBox>
 
 PageUserUnitsWgt::PageUserUnitsWgt(QWidget *parent, UserUnitSettings *_uuStgs, DeviceInterface *_devinterface) :
 	QWidget(parent),
@@ -21,7 +22,7 @@ PageUserUnitsWgt::PageUserUnitsWgt(QWidget *parent, UserUnitSettings *_uuStgs, D
 	m_ui->stepMultiplier->setFloatStyleAllowed(false); // blocks userunits control from becoming denominated in userunits :)
 	m_ui->stepMultiplier->setUnitType(UserUnitSettings::TYPE_COORD);
 
-	m_ui->unitMultiplier->setRange(1e-9, DBL_MAX);
+	m_ui->unitMultiplier->setRange(1e-9, DBL_MAX);//1e-9
 	m_ui->unitMultiplier->setValue(888);
 
 	QObject::connect(m_ui->enableChk, SIGNAL(clicked(bool)), this, SIGNAL(SgnChangeUU()));
@@ -75,19 +76,52 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 	else
 		m_ui->enableChk->setDisabled(true);
 
+	int chekValUU = 0;
+	static int stateUU = 0;
 	if(settings->contains("Step_multiplier"))
-		m_ui->stepMultiplier->setValue(settings->value("Step_multiplier", 0).toDouble());
+		if(settings->value("Step_multiplier", 1).toDouble() >= 1)
+			m_ui->stepMultiplier->setValue(settings->value("Step_multiplier", 1).toDouble());
+		else {
+			if (m_ui->enableChk->isChecked()) {
+				m_ui->enableChk->setChecked(false);
+				chekValUU = 1;
+			}
+			m_ui->stepMultiplier->setValue(1.0);		
+		}
 	else if(default_stgs != NULL)
-		m_ui->stepMultiplier->setValue(default_stgs->value("Step_multiplier", 0).toDouble());
+		m_ui->stepMultiplier->setValue(default_stgs->value("Step_multiplier", 1).toDouble());
 	else 
 		errors+="\"Step_multiplier\" key is not found\n";
 
 	if(settings->contains("Unit_multiplier"))
-		m_ui->unitMultiplier->setValue(settings->value("Unit_multiplier", 0).toDouble());
+		if(settings->value("Unit_multiplier", 1).toDouble() >= 1)
+			m_ui->unitMultiplier->setValue(settings->value("Unit_multiplier", 1).toDouble());
+		else {
+			if (m_ui->enableChk->isChecked()) {
+				m_ui->enableChk->setChecked(false);
+				chekValUU = 1;
+			}
+			m_ui->unitMultiplier->setValue(1.0);
+		}
 	else if(default_stgs != NULL)
-		m_ui->unitMultiplier->setValue(default_stgs->value("Unit_multiplier", 0).toDouble());
+		m_ui->unitMultiplier->setValue(default_stgs->value("Unit_multiplier", 1).toDouble());
 	else 
 		errors+="\"Unit_multiplier\" key is not found\n";
+
+	if (chekValUU && stateUU) {
+		m_ui->enableChk->setChecked(false);
+		QMessageBox msgBox;
+		msgBox.setText("Warning");
+		msgBox.setInformativeText("The settings of the user units in the profile are incorrect. They were turned off on the User unit page to prevent data corruption.");
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.setDefaultButton(QMessageBox::Ok);
+		msgBox.setIcon(QMessageBox::Warning);
+		int ret = msgBox.exec();
+		chekValUU = 0;
+		stateUU = 0;
+	}
+	else
+		stateUU = 1;
 
 	if(settings->contains("Precision"))
 		m_ui->precisionValue->setValue(settings->value("Precision", 3).toUInt());
