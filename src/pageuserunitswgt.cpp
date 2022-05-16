@@ -197,6 +197,7 @@ void PageUserUnitsWgt::OnLoadTableBtnClicked()
 
 		result = this->devface->load_calibration_table(namefile);
 		if (result == result_ok) m_ui->namefileLbl->setText(namefile);
+		else m_ui->namefileLbl->setText("\"\"");
 	}
 }
 
