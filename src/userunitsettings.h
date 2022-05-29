@@ -6,7 +6,7 @@
 class UserUnitSettings {
 public:
 	enum UnitType{TYPE_COORD, TYPE_SPEED, TYPE_ACCEL, TYPE_UNKNOWN};
-	UserUnitSettings(bool _enable, double _stepMult, double _unitMult, unsigned int _precision, QString _unitName);
+	UserUnitSettings(bool _enable, double _stepMult, double _unitMult, unsigned int _precision, QString _unitName, QString _correctionTable);
 	UserUnitSettings();
     ~UserUnitSettings();
 	QString getOffSuffix(UnitType unit_type, int fbtype);
@@ -18,6 +18,7 @@ public:
 	bool enable;
 	unsigned int precision;
 	QString unitName;
+	QString correctionTable;
 
 private:
 	double stepMult;

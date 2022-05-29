@@ -132,6 +132,7 @@ private:
 	int devcount;
 
 	QList<QLabel*> curPoss;
+	QList<QLabel*> tableLabel;
 	QList<StepSpinBox*> moveTos, shiftOns;
 	QList<QPushButton*> joyDecs, joyIncs;
 	QList<QGroupBox*> groupBoxs;

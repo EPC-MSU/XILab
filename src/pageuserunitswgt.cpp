@@ -51,7 +51,10 @@ void PageUserUnitsWgt::FromUiToSettings(QSettings *settings)
 	settings->setValue("Unit_multiplier", m_ui->unitMultiplier->value());
 	settings->setValue("Precision", m_ui->precisionValue->value());
 	settings->setValue("Unit", m_ui->unitEdit->text());
-
+	if (m_ui->namefileLbl->text() != "\"\"")
+		settings->setValue("Correction_table", m_ui->namefileLbl->text());
+	else
+		settings->setValue("Correction_table", "");
 	settings->endGroup();
 }
 
@@ -137,6 +140,52 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 	else 
 		errors+="\"Unit\" key is not found\n";
 
+	if (settings->contains("Correction_table"))
+	{
+		m_ui->namefileLbl->setText(settings->value("Correction_table", "\"\"").toString());
+
+		char namefile[255];
+		int i;
+		for (i = 0; i<m_ui->namefileLbl->text().length(); i++){
+			namefile[i] = (char)m_ui->namefileLbl->text()[i].toAscii();
+		}
+		namefile[i] = '\0';
+		
+		if (i > 1)
+		{
+			result = this->devface->load_calibration_table(namefile);
+			if (result == result_ok) m_ui->namefileLbl->setText(namefile);
+			else
+			{
+				QMessageBox::StandardButton reply;
+				reply = QMessageBox::warning(this, "", "The correction table " + m_ui->namefileLbl->text() + " specified in the profile could not be loaded.",
+					QMessageBox::Ok);
+
+				m_ui->namefileLbl->setText("\"\"");
+				OnCloseTableBtnClicked();
+			}
+		}
+		else
+		{
+			m_ui->namefileLbl->setText("\"\"");
+			OnCloseTableBtnClicked();
+		}
+	}
+	else
+	{
+		static int messageWrite = 0;
+		if ((m_ui->namefileLbl->text() != "\"\"") && messageWrite)
+		{
+			messageWrite = 0;
+			QMessageBox::StandardButton reply;
+			reply = QMessageBox::question(this, "", "Reset the correction table " + m_ui->namefileLbl->text() + " after loading the profile?",
+				QMessageBox::Yes | QMessageBox::No);
+			if (reply == QMessageBox::Yes) 
+				OnCloseTableBtnClicked();
+		}
+		else messageWrite = 1;
+	}
+
 	settings->endGroup();
 	if(default_stgs != NULL)
 		default_stgs->endGroup();
@@ -151,6 +200,7 @@ void PageUserUnitsWgt::FromClassToUi(bool _emit)
 	m_ui->unitMultiplier->setValue(uuStgs->unitMult);
 	m_ui->precisionValue->setValue(uuStgs->precision);
 	m_ui->unitEdit->setText(uuStgs->unitName);
+	m_ui->namefileLbl->setText(uuStgs->correctionTable);
 	if (_emit) {
 		emit SgnChangeUU();
 	}
@@ -163,6 +213,7 @@ void PageUserUnitsWgt::SetChecked(bool _emit, bool enable)
 	m_ui->unitMultiplier->setValue(uuStgs->unitMult);
 	m_ui->precisionValue->setValue(uuStgs->precision);
 	m_ui->unitEdit->setText(uuStgs->unitName);
+	m_ui->namefileLbl->setText(uuStgs->correctionTable);
 	if (_emit) {
 		emit SgnChangeUU();
 	}
@@ -175,6 +226,7 @@ void PageUserUnitsWgt::FromUiToClass()
 	uuStgs->unitMult = m_ui->unitMultiplier->value();
 	uuStgs->precision = m_ui->precisionValue->value();
 	uuStgs->unitName = m_ui->unitEdit->text();
+	uuStgs->correctionTable = m_ui->namefileLbl->text();
 }
 
 void PageUserUnitsWgt::OnLoadTableBtnClicked()

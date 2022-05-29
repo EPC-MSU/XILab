@@ -88,7 +88,7 @@
            <property name="title">
             <string>Position</string>
            </property>
-           <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0" columnstretch="0,20,20,60">
+           <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0" columnstretch="0,20,20,60,0">
             <property name="horizontalSpacing">
              <number>7</number>
             </property>
@@ -106,41 +106,41 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="StepSpinBox" name="spinBox_moveTo_3">
-              <property name="maximum">
+             <widget class="StepSpinBox" name="spinBox_moveTo_3" native="true">
+              <property name="maximum" stdset="0">
                <double>999999999.000000000000000</double>
               </property>
-              <property name="value">
+              <property name="value" stdset="0">
                <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
             <item row="2" column="2">
-             <widget class="StepSpinBox" name="spinBox_shiftOn_1">
-              <property name="maximum">
+             <widget class="StepSpinBox" name="spinBox_shiftOn_1" native="true">
+              <property name="maximum" stdset="0">
                <double>999999999.000000000000000</double>
               </property>
-              <property name="value">
+              <property name="value" stdset="0">
                <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
             <item row="4" column="2">
-             <widget class="StepSpinBox" name="spinBox_shiftOn_3">
-              <property name="maximum">
+             <widget class="StepSpinBox" name="spinBox_shiftOn_3" native="true">
+              <property name="maximum" stdset="0">
                <double>999999999.000000000000000</double>
               </property>
-              <property name="value">
+              <property name="value" stdset="0">
                <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
             <item row="3" column="2">
-             <widget class="StepSpinBox" name="spinBox_shiftOn_2">
-              <property name="maximum">
+             <widget class="StepSpinBox" name="spinBox_shiftOn_2" native="true">
+              <property name="maximum" stdset="0">
                <double>999999999.000000000000000</double>
               </property>
-              <property name="value">
+              <property name="value" stdset="0">
                <double>0.000000000000000</double>
               </property>
              </widget>
@@ -167,11 +167,11 @@
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="StepSpinBox" name="spinBox_moveTo_2">
-              <property name="maximum">
+             <widget class="StepSpinBox" name="spinBox_moveTo_2" native="true">
+              <property name="maximum" stdset="0">
                <double>999999999.000000000000000</double>
               </property>
-              <property name="value">
+              <property name="value" stdset="0">
                <double>0.000000000000000</double>
               </property>
              </widget>
@@ -226,11 +226,11 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="StepSpinBox" name="spinBox_moveTo_1">
-              <property name="maximum">
+             <widget class="StepSpinBox" name="spinBox_moveTo_1" native="true">
+              <property name="maximum" stdset="0">
                <double>999999999.000000000000000</double>
               </property>
-              <property name="value">
+              <property name="value" stdset="0">
                <double>0.000000000000000</double>
               </property>
              </widget>
@@ -296,6 +296,27 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="4">
+             <widget class="QLabel" name="tableLabel_1">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QLabel" name="tableLabel_2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QLabel" name="tableLabel_3">
+              <property name="text">
+               <string>  </string>
               </property>
              </widget>
             </item>
@@ -1371,7 +1392,7 @@
  <customwidgets>
   <customwidget>
    <class>StepSpinBox</class>
-   <extends>QDoubleSpinBox</extends>
+   <extends>QWidget</extends>
    <header>stepspinbox.h</header>
   </customwidget>
  </customwidgets>

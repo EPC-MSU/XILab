@@ -432,7 +432,17 @@
           <property name="title">
            <string>Control</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="5,1,0,0,1,0">
+          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,5,1,0,0,1,0">
+           <item>
+            <widget class="QLabel" name="tableLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
            <item>
             <layout class="QVBoxLayout" name="horizontalLayout_5" stretch="0,0">
              <item>

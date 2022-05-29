@@ -3,13 +3,14 @@
 #include <float.h>
 #include <functions.h>
 
-UserUnitSettings::UserUnitSettings(bool _enable, double _stepMult, double _unitMult, unsigned int _precision, QString _unitName)
+UserUnitSettings::UserUnitSettings(bool _enable, double _stepMult, double _unitMult, unsigned int _precision, QString _unitName, QString _correctionTable)
 {
 	enable = _enable;
 	stepMult = _stepMult;
 	unitMult = _unitMult;
 	precision = _precision;
 	unitName = _unitName;
+	correctionTable = _correctionTable;
 }
 
 UserUnitSettings::UserUnitSettings()
@@ -19,6 +20,7 @@ UserUnitSettings::UserUnitSettings()
 	unitMult = 1;
 	precision = 3;
 	unitName = QString("mm");
+	correctionTable = QString("");
 }
 
 UserUnitSettings::~UserUnitSettings()

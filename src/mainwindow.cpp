@@ -1271,7 +1271,9 @@ void MainWindow::UpdateState()
 		ui->pwrVoltageValue->setText("<html><span style=\"text-decoration: overline;\">"+ui->pwrVoltageValue->text()+"</span></html>");
 	if((settingsDlg->motorStgs->engine.EngineFlags & ENGINE_LIMIT_CURR) && ((unsigned int)abs(cs->status().Ipwr) >= settingsDlg->motorStgs->engine.NomCurrent))
 		ui->pwrCurrentValue->setText("<html><span style=\"text-decoration: overline;\">"+ui->pwrCurrentValue->text()+"</span></html>");
-    
+
+	ui->tableLabel->setText(settingsDlg->uuStgs->correctionTable); 
+
 	//Attenuator motion
 	AttenuatorMotion();
 	

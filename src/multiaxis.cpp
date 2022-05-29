@@ -143,6 +143,7 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	for (int i=0; i<max_devices; i++) {
 		tr_matrix[i] = i; // translation array initialized to unity
 		curPoss.push_back(FIND(QLabel, "curPos", i));
+		tableLabel.push_back(FIND(QLabel, "tableLabel", i));
 		moveTos.push_back(FIND(StepSpinBox, "spinBox_moveTo", i));
 		shiftOns.push_back(FIND(StepSpinBox, "spinBox_shiftOn", i));
 		joyDecs.push_back(FIND(QPushButton, "pushButton_joyDec", i));
@@ -288,6 +289,7 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	}
 	for (int i=devinterfaces.size(); i<max_devices; i++) { // In fact, i == 2 is the only possible case here, but let's preserve the generality
 		curPoss.at(i)->hide();
+		tableLabel.at(i)->hide();
 		moveTos.at(i)->setDisabled(true);
 		shiftOns.at(i)->setDisabled(true);
 		joyDecs.at(i)->setDisabled(true);
@@ -539,6 +541,7 @@ void Multiaxis::UpdateState() {
 		if (devinterfaces.at(i)->cs->connect() == false && noDevice[i] == false) {
 			groupBoxs.at(e)->setDisabled(true);
 			curPoss.at(e)->setDisabled(true);
+			tableLabel.at(e)->setDisabled(true);
 			joyDecs.at(e)->setDisabled(true);
 			joyIncs.at(e)->setDisabled(true);
 			moveTos.at(i)->setDisabled(true); // (i) is intentional here
@@ -550,6 +553,7 @@ void Multiaxis::UpdateState() {
 		} else if (devinterfaces.at(i)->cs->connect()== true && noDevice[i] == true){
 			groupBoxs.at(e)->setDisabled(false);
 			curPoss.at(e)->setDisabled(false);
+			tableLabel.at(e)->setDisabled(false);
 			joyDecs.at(e)->setDisabled(false);
 			joyIncs.at(e)->setDisabled(false);
 			moveTos.at(i)->setDisabled(false); // (i) is intentional here
@@ -617,6 +621,7 @@ void Multiaxis::UpdateState() {
 
 		QString value;
 		curPoss.at(e)->setText(settingsDlgs.at(i)->getFormattedPosition());
+		tableLabel.at(e)->setText(settingsDlgs.at(i)->uuStgs->correctionTable);
 		speedValues.at(e)->setText(settingsDlgs.at(i)->getFormattedSpeed());
 
 		voltageValues.at(e)->setText(QString("%1 V").arg(devinterfaces.at(i)->cs->status().Upwr/100.));
@@ -661,7 +666,7 @@ void Multiaxis::UpdateState() {
 		if (settingsDlgs.at(i)->uuStgs->enable)
 			k = settingsDlgs.at(i)->uuStgs->getUnitPerStep();
 		else
-			k = 1;
+			k = 1;		
 
 		double left, right;
 		if (settingsDlgs.at(i)->sliderStgs->loadfromdevice) {
