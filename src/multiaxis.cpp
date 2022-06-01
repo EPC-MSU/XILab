@@ -296,7 +296,7 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	}
 	for (int i=devinterfaces.size(); i<max_devices; i++) { // In fact, i == 2 is the only possible case here, but let's preserve the generality
 		curPoss.at(i)->hide();
-		tableLabel.at(i)->setPalette(palette_green);
+		//tableLabel.at(i)->setPalette(palette_green);
 		tableLabel.at(i)->setDisabled(true);
 		moveTos.at(i)->setDisabled(true);
 		shiftOns.at(i)->setDisabled(true);
@@ -637,6 +637,7 @@ void Multiaxis::UpdateState() {
 
 		if (settingsDlgs.at(i)->uuStgs->correctionTable == "\"\"")
 		{
+			tableLabel.at(e)->setPalette(palette_green);
 			tableLabel.at(e)->setDisabled(true);
 			tableLabel.at(e)->setToolTip(tr("Loading correction table status"));
 		}
