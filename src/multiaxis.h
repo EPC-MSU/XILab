@@ -166,6 +166,7 @@ private:
 	double line_erase_delay;
 
 	QList<QwtPlotMarker*> markmin, markmax, mark;
+	QPalette palette_green;
 };
 
 #endif // MULTIAXIS_H

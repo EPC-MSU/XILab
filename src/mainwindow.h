@@ -164,6 +164,7 @@ private:
 	QLabel wnd1Lbl;
 	QLabel wnd2Lbl;
 	QLabel encdLbl;
+	QLabel ctblLbl;
 	
 
 	bool cyclic;

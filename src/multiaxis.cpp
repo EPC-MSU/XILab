@@ -69,6 +69,13 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	qRegisterMetaType<result_t>("result_t");
 	qRegisterMetaType<measurement_t>("measurement_t");
 
+	QBrush redBrush(QColor(255, 0, 0, 255));
+	QBrush greyBrush(QColor(128, 128, 128, 255));
+	QBrush greenBrush(QColor(0, 208, 0, 255));
+	QBrush yellowBrush(QColor(255, 212, 0, 255));
+	QBrush semitransparentBrush(QColor(0, 0, 0, 12));
+	QBrush clearBrush(QColor(0, 0, 0, 0));
+
 	QObject::connect(ui.pushButton_settings_1,	SIGNAL(clicked()), this, SLOT(OnSettings1BtnClicked()));
 	QObject::connect(ui.pushButton_settings_2,	SIGNAL(clicked()), this, SLOT(OnSettings2BtnClicked()));
 	QObject::connect(ui.pushButton_settings_3,	SIGNAL(clicked()), this, SLOT(OnSettings3BtnClicked()));
@@ -289,7 +296,8 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	}
 	for (int i=devinterfaces.size(); i<max_devices; i++) { // In fact, i == 2 is the only possible case here, but let's preserve the generality
 		curPoss.at(i)->hide();
-		tableLabel.at(i)->hide();
+		tableLabel.at(i)->setPalette(palette_green);
+		tableLabel.at(i)->setDisabled(true);
 		moveTos.at(i)->setDisabled(true);
 		shiftOns.at(i)->setDisabled(true);
 		joyDecs.at(i)->setDisabled(true);
@@ -310,6 +318,11 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 		connect(pickerZ, SIGNAL(selected(const QPointF &)), this, SLOT(OnPickerZPointSelected(const QPointF &)));
 		pickerZ->setStateMachine(new QwtPickerClickPointMachine());
 	}
+
+	palette_green.setBrush(QPalette::Active, QPalette::WindowText, greenBrush);
+	palette_green.setBrush(QPalette::Inactive, QPalette::WindowText, greenBrush);
+	palette_green.setBrush(QPalette::Disabled, QPalette::WindowText, semitransparentBrush);
+	palette_green.setBrush(QPalette::Light, clearBrush); // For Windows XP & 2003
 
 	((QGridLayout*)ui.groupBox_Joystick->layout())->addWidget(plotXY, 1, 1);
 	((QGridLayout*)ui.groupBox_Joystick->layout())->addWidget(plotZ, 1, 4);
@@ -621,7 +634,19 @@ void Multiaxis::UpdateState() {
 
 		QString value;
 		curPoss.at(e)->setText(settingsDlgs.at(i)->getFormattedPosition());
-		tableLabel.at(e)->setText(settingsDlgs.at(i)->uuStgs->correctionTable);
+
+		if (settingsDlgs.at(i)->uuStgs->correctionTable == "\"\"")
+		{
+			tableLabel.at(e)->setDisabled(true);
+			tableLabel.at(e)->setToolTip(tr("Loading correction table status"));
+		}
+		else
+		{
+			tableLabel.at(e)->setPalette(palette_green);
+			tableLabel.at(e)->setToolTip(tr("Loading correction table status \n") + settingsDlgs.at(i)->uuStgs->correctionTable);
+			tableLabel.at(e)->setEnabled(true);
+		}
+
 		speedValues.at(e)->setText(settingsDlgs.at(i)->getFormattedSpeed());
 
 		voltageValues.at(e)->setText(QString("%1 V").arg(devinterfaces.at(i)->cs->status().Upwr/100.));

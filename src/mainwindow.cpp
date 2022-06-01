@@ -371,6 +371,15 @@ void MainWindow::InitUI()
 	errvLbl.setDisabled(true);
 	ui->statusBar->addPermanentWidget(&errvLbl);
 
+	ctblLbl.setFixedWidth(ST_PANE_WIDTH);
+	ctblLbl.setAlignment(Qt::AlignHCenter);
+	ctblLbl.setToolTip(tr("The state of loading the correction table"));
+	ctblLbl.setFont(font);
+	ctblLbl.setPalette(palette_green);
+	ctblLbl.setText("Ctbl");
+	ctblLbl.setDisabled(true);
+	ui->statusBar->addPermanentWidget(&ctblLbl);
+
 	ui->movingStateLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/state_moving.png"));
 	ui->targetSpeedLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/check.png"));
 	ui->antiplayLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/antiplay.png"));
@@ -1272,7 +1281,17 @@ void MainWindow::UpdateState()
 	if((settingsDlg->motorStgs->engine.EngineFlags & ENGINE_LIMIT_CURR) && ((unsigned int)abs(cs->status().Ipwr) >= settingsDlg->motorStgs->engine.NomCurrent))
 		ui->pwrCurrentValue->setText("<html><span style=\"text-decoration: overline;\">"+ui->pwrCurrentValue->text()+"</span></html>");
 
-	ui->tableLabel->setText(settingsDlg->uuStgs->correctionTable); 
+	if (settingsDlg->uuStgs->correctionTable == "\"\"")
+	{
+		ctblLbl.setDisabled(true);
+		ctblLbl.setToolTip(tr("Loading correction table status"));
+	}
+	else
+	{
+		ctblLbl.setPalette(palette_green);
+		ctblLbl.setEnabled(true);
+		ctblLbl.setToolTip(tr("Loading correction table status \n") + settingsDlg->uuStgs->correctionTable);
+	}
 
 	//Attenuator motion
 	AttenuatorMotion();
