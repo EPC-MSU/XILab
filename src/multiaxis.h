@@ -100,6 +100,8 @@ private:
 	QStringList headerLabels;
 	void SaveAxisConfig();
 	void LoadSingleConfigs();
+	void LoadLineEraseDelay();
+	void LoadSingleConfigs1();
 	void SaveSingleConfigs();
 	void LoadConfigs();
 	void SaveConfigs();

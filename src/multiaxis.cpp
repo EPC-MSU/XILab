@@ -196,7 +196,7 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 
 	font = ui.label_curPos->font(); // uhm...
 
-	LoadSingleConfigs(); // needs getSerials(), which needs translate(), which is initialized above
+	LoadLineEraseDelay();
 
 	unitsDlg = new DimensionalUnitsDlg(this, "Common settings", getSerials(), line_erase_delay);
 	unitsDlg->setWindowFlags(unitsDlg->windowFlags() | Qt::WindowMaximizeButtonHint | Qt::Tool);
@@ -343,8 +343,16 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	exitBox->setClosingOnReject(false);
 
 	hidden->setFocusPolicy(Qt::NoFocus);// Qt::NoFocus//Qt::StrongFocus
-
+	
 	exiting = false;
+
+	for (int i = 0; i < max_devices; i++) {
+		tableLabel.at(i)->setPalette(palette_green);
+		tableLabel.at(i)->setDisabled(true);
+	}
+
+	LoadSingleConfigs1(); // needs getSerials(), which needs translate(), which is initialized above
+
 	inited = true;
 }
 
@@ -1221,6 +1229,28 @@ void Multiaxis::LoadSingleConfigs()
 	settings.beginGroup(getSerialsSortedConcat());
 	line_erase_delay = settings.value("line_erase_delay", 0).toDouble();
 	settings.endGroup();
+}
+
+void Multiaxis::LoadLineEraseDelay()
+{
+	XSettings settings(MakeProgramConfigFilename(), QSettings::IniFormat, QIODevice::ReadOnly);
+	settings.beginGroup(getSerialsSortedConcat());
+	line_erase_delay = settings.value("line_erase_delay", 0).toDouble();
+	settings.endGroup();
+}
+
+void Multiaxis::LoadSingleConfigs1()
+{
+	QStringList serials = getSerials();
+	XSettings default_stgs(DefaultConfigFilename(), QSettings::IniFormat, QIODevice::ReadOnly);
+	for (int i = 0; i<serials.length(); i++) {
+		XSettings settings(settingsDlgs.at(i)->MakeConfigFilename(), QSettings::IniFormat, QIODevice::ReadOnly);
+		settingsDlgs.at(i)->AllPagesFromSettingsToUi(&settings, &default_stgs);
+
+		((PageSliderSetupWgt*)settingsDlgs.at(i)->pageWgtsLst[PageSliderSetupNum])->FromUiToClass();
+		((PageUserUnitsWgt*)settingsDlgs.at(i)->pageWgtsLst[PageUserUnitsNum])->FromUiToClass();
+	}
+
 }
 
 void Multiaxis::SaveSingleConfigs()
