@@ -88,10 +88,17 @@
            <property name="title">
             <string>Position</string>
            </property>
-           <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0" columnstretch="0,20,20,60,0">
+           <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0" columnstretch="0,0,0,0,0,0">
             <property name="horizontalSpacing">
              <number>7</number>
             </property>
+            <item row="0" column="5">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Correction table</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="1">
              <widget class="QPushButton" name="pushButton_moveTo">
               <property name="sizePolicy">
@@ -299,26 +306,90 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="4">
+            <item row="2" column="5">
              <widget class="QLabel" name="tableLabel_1">
               <property name="text">
-               <string/>
+               <string>Ctbl</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="4">
+            <item row="3" column="5">
              <widget class="QLabel" name="tableLabel_2">
               <property name="text">
-               <string/>
+               <string>Ctbl</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="4">
+            <item row="4" column="5">
              <widget class="QLabel" name="tableLabel_3">
               <property name="text">
-               <string>  </string>
+               <string>Ctbl</string>
               </property>
              </widget>
+            </item>
+            <item row="0" column="4">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="4">
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="4">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="4">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>

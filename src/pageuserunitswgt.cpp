@@ -200,7 +200,28 @@ void PageUserUnitsWgt::FromClassToUi(bool _emit)
 	m_ui->unitMultiplier->setValue(uuStgs->unitMult);
 	m_ui->precisionValue->setValue(uuStgs->precision);
 	m_ui->unitEdit->setText(uuStgs->unitName);
-	m_ui->namefileLbl->setText(uuStgs->correctionTable);
+	if (m_ui->namefileLbl->text() != uuStgs->correctionTable)
+	{
+		m_ui->namefileLbl->setText(uuStgs->correctionTable);
+		if (uuStgs->correctionTable == "\"\"")
+		{
+			result = this->devface->load_calibration_table(NULL);
+		}
+		else
+		{
+			char namefile[255];
+			int i;
+			for (i = 0; i<uuStgs->correctionTable.length(); i++){
+				namefile[i] = (char) uuStgs->correctionTable[i].toAscii();
+			}
+			namefile[i] = '\0';
+
+			result = this->devface->load_calibration_table(namefile);
+			if (result == result_ok) m_ui->namefileLbl->setText(namefile);
+			else m_ui->namefileLbl->setText("\"\"");
+		}
+	}
+
 	if (_emit) {
 		emit SgnChangeUU();
 	}
@@ -226,7 +247,10 @@ void PageUserUnitsWgt::FromUiToClass()
 	uuStgs->unitMult = m_ui->unitMultiplier->value();
 	uuStgs->precision = m_ui->precisionValue->value();
 	uuStgs->unitName = m_ui->unitEdit->text();
-	uuStgs->correctionTable = m_ui->namefileLbl->text();
+	if (uuStgs->correctionTable != m_ui->namefileLbl->text())
+	{
+		uuStgs->correctionTable = m_ui->namefileLbl->text();
+	}
 }
 
 void PageUserUnitsWgt::OnLoadTableBtnClicked()

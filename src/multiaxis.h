@@ -100,6 +100,8 @@ private:
 	QStringList headerLabels;
 	void SaveAxisConfig();
 	void LoadSingleConfigs();
+	void LoadLineEraseDelay();
+	void LoadSingleConfigs1();
 	void SaveSingleConfigs();
 	void LoadConfigs();
 	void SaveConfigs();
@@ -166,6 +168,7 @@ private:
 	double line_erase_delay;
 
 	QList<QwtPlotMarker*> markmin, markmax, mark;
+	QPalette palette_green;
 };
 
 #endif // MULTIAXIS_H
