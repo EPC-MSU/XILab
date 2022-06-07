@@ -643,9 +643,18 @@ void Multiaxis::UpdateState() {
 		}
 		else
 		{
-			tableLabel.at(e)->setPalette(palette_green);
+			if (settingsDlgs.at(i)->uuStgs->enable)
+			{
+				tableLabel.at(e)->setPalette(palette_green);
+				tableLabel.at(e)->setEnabled(true);
+			}
+			else
+			{
+				tableLabel.at(e)->setPalette(palette_green);
+				tableLabel.at(e)->setDisabled(true);
+			}
+
 			tableLabel.at(e)->setToolTip(tr("Loading correction table status \n") + settingsDlgs.at(i)->uuStgs->correctionTable);
-			tableLabel.at(e)->setEnabled(true);
 		}
 
 		speedValues.at(e)->setText(settingsDlgs.at(i)->getFormattedSpeed());

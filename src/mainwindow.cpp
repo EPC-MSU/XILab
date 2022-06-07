@@ -1288,8 +1288,13 @@ void MainWindow::UpdateState()
 	}
 	else
 	{
-		ctblLbl.setPalette(palette_green);
-		ctblLbl.setEnabled(true);
+		if (settingsDlg->uuStgs->enable)
+		{
+			ctblLbl.setPalette(palette_green);
+			ctblLbl.setEnabled(true);
+		}
+		else
+			ctblLbl.setDisabled(true);
 		ctblLbl.setToolTip(tr("Loading correction table status \n") + settingsDlg->uuStgs->correctionTable);
 	}
 
