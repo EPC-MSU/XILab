@@ -257,9 +257,9 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 
 		//по горизонтали растянем, по вертикали - как решит программа :)
 		boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-		boxProtocol->addItem(/*"xi-net://"*/"");
-		boxProtocol->addItem(/*"xi-udp://"*/"udp");
-		boxProtocol->addItem(/*"xi-tcp://"*/"tcp");
+		boxProtocol->addItem(XI_NET);
+		boxProtocol->addItem(XI_UDP);
+		boxProtocol->addItem(XI_TCP);
 		
 		boxProtocol->setCurrentIndex(0);
 		//вставляем в таблицу QTableWidget в колонку №0
@@ -299,13 +299,13 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 		int curr_ind;
 		//по горизонтали растянем, по вертикали - как решит программа :)
 		boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-		boxProtocol->addItem(/*"xi-net://"*/"");
-		boxProtocol->addItem(/*"xi-udp://"*/"udp");
-		boxProtocol->addItem(/*"xi-tcp://"*/"tcp");
-		if (list_protocol.at(i) == "udp")
+		boxProtocol->addItem(XI_NET);
+		boxProtocol->addItem(XI_UDP);
+		boxProtocol->addItem(XI_TCP);
+		if (list_protocol.at(i) == XI_UDP)
 			curr_ind = 1;
 		else
-			if (list_protocol.at(i) == "tcp")
+		if (list_protocol.at(i) == XI_TCP)
 				curr_ind = 2;
 			else
 				curr_ind = 0;
@@ -329,9 +329,9 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 
 	//по горизонтали растянем, по вертикали - как решит программа :)
 	boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-	boxProtocol->addItem(/*"xi-net://"*/"");
-	boxProtocol->addItem(/*"xi-udp://"*/"udp");
-	boxProtocol->addItem(/*"xi-tcp://"*/"tcp");
+	boxProtocol->addItem(XI_NET);
+	boxProtocol->addItem(XI_UDP);
+	boxProtocol->addItem(XI_TCP);
 	ui->tableWidget->setCellWidget(list.size(), 0, boxProtocol);
 
 	// this is the edit line
