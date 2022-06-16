@@ -1655,7 +1655,7 @@ void SettingsDlg::setStyles(bool permanent)
 	} else {
 		StepSpinBox::setShowStyleAll(controllerStgs->serialnumber, permanent, prev_tmp_uuStgs, curr_tmp_uuStgs, old_multi, new_multi);
 	}
-	StepSpinBox::setStepFactorAll(controllerStgs->serialnumber, permanent, tempStgs.getStepFrac());
+	//StepSpinBox::setStepFactorAll(controllerStgs->serialnumber, permanent, tempStgs.getStepFrac());
 
 	// We do the resaving one more time because setShowStyle call above could have affected the userunits ui page through recalc via feedback change and we need most recent values in curr_tmp_uuStgs for the next setStyles call
 	save_tmp_uuStgs = *uuStgs;  // Save internal settings
