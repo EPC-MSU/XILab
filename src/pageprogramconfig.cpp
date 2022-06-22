@@ -16,6 +16,12 @@
 
 #define FUTURE_WAIT_MS 2000
 
+QString ProtocolSelectionStyle = { //"border: 1px solid gray;"
+"border - radius: 2px;"
+//"padding: 1px 18px 1px 3px;"
+//"min - width: 6em;" 
+};
+
 
 PageProgramConfigWgt::PageProgramConfigWgt(QWidget *parent, DeviceSearchSettings* _dss) :
     QWidget(parent),
@@ -102,7 +108,7 @@ void PageProgramConfigWgt::DetectHosts()
 
 	// add rows from the table
 	for (int i=0; i<ui->tableWidget->rowCount()-1; i++) { // last row is edit row which has no items
-		v.push_back( ui->tableWidget->item(i, 0)->text() );
+		v.push_back( ui->tableWidget->item(i, 1)->text() );
 	}
 	// once more sort and clear dupes
 	std::sort(v.begin(), v.end()); 
@@ -130,8 +136,13 @@ void PageProgramConfigWgt::FromUiToClass()
 	dss->Protocol_list.clear();
 	
 	for (int i = 0; i < ui->tableWidget->rowCount()-1; ++i) { // last row is edit row which has no items
-		dss->Server_hosts.append(ui->tableWidget->item(i,0)->text() );
-		dss->Protocol_list.append(ui->tableWidget->item(i, 1) == 0 ? QString(" ") : ui->tableWidget->item(i, 1)->text());
+		dss->Server_hosts.append(ui->tableWidget->item(i,1)->text() );
+		QComboBox *boxProtocol;
+		boxProtocol = qobject_cast<QComboBox*>(
+			ui->tableWidget->cellWidget(i, 0));
+		dss->Protocol_list.append(ui->tableWidget->item(i, 0) == 0 ? QString(" ") : /*ui->tableWidget->item(i, 0)->text()*/boxProtocol->currentText());
+		
+		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
 	}
 }
 
@@ -203,7 +214,7 @@ void PageProgramConfigWgt::slotCellClicked ( int row, int column )
 		delete ui->remoteUserTableView->model();
 
 		// Reconnect to specified address
-		std::string address = ui->tableWidget->item(row, 0)->text().toStdString();
+		std::string address = ui->tableWidget->item(row, 1)->text().toStdString();
 		bindy->disconnect(conn_id);
 		try {
 			conn_id = bindy->connect(address, std::string());
@@ -227,12 +238,12 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 {
 	QTableWidget *tw = ui->tableWidget;
 	tw->blockSignals(true);
-	if (column == 0 && row == tw->rowCount()-1 && tw->item(row, column)->text().trimmed() != QString("") ) { // add new line
+	if (column == 1 && row == tw->rowCount()-1 && tw->item(row, column)->text().trimmed() != QString("") ) { // add new line
 		// Increase table size by one row
 		tw->setRowCount(tw->rowCount() + 1);
 
 		// Trim spaces in edited line (left column)
-		tw->item(row, 0)->setText(tw->item(row, 0)->text().trimmed());
+		tw->item(row, 1)->setText(tw->item(row, 1)->text().trimmed());
 
 		// Add "x" icon in the edited row (next column)
 		QTableWidgetItem* icon_item = new QTableWidgetItem();
@@ -249,7 +260,20 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 		// Disable right column of the new row
 		tw->setItem(row+1, 2, new QTableWidgetItem());
 		tw->item(row+1, 2)->setFlags(Qt::NoItemFlags);
-	} else if (column == 0 && row != tw->rowCount()-1 && tw->item(row, column)->text().trimmed() == QString("") ) { // remove empty line
+
+		QComboBox *boxProtocol = new QComboBox;
+		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
+
+		//по горизонтали растянем, по вертикали - как решит программа :)
+		boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+		boxProtocol->addItem(XI_NET);
+		boxProtocol->addItem(XI_UDP);
+		boxProtocol->addItem(XI_TCP);
+		
+		boxProtocol->setCurrentIndex(0);
+		//вставляем в таблицу QTableWidget в колонку №0
+		ui->tableWidget->setCellWidget(ui->tableWidget->rowCount() - 1, 0, boxProtocol);
+	} else if (column == 1 && row != tw->rowCount()-1 && tw->item(row, column)->text().trimmed() == QString("") ) { // remove empty line
 		tw->removeRow(row);
 	}
 	tw->blockSignals(false);
@@ -258,6 +282,7 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_protocol)
 {
 	QTableWidget *tw = ui->tableWidget;
+
 	tw->blockSignals(true);
 
 	tw->clearContents();
@@ -265,20 +290,39 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 	tw->setColumnCount(4);
 
 	QStringList qslist;
-	qslist << QString("IP/Host") << QString("Protocol") << QString() << QString() ;
-	ui->tableWidget->setHorizontalHeaderLabels(qslist);
+	qslist << QString("Protocol") << QString("IP/Host[:port]") << QString() << QString() ;
+	ui->tableWidget->setHorizontalHeaderLabels(qslist);	
 	QHeaderView * h = ui->tableWidget->horizontalHeader();
 	QHeaderView * v = ui->tableWidget->verticalHeader();
 	h->setClickable(false);
-	h->setResizeMode(0, QHeaderView::Stretch);
-	h->setResizeMode(1, QHeaderView::ResizeToContents);
+	h->setResizeMode(1, QHeaderView::Stretch);
+	h->setResizeMode(0, QHeaderView::ResizeToContents);
 	h->setResizeMode(2, QHeaderView::ResizeToContents);
 	h->setResizeMode(3, QHeaderView::ResizeToContents);
 	v->hide();
 
 	for (int i=0; i<list.size(); ++i) {
-		tw->setItem(i, 0, new QTableWidgetItem( list.at(i) ) );
-		tw->setItem(i, 1, new QTableWidgetItem( list_protocol.at(i) ) );
+		tw->setItem(i, 1, new QTableWidgetItem( list.at(i) ) );
+		tw->setItem(i, 0, new QTableWidgetItem( list_protocol.at(i) ) );
+		QComboBox *boxProtocol = new QComboBox;
+		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
+		int curr_ind;
+		//по горизонтали растянем, по вертикали - как решит программа :)
+		boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+		boxProtocol->addItem(XI_NET);
+		boxProtocol->addItem(XI_UDP);
+		boxProtocol->addItem(XI_TCP);
+		if (list_protocol.at(i) == XI_UDP)
+			curr_ind = 1;
+		else
+		if (list_protocol.at(i) == XI_TCP)
+				curr_ind = 2;
+			else
+				curr_ind = 0;
+
+		boxProtocol->setCurrentIndex(curr_ind);
+		//вставляем в таблицу QTableWidget в колонку №0
+		ui->tableWidget->setCellWidget(i, 0, boxProtocol);
 
 		QTableWidgetItem* icon_item = new QTableWidgetItem();
 		icon_item->setIcon(x_icon);
@@ -290,6 +334,16 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 		icon_item2->setFlags(Qt::ItemIsEnabled);
 		tw->setItem(i, 3, icon_item2 );
 	}
+
+	QComboBox *boxProtocol = new QComboBox;
+	boxProtocol->setStyleSheet(ProtocolSelectionStyle);
+
+	//по горизонтали растянем, по вертикали - как решит программа :)
+	boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+	boxProtocol->addItem(XI_NET);
+	boxProtocol->addItem(XI_UDP);
+	boxProtocol->addItem(XI_TCP);
+	ui->tableWidget->setCellWidget(list.size(), 0, boxProtocol);
 
 	// this is the edit line
 	tw->setItem(list.size(), 2, new QTableWidgetItem());

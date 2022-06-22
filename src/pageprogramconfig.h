@@ -9,6 +9,10 @@
 #include <devicesearchsettings.h>
 #include "bindy.h"
 
+#define XI_NET "" /*"xi-net://"*/
+#define XI_UDP "xi-udp://"/*"udp"*/
+#define XI_TCP "xi-tcp://"/*"tcp"*/
+
 namespace Ui {
 class PageProgramConfigWgt;
 }
