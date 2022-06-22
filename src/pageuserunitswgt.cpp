@@ -157,12 +157,19 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 			if (result == result_ok) m_ui->namefileLbl->setText(namefile);
 			else
 			{
-				QMessageBox::StandardButton reply;
-				reply = QMessageBox::warning(this, "", "The correction table " + m_ui->namefileLbl->text() + " specified in the profile could not be loaded.",
-					QMessageBox::Ok);
+				// Counter, to eliminate double triggers
+				static int messageWrite1 = 0;
+				if ((m_ui->namefileLbl->text() != "\"\"") && messageWrite1)
+				{
+					messageWrite1 = 0;
+					QMessageBox::StandardButton reply;
+					reply = QMessageBox::warning(this, "", "The correction table " + m_ui->namefileLbl->text() + " specified in the profile could not be loaded.",
+						QMessageBox::Ok);
 
-				m_ui->namefileLbl->setText("\"\"");
-				OnCloseTableBtnClicked();
+					m_ui->namefileLbl->setText("\"\"");
+					OnCloseTableBtnClicked();
+				}
+				else messageWrite1 = 1;			
 			}
 		}
 		else
@@ -173,6 +180,7 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 	}
 	else
 	{
+		// Counter, to eliminate double triggers
 		static int messageWrite = 0;
 		if ((m_ui->namefileLbl->text() != "\"\"") && messageWrite)
 		{
