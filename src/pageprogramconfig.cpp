@@ -16,6 +16,12 @@
 
 #define FUTURE_WAIT_MS 2000
 
+QString ProtocolSelectionStyle = { //"border: 1px solid gray;"
+"border - radius: 2px;"
+//"padding: 1px 18px 1px 3px;"
+//"min - width: 6em;" 
+};
+
 
 PageProgramConfigWgt::PageProgramConfigWgt(QWidget *parent, DeviceSearchSettings* _dss) :
     QWidget(parent),
@@ -135,6 +141,8 @@ void PageProgramConfigWgt::FromUiToClass()
 		boxProtocol = qobject_cast<QComboBox*>(
 			ui->tableWidget->cellWidget(i, 0));
 		dss->Protocol_list.append(ui->tableWidget->item(i, 0) == 0 ? QString(" ") : /*ui->tableWidget->item(i, 0)->text()*/boxProtocol->currentText());
+		
+		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
 	}
 }
 
@@ -254,6 +262,7 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 		tw->item(row+1, 2)->setFlags(Qt::NoItemFlags);
 
 		QComboBox *boxProtocol = new QComboBox;
+		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
 
 		//по горизонтали растянем, по вертикали - как решит программа :)
 		boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -296,6 +305,7 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 		tw->setItem(i, 1, new QTableWidgetItem( list.at(i) ) );
 		tw->setItem(i, 0, new QTableWidgetItem( list_protocol.at(i) ) );
 		QComboBox *boxProtocol = new QComboBox;
+		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
 		int curr_ind;
 		//по горизонтали растянем, по вертикали - как решит программа :)
 		boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -326,6 +336,7 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 	}
 
 	QComboBox *boxProtocol = new QComboBox;
+	boxProtocol->setStyleSheet(ProtocolSelectionStyle);
 
 	//по горизонтали растянем, по вертикали - как решит программа :)
 	boxProtocol->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
