@@ -836,6 +836,33 @@ void Multiaxis::UpdateState() {
 			fixfocus = 0;
 		}
 	}
+
+	for (int e = 0; e < devcount; e++) {
+		int i = translate(e);
+		// The block for displaying error messages of the correction table.
+		switch (settingsDlgs.at(i)->uuStgs->messageType)
+		{
+		case 1:
+			settingsDlgs.at(i)->uuStgs->messageType = 0;
+			QMessageBox::StandardButton reply;
+			reply = QMessageBox::question(this, groupBoxs.at(i)->title(), settingsDlgs.at(i)->uuStgs->messageText,
+				QMessageBox::Yes | QMessageBox::No);
+			if (reply == QMessageBox::Yes)
+				((PageUserUnitsWgt*)settingsDlgs.at(i)->pageWgtsLst[PageUserUnitsNum])->OnCloseTableBtnClicked();
+			break;
+		case 3:
+			settingsDlgs.at(i)->uuStgs->messageType = 0;
+			QMessageBox::StandardButton reply1;
+			reply1 = QMessageBox::warning(this, groupBoxs.at(i)->title(), settingsDlgs.at(i)->uuStgs->messageText,
+				QMessageBox::Ok);
+
+			break;
+		case 2:
+		case 4:
+		default:
+			break;
+		}
+	}
 }
 
 void Multiaxis::OnMoveBtnPressed() {

@@ -421,6 +421,9 @@ void MainWindow::Init()
 #endif
 	connect(settingsDlg, SIGNAL(SgnLog(QString, QString, int)),
 			this, SLOT(Log(QString, QString, int)) );
+	connect(this, SIGNAL(SgnMessageUserUnit()),
+		settingsDlg, SLOT(MessageUserUnitOutput()));
+
 	connect(settingsDlg->pageWgtsLst[PageADNum],SIGNAL(errorInLog(QString, QString, int)), this, SLOT(Log(QString, QString, int)) );
 	LoggedFile file("");
 	file.setLogSettings(settingsDlg->logStgs);
@@ -1298,6 +1301,8 @@ void MainWindow::UpdateState()
 		ctblLbl.setToolTip(tr("Loading correction table status \n") + settingsDlg->uuStgs->correctionTable);
 	}
 
+		
+
 	//Attenuator motion
 	AttenuatorMotion();
 	
@@ -1325,6 +1330,30 @@ void MainWindow::UpdateState()
 		scriptSaveBtn->setDisabled(evaling);
 		codeEdit->setTextInteractionFlags(evaling ? Qt::NoTextInteraction : Qt::TextEditorInteraction);
 	}
+
+	// The block for displaying error messages of the correction table.
+	switch (settingsDlg->uuStgs->messageType)
+	{
+	case 1: 
+		settingsDlg->uuStgs->messageType = 0;
+		QMessageBox::StandardButton reply;
+		reply = QMessageBox::question(this, "", settingsDlg->uuStgs->messageText,
+			QMessageBox::Yes | QMessageBox::No);
+		if (reply == QMessageBox::Yes)
+			((PageUserUnitsWgt*)settingsDlg->pageWgtsLst[PageUserUnitsNum])->OnCloseTableBtnClicked();
+		break;
+	case 3:
+		settingsDlg->uuStgs->messageType = 0;
+		QMessageBox::StandardButton reply1;
+		reply1 = QMessageBox::warning(this, "", settingsDlg->uuStgs->messageText,
+			QMessageBox::Ok);		
+		break;
+	case 2:
+	case 4:
+	default:
+		break;
+	}
+
 }
 
 long long MainWindow::getMicroposition(libximc::status_t status) // Returns position in microsteps

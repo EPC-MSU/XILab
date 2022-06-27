@@ -19,6 +19,10 @@ public:
 	unsigned int precision;
 	QString unitName;
 	QString correctionTable;
+	
+	unsigned int messageType;
+	QString messageText;
+	unsigned int messageActiom;
 
 private:
 	double stepMult;

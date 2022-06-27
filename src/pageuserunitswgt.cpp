@@ -157,9 +157,8 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 			if (result == result_ok) m_ui->namefileLbl->setText(namefile);
 			else
 			{
-				QMessageBox::StandardButton reply;
-				reply = QMessageBox::warning(this, "", "The correction table " + m_ui->namefileLbl->text() + " specified in the profile could not be loaded.",
-					QMessageBox::Ok);
+				uuStgs->messageType = 3; // Warning
+				uuStgs->messageText = "The correction table " + m_ui->namefileLbl->text() + " specified in the profile could not be loaded.";
 
 				m_ui->namefileLbl->setText("\"\"");
 				OnCloseTableBtnClicked();
@@ -173,17 +172,11 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 	}
 	else
 	{
-		static int messageWrite = 0;
-		if ((m_ui->namefileLbl->text() != "\"\"") && messageWrite)
+		if ((m_ui->namefileLbl->text() != "\"\""))
 		{
-			messageWrite = 0;
-			QMessageBox::StandardButton reply;
-			reply = QMessageBox::question(this, "", "Reset the correction table " + m_ui->namefileLbl->text() + " after loading the profile?",
-				QMessageBox::Yes | QMessageBox::No);
-			if (reply == QMessageBox::Yes) 
-				OnCloseTableBtnClicked();
+			uuStgs->messageType = 1; //Qestion
+			uuStgs->messageText = "Reset the correction table " + m_ui->namefileLbl->text() + " after loading the profile?";
 		}
-		else messageWrite = 1;
 	}
 
 	settings->endGroup();
