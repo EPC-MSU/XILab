@@ -400,7 +400,7 @@
         <item>
          <widget class="QPushButton" name="TechSupport">
           <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When you click the technical support button, the mail client will open, if it is installed. If it is not possible to identify the email client, the technical support page will open, where you can register if you have not yet contacted the technical support service and ask questions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When you click the technical support button, the email client will open, if it is installed. If it is not possible to identify the email client, the technical support page will open, where you can register if you have not yet contacted the technical support service and ask questions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>Technical support</string>
