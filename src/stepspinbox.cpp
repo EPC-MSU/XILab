@@ -7,7 +7,7 @@
 #include <ximc.h>
 #include <functions.h>
 
-#define DEFAULT_PRECISION 4
+#define DEFAULT_PRECISION 6
 
 // Calls setShowStyle with params on every StepSpinBoxItem with matching serial
 void CounterStepSpinBoxSetter::setShowStyleAll(unsigned int sn, bool permanent, UserUnitSettings old_uuStgs, UserUnitSettings new_uuStgs, multiplier_t old_passed_mult, multiplier_t new_passed_mult) {
