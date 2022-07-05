@@ -137,12 +137,11 @@ void PageProgramConfigWgt::FromUiToClass()
 	
 	for (int i = 0; i < ui->tableWidget->rowCount()-1; ++i) { // last row is edit row which has no items
 		dss->Server_hosts.append(ui->tableWidget->item(i,1)->text() );
-		QComboBox *boxProtocol;
+		QComboBox *boxProtocol;		
 		boxProtocol = qobject_cast<QComboBox*>(
 			ui->tableWidget->cellWidget(i, 0));
-		dss->Protocol_list.append(ui->tableWidget->item(i, 0) == 0 ? QString(" ") : /*ui->tableWidget->item(i, 0)->text()*/boxProtocol->currentText());
-		
-		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
+		dss->Protocol_list.append(/*ui->tableWidget->item(i, 0) == 0 ? QString(" ") : *//*ui->tableWidget->item(i, 0)->text()*/boxProtocol->currentText());
+		//boxProtocol->setStyleSheet(ProtocolSelectionStyle);		
 	}
 }
 
@@ -270,7 +269,7 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 		boxProtocol->addItem(XI_UDP);
 		boxProtocol->addItem(XI_TCP);
 		
-		boxProtocol->setCurrentIndex(0);
+		//boxProtocol->setCurrentIndex(0);
 		//вставляем в таблицу QTableWidget в колонку №0
 		ui->tableWidget->setCellWidget(ui->tableWidget->rowCount() - 1, 0, boxProtocol);
 	} else if (column == 1 && row != tw->rowCount()-1 && tw->item(row, column)->text().trimmed() == QString("") ) { // remove empty line
