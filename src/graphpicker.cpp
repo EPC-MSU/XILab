@@ -37,7 +37,7 @@ QwtText myPicker::trackerText (const QwtDoublePoint &pos) const
 
 	QwtText ret;
 
-	clock_t t1 = clock();
+	//clock_t t1 = clock();
 
 	//заливка бэкграунда мягким цветом графика
 	QColor color(parent->getCurve()->pen().color());
@@ -82,7 +82,7 @@ QwtText myPicker::trackerText (const QwtDoublePoint &pos) const
 	//рассчитываем x
 	QString time;
 	if(found)
-		time = toStr(static_cast<int>(timeoffset->CalcValue(parent->getCurve()->sample(i).x())/1000)) + " s " + toStr((int)(timeoffset->CalcValue(parent->getCurve()->sample(i).x()) - static_cast<int>(timeoffset->CalcValue(parent->getCurve()->sample(i).x())/1000)*1000), true, 3) + " ms";
+		time = toStr(static_cast<int>(timeoffset->CalcValue(parent->getCurve()->sample(i).x())/1000)) + " s " + toStr((int)(timeoffset->CalcValue(parent->getCurve()->sample(i).x()) - static_cast<int>(timeoffset->CalcValue(parent->getCurve()->sample(i).x())/1000)*1000), /*true,*/ 3) + " ms";
 	else 
 		time = "";
 
@@ -95,7 +95,7 @@ QwtText myPicker::trackerText (const QwtDoublePoint &pos) const
 		marker->setXValue(parent->getCurve()->sample(i).x());
 		marker->setYValue(parent->getCurve()->sample(i).y());
 		marker->setVisible(true);
-		double data, udata;
+		double data = 0.0, udata = 0.0;
 		if(data_type >= 0 && curr->step_factor > 1){	//в полношаговом режиме фактор не отображается
 			if(data_type == POSNUM){
 				data = curr->position;
@@ -103,7 +103,6 @@ QwtText myPicker::trackerText (const QwtDoublePoint &pos) const
 			else if(data_type == SPEEDNUM){
 				data = curr->speed;
 			}
-			udata = 0;
 			ret.setText(" " + time + "; " + QString("%1 %2/%3 ").arg(data).arg(udata).arg(curr->step_factor) + suffix + " ");
 		}
 		else

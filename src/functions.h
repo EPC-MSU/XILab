@@ -40,10 +40,10 @@ private:
 	QDateTime time;
 };
 
-QString toStr(signed int n, bool show_zero=false, int size=0);
-QString toStr(unsigned int n, bool show_zero=false, int size=0);
-QString toStr(signed long long n, bool show_zero=false, int size=0);
-QString toStr(unsigned long long n, bool show_zero=false, int size=0);
+QString toStr(signed int n,/* bool show_zero=false,*/ int size=0);
+QString toStr(unsigned int n,/* bool show_zero=false,*/ int size=0);
+QString toStr(signed long long n,/* bool show_zero=false,*/ int size=0);
+QString toStr(unsigned long long n,/* bool show_zero=false,*/ int size=0);
 
 QString toStr(double n, bool show_zero=false);
 void setUnsetBit(bool condition, unsigned int* toset, unsigned int flag);
@@ -116,8 +116,8 @@ bool operator==(const gear_settings_t& l, const gear_settings_t& r);
 bool operator==(const accessories_settings_t& l, const accessories_settings_t& r);
 
 #define safe_copy(DST,SRC) {\
-	strncpy(DST,SRC,sizeof DST - 1);\
-	DST[sizeof DST] = '\0';\
+	strncpy(DST,SRC,sizeof DST - 2);\
+	DST[sizeof DST - 1] = '\0';\
 }
 
 bool isSpeedUnitRotation(int feedbacktype);

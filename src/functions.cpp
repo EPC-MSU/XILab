@@ -46,10 +46,10 @@ int TimeInterval::msecsElapsed()
 	return time.msecsTo(QDateTime::currentDateTimeUtc());
 }
 
-QString toStr(signed int n, bool show_zero, int size) { TOSTR }
-QString toStr(unsigned int n, bool show_zero, int size) { TOSTR }
-QString toStr(signed long long n, bool show_zero, int size) { TOSTR }
-QString toStr(unsigned long long n, bool show_zero, int size) { TOSTR }
+QString toStr(signed int n,/* bool show_zero,*/ int size) { TOSTR }
+QString toStr(unsigned int n,/* bool show_zero,*/ int size) { TOSTR }
+QString toStr(signed long long n,/* bool show_zero,*/ int size) { TOSTR }
+QString toStr(unsigned long long n,/* bool show_zero,*/ int size) { TOSTR }
 QString toStr(double n, bool show_zero)
 {
 	if((n == 0.0) && show_zero) return "0.0";
@@ -60,8 +60,10 @@ QString toStr(double n, bool show_zero)
 	return s;
 }
 
+#ifdef _MSC_VER
 #pragma warning ( push )
 #pragma warning ( disable : 4146 )
+#endif
 void setUnsetBit(bool condition, unsigned int* toset, unsigned int flag)
 {
 	Q_ASSERT( flag == (flag & -flag) ); // bombs if our "flag" has more than 1 bit set
@@ -71,7 +73,9 @@ void setUnsetBit(bool condition, unsigned int* toset, unsigned int flag)
 		*toset &= ~flag;
 }
 
+#ifdef _MSC_VER
 #pragma warning ( disable : 4018 )
+#endif
 void Base16to256(QString text, std::vector<uint8_t>* key) // assumes vector size is the length of data we read from the string
 {
 	for (int i=0; i<key->size(); i++) {
@@ -88,8 +92,9 @@ void Base256to16(std::vector<uint8_t> key, QString* text) // assumes we want to 
 		text->replace(2*i+1, 1, QString::number(byte % 16, 16).toUpper());
 	}
 }
+#ifdef _MSC_VER
 #pragma warning ( pop )
-
+#endif
 
 void LoadHelperSInt(QSettings *settings, QString *errors, const char *s, int *toset)
 {
@@ -113,8 +118,10 @@ void LoadHelperUInt(QSettings *settings, QString *errors, const char *s, unsigne
   If key "s" doesn't exist, then appends error message to the QString pointed to by "errors" variable.
   You might want to select a setting group with settings->beginGroup first.
 */
+#ifdef _MSC_VER
 #pragma warning ( push )
 #pragma warning ( disable : 4146 )
+#endif
 void LoadHelperFlag(QSettings *settings, QString *errors, const char *s, unsigned int *toset, unsigned int flag)
 {
 	Q_ASSERT( flag == (flag & -flag) ); // bombs if our "flag" has more than 1 bit set
@@ -142,8 +149,9 @@ void LoadHelperMask(QSettings *settings, QString *errors, const char *s, unsigne
 	else
 		errors->append(s+knf);
 }
+#ifdef _MSC_VER
 #pragma warning ( pop )
-
+#endif
 /*
   Takes key "s" as a string, and searches for matching value in the first part of the pairs in the list "list".
   If a match is found, then assignes value of the second part of the found pair to the "toset" variable.

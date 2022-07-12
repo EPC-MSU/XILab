@@ -36,7 +36,7 @@ private:
 	int data_type;
 
 protected:
-	QwtText trackerText (const QwtDoublePoint &pos) const;
+	virtual QwtText trackerText (const QwtDoublePoint &pos) const;
 	virtual void widgetMouseMoveEvent(QMouseEvent *);
 };
 
