@@ -82,7 +82,7 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	pagepc->FromClassToUi();
 	((QGridLayout*)m_ui->settings_frame->layout())->addWidget(pagepc);
 
-	devicethread = new DeviceThread(this, new DeviceInterface(), dss);
+	devicethread = new DeviceThread(/*this,*/ new DeviceInterface(), dss);
 
 	qRegisterMetaType<QList<Qt::ItemFlags> >("QList<Qt::ItemFlags>");
 	qRegisterMetaType<QList<uint32_t> >("QList<uint32_t>");

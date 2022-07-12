@@ -37,7 +37,7 @@ void FloatSpinBox::setSuffix(QString _suffix)
 	this->setValue(value); // set old value with new suffix (see setValue)
 }
 
-QValidator::State FloatSpinBox::validate ( QString & text, int & pos ) const
+QValidator::State FloatSpinBox::validate ( QString & text/*, int & pos */) const
 {
 	bool ok;
 	QString t = text;

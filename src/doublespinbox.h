@@ -29,7 +29,7 @@ private:
 protected:
 	double valueFromText ( const QString & text ) const;
 	QString textFromValue ( double value ) const;
-	QValidator::State validate ( QString & text, int & pos ) const;
+	QValidator::State validate ( QString & text/*, int & pos*/ ) const;
 	QAbstractSpinBox::StepEnabled stepEnabled() const;
 	void fixup ( QString & input ) const;
 };

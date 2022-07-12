@@ -2,8 +2,9 @@
 #include <devicethread.h>
 #include <Timer.h>
 
-DeviceThread::DeviceThread(QObject *parent, DeviceInterface *_devinterface, DeviceSearchSettings* _dss)
+DeviceThread::DeviceThread(/*QObject *_parent,*/ DeviceInterface *_devinterface, DeviceSearchSettings* _dss)
 {
+	//parent = _parent;
 	devinterface = _devinterface;
 	dss = _dss;
 	wait_for_exit = false;
@@ -122,7 +123,7 @@ void DeviceThread::run()
 		std::vector<char*> deviceUrls;
 		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
-		if (dev_enum == NULL) {
+		if (dev_enum == /*NULL*/0) {
 			emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 			return;
 		}

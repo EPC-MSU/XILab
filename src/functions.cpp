@@ -78,7 +78,7 @@ void setUnsetBit(bool condition, unsigned int* toset, unsigned int flag)
 #endif
 void Base16to256(QString text, std::vector<uint8_t>* key) // assumes vector size is the length of data we read from the string
 {
-	for (int i=0; i<key->size(); i++) {
+	for (int i = 0; i<(int)key->size(); i++) {
 		key->at(i) = (text.mid(2*i,1).toInt(NULL,16) << 4) + (text.mid(2*i+1,1).toInt(NULL,16));
 	}
 }
@@ -86,7 +86,7 @@ void Base16to256(QString text, std::vector<uint8_t>* key) // assumes vector size
 void Base256to16(std::vector<uint8_t> key, QString* text) // assumes we want to write entire vector into the string
 {
 	text->clear();
-	for (int i=0; i<key.size(); i++) {
+	for (int i=0; i<(int)key.size(); i++) {
 		uint8_t byte = key.at(i);
 		text->replace(2*i, 1, QString::number(byte >> 4, 16).toUpper());
 		text->replace(2*i+1, 1, QString::number(byte % 16, 16).toUpper());

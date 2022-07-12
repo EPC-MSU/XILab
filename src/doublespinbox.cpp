@@ -36,7 +36,7 @@ void DoubleSpinBox::setSuffix(QString _suffix)
 	this->setValue(value); // set old value with new suffix (see setValue)
 }
 
-QValidator::State DoubleSpinBox::validate ( QString & text, int & pos ) const
+QValidator::State DoubleSpinBox::validate ( QString & text/*, int & pos*/ ) const
 {
 	bool ok;
 	QString t = text;

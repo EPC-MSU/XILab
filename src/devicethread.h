@@ -11,12 +11,13 @@ class DeviceThread: public QThread
 {
 	Q_OBJECT
 public:
-	DeviceThread(QObject *parent, DeviceInterface *_devinterface, DeviceSearchSettings* _dss);
+	DeviceThread(/*QObject *_parent,*/ DeviceInterface *_devinterface, DeviceSearchSettings* _dss);
 	~DeviceThread();
 
 	bool wait_for_exit;
 
 private:
+	//QObject *parent;
 	DeviceInterface *devinterface;
 	DeviceSearchSettings *dss;
 	QString getPortName(char *name);

@@ -20,7 +20,7 @@ private:
 	QScriptEngine *engine;
 
 public slots:
-	bool open();
+	virtual bool open();
 	void close();
 	qint64 size();
 	bool seek(qint64 pos);

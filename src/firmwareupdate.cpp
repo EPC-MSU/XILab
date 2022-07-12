@@ -3,7 +3,7 @@
 #include <firmwareupdate.h>
 #include <loggedfile.h>
 
-FirmwareUpdateThread::FirmwareUpdateThread(QObject *parent, UpdateThread *_updateThread, DeviceInterface *_devinterface)
+FirmwareUpdateThread::FirmwareUpdateThread(/*QObject *parent,*/ UpdateThread *_updateThread, DeviceInterface *_devinterface)
 {
 	devinterface = _devinterface;
 	updateThread = _updateThread;

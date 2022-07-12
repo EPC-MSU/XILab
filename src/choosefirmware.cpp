@@ -23,7 +23,7 @@ QDialog(parent,Qt::CustomizeWindowHint| Qt::WindowCloseButtonHint |Qt::MSWindows
     ui->setupUi(this);
     ui->treeWidget->header()->hide();
 	connect(ui->updateBtn_2,SIGNAL(clicked()),this,SLOT(checkClk()));
-    connect(ui->treeWidget,SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),this, SLOT(get_double_clk_item(QTreeWidgetItem*, int)));
+    connect(ui->treeWidget,SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),this, SLOT(get_double_clk_item(QTreeWidgetItem*/*, int*/)));
 	connect(ui->refreshBtn_2,SIGNAL(clicked()),this,SLOT(up_list()));
 	ui->statusLabel->setText("");
 }
@@ -154,7 +154,7 @@ void ChooseFirmware::fill_treeWdg(XMLElement* root_element, leaf_element_t *max_
 	}
 }
 
-void ChooseFirmware::get_double_clk_item(QTreeWidgetItem* Item, int col) {
+void ChooseFirmware::get_double_clk_item(QTreeWidgetItem* Item/*, int col*/) {
 	emit clicked(Item->data(URL_DATA_COLUMN, Qt::UserRole).toString(),
 		         Item->data(SHA_DATA_COLUMN, Qt::UserRole).toString());
 }

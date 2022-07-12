@@ -18,9 +18,9 @@ ChartLog::~ChartLog(void)
 	delete_list();	
 }
 
-void ChartLog::InsertMeasure(int number, QDateTime msrTime, measurement_t meas)
+void ChartLog::InsertMeasure(/*int number,*/ QDateTime msrTime, measurement_t meas)
 {
-	Q_ASSERT(number == 0);
+	Q_ASSERT(/*number == 0*/ true);
 	TList *temp;
 
 	if(list == NULL){

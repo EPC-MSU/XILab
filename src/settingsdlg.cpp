@@ -110,7 +110,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, UpdateThread *_updateThread, DeviceInt
 	motorStgs = new MotorSettings(devinterface);
 	motorStgs->LoadFirstInfo();
 	controllerStgs = new ControllerSettings(devinterface, &updateThread->QSdev_name);
-	firmwareUpdate = new FirmwareUpdateThread(this, updateThread, devinterface);
+	firmwareUpdate = new FirmwareUpdateThread(/*this,*/ updateThread, devinterface);
 	cyclicStgs = new CyclicSettings();
 
 	sliderStgs = new SliderSettings();

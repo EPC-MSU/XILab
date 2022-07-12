@@ -510,7 +510,7 @@ void ChartDlg::InsertMeasure()
 
 	//одиночное измерение
 	if(onceshot){
-		log->InsertMeasure(0, msrTime, meas);
+		log->InsertMeasure(/*0,*/ msrTime, meas);
 		setFileChanged();
 		onceshot = false;
 	}
@@ -529,7 +529,7 @@ void ChartDlg::InsertMeasure()
 	}
 
 	if(global_started && enabled && slider_enabled && !break_by_dataUpdate){
-		log->InsertMeasure(0, msrTime, meas);
+		log->InsertMeasure(/*0,*/ msrTime, meas);
 		setFileChanged();
 		stateLbl.setText(" run ");
 	}

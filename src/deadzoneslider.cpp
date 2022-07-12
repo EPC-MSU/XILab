@@ -8,24 +8,25 @@ DeadZoneSlider::DeadZoneSlider(Qt::Orientation orientation, QWidget *parent) : Q
 	setMaximum(fullrange);
 }
 
-void DeadZoneSlider::mouseMoveEvent(/*QMouseEvent *ev*/)
+void DeadZoneSlider::mouseMoveEvent(QMouseEvent *ev)
 {
 ;
 }
 
-void DeadZoneSlider::mousePressEvent(/*QMouseEvent *ev*/)
+void DeadZoneSlider::mousePressEvent(QMouseEvent *ev)
 {
 ;
 }
 
-void DeadZoneSlider::mouseReleaseEvent(/*QMouseEvent *ev*/)
+void DeadZoneSlider::mouseReleaseEvent(QMouseEvent *ev)
 {
 ;
 }
 
 void DeadZoneSlider::paintEvent(QPaintEvent *ev)
 {
-	int position = QStyle::sliderPositionFromValue(minimum(),
+	//int position = 
+	QStyle::sliderPositionFromValue(minimum(),
                                                    maximum(),
                                                    default_value_,
                                                    width());

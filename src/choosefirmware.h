@@ -26,7 +26,7 @@ public:
 
 public slots:
     void checkClk();
-	void get_double_clk_item(QTreeWidgetItem* Item, int col);
+	void get_double_clk_item(QTreeWidgetItem* Item/*, int col*/);
 	void up_list();
 	void showMessageAndClose(QString, bool, int dummy=0); // first parameter is the message to show, second parameter decides whether we should close, third parameter is a dummy
 signals:

@@ -42,7 +42,7 @@ public:
     ChartLog(QDateTime *base);
     ~ChartLog(void);
 
-    void InsertMeasure(int number, QDateTime msrTime, measurement_t meas);
+    void InsertMeasure(/*int number,*/ QDateTime msrTime, measurement_t meas);
 	void delete_list();
 	void cleanPositionSpeed();
 	int getDataSize(){ return sizeof(TList)-2*sizeof(int*); }

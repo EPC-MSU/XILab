@@ -16,7 +16,7 @@ class FirmwareUpdateThread: public QThread
 {
 	Q_OBJECT
 public:
-	FirmwareUpdateThread(QObject *parent, UpdateThread *_updateThread, DeviceInterface *_devinterface);
+	FirmwareUpdateThread(/*QObject *parent,*/ UpdateThread *_updateThread, DeviceInterface *_devinterface);
 	
 	QByteArray fw_data;
 
