@@ -1,6 +1,9 @@
 #include <math.h>
 #include <doublespinbox.h>
 
+// Устранение предупреждения.
+int currPos = 0;
+
 DoubleSpinBox::DoubleSpinBox(QWidget *parent):QAbstractSpinBox(parent)
 {
 	setRange(-DBL_MAX, DBL_MAX);
@@ -36,13 +39,18 @@ void DoubleSpinBox::setSuffix(QString _suffix)
 	this->setValue(value); // set old value with new suffix (see setValue)
 }
 
-QValidator::State DoubleSpinBox::validate ( QString & text/*, int & pos*/ ) const
+QValidator::State DoubleSpinBox::validate ( QString & text, int & pos ) const
 {
+	
 	bool ok;
 	QString t = text;
 	t.chop(suffix.length());
 	double tryconv = QLocale::system().toDouble(t, &ok);
 	QValidator::State state;
+
+	// Устранение предупреждения.
+	if (pos) currPos++;
+
 	if (ok)
 		if (textFromValue(tryconv) == text)
 			if (tryconv < min || tryconv > max)

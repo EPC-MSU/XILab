@@ -1,5 +1,7 @@
 #include <deadzoneslider.h>
 
+int position = 0;
+
 DeadZoneSlider::DeadZoneSlider(Qt::Orientation orientation, QWidget *parent) : QSlider(orientation, parent), default_value_(-1)
 {
 	connect(this, SIGNAL(valueChanged(int)), SLOT(VerifyDefaultValue(int)));
@@ -8,24 +10,29 @@ DeadZoneSlider::DeadZoneSlider(Qt::Orientation orientation, QWidget *parent) : Q
 	setMaximum(fullrange);
 }
 
-void DeadZoneSlider::mouseMoveEvent(/*QMouseEvent *ev*/)
+void DeadZoneSlider::mouseMoveEvent(QMouseEvent *ev)
 {
+	//Устранение предупреждения.
+	if (ev->isAccepted()) position++;
 ;
 }
 
-void DeadZoneSlider::mousePressEvent(/*QMouseEvent *ev*/)
+void DeadZoneSlider::mousePressEvent(QMouseEvent *ev)
 {
+	//Устранение предупреждения.
+	if (ev->isAccepted()) position++;
 ;
 }
 
-void DeadZoneSlider::mouseReleaseEvent(/*QMouseEvent *ev*/)
+void DeadZoneSlider::mouseReleaseEvent(QMouseEvent *ev)
 {
+	//Устранение предупреждения.
+	if (ev->isAccepted()) position++;
 ;
 }
 
 void DeadZoneSlider::paintEvent(QPaintEvent *ev)
 {
-	//int position = 
 	QStyle::sliderPositionFromValue(minimum(),
                                                    maximum(),
                                                    default_value_,
