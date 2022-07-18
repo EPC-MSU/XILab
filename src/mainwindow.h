@@ -254,7 +254,7 @@ public slots:
 
 	void OnGoHomeBtnPressed();
 	void stopByCancel();
-    void OnZeroBtnPressed(QString side = "");
+    void OnZeroBtnPressed(/*QString side = ""*/);
 	void OnClearLogBtnPressed();
 	void OnSaveLogBtnPressed();
     void OnExitBtnPressed();

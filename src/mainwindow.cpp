@@ -684,8 +684,6 @@ void MainWindow::UpdateLogTable()
 		message_old.truncate(inddupl);
 	}
 	
-	
-	int counter_all = 0;
 
 	while (mlog->pop(&next_item) && (tick2 - tick1 < 50) ) { // gathers data for 50ms max (out of 100ms limit for a single update)
 		tick2 = t.getElapsedTimeInMilliSec();
@@ -1344,8 +1342,8 @@ void MainWindow::UpdateState()
 		break;
 	case 3:
 		settingsDlg->uuStgs->messageType = 0;
-		QMessageBox::StandardButton reply1;
-		reply1 = QMessageBox::warning(this, "", settingsDlg->uuStgs->messageText,
+		/*QMessageBox::StandardButton reply1;*/
+		/*reply1 = */QMessageBox::warning(this, "", settingsDlg->uuStgs->messageText,
 			QMessageBox::Ok);		
 		break;
 	case 2:
@@ -1449,6 +1447,9 @@ void MainWindow::AttenuatorMotion()
 			attenuator->setCalibrationStatus(Calibration::NO_CALIBRATION);
 			attenuator->resetAllBut();
 			infoBox.close();
+			break;
+		case WAIT_MOVE1:
+		case CONTINUE_CALIBRATE:
 			break;
 	}
 }
@@ -1835,7 +1836,7 @@ void MainWindow::OnPIDCalibratorShow()
 	cyclic = false;
 }
 
-void MainWindow::OnZeroBtnPressed(QString side)
+void MainWindow::OnZeroBtnPressed(/*QString side*/)
 {
 	devinterface->command_zero();
 	attenuator->setCalibrationStatus(Calibration::NO_CALIBRATION);
