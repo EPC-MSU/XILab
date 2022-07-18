@@ -47,7 +47,7 @@ void CounterStepSpinBoxSetter::setStepFactorAll(unsigned int sn, bool permanent,
 }
 
 
-StepSpinBoxItem::StepSpinBoxItem(/*QWidget *parent*/):QDoubleSpinBox(/*parent*/)
+StepSpinBoxItem::StepSpinBoxItem(QWidget *parent):QDoubleSpinBox(parent)
 {
 	show_style = STYLE_NONE; // default show style
 	precision = 0; // goes with STYLE_INT
