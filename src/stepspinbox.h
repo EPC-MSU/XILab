@@ -18,7 +18,7 @@ class StepSpinBoxItem: public QDoubleSpinBox
 {
 	friend class CounterStepSpinBoxSetter;
 public:
-	StepSpinBoxItem(QWidget *parent = NULL);
+	StepSpinBoxItem(/*QWidget *parent = NULL*/);
 	virtual ~StepSpinBoxItem();
 
 	void setStep(int step);

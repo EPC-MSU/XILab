@@ -8,17 +8,17 @@ DeadZoneSlider::DeadZoneSlider(Qt::Orientation orientation, QWidget *parent) : Q
 	setMaximum(fullrange);
 }
 
-void DeadZoneSlider::mouseMoveEvent(QMouseEvent *ev)
+void DeadZoneSlider::mouseMoveEvent(/*QMouseEvent *ev*/)
 {
 ;
 }
 
-void DeadZoneSlider::mousePressEvent(QMouseEvent *ev)
+void DeadZoneSlider::mousePressEvent(/*QMouseEvent *ev*/)
 {
 ;
 }
 
-void DeadZoneSlider::mouseReleaseEvent(QMouseEvent *ev)
+void DeadZoneSlider::mouseReleaseEvent(/*QMouseEvent *ev*/)
 {
 ;
 }

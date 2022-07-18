@@ -10,9 +10,9 @@ public:
 
 protected:
 	void paintEvent(QPaintEvent *ev);
-	void mouseMoveEvent(QMouseEvent *ev);
-	void mousePressEvent(QMouseEvent *ev);
-	void mouseReleaseEvent(QMouseEvent *ev);
+	void mouseMoveEvent(/*QMouseEvent *ev*/);
+	void mousePressEvent(/*QMouseEvent *ev*/);
+	void mouseReleaseEvent(/*QMouseEvent *ev*/);
 
 private slots:
 	void VerifyDefaultValue(int value);
