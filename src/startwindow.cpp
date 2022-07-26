@@ -109,8 +109,8 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	connect(&timer1, SIGNAL(timeout()), this, SLOT(timer1Full()), Qt::DirectConnection);
 	connect(&timer2, SIGNAL(timeout()), this, SLOT(timer2Full()), Qt::DirectConnection);
 
-	QSize leftsize = m_ui->devices_frame->sizeHint();
-	QSize rightsize = m_ui->settings_frame->sizeHint();
+	//QSize leftsize = m_ui->devices_frame->sizeHint();
+	//QSize rightsize = m_ui->settings_frame->sizeHint();
 
 	this->loadWindowGeometry(MakeProgramConfigFilename());
 	inited = true;
@@ -283,7 +283,7 @@ void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringLis
 		}
 
 		for (unsigned int i = 0; i<dss->Virtual_devices; i++){
-			QListWidgetItem* item = new QListWidgetItem();
+			//QListWidgetItem* item = new QListWidgetItem();
 
 			QString url = QString("xi-emu:///%1?serial=%2").arg(VirtualControllerBlobFilename(i + 1)).arg(i + 1);
 			QString serial = QString::number(i + 1);
@@ -388,7 +388,7 @@ void StartWindow::selectBtnClicked()
 
 		QString sn_str;
 		QList<uint32_t> sorted_serials;
-		int l = 0;
+		//int l = 0;
 
 		QModelIndexList list = m_ui->deviceListTable->selectionModel()->selectedRows();
 		QModelIndexList::iterator i;
@@ -479,7 +479,7 @@ void StartWindow::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-		QRect p = this->geometry();
+		//QRect p = this->geometry();
 		lastPoint = event->pos();      
         b_move = true;
     }
