@@ -72,7 +72,7 @@ private slots:
 	void showProgress();
 	void hideProgress();
 	void hideProgressHelper();
-	void slotError(QNetworkReply::NetworkError);
+	void slotError(/*QNetworkReply::NetworkError*/);
 	void OnUpdateFirmwareInternetBtnClicked();
 	void CallChooseFirmDlg();
 	void updateChooseFirmware(QString, QString);

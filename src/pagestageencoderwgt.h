@@ -24,7 +24,7 @@ public slots:
 	void SetDisabled(bool set);
 private slots:
 	void OnDiffOutChanged(int index);
-	void OnPushOutChanged(int index);
+	void OnPushOutChanged(/*int index*/);
 };
 
 #endif // PAGESTAGEENCWGT_H

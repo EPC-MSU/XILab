@@ -46,7 +46,7 @@ void PageDCMotorWgt::emitOnRadio()
 	}
 }
 
-void PageDCMotorWgt::showEvent(QShowEvent *se)
+void PageDCMotorWgt::showEvent(/*QShowEvent *se*/)
 {
 	emitOnRadio();
 }

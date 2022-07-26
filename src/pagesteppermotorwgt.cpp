@@ -87,7 +87,7 @@ unsigned int PageStepperMotorWgt::OnRadio()
 	return 0;
 }
 
-void PageStepperMotorWgt::showEvent(QShowEvent *se)
+void PageStepperMotorWgt::showEvent(/*QShowEvent *se*/)
 {
 	emitOnRadio();
 }

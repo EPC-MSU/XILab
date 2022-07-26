@@ -124,7 +124,7 @@ void PageStageEncoderWgt::OnDiffOutChanged(int index)
 	m_ui->encSetDifferentialOutput->setCurrentIndex(stageStgs->encoder_settings.EncoderSettings & ENCSET_DIFFERENTIAL_OUTPUT);
 }
 
-void PageStageEncoderWgt::OnPushOutChanged(int index)
+void PageStageEncoderWgt::OnPushOutChanged(/*int index*/)
 {
 	m_ui->encSetPushpullOutput->setCurrentIndex(stageStgs->encoder_settings.EncoderSettings & ENCSET_PUSHPULL_OUTPUT);
 }

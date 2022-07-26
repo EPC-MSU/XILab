@@ -388,7 +388,7 @@ void PageAboutDeviceWgt::hideProgressHelper()
 }
 
 
-void PageAboutDeviceWgt::slotError(QNetworkReply::NetworkError error)
+void PageAboutDeviceWgt::slotError(/*QNetworkReply::NetworkError error*/)
 {
 	disconnect(reply);
 	emit errorInLog("Error downloading firmware: cannot connect to the update server.", SOURCE_XILAB, LOGLEVEL_ERROR);

@@ -26,8 +26,8 @@ signals:
 	void exceptionThrown(QScriptValue exception);
 
 protected:
-	void positionChange(qint64 scriptId, int lineNumber, int columnNumber);
-	void exceptionThrow(qint64 scriptId, const QScriptValue & exception, bool hasHandler);
+	void positionChange(/*qint64 scriptId,*/ int lineNumber/*, int columnNumber*/);
+	void exceptionThrow(/*qint64 scriptId, */const QScriptValue & exception/*, bool hasHandler*/);
 };
 
 #endif // SCRIPTAGENT_H

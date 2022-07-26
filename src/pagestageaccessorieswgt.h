@@ -23,7 +23,7 @@ private:
 public slots:
 	void SetDisabled(bool set);
 private slots:
-	void OnTSTypeChanged(int index);
+	void OnTSTypeChanged(/*int index*/);
 };
 
 #endif // PAGESTAGEACCWGT_H

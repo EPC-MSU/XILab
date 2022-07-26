@@ -130,7 +130,7 @@ QString PageIntrfSettingsWgt::FromSettingsToUi(QSettings *settings, QSettings *d
 		ui->Wheel2Box->setEnabled(true);
 	}
 
-    int waveNumBut = 0;
+   // int waveNumBut = 0;
 
     for (int i = 0;i != FILTER_COUNT; i++) {
         QString valueTransmTitle1 = "Wheel_1Transmittance_" + QString::number(i+1);

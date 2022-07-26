@@ -140,7 +140,7 @@ void PageStageAccessoriesWgt::FromUiToClass(StageSettings *lsStgs)
 	setUnsetBit(m_ui->lsShortedCheck->isChecked(), &lsStgs->accessories_settings.LimitSwitchesSettings, LS_SHORTED);
 }
 
-void PageStageAccessoriesWgt::OnTSTypeChanged(int index)
+void PageStageAccessoriesWgt::OnTSTypeChanged(/*int index*/)
 {
 	m_ui->tsTypeCombo->setCurrentIndex((stageStgs->accessories_settings.TSSettings & TS_TYPE_BITS) - 1);
 }

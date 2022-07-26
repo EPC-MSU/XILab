@@ -14,11 +14,11 @@ ScriptAgent::~ScriptAgent()
 	disconnect(this, SLOT(update()));
 }
 
-void ScriptAgent::positionChange (qint64 scriptId, int lineNumber, int columnNumber) {
+void ScriptAgent::positionChange (/*qint64 scriptId,*/ int lineNumber/*, int columnNumber*/) {
 	line = lineNumber;
 }
 
-void ScriptAgent::exceptionThrow (qint64 scriptId, const QScriptValue & exception, bool hasHandler) { 
+void ScriptAgent::exceptionThrow (/*qint64 scriptId,*/ const QScriptValue & exception/*, bool hasHandler*/) { 
 	emit exceptionThrown(exception);
 }
 
