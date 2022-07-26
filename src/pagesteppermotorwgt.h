@@ -29,7 +29,7 @@ public:
 
 protected:
     virtual void changeEvent(QEvent *e);
-	virtual void showEvent(/*QShowEvent *e*/);
+	virtual void showEvent(QShowEvent *e);
 
 private:
     Ui::PageStepperMotorWgtClass *m_ui;
