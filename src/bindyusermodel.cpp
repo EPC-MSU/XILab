@@ -2,11 +2,13 @@
 
 int BindyUserModel::rowCount(const QModelIndex &parent) const
 {
+	if (parent.isValid()) elimination_warnings;
 	return static_cast<int>(users.size());
 }
 
 int BindyUserModel::columnCount(const QModelIndex &parent) const
 {
+	if (parent.isValid()) elimination_warnings;
 	return 3;
 }
 

@@ -15,12 +15,12 @@ ScriptAgent::~ScriptAgent()
 }
 
 void ScriptAgent::positionChange (qint64 scriptId, int lineNumber, int columnNumber) {
-	elimination_warnings = scriptId && columnNumber;
+	elimination_warnings = scriptId && columnNumber; //Для устранения предупреждений
 	line = lineNumber;
 }
 
 void ScriptAgent::exceptionThrow (qint64 scriptId, const QScriptValue & exception, bool hasHandler) { 
-	elimination_warnings = scriptId && 1;
+	elimination_warnings = scriptId && hasHandler; //Для устранения предупреждений
 	emit exceptionThrown(exception);
 }
 
