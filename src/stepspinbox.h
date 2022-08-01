@@ -111,9 +111,12 @@ public:
 
 class StepSpinBox: public StepSpinBoxItem, public CounterStepSpinBoxSetter
 {
+private:
+int elimination_warnings; //Для устранения предупреждений
 public:
 	StepSpinBox(QWidget* parent = NULL)
 	{
+		if (parent == NULL) elimination_warnings++;//Для устранения предупреждений
 		setSerial(0);
 	}
 };
