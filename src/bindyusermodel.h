@@ -16,7 +16,7 @@ public:
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 private:
-	bool elimination_warnings; //Для устранения предупреждений
+	//bool elimination_warnings; //Для устранения предупреждений
 	bindy::user_vector_t users;
 };
 
