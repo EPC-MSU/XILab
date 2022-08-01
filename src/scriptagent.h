@@ -17,6 +17,7 @@ public:
 private:
 	QTimer *timer;
 	int line, prev_line;
+	int elimination_warnings; //Для устранения предупреждений
 
 private slots:
 	void update();
@@ -26,8 +27,8 @@ signals:
 	void exceptionThrown(QScriptValue exception);
 
 protected:
-	void positionChange(/*qint64 scriptId,*/ int lineNumber/*, int columnNumber*/);
-	void exceptionThrow(/*qint64 scriptId, */const QScriptValue & exception/*, bool hasHandler*/);
+	void positionChange(qint64 scriptId, int lineNumber, int columnNumber);
+	void exceptionThrow(qint64 scriptId, const QScriptValue & exception, bool hasHandler);
 };
 
 #endif // SCRIPTAGENT_H
