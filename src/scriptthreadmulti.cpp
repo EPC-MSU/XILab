@@ -53,9 +53,13 @@ QScriptValue toScriptValueM(QScriptEngine *engine, const status_calb_t &s) {
 }
 
 void fromScriptValueM(const QScriptValue &obj, status_t &s) {
+	Q_UNUSED(obj)
+	Q_UNUSED(s)
 }
 
 void fromScriptValueM(const QScriptValue &obj, status_calb_t &s) {
+	Q_UNUSED(obj)
+	Q_UNUSED(s)
 }
 
 #include <qtscript-fromscript.c>
@@ -67,6 +71,7 @@ extern QObject* p_mainWnd;
 
 static QScriptValue mwait(QScriptContext *context, QScriptEngine *engine)
 {
+	Q_UNUSED(engine)
 	int ms = context->argument(0).toNumber();
 	((ScriptThreadMulti*)p_scriptThread)->snore(ms);
 	return QScriptValue::NullValue;
@@ -96,6 +101,7 @@ static QScriptValue newaxis(QScriptContext *context, QScriptEngine *engine)
 
 static QScriptValue get_next_serial(QScriptContext *context, QScriptEngine *engine)
 {
+	Q_UNUSED(engine)
 	if (context->argumentCount() > 1)
 		return QScriptValue::NullValue;
 	unsigned int sn = context->argument(0).toNumber();
@@ -134,6 +140,7 @@ static QScriptValue new_file(QScriptContext *context, QScriptEngine *engine)
 
 static QScriptValue script_log(QScriptContext *context, QScriptEngine *engine)
 {
+	Q_UNUSED(engine)
 	int loglevel;
 	if (context->argumentCount() > 1) {
 		loglevel = context->argument(1).toInteger();

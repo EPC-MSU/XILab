@@ -179,6 +179,7 @@ void SettingsDlg::closeEvent(QCloseEvent *e)
 
 void SettingsDlg::hideEvent(QHideEvent *e)
 {
+	Q_UNUSED(e)
 	devinterface->cs->setAnalogEnabled(false);
 }
 
@@ -267,7 +268,7 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 			treeWgtsLst[i]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 		}
 		int entype = motorStgs->entype.EngineType;
-		int feedback = motorStgs->feedback.FeedbackType;
+		//int feedback = motorStgs->feedback.FeedbackType;
 		// Disable all unused engine type pages and switch away if needed
 		motorTypeChanged(entype);
 		if(entype == ENGINE_TYPE_STEP){
@@ -442,7 +443,7 @@ void SettingsDlg::AllPagesFromUiToClassToDevice()
 	((PageGraphWgt*)pageWgtsLst[PageGraphTempNum])->FromUiToClass();
 	((PageGraphWgt*)pageWgtsLst[PageGraphJoyNum])->FromUiToClass();
 	((PageGraphWgt*)pageWgtsLst[PageGraphPotNum])->FromUiToClass();
-	clock_t t2 = clock() - t1;
+	//clock_t t2 = clock() - t1;
 
 	CheckForChanges();
 
@@ -1373,9 +1374,9 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 	
 	filename = QFileDialog::getOpenFileName(this, tr("Open config file"), load_path, tr("Config files (*.cfg);;All files (*.*)"));
 	
-	bool err_vers = !CheckCompatibility(QString(XILAB_VERSION), controllerStgs->firmware_version);
-	bool err_path = !filename.contains(load_path, Qt::CaseInsensitive);
-	int ret_messg = QMessageBox::Ok;
+	//bool err_vers = !CheckCompatibility(QString(XILAB_VERSION), controllerStgs->firmware_version);
+	//bool err_path = !filename.contains(load_path, Qt::CaseInsensitive);
+	/*int ret_messg = */QMessageBox::Ok;
 
 	if (!filename.isEmpty()) {
 		
@@ -1686,6 +1687,7 @@ void SettingsDlg::OnChangeFrac(unsigned int value)
 
 void SettingsDlg::OnNetResult(QString text, bool flag, int loglevel)
 {
+	Q_UNUSED(flag)
 	emit SgnLog(text, SOURCE_XILAB, loglevel);
 }
 

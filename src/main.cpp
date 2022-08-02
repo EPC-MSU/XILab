@@ -279,7 +279,7 @@ do {
 		((Multiaxis*)p_mainWnd)->show(); // although (QObject*) would do just fine
 	}
 
-	int result;
+	int result = 0;
 	try {
 		result = app.exec();
 	} catch (critical_exception &e) {

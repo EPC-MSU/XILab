@@ -754,7 +754,7 @@ void Multiaxis::UpdateState() {
 	}
 	
 	const int cutoff = 1000; // cutoff point is 100 seconds at 1 update/100 ms or 1000 points.
-	if (points.size() > cutoff) { // truncate arrays if they become too large
+	if (points.size() > (int)cutoff) { // truncate arrays if they become too large
 		points.pop_back();
 	}
 

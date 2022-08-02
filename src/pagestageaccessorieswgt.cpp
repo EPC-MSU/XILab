@@ -142,5 +142,6 @@ void PageStageAccessoriesWgt::FromUiToClass(StageSettings *lsStgs)
 
 void PageStageAccessoriesWgt::OnTSTypeChanged(int index)
 {
+	Q_UNUSED(index)
 	m_ui->tsTypeCombo->setCurrentIndex((stageStgs->accessories_settings.TSSettings & TS_TYPE_BITS) - 1);
 }

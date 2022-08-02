@@ -121,10 +121,12 @@ void PageStageEncoderWgt::FromUiToClass(StageSettings *lsStgs)
 
 void PageStageEncoderWgt::OnDiffOutChanged(int index)
 {
+	Q_UNUSED(index)
 	m_ui->encSetDifferentialOutput->setCurrentIndex(stageStgs->encoder_settings.EncoderSettings & ENCSET_DIFFERENTIAL_OUTPUT);
 }
 
 void PageStageEncoderWgt::OnPushOutChanged(int index)
 {
+	Q_UNUSED(index)
 	m_ui->encSetPushpullOutput->setCurrentIndex(stageStgs->encoder_settings.EncoderSettings & ENCSET_PUSHPULL_OUTPUT);
 }

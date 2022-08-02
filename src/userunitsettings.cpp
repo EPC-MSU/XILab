@@ -55,6 +55,7 @@ QString UserUnitSettings::getOffSuffix(UnitType unit_type, int fbtype)
 
 QString UserUnitSettings::getOnSuffix(UnitType unit_type, int fbtype)
 {
+	Q_UNUSED(fbtype)
 	QString s;
 
 	switch (unit_type) {

@@ -15,6 +15,7 @@ const int REBOOT_TWONODEVICE_MSECS = 20000; // max time between two "no device" 
 
 UpdateThread::UpdateThread(int _number, QObject *parent, char* dev_name, DeviceInterface *_devinterface)
 {
+	Q_UNUSED(parent)
 	number = _number;
 	devinterface = _devinterface;
 	wait_for_exit = false;

@@ -245,11 +245,13 @@ PIDCalibratorWgt::~PIDCalibratorWgt()
 
 void PIDCalibratorWgt::closeEvent(QCloseEvent *event)
 {
+	Q_UNUSED(event)
 	this->onStop();
 }
 
 void PIDCalibratorWgt::showEvent(QShowEvent *event)
 {
+	Q_UNUSED(event)
 	this->loadSettings();
 }
 

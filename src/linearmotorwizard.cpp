@@ -2,6 +2,7 @@
 
 LinearMotorWizardDlg::LinearMotorWizardDlg(QWidget *parent)
 {
+	Q_UNUSED(parent)
 	ui.setupUi(this);
 
 	QObject::connect((this->ui.okBtn), SIGNAL(clicked()), this, SLOT(CalculateSettings()));
