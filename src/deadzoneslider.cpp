@@ -10,25 +10,30 @@ DeadZoneSlider::DeadZoneSlider(Qt::Orientation orientation, QWidget *parent) : Q
 
 void DeadZoneSlider::mouseMoveEvent(QMouseEvent *ev)
 {
+	Q_UNUSED(ev)
 ;
 }
 
 void DeadZoneSlider::mousePressEvent(QMouseEvent *ev)
 {
+	Q_UNUSED(ev)
 ;
 }
 
 void DeadZoneSlider::mouseReleaseEvent(QMouseEvent *ev)
 {
+	Q_UNUSED(ev)
 ;
 }
 
 void DeadZoneSlider::paintEvent(QPaintEvent *ev)
 {
-	int position = QStyle::sliderPositionFromValue(minimum(),
+	int position = 
+		QStyle::sliderPositionFromValue(minimum(),
                                                    maximum(),
                                                    default_value_,
                                                    width());
+	Q_UNUSED(position)
 	QPainter painter(this);
 	painter.setPen(QPen(QColor(128,128,128)));
 

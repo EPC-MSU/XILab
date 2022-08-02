@@ -2,11 +2,13 @@
 
 int BindyUserModel::rowCount(const QModelIndex &parent) const
 {
+	Q_UNUSED(parent)
 	return static_cast<int>(users.size());
 }
 
 int BindyUserModel::columnCount(const QModelIndex &parent) const
 {
+	Q_UNUSED(parent)
 	return 3;
 }
 

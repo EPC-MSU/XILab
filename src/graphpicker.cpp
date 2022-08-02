@@ -37,7 +37,7 @@ QwtText myPicker::trackerText (const QwtDoublePoint &pos) const
 
 	QwtText ret;
 
-	clock_t t1 = clock();
+	//clock_t t1 = clock();
 
 	//заливка бэкграунда мягким цветом графика
 	QColor color(parent->getCurve()->pen().color());
@@ -95,7 +95,7 @@ QwtText myPicker::trackerText (const QwtDoublePoint &pos) const
 		marker->setXValue(parent->getCurve()->sample(i).x());
 		marker->setYValue(parent->getCurve()->sample(i).y());
 		marker->setVisible(true);
-		double data, udata;
+		double data = 0.0, udata;
 		if(data_type >= 0 && curr->step_factor > 1){	//в полношаговом режиме фактор не отображается
 			if(data_type == POSNUM){
 				data = curr->position;

@@ -5,6 +5,7 @@
 
 FirmwareUpdateThread::FirmwareUpdateThread(QObject *parent, UpdateThread *_updateThread, DeviceInterface *_devinterface)
 {
+	Q_UNUSED(parent)
 	devinterface = _devinterface;
 	updateThread = _updateThread;
 	safe_copy(this->device_name, updateThread->device_name);

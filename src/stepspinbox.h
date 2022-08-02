@@ -114,6 +114,7 @@ class StepSpinBox: public StepSpinBoxItem, public CounterStepSpinBoxSetter
 public:
 	StepSpinBox(QWidget* parent = NULL)
 	{
+		Q_UNUSED(parent)
 		setSerial(0);
 	}
 };

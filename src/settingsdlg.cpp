@@ -1260,7 +1260,7 @@ void SettingsDlg::OnSaveFileBtnClicked()
 		AllPagesFromUiToSettings(&settings);
 		MotorSettings tmpStgs = *motorStgs;
 		FromUiToClass(&tmpStgs);
-		tmpStgs.FromClassToSettings(&settings, getCurrentMotorType());
+		tmpStgs.FromClassToSettings(&settings/*, getCurrentMotorType()*/);
 #ifdef SERVICEMODE
 		StageSettings tspStgs = *stageStgs;
 		FromUiToClass(&tspStgs);

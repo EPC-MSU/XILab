@@ -685,7 +685,7 @@ void MainWindow::UpdateLogTable()
 	}
 	
 	
-	int counter_all = 0;
+	//int counter_all = 0;
 
 	while (mlog->pop(&next_item) && (tick2 - tick1 < 50) ) { // gathers data for 50ms max (out of 100ms limit for a single update)
 		tick2 = t.getElapsedTimeInMilliSec();
@@ -1450,6 +1450,9 @@ void MainWindow::AttenuatorMotion()
 			attenuator->resetAllBut();
 			infoBox.close();
 			break;
+		case WAIT_MOVE1:
+		case CONTINUE_CALIBRATE:
+			break;
 	}
 }
 
@@ -1837,6 +1840,7 @@ void MainWindow::OnPIDCalibratorShow()
 
 void MainWindow::OnZeroBtnPressed(QString side)
 {
+	Q_UNUSED(side)
 	devinterface->command_zero();
 	attenuator->setCalibrationStatus(Calibration::NO_CALIBRATION);
 }
@@ -2172,6 +2176,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent* event)
 
 bool MainWindow::eventFilter(QObject *object, QEvent *e)
 {
+	Q_UNUSED(object)
 	if (e->type() == QEvent::WindowActivate) {
 		if (settingsDlg->isVisible())
 			settingsDlg->raise();

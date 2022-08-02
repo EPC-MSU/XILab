@@ -39,6 +39,7 @@ void FloatSpinBox::setSuffix(QString _suffix)
 
 QValidator::State FloatSpinBox::validate ( QString & text, int & pos ) const
 {
+	Q_UNUSED(pos)
 	bool ok;
 	QString t = text;
 	t.chop(suffix.length());

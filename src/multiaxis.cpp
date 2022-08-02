@@ -37,11 +37,13 @@ void HiddenWidget::clearlist() {
 	clients.clear();
 }
 void HiddenWidget::focusOutEvent(QFocusEvent* event) {
+	Q_UNUSED(event)
 	foreach (QwtPlot* item, clients) {
 		item->setCanvasBackground(QColor(255,255,255));
 	}
 }
 void HiddenWidget::focusInEvent(QFocusEvent* event) {
+	Q_UNUSED(event)
 	foreach (QwtPlot* item, clients) {
 		item->setCanvasBackground(QColor(224,255,224)); // light green
 	}
@@ -423,7 +425,7 @@ void Multiaxis::UpdateLogTable()
 	}
 
 
-	int counter_all = 0;
+	//int counter_all = 0;
 
 	while (mlog->pop(&next_item) && (tick2 - tick1 < 50) ) { // gathers data for 50ms max (out of 100ms limit for a single update)
 		tick2 = t.getElapsedTimeInMilliSec();
@@ -553,10 +555,10 @@ void Multiaxis::UpdateState() {
 	for (int e=0; e<devcount; e++) {
 		int i = translate(e);
 
-		bool recalc_enabled = settingsDlgs.at(i)->uuStgs->enable;
+		//bool recalc_enabled = settingsDlgs.at(i)->uuStgs->enable;
 		QString units = settingsDlgs.at(i)->uuStgs->unitName;
-		double coeff = settingsDlgs.at(i)->uuStgs->getUnitPerStep();
-		int precision = settingsDlgs.at(i)->uuStgs->precision;
+		//double coeff = settingsDlgs.at(i)->uuStgs->getUnitPerStep();
+		//int precision = settingsDlgs.at(i)->uuStgs->precision;
 
 		QPen pen = mark.at(i)->linePen();
 		if (devinterfaces.at(i)->cs->connect() == false && noDevice[i] == false) {

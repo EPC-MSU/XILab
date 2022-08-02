@@ -36,6 +36,7 @@ private:
 	int data_type;
 
 protected:
+	using QwtPlotPicker::trackerText;
 	QwtText trackerText (const QwtDoublePoint &pos) const;
 	virtual void widgetMouseMoveEvent(QMouseEvent *);
 };
