@@ -854,8 +854,8 @@ void Multiaxis::UpdateState() {
 			break;
 		case 3:
 			settingsDlgs.at(i)->uuStgs->messageType = 0;
-			QMessageBox::StandardButton reply1;
-			reply1 = QMessageBox::warning(this, groupBoxs.at(i)->title(), settingsDlgs.at(i)->uuStgs->messageText,
+			//QMessageBox::StandardButton reply1;
+			/*reply1 = */QMessageBox::warning(this, groupBoxs.at(i)->title(), settingsDlgs.at(i)->uuStgs->messageText,
 				QMessageBox::Ok);
 
 			break;

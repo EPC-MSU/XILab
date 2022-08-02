@@ -84,7 +84,7 @@ void PageProgramConfigWgt::DetectHosts()
 
 	libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 	tmp_enum = libximc::enumerate_devices(ENUMERATE_PROBE | ENUMERATE_NETWORK, "addr=");
-	if (tmp_enum == NULL) {
+	if (tmp_enum == 0/*NULL*/) {
 		displayStatus("Failure in enumerate_devices.");
 		return;
 	}
@@ -449,7 +449,7 @@ namepair_t askForNameKey()
 	QAbstractButton *okBtn = msgBox.button(QMessageBox::Ok);
 	QLineEdit *line = new QLineEdit();
 	msgBox.layout()->addWidget(line);
-	int ret = msgBox.exec();
+	/*int ret = */msgBox.exec();
 	msgBox.layout()->removeWidget(line);
 	result.name = line->text().toStdString();
 	int keylen = sizeof(result.key);

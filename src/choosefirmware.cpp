@@ -175,7 +175,7 @@ void ChooseFirmware::checkClk(){
 }
 
 void ChooseFirmware::showMessageAndClose(QString message, bool shouldClose, int dummy) {
-	(void*)dummy;
+	//(void*)dummy;
 	Q_UNUSED(dummy)
 	ui->statusLabel->setText(message);
 	if (shouldClose) {

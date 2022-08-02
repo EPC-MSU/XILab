@@ -44,7 +44,7 @@ void PageAboutWgt::OnRemoveAllConfigsBtnClicked()
 	msgBox.setDefaultButton(QMessageBox::Cancel);
 
 	QAbstractButton *okBtn = msgBox.button(QMessageBox::Ok);
-	int ret = msgBox.exec();
+	/*int ret =*/ msgBox.exec();
 
 	if (msgBox.clickedButton() == okBtn) {
 		// removes settings.ini

@@ -19,7 +19,7 @@ void ColorButton::paintEvent(QPaintEvent *paint)
 	
 	p.setPen(Qt::gray);
 	p.setBrush(QBrush(BkColor));
-	int width = p.viewport().width();
+	//int width = p.viewport().width();
 	int height = p.viewport().height();
 	p.drawRect(height/4, height/4, height*2, height*2/4);
 

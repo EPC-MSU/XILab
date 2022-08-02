@@ -1344,8 +1344,8 @@ void MainWindow::UpdateState()
 		break;
 	case 3:
 		settingsDlg->uuStgs->messageType = 0;
-		QMessageBox::StandardButton reply1;
-		reply1 = QMessageBox::warning(this, "", settingsDlg->uuStgs->messageText,
+		//QMessageBox::StandardButton reply1;
+		/*reply1 =*/ QMessageBox::warning(this, "", settingsDlg->uuStgs->messageText,
 			QMessageBox::Ok);		
 		break;
 	case 2:

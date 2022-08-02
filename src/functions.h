@@ -117,7 +117,7 @@ bool operator==(const accessories_settings_t& l, const accessories_settings_t& r
 
 #define safe_copy(DST,SRC) {\
 	strncpy(DST,SRC,sizeof DST - 1);\
-	DST[sizeof DST] = '\0';\
+	DST[sizeof DST - 1] = '\0';\
 }
 
 bool isSpeedUnitRotation(int feedbacktype);
