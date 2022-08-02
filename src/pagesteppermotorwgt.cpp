@@ -89,6 +89,7 @@ unsigned int PageStepperMotorWgt::OnRadio()
 
 void PageStepperMotorWgt::showEvent(QShowEvent *se)
 {
+	Q_UNUSED(se)
 	emitOnRadio();
 }
 

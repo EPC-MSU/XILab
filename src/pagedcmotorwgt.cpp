@@ -48,6 +48,7 @@ void PageDCMotorWgt::emitOnRadio()
 
 void PageDCMotorWgt::showEvent(QShowEvent *se)
 {
+	Q_UNUSED(se)
 	emitOnRadio();
 }
 

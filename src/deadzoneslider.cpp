@@ -1,6 +1,5 @@
 #include <deadzoneslider.h>
 
-int position = 0;
 
 DeadZoneSlider::DeadZoneSlider(Qt::Orientation orientation, QWidget *parent) : QSlider(orientation, parent), default_value_(-1)
 {
@@ -12,22 +11,19 @@ DeadZoneSlider::DeadZoneSlider(Qt::Orientation orientation, QWidget *parent) : Q
 
 void DeadZoneSlider::mouseMoveEvent(QMouseEvent *ev)
 {
-	//Устранение предупреждения.
-	if (ev->isAccepted()) position++;
+	Q_UNUSED(ev)
 ;
 }
 
 void DeadZoneSlider::mousePressEvent(QMouseEvent *ev)
 {
-	//Устранение предупреждения.
-	if (ev->isAccepted()) position++;
+	Q_UNUSED(ev)
 ;
 }
 
 void DeadZoneSlider::mouseReleaseEvent(QMouseEvent *ev)
 {
-	//Устранение предупреждения.
-	if (ev->isAccepted()) position++;
+	Q_UNUSED(ev)
 ;
 }
 

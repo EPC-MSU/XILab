@@ -17,7 +17,6 @@ public:
 private:
 	QTimer *timer;
 	int line, prev_line;
-	int elimination_warnings; //Для устранения предупреждений
 
 private slots:
 	void update();
