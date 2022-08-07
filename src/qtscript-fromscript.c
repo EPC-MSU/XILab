@@ -333,7 +333,7 @@ static void fromScriptValue(const QScriptValue &obj, accessories_settings_t &s) 
 }
 */
 
-#if defined(WIN32) || defined(WIN64)  || defined(__APPLE__)
+//#if defined(WIN32) || defined(WIN64)  || defined(__APPLE__)
 
 static void fromScriptValue(const QScriptValue &obj, status_t &s) {
 	s.MoveSts   = obj.property("MoveSts").toUInt32();
@@ -381,7 +381,7 @@ static void fromScriptValue(const QScriptValue &obj, status_calb_t &s) {
 	s.CmdBufFreeSpace = obj.property("CmdBufFreeSpace").toUInt32();
 }
 
-#endif
+//#endif
 
 static void fromScriptValue(const QScriptValue &obj, device_information_t &s) {
 	s.Major = obj.property("Major").toUInt32();
