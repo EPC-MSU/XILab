@@ -8,8 +8,9 @@ FileObject::FileObject(QScriptEngine* _engine, QString filename)
 	file.setFileName(filename);
 }
 
-bool FileObject::open()
+bool FileObject::open(OpenMode flags)
 {
+	Q_UNUSED(flags)
 	bool ok = file.open(QIODevice::ReadWrite | QIODevice::Text);
 	if (!ok)
 		file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -21,7 +22,7 @@ void FileObject::close()
 	file.close();
 }
 
-qint64 FileObject::size()
+qint64 FileObject::size() const
 {
 	return file.size();
 }
