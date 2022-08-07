@@ -221,7 +221,7 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const chart_data_t &s) 
 	obj.setProperty("DutyCycle", s.DutyCycle);
 	return obj;
 }
-Q_DECLARE_METATYPE(serial_number_t);
+/*Q_DECLARE_METATYPE(serial_number_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const serial_number_t &s) {
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("SN", s.SN);
@@ -233,6 +233,7 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const serial_number_t &
 	obj.setProperty("Release", s.Release);
 	return obj;
 }
+*/
 Q_DECLARE_METATYPE(analog_data_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const analog_data_t &s) {
 	QScriptValue obj = engine->newObject();
@@ -275,7 +276,7 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const debug_read_t &s) 
 	obj.setProperty("DebugData", DebugData);
 	return obj;
 }
-Q_DECLARE_METATYPE(debug_write_t);
+/*Q_DECLARE_METATYPE(debug_write_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const debug_write_t &s) {
 	QScriptValue obj = engine->newObject();
 	QScriptValue DebugData = engine->newObject();
@@ -283,6 +284,7 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const debug_write_t &s)
 	obj.setProperty("DebugData", DebugData);
 	return obj;
 }
+*/
 Q_DECLARE_METATYPE(stage_name_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const stage_name_t &s) {
 	QScriptValue obj = engine->newObject();
@@ -415,7 +417,7 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const accessories_setti
 	obj.setProperty("LimitSwitchesSettings", s.LimitSwitchesSettings);
 	return obj;
 }
-Q_DECLARE_METATYPE(init_random_t);
+/*Q_DECLARE_METATYPE(init_random_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const init_random_t &s) {
 	QScriptValue obj = engine->newObject();
 	QScriptValue key = engine->newObject();
@@ -423,6 +425,7 @@ static QScriptValue toScriptValue(QScriptEngine *engine, const init_random_t &s)
 	obj.setProperty("key", key);
 	return obj;
 }
+*/
 Q_DECLARE_METATYPE(device_information_t);
 static QScriptValue toScriptValue(QScriptEngine *engine, const device_information_t &s) {
 	QScriptValue obj = engine->newObject();

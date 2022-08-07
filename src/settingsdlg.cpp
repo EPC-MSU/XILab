@@ -406,7 +406,7 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 
 void SettingsDlg::AllPagesFromUiToClassToDevice()
 {
-	clock_t t1 = clock();
+	//clock_t t1 = clock();
 #ifdef SERVICEMODE
 	// Service
 	((PageStep3Wgt*)pageWgtsLst[PageKeyNum])->FromUiToClass();
@@ -1376,7 +1376,7 @@ void SettingsDlg::OnRestoreFileBtnClicked()
 	
 	//bool err_vers = !CheckCompatibility(QString(XILAB_VERSION), controllerStgs->firmware_version);
 	//bool err_path = !filename.contains(load_path, Qt::CaseInsensitive);
-	/*int ret_messg = */QMessageBox::Ok;
+	//int ret_messg = QMessageBox::Ok;
 
 	if (!filename.isEmpty()) {
 		

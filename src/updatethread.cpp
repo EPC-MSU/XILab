@@ -203,7 +203,7 @@ bool UpdateThread::waitForReconnect(int ms)
 
 		devinterface->open_device(device_name);
 
-	} while(!devinterface->is_open() && (1000*(clock()-t)/CLOCKS_PER_SEC < ms));
+	} while(!devinterface->is_open() && ((int) 1000*(clock()-t)/CLOCKS_PER_SEC < ms));
 
 	last_wfr_datetime = QDateTime::currentDateTime();
 	reset_time_counter = 0;

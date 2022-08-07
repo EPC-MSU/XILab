@@ -1488,6 +1488,9 @@ void MainWindow::CyclicMotion()
 	const int cyclic_wait = 20; // ms
 	switch(settingsDlg->cyclicStgs->GetType())
 	{
+	case CyclicSettings::UnitType::CYCLICUNKNOWN:
+
+		break;
 	case CyclicSettings::UnitType::CYCLICBTB:
 		if ((cs->status().GPIOFlags & STATE_LEFT_EDGE) && (last_cyclic_move == CYCLIC_LEFT)) {
 			devinterface->command_stop();

@@ -308,6 +308,7 @@ void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringLis
 
 void StartWindow::itemPressed(QTableWidgetItem *item)
 {
+	Q_UNUSED(item)
 	timer1.start(TIME_DOUBLE_CLICK);
 }
 

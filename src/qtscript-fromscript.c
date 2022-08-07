@@ -171,14 +171,14 @@ static void fromScriptValue(const QScriptValue &obj, chart_data_t &s) {
 	s.DutyCycle = obj.property("DutyCycle").toInt32();
 }
 
-static void fromScriptValue(const QScriptValue &obj, serial_number_t &s) {
+/*static void fromScriptValue(const QScriptValue &obj, serial_number_t &s) {
 	s.SN = obj.property("SN").toUInt32();
 	for (int i=0; i<32; i++) { s.Key[i] = obj.property("Key").property(i).toUInt32(); }
 	s.Major = obj.property("Major").toUInt32();
 	s.Minor = obj.property("Minor").toUInt32();
 	s.Release = obj.property("Release").toUInt32();
 }
-
+*/
 static void fromScriptValue(const QScriptValue &obj, analog_data_t &s) {
 	s.A1Voltage_ADC = obj.property("A1Voltage_ADC").toUInt32();
 	s.A2Voltage_ADC = obj.property("A2Voltage_ADC").toUInt32();
@@ -215,9 +215,10 @@ static void fromScriptValue(const QScriptValue &obj, debug_read_t &s) {
 	for (int i=0; i<128; i++) { s.DebugData[i] = obj.property("DebugData").property(i).toUInt32(); }
 }
 
-static void fromScriptValue(const QScriptValue &obj, debug_write_t &s) {
+/*static void fromScriptValue(const QScriptValue &obj, debug_write_t &s) {
 	for (int i=0; i<128; i++) { s.DebugData[i] = obj.property("DebugData").property(i).toUInt32(); }
 }
+*/
 
 static void fromScriptValue(const QScriptValue &obj, stage_name_t &s) {
 	strncpy(s.PositionerName, obj.property("PositionerName").toString().toLocal8Bit().data(), 16);
@@ -327,9 +328,10 @@ static void fromScriptValue(const QScriptValue &obj, accessories_settings_t &s) 
 	s.LimitSwitchesSettings = obj.property("LimitSwitchesSettings").toUInt32();
 }
 
-static void fromScriptValue(const QScriptValue &obj, init_random_t &s) {
+/*static void fromScriptValue(const QScriptValue &obj, init_random_t &s) {
 	for (int i=0; i<16; i++) { s.key[i] = obj.property("key").property(i).toUInt32(); }
 }
+*/
 
 static void fromScriptValue(const QScriptValue &obj, status_t &s) {
 	s.MoveSts   = obj.property("MoveSts").toUInt32();
