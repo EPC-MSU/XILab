@@ -333,7 +333,7 @@ static void fromScriptValue(const QScriptValue &obj, accessories_settings_t &s) 
 }
 */
 
-#if defined(WIN32) || defined(WIN64)
+#if defined(WIN32) || defined(WIN64)  || defined(__APPLE__)
 
 static void fromScriptValue(const QScriptValue &obj, status_t &s) {
 	s.MoveSts   = obj.property("MoveSts").toUInt32();
