@@ -333,6 +333,8 @@ static void fromScriptValue(const QScriptValue &obj, accessories_settings_t &s) 
 }
 */
 
+#if defined(WIN32) || defined(WIN64)
+
 static void fromScriptValue(const QScriptValue &obj, status_t &s) {
 	s.MoveSts   = obj.property("MoveSts").toUInt32();
 	s.MvCmdSts  = obj.property("MvCmdSts").toUInt32();
@@ -378,6 +380,8 @@ static void fromScriptValue(const QScriptValue &obj, status_calb_t &s) {
 	s.GPIOFlags = obj.property("GPIOFlags").toUInt32();
 	s.CmdBufFreeSpace = obj.property("CmdBufFreeSpace").toUInt32();
 }
+
+#endif
 
 static void fromScriptValue(const QScriptValue &obj, device_information_t &s) {
 	s.Major = obj.property("Major").toUInt32();

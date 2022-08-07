@@ -1488,7 +1488,7 @@ void MainWindow::CyclicMotion()
 	const int cyclic_wait = 20; // ms
 	switch(settingsDlg->cyclicStgs->GetType())
 	{
-	case CyclicSettings::UnitType::CYCLICUNKNOWN:
+		case CyclicSettings::UnitType::CYCLICUNKNOWN:
 
 		break;
 	case CyclicSettings::UnitType::CYCLICBTB:

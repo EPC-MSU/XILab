@@ -36,7 +36,7 @@ void UpdateThread::user_update()
 	measurement_t meas;
 
 	if(cs->updatesEnabled()){
-		bool connect_ok = true;
+		//bool connect_ok = true;
 		if(devinterface->getMode() == FIRMWARE_MODE)
 		{
 			timer->setInterval(UPDATE_INTERVAL);
@@ -51,7 +51,7 @@ void UpdateThread::user_update()
 			if(result == result_nodevice) {
 				cs->setConnect(false);
 				emit done();
-				connect_ok = waitForReconnect(100);
+				/*connect_ok = */waitForReconnect(100);
 				return;
 			} else if (result == result_ok) {
 				cs->setConnect(true);
@@ -72,7 +72,7 @@ void UpdateThread::user_update()
 				if(result == result_nodevice) {
 					cs->setConnect(false);
 					emit done();
-					connect_ok = waitForReconnect(100);
+					/*connect_ok = */waitForReconnect(100);
 					return;
 				} else if (result == result_ok) {
 					cs->setConnect(true);
@@ -91,7 +91,7 @@ void UpdateThread::user_update()
 				if(result == result_nodevice) {
 					cs->setConnect(false);
 					emit done();
-					connect_ok = waitForReconnect(100);
+					/*connect_ok = */waitForReconnect(100);
 					return;
 				} else if (result == result_ok) {
 					cs->setConnect(true);
@@ -112,7 +112,7 @@ void UpdateThread::user_update()
 			if(result == result_nodevice) {
 				cs->setConnect(false);
 				emit done();
-				connect_ok = waitForReconnect(100);
+				/*connect_ok = */waitForReconnect(100);
 				return;
 			} else {
 				cs->setConnect(true);
@@ -203,7 +203,7 @@ bool UpdateThread::waitForReconnect(int ms)
 
 		devinterface->open_device(device_name);
 
-	} while(!devinterface->is_open() && ((int) 1000*(clock()-t)/CLOCKS_PER_SEC < ms));
+	} while(!devinterface->is_open() && ((int) (1000*(clock()-t)/CLOCKS_PER_SEC) < ms));
 
 	last_wfr_datetime = QDateTime::currentDateTime();
 	reset_time_counter = 0;
