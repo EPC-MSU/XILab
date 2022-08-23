@@ -79,7 +79,7 @@ pipeline {
               powershell "Invoke-WebRequest -Uri https://artifacts.ci.ximc.ru/jenkins/libximc/libximc-${LIBXIMC_VERSION}-all.tar.gz -OutFile ximc-0.0.tar.gz"
               bat "build.bat add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.exe"
-              stash name: "result-${BUILDOS}", includes: "xilab-*.exe, xilab-*.7z"
+              stash name: "result-${BUILDOS}", includes: "xilab-*.exe, xilab-*.7z, profile-archives.zip"
             }
           } // stage
         } // stages
@@ -106,7 +106,7 @@ pipeline {
         sh "ls"
         sh "7z a -mx0 xilab-release_${BRANCH_NAME}_build-${BUILD_ID}.7z xilab-*.tar.gz xilab-win32.7z xilab-win64.7z xilab-*.exe xilab-*.AppImage"
         sh "7z l xilab-release_${BRANCH_NAME}_build-${BUILD_ID}.7z"
-        archiveArtifacts artifacts: "xilab-release*7z"
+        archiveArtifacts artifacts: "xilab-release*7z", "profile-archives.zip"
       }
     } // stage
 
