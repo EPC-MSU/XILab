@@ -243,8 +243,8 @@ cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
 # package profiles
 XIMC_DIR=./ximc-*/ximc
 CFG_DIR=../$r_dir/Library/XILab
-mkdir -p ../$r_dir/Library/XILab
-ARCHIVE_DIR=../$r_dir/Library/XILab
+ARCHIVE_DIR=profile-archives
+mkdir -p ${ARCHIVE_DIR}
 . ./profiles.sh
 
 # package and create .dmg volume to hold the installer
