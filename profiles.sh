@@ -16,12 +16,18 @@ done
 for path in ${CFG_DIR}/*.cfg; do
 	filename="${path##*/}"
 	profname="${filename%.*}"
-	tar -rvf ${ARCHIVE_DIR}/${profname}.tar -C $CFG_DIR $filename
+	if [ -e $path ]
+	then
+		tar -rvf ${ARCHIVE_DIR}/${profname}.tar -C $CFG_DIR $filename
+	else
+		echo $path
+	fi
 done
 
 for path in ${ARCHIVE_DIR}/*.tar; do
 	gzip $path
 	tar -rvf profile-archives.tar ${path}.gz
 done
+
 gzip profile-archives.tar
 rm -rvf $ARCHIVE_DIR
