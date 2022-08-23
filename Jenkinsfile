@@ -65,7 +65,7 @@ pipeline {
               sh "./build.sh add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.tar.gz"
               sh "ls"
-              stash name: "result-${BUILDOS}", includes: "xilab-*.AppImage,xilab-*.tar.gz"
+              stash name: "result-${BUILDOS}", includes: "xilab-*.AppImage,xilab-*.tar.gz,profile-archives.zip"
             }
           } // stage
 
@@ -79,7 +79,7 @@ pipeline {
               powershell "Invoke-WebRequest -Uri https://artifacts.ci.ximc.ru/jenkins/libximc/libximc-${LIBXIMC_VERSION}-all.tar.gz -OutFile ximc-0.0.tar.gz"
               bat "build.bat add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.exe"
-              stash name: "result-${BUILDOS}", includes: "xilab-*.exe, xilab-*.7z, profile-archives.zip"
+              stash name: "result-${BUILDOS}", includes: "xilab-*.exe, xilab-*.7z"
             }
           } // stage
         } // stages
