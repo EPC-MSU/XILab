@@ -19,6 +19,5 @@ for path in ${CFG_DIR}/*.cfg; do
 	zip -j ${ARCHIVE_DIR}/${profname}.zip $path
 done
 
-zip -r profile-archives.zip ${ARCHIVE_DIR}
-rm ${ARCHIVE_DIR}/*
-mv profile-archives.zip ${ARCHIVE_DIR}/
+zip -r profile-archives.zip $ARCHIVE_DIR
+rm -rf $ARCHIVE_DIR
