@@ -106,12 +106,6 @@ cp -R ./xiresource/scripts ../$r_dir/Library/XILab/
 cp -R ./xiresource/profiles ../$r_dir/Library/XILab/
 cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
 
-XIMC_DIR=./ximc-*/ximc
-CFG_DIR=../$r_dir/Library/XILab
-mkdir -p ../$r_dir/Library/XILab
-ARCHIVE_DIR=../$r_dir/Library/XILab
-. ./profiles.sh
-
 # add qwt
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/
 
@@ -245,6 +239,13 @@ mkdir -p ../$r_dir/Library/XILab/
 cp -R ./xiresource/scripts ../$r_dir/Library/XILab/
 cp -R ./xiresource/profiles ../$r_dir/Library/XILab/
 cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
+
+# package profiles
+XIMC_DIR=./ximc-*/ximc
+CFG_DIR=../$r_dir/Library/XILab
+mkdir -p ../$r_dir/Library/XILab
+ARCHIVE_DIR=../$r_dir/Library/XILab
+. ./profiles.sh
 
 # package and create .dmg volume to hold the installer
 cd ..
