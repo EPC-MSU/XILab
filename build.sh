@@ -108,7 +108,7 @@ cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
 
 XIMC_DIR=./ximc-*/ximc
 CFG_DIR=../$r_dir/Library/XILab
-mkdir ../$r_dir/Library/XILab
+mkdir -p ../$r_dir/Library/XILab
 ARCHIVE_DIR=../$r_dir/Library/XILab
 source ./profiles.sh
 
