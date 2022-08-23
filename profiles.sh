@@ -24,4 +24,4 @@ for path in ${ARCHIVE_DIR}/*.tar; do
 	tar -rvf profile-archives.tar ${path}.gz
 done
 gzip profile-archives.tar
-#rm -rvf $ARCHIVE_DIR
+rm -rvf $ARCHIVE_DIR
