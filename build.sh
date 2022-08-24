@@ -112,7 +112,7 @@ mkdir -p ../$r_dir/Library/XILab
 ARCHIVE_DIR=../$r_dir/Library/XILab
 . ./profiles.sh
 
-for $path in $XIMC_DIR/c-profiles/*; do
+for path in $XIMC_DIR/c-profiles/*; do
 	filename="${path##*/}"
 	if [ "$filename" = "STANDA" ]; then
 		echo "STANDA already compressed"
