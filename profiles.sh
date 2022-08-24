@@ -28,7 +28,8 @@ done
 
 for path in ${TMP_DIR}/*.tar; do
 	gzip $path
-	tar -rvf profile-archives.tar -C $TMP_DIR ${path}.gz
+	filename="${path##*/}"	
+	tar -rvf profile-archives.tar -C $TMP_DIR ${filename}.gz
 done
 
 gzip profile-archives.tar
