@@ -112,6 +112,18 @@ mkdir -p ../$r_dir/Library/XILab
 ARCHIVE_DIR=../$r_dir/Library/XILab
 . ./profiles.sh
 
+for $path in $XIMC_DIR/c-profiles/*; do
+	filename="${path##*/}"
+	if [ "$filename" = "STANDA" ]; then
+		echo "STANDA already compressed"
+	else
+		tar -rvf $filename.tar c-profiles/$filename -C $XIMC_DIR
+		tar -rvf $filename.tar python-profiles/$filename -C $XIMC_DIR
+		tar -rvf $filename.tar profiles/$filename -C ../$r_dir/Library/XILab
+		gzip $filename.tar
+	fi
+done
+
 # add qwt
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/
 
