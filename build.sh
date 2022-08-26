@@ -109,7 +109,7 @@ cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
 XIMC_DIR=./ximc-*/ximc
 CFG_DIR=../$r_dir/Library/XILab/profiles/STANDA
 mkdir -p ../$r_dir/Library/XILab
-ARCHIVE_DIR=../$r_dir/Library/XILab
+ARCHIVE_DIR=../$r_dir
 . ./profiles.sh
 
 for path in $XIMC_DIR/c-profiles/*; do
@@ -122,6 +122,7 @@ for path in $XIMC_DIR/c-profiles/*; do
 		tar -rvf "$filename.tar" -C $XIMC_DIR "python-profiles/$filename"
 		tar -rvf "$filename.tar" -C ../$r_dir/Library/XILab "profiles/$filename"
 		gzip "$filename.tar"
+		mv "$filename.tar.gz" $ARCHIVE_DIR
 	fi
 done
 
