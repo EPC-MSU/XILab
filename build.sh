@@ -109,7 +109,7 @@ cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
 XIMC_DIR=./ximc-*/ximc
 CFG_DIR=../$r_dir/Library/XILab/profiles/STANDA
 mkdir -p ../$r_dir/Library/XILab
-ARCHIVE_DIR=../$r_dir
+ARCHIVE_DIR=..
 . ./profiles.sh
 
 for path in $XIMC_DIR/c-profiles/*; do
