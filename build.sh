@@ -122,7 +122,9 @@ for path in $XIMC_DIR/c-profiles/*; do
 		tar -rvf "$filename.tar" -C $XIMC_DIR "python-profiles/$filename"
 		tar -rvf "$filename.tar" -C ../$r_dir/Library/XILab "profiles/$filename"
 		gzip "$filename.tar"
-		mv "$filename.tar.gz" $ARCHIVE_DIR
+		if [ ! $ARCHIVE_DIR -ef . ]; then
+			mv "$filename.tar.gz" $ARCHIVE_DIR
+		fi
 	fi
 done
 
