@@ -65,7 +65,7 @@ pipeline {
               sh "./build.sh add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.tar.gz"
               sh "ls"
-              stash name: "result-${BUILDOS}", includes: "xilab-*.AppImage,xilab-*.tar.gz,profile-archives.zip"
+              stash name: "result-${BUILDOS}", includes: "xilab-*.AppImage,xilab-*.tar.gz,profile-archives.tar.gz,miscellaneous.tar.gz,Newport.tar.gz,Thorlabs.tar.gz"
             }
           } // stage
 
