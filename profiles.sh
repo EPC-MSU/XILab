@@ -33,5 +33,7 @@ for path in ${TMP_DIR}/*.tar; do
 done
 
 gzip profile-archives.tar
-mv profile-archives.tar.gz $ARCHIVE_DIR
+if [ ! $ARCHIVE_DIR -ef . ]; then
+       	mv profile-archives.tar.gz $ARCHIVE_DIR
+fi
 rm -rvf $TMP_DIR
