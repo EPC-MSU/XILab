@@ -253,12 +253,12 @@ for path in $XIMC_DIR/c-profiles/*; do
 		echo "STANDA already compressed"
 	else
 		echo "Compressing $filename"
-		tar -rvf "$filename.tar" -C $XIMC_DIR "c-profiles/$filename"
-		tar -rvf "$filename.tar" -C $XIMC_DIR "python-profiles/$filename"
-		tar -rvf "$filename.tar" -C ../$r_dir/Library/XILab "profiles/$filename"
-		gzip "$filename.tar"
+		tar -rvf "profile-$filename.tar" -C $XIMC_DIR "c-profiles/$filename"
+		tar -rvf "profile-$filename.tar" -C $XIMC_DIR "python-profiles/$filename"
+		tar -rvf "profile-$filename.tar" -C ../$r_dir/Library/XILab "profiles/$filename"
+		gzip "profile-$filename.tar"
 		if [ ! $ARCHIVE_DIR -ef . ]; then
-			mv "$filename.tar.gz" $ARCHIVE_DIR
+			mv "profile-$filename.tar.gz" $ARCHIVE_DIR
 		fi
 	fi
 done
