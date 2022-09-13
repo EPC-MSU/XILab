@@ -29,11 +29,11 @@ done
 for path in ${TMP_DIR}/*.tar; do
 	gzip $path
 	filename="${path##*/}"	
-	tar -rvf profile-archives.tar -C $TMP_DIR ${filename}.gz
+	tar -rvf profile-STANDA.tar -C $TMP_DIR ${filename}.gz
 done
 
-gzip profile-archives.tar
+gzip profile-STANDA.tar
 if [ ! $ARCHIVE_DIR -ef . ]; then
-       	mv profile-archives.tar.gz $ARCHIVE_DIR
+       	mv profile-STANDA.tar.gz $ARCHIVE_DIR
 fi
 rm -rvf $TMP_DIR
