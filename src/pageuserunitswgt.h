@@ -24,6 +24,7 @@ public:
 	void FromClassToUi(bool _emit=false);
 	void SetChecked(bool _emit = true, bool enable = false);
 	void FromUiToSettings(QSettings *settings);
+	bool enableChkisChecked();
 	QString FromSettingsToUi(QSettings *settings, QSettings *default_stgs = NULL);
 
 	Ui::PageUserUnitsWgtClass *m_ui;

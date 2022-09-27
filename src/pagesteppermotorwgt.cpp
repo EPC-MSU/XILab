@@ -87,6 +87,18 @@ unsigned int PageStepperMotorWgt::OnRadio()
 	return 0;
 }
 
+void PageStepperMotorWgt::stepmodeBoxDisable()
+{
+	m_ui->stepmodeBox->setEnabled(false);
+	m_ui->stepmodeBox->setToolTip("The microstep mode cannot be changed when working in user units.");
+}
+
+void PageStepperMotorWgt::stepmodeBoxEnable()
+{
+	m_ui->stepmodeBox->setEnabled(true);
+	m_ui->stepmodeBox->setToolTip("");
+}
+
 void PageStepperMotorWgt::showEvent(QShowEvent *se)
 {
 	emitOnRadio();

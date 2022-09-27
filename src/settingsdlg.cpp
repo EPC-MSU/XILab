@@ -1663,6 +1663,12 @@ void SettingsDlg::setStyles(bool permanent)
 	((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->FromUiToClass(); // load potentially changed user units to uustgs class
 	curr_tmp_uuStgs = *uuStgs; // copy uustgs class for comparison
 	*uuStgs = save_tmp_uuStgs; // restore (potentially changed by ui load) user units settings back
+	
+	// Bug #65219 This code removes the ability to edit the microstep mode when user units are enabled.
+	if (((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->enableChkisChecked())
+		((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxDisable();
+	else
+		((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxEnable();
 }
 
 void SettingsDlg::OnSwitchCTP(unsigned int new_feedback_type)
