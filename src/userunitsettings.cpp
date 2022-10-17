@@ -44,7 +44,7 @@ QString UserUnitSettings::getOffSuffix(UnitType unit_type, int fbtype)
 		switch (unit_type) {
 			case TYPE_COORD: s = "steps"; break;
 			case TYPE_SPEED: s = "steps/s"; break;
-			case TYPE_ACCEL: s = "steps/s²"; break;
+			case TYPE_ACCEL: s = "steps/sÂ²"; break;
 			case TYPE_UNKNOWN:
 			default: s = "unknown stepper unit";
 		}
@@ -55,13 +55,12 @@ QString UserUnitSettings::getOffSuffix(UnitType unit_type, int fbtype)
 
 QString UserUnitSettings::getOnSuffix(UnitType unit_type, int fbtype)
 {
-	Q_UNUSED(fbtype)
 	QString s;
 
 	switch (unit_type) {
 		case TYPE_COORD: s = unitName; break;
 		case TYPE_SPEED: s = unitName + "/s"; break;
-		case TYPE_ACCEL: s = unitName + "/s²"; break;
+		case TYPE_ACCEL: s = unitName + "/sÂ²"; break;
 		case TYPE_UNKNOWN:
 		default: s = "unknown user unit";
 	}
