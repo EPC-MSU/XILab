@@ -58,7 +58,6 @@ void DeviceThread::run()
 	 * Getting a list of network interfaces.
 	*/
 	QStringList list_interfase = DeviceThread::SearchAdapters();
-	QStringList protocol_list;
 
 	if (dss->Enumerate_network)
 	{
@@ -80,12 +79,11 @@ void DeviceThread::run()
 			*/
 			qs = QString("addr=");
 			for (int i = 0; i < dss->Server_hosts.size(); i++) {
-				//if (dss->Protocol_list.at(i) == QString("udp"))
 				if (QString::compare(dss->Protocol_list.at(i), QString("xi-udp://"), Qt::CaseInsensitive) == 0)
-					protocol_list.append(QString("xi-udp://").append(dss->Server_hosts.at(i)));
+					qs.append(QString("xi-udp://")).append(dss->Server_hosts.at(i)).append(",");
 				else
 					if (QString::compare(dss->Protocol_list.at(i), QString("xi-tcp://"), Qt::CaseInsensitive) == 0)
-						protocol_list.append(QString("xi-tcp://").append(dss->Server_hosts.at(i)));
+						qs.append(QString("xi-tcp://")).append(dss->Server_hosts.at(i)).append(",");
 					else
 						qs.append(dss->Server_hosts.at(i)).append(",");
 				
@@ -100,15 +98,6 @@ void DeviceThread::run()
 	QList<uint32_t> serials;
 	bool full_enum = false;
 
-	for (int i = 0; i < protocol_list.size(); i++) {
-		urls.append(protocol_list.at(i));
-		descriptions.append("Description?");
-		friendlyNames.append("");
-		positionerNames.append("");
-		serials.append(0);
-		flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-		full_enum = true;
-	}
 	/*
 	 * Search cycle for all interfaces.
 	*/
