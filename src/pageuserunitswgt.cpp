@@ -119,7 +119,7 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 		msgBox.setStandardButtons(QMessageBox::Ok);
 		msgBox.setDefaultButton(QMessageBox::Ok);
 		msgBox.setIcon(QMessageBox::Warning);
-		/*int ret = */msgBox.exec();
+		msgBox.exec();
 		chekValUU = 0;
 		stateUU = 0;
 	}

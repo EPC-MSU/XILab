@@ -540,7 +540,7 @@ void MotorSettings::FromSettingsToClass(QSettings *settings, QString *errors)
 
 }
 
-bool MotorSettings::FromClassToSettings(QSettings *settings/*, unsigned int currentMotorType*/)
+bool MotorSettings::FromClassToSettings(QSettings *settings)
 {
 	QString s;
 	// Border [edges]

@@ -268,7 +268,6 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 			treeWgtsLst[i]->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 		}
 		int entype = motorStgs->entype.EngineType;
-		//int feedback = motorStgs->feedback.FeedbackType;
 		// Disable all unused engine type pages and switch away if needed
 		motorTypeChanged(entype);
 		if(entype == ENGINE_TYPE_STEP){
@@ -406,7 +405,6 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 
 void SettingsDlg::AllPagesFromUiToClassToDevice()
 {
-	//clock_t t1 = clock();
 #ifdef SERVICEMODE
 	// Service
 	((PageStep3Wgt*)pageWgtsLst[PageKeyNum])->FromUiToClass();
@@ -443,7 +441,6 @@ void SettingsDlg::AllPagesFromUiToClassToDevice()
 	((PageGraphWgt*)pageWgtsLst[PageGraphTempNum])->FromUiToClass();
 	((PageGraphWgt*)pageWgtsLst[PageGraphJoyNum])->FromUiToClass();
 	((PageGraphWgt*)pageWgtsLst[PageGraphPotNum])->FromUiToClass();
-	//clock_t t2 = clock() - t1;
 
 	CheckForChanges();
 
@@ -1261,7 +1258,7 @@ void SettingsDlg::OnSaveFileBtnClicked()
 		AllPagesFromUiToSettings(&settings);
 		MotorSettings tmpStgs = *motorStgs;
 		FromUiToClass(&tmpStgs);
-		tmpStgs.FromClassToSettings(&settings/*, getCurrentMotorType()*/);
+		tmpStgs.FromClassToSettings(&settings);
 #ifdef SERVICEMODE
 		StageSettings tspStgs = *stageStgs;
 		FromUiToClass(&tspStgs);

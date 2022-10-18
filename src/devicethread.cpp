@@ -25,7 +25,6 @@ QStringList DeviceThread::SearchAdapters()
 	QList<QNetworkInterface> networkInterfaces = QNetworkInterface::allInterfaces();
 
 	QStringList url;
-	//int ch = 0;
 	for (int i = 0; i < networkInterfaces.size(); i++)
 	{
 		QFlags<QNetworkInterface::InterfaceFlags> _flags = networkInterfaces.at(i).flags();
@@ -146,7 +145,6 @@ void DeviceThread::run()
 			*/
 			if (urls.indexOf(QString(deviceUrls[i]), 0) == -1)
 			{
-				//bool device_ok = true;
 				if (wait_for_exit) return;
 
 				uint32_t sn;

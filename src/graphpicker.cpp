@@ -37,8 +37,6 @@ QwtText myPicker::trackerText (const QwtDoublePoint &pos) const
 
 	QwtText ret;
 
-	//clock_t t1 = clock();
-
 	//заливка бэкграунда мягким цветом графика
 	QColor color(parent->getCurve()->pen().color());
 	color.setAlpha(64);
