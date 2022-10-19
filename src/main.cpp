@@ -31,6 +31,7 @@ const char* valid_manufacturer = "XIMC";
 
 static void XIMC_CALLCONV myCallback(int loglevel, const wchar_t* message, void *user_data)
 {
+	Q_UNUSED(user_data)
 	QString conv = QString::fromWCharArray(message);
 	QString conv_1 = QString::fromWCharArray(message);
 	QString conv_2 = "receive_synchronized: receive finally timed out";
@@ -278,7 +279,7 @@ do {
 		((Multiaxis*)p_mainWnd)->show(); // although (QObject*) would do just fine
 	}
 
-	int result;
+	int result = 0;
 	try {
 		result = app.exec();
 	} catch (critical_exception &e) {

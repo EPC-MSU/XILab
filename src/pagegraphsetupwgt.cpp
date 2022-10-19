@@ -56,7 +56,6 @@ void CurveGetSettings(QSettings *settings, QString groupname,
 {
 	settings->beginGroup(groupname);
 
-	double _val = linewidthValue->value();
 	settings->setValue("Line_width", linewidthValue->value());
 	settings->setValue("Line_color", colorBox->getColor().name());
 	settings->setValue("Line_style", linestyleBox->currentIndex());

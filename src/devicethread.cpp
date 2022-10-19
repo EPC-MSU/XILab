@@ -4,6 +4,7 @@
 
 DeviceThread::DeviceThread(QObject *parent, DeviceInterface *_devinterface, DeviceSearchSettings* _dss)
 {
+	Q_UNUSED(parent)
 	devinterface = _devinterface;
 	dss = _dss;
 	wait_for_exit = false;
@@ -24,7 +25,6 @@ QStringList DeviceThread::SearchAdapters()
 	QList<QNetworkInterface> networkInterfaces = QNetworkInterface::allInterfaces();
 
 	QStringList url;
-	int ch = 0;
 	for (int i = 0; i < networkInterfaces.size(); i++)
 	{
 		QFlags<QNetworkInterface::InterfaceFlags> _flags = networkInterfaces.at(i).flags();
@@ -111,7 +111,7 @@ void DeviceThread::run()
 		std::vector<char*> deviceUrls;
 		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
-		if (dev_enum == NULL) {
+		if (dev_enum == 0) {
 			emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 			return;
 		}
@@ -134,7 +134,6 @@ void DeviceThread::run()
 			*/
 			if (urls.indexOf(QString(deviceUrls[i]), 0) == -1)
 			{
-				bool device_ok = true;
 				if (wait_for_exit) return;
 
 				uint32_t sn;

@@ -30,6 +30,7 @@ void LongLongSpinBox::setRange(long long minimum, long long maximum)
 
 QValidator::State LongLongSpinBox::validate ( QString & text, int & pos ) const
 {
+	Q_UNUSED(pos)
 	if (text.isEmpty() || text == "-")
 		return QValidator::Intermediate;
 	long long fromtext = valueFromText(text);

@@ -37,11 +37,13 @@ void HiddenWidget::clearlist() {
 	clients.clear();
 }
 void HiddenWidget::focusOutEvent(QFocusEvent* event) {
+	Q_UNUSED(event)
 	foreach (QwtPlot* item, clients) {
 		item->setCanvasBackground(QColor(255,255,255));
 	}
 }
 void HiddenWidget::focusInEvent(QFocusEvent* event) {
+	Q_UNUSED(event)
 	foreach (QwtPlot* item, clients) {
 		item->setCanvasBackground(QColor(224,255,224)); // light green
 	}
@@ -422,9 +424,6 @@ void Multiaxis::UpdateLogTable()
 		message_old.truncate(inddupl);
 	}
 
-
-	int counter_all = 0;
-
 	while (mlog->pop(&next_item) && (tick2 - tick1 < 50) ) { // gathers data for 50ms max (out of 100ms limit for a single update)
 		tick2 = t.getElapsedTimeInMilliSec();
 		QDateTime datetime = next_item.datetime;
@@ -553,10 +552,7 @@ void Multiaxis::UpdateState() {
 	for (int e=0; e<devcount; e++) {
 		int i = translate(e);
 
-		bool recalc_enabled = settingsDlgs.at(i)->uuStgs->enable;
 		QString units = settingsDlgs.at(i)->uuStgs->unitName;
-		double coeff = settingsDlgs.at(i)->uuStgs->getUnitPerStep();
-		int precision = settingsDlgs.at(i)->uuStgs->precision;
 
 		QPen pen = mark.at(i)->linePen();
 		if (devinterfaces.at(i)->cs->connect() == false && noDevice[i] == false) {
@@ -752,7 +748,7 @@ void Multiaxis::UpdateState() {
 	}
 	
 	const int cutoff = 1000; // cutoff point is 100 seconds at 1 update/100 ms or 1000 points.
-	if (points.size() > cutoff) { // truncate arrays if they become too large
+	if (points.size() > (int)cutoff) { // truncate arrays if they become too large
 		points.pop_back();
 	}
 
@@ -852,8 +848,7 @@ void Multiaxis::UpdateState() {
 			break;
 		case 3:
 			settingsDlgs.at(i)->uuStgs->messageType = 0;
-			QMessageBox::StandardButton reply1;
-			reply1 = QMessageBox::warning(this, groupBoxs.at(i)->title(), settingsDlgs.at(i)->uuStgs->messageText,
+			QMessageBox::warning(this, groupBoxs.at(i)->title(), settingsDlgs.at(i)->uuStgs->messageText,
 				QMessageBox::Ok);
 
 			break;

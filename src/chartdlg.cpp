@@ -435,7 +435,7 @@ void ChartDlg::updatePlotsRightDist() //todo fix for plotmulti
 //вызывается при изменении настроек
 void ChartDlg::ReinitPlots()
 {
-	if(timer->interval() != gStgs->commonStgs->interval)
+	if(timer->interval() != (int) gStgs->commonStgs->interval)
 		timer->setInterval(gStgs->commonStgs->interval);
 
 	datapoints = gStgs->commonStgs->datapoints*(1000/UPDATE_INTERVAL);
@@ -1336,7 +1336,6 @@ void ChartDlg::OnSaveBtnClicked()
 	file.seek(header_length);
 
 	int i=0;
-	double time = 0;
 
 	//запись будем вести с конца
 	while(curr->next != NULL) curr = curr->next;
@@ -1429,7 +1428,6 @@ void ChartDlg::OnExportBtnClicked()
 	file.write("\n");
 
 	int i=0;
-	double time = 0;
 
 	//запись будем вести с конца
 	while(curr->next != NULL) curr = curr->next;
@@ -1440,7 +1438,6 @@ void ChartDlg::OnExportBtnClicked()
 		double temp_time = curr->msec;
 		curr->msec = timeoffset->CalcValue(temp_time);
 
-		int j = 0;
 		write_dbl(file, curr->encoder_position,	0);
 		write_dbl(file, curr->position,			0);
 		write_dbl(file, curr->speed,			0);

@@ -59,7 +59,7 @@ void JoystickCalibrationDlg::RefreshWindow()
 
 	int joy = meas.chart_data.Joy;
 	msrs.push_back(joy);
-	if (msrs.size() > deque_size) {
+	if (msrs.size() > (int)deque_size) {
 		msrs.pop_front();
 	}
 

@@ -92,6 +92,8 @@ void PageCyclicWgt::FromClassToUi()
 {
 	switch(cStgs->GetType())
 	{
+		case CyclicSettings::UnitType::CYCLICUNKNOWN:
+			break;
 		case CyclicSettings::UnitType::CYCLICBTB:
 			m_ui->btbBtn->setChecked(true);
 			break;

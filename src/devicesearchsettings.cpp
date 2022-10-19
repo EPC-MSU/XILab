@@ -29,7 +29,8 @@ void DeviceSearchSettings::load()
 	if (sizehosts > sizeprotocol) size = sizeprotocol;
 	else size = sizehosts;
 
-	int size1 = settings.beginReadArray("Server_hosts");
+	settings.beginReadArray("Server_hosts");
+
 	Server_hosts.clear();
 	for (int i = 0; i < size; i++) {
 		settings.setArrayIndex(i);
@@ -38,7 +39,8 @@ void DeviceSearchSettings::load()
 	}
 	settings.endArray();
 
-	int size2 = settings.beginReadArray("Protocol_list");
+	settings.beginReadArray("Protocol_list");
+
 	Protocol_list.clear();
 	for (int i = 0; i < size; i++) {
 		settings.setArrayIndex(i);

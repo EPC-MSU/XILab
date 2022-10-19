@@ -90,12 +90,20 @@ void PageDebugWgt::OnDbgr()
 void PageDebugWgt::OnDbgw()
 {
 	for (int i=0; i<boxes; i++) {
+#if defined(__LINUX__)
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#endif
+		
 		*(signed long long*) &chars[i*bytes/boxes + 0] = findChild<LongLongSpinBox*>("box_" + toStr(i) + "_0")->value();
 		*(signed long long*) &chars[i*bytes/boxes + 8] = findChild<LongLongSpinBox*>("box_" + toStr(i) + "_1")->value();
 		*(unsigned int*) &chars[i*bytes/boxes + 16] = findChild<LongLongSpinBox*>("box_" + toStr(i) + "_2")->value();
 		*(unsigned int*) &chars[i*bytes/boxes + 20] = findChild<LongLongSpinBox*>("box_" + toStr(i) + "_3")->value();
 		*(unsigned int*) &chars[i*bytes/boxes + 24] = findChild<LongLongSpinBox*>("box_" + toStr(i) + "_4")->value();
 		*(unsigned int*) &chars[i*bytes/boxes + 28] = findChild<LongLongSpinBox*>("box_" + toStr(i) + "_5")->value();
+#if defined(__LINUX__)
+#pragma GCC diagnostic warning "-Wstrict-aliasing"
+#endif
+
 	}
 
 	for (int i=0; i<bytes; i++)
@@ -183,11 +191,17 @@ void PageDebugWgt::OnFix() {
 void PageDebugWgt::redraw()
 {
 	for (int i=0; i<boxes; i++) {
+#if defined(__LINUX__)
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#endif
 		findChild<QLabel*>("label_"+toStr(i)+"_0")->setText(toStr(*(signed long long*)&chars[i*bytes/boxes + 0]));
 		findChild<QLabel*>("label_"+toStr(i)+"_1")->setText(toStr(*(signed long long*)&chars[i*bytes/boxes + 8]));
 		findChild<QLabel*>("label_"+toStr(i)+"_2")->setText(toStr(*(unsigned int*)&chars[i*bytes/boxes + 16]));
 		findChild<QLabel*>("label_"+toStr(i)+"_3")->setText(toStr(*(unsigned int*)&chars[i*bytes/boxes + 20]));
 		findChild<QLabel*>("label_"+toStr(i)+"_4")->setText(toStr(*(signed int*)&chars[i*bytes/boxes + 24]));
 		findChild<QLabel*>("label_"+toStr(i)+"_5")->setText(toStr(*(signed int*)&chars[i*bytes/boxes + 28]));
+#if defined(__LINUX__)
+#pragma GCC diagnostic warning "-Wstrict-aliasing"
+#endif
 	}
 }

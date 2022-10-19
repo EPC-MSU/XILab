@@ -14,6 +14,7 @@ void varlengthValidator::setByteLength(int bytes)
 
 QValidator::State varlengthValidator::validate( QString & input, int & pos ) const
 {
+	Q_UNUSED(pos)
 	if (input.toUtf8().size() <= bytes)
 		return QValidator::Acceptable;
 	else

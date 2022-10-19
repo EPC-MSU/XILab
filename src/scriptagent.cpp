@@ -16,10 +16,14 @@ ScriptAgent::~ScriptAgent()
 
 void ScriptAgent::positionChange (qint64 scriptId, int lineNumber, int columnNumber) {
 	line = lineNumber;
+	Q_UNUSED(scriptId)
+	Q_UNUSED(columnNumber)
 }
 
 void ScriptAgent::exceptionThrow (qint64 scriptId, const QScriptValue & exception, bool hasHandler) { 
 	emit exceptionThrown(exception);
+	Q_UNUSED(scriptId)
+	Q_UNUSED(hasHandler)
 }
 
 void ScriptAgent::update() {

@@ -20,9 +20,9 @@ private:
 	QScriptEngine *engine;
 
 public slots:
-	bool open();
+	bool open(OpenMode flags);
 	void close();
-	qint64 size();
+	qint64 size() const;
 	bool seek(qint64 pos);
 	bool resize(qint64 size);
 	bool remove();

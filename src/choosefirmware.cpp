@@ -46,7 +46,6 @@ void ChooseFirmware::fill_treeWdg(XMLElement* root_element, leaf_element_t *max_
 	XMLElement* minor_element = NULL;
 	XMLElement* release_element = NULL;
 	XMLElement* firmware_element = NULL;
-	XMLElement* el = NULL;
 	max_allowed->valid = false; // by default we couldn't find any valid element
 	max_allowed->version = { 0, 0, 0 }; // init with lowest possible version
 	leaf_element_t tmp_max;
@@ -155,6 +154,7 @@ void ChooseFirmware::fill_treeWdg(XMLElement* root_element, leaf_element_t *max_
 }
 
 void ChooseFirmware::get_double_clk_item(QTreeWidgetItem* Item, int col) {
+	Q_UNUSED(col)
 	emit clicked(Item->data(URL_DATA_COLUMN, Qt::UserRole).toString(),
 		         Item->data(SHA_DATA_COLUMN, Qt::UserRole).toString());
 }
@@ -174,7 +174,7 @@ void ChooseFirmware::checkClk(){
 }
 
 void ChooseFirmware::showMessageAndClose(QString message, bool shouldClose, int dummy) {
-	(void*)dummy;
+	Q_UNUSED(dummy)
 	ui->statusLabel->setText(message);
 	if (shouldClose) {
 		this->hide();

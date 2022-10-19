@@ -61,6 +61,7 @@ void ScriptDlg::InitUI()
 	file.close();
 
 	Highlighter *highlighter = new Highlighter(ui.codeEdit->document());
+	Q_UNUSED(highlighter)
 }
 
 void ScriptDlg::close()

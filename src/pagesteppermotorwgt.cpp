@@ -101,6 +101,7 @@ void PageStepperMotorWgt::stepmodeBoxEnable()
 
 void PageStepperMotorWgt::showEvent(QShowEvent *se)
 {
+	Q_UNUSED(se)
 	emitOnRadio();
 }
 

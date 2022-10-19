@@ -21,6 +21,7 @@ ChartLog::~ChartLog(void)
 void ChartLog::InsertMeasure(int number, QDateTime msrTime, measurement_t meas)
 {
 	Q_ASSERT(number == 0);
+	Q_UNUSED(number)
 	TList *temp;
 
 	if(list == NULL){

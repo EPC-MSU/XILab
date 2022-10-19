@@ -18,7 +18,7 @@ public:
 	bool FromClassToDevice();
 
 	void FromSettingsToClass(QSettings *settings, QString *errors);
-	bool FromClassToSettings(QSettings *settings, unsigned int currentMotorType);
+	bool FromClassToSettings(QSettings *settings);
 
 	void set_save_true();
 	int getStepFrac();
@@ -88,7 +88,6 @@ private:
 	DeviceInterface *devinterface;
 	result_t set_edges_result;
 	result_t set_secure_result;
-	result_t set_pwm_result;
 	result_t set_engine_result;
 	result_t set_entype_result;
 	result_t set_move_result;
