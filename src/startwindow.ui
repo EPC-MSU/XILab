@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>569</width>
+    <width>664</width>
     <height>521</height>
    </rect>
   </property>
@@ -297,6 +297,19 @@
          <property name="bottomMargin">
           <number>3</number>
          </property>
+         <item>
+          <widget class="QLabel" name="axisSelect">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string> </string>
+           </property>
+          </widget>
+         </item>
          <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">

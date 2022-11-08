@@ -88,12 +88,15 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	qRegisterMetaType<QList<uint32_t> >("QList<uint32_t>");
 
 	connect(devicethread, SIGNAL(finished(bool, QStringList, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)), this, SLOT(deviceListRecieved(bool, QStringList, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)));
+
 	/*
 	 * When pressed, a timer starts to control double-tapping so that the hint is not displayed.
 	*/
 	connect(m_ui->deviceListTable, SIGNAL(itemPressed(QTableWidgetItem*)), this, SLOT(itemPressed(QTableWidgetItem*)));
 	connect(m_ui->deviceListTable, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(itemDoubleClicked(QTableWidgetItem*)));
 	connect(m_ui->deviceListTable, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(itemClicked(QTableWidgetItem*)));
+	connect(m_ui->deviceListTable, SIGNAL(currentCellChanged(int, int, int, int)), this, SLOT(SelClic()));
+
 	connect(m_ui->selectBtn, SIGNAL(clicked()), this, SLOT(selectBtnClicked()));
 	connect(m_ui->retryBtn, SIGNAL(clicked()), this, SLOT(retryBtnClicked()));
 	connect(m_ui->cancelBtn, SIGNAL(clicked()), this, SLOT(cancelBtnClicked()));
@@ -216,14 +219,21 @@ void  StartWindow::ShowDeviseSelClic()
 	if (count_row == 0)
 	{
 		QToolTip::showText(QPoint(cursor().pos().x(), cursor().pos().y() + 20), "No axes are selected.");
+		m_ui->axisSelect->setText("No axes are selected.");
+
 	}
 	if (count_row == 1)
 	{
 		QToolTip::showText(QPoint(cursor().pos().x(), cursor().pos().y() + 20), "The app will run in single-axis mode.");
+		m_ui->axisSelect->setText("One axis is selected.");
 	}
 	else
 	{
 		QToolTip::showText(QPoint(cursor().pos().x(), cursor().pos().y() + 20), "The app will run in multi-axis mode.");
+		if (count_row == 2)
+			m_ui->axisSelect->setText("Two axes are selected.");
+		else
+			m_ui->axisSelect->setText("three axes are selected.");
 	}
 
 	timer2.start(TIME_SHOW);
@@ -379,6 +389,11 @@ void StartWindow::timer2Full()
 {
 	QToolTip::hideText();
 	timer2.stop();
+}
+
+void StartWindow::SelClic()
+{
+	timer1.start(TIME_DOUBLE_CLICK);
 }
 
 void StartWindow::selectBtnClicked()

@@ -20,7 +20,7 @@ namespace Ui {
 #define STATE_THINKING	4
 
 //Values of hint management timers.
-#define TIME_DOUBLE_CLICK 600
+#define TIME_DOUBLE_CLICK 400
 #define TIME_SHOW 1200
 
 namespace Columns
@@ -96,6 +96,7 @@ void deviceListRecieved(bool enum_ok, QStringList names, QStringList description
 	bool return_probe();
 	void timer1Full();
 	void timer2Full();
+	void SelClic();
 };
 
 
