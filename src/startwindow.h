@@ -45,6 +45,7 @@ public:
 
 	void LoadAxisConfig(QList<uint32_t> serials);
 	bool inited;
+
 private:
 
     Ui::StartWindowClass *m_ui;
@@ -80,6 +81,8 @@ private:
 	void SetPicture();
 
 	void  ShowDeviseSelClic();
+	
+	//void showhelp();
 
 public slots:
 void deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags);
@@ -98,11 +101,5 @@ void deviceListRecieved(bool enum_ok, QStringList names, QStringList description
 	void timer2Full();
 	void SelClic();
 };
-
-
-
-
-
-
 
 #endif

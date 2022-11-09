@@ -197,6 +197,8 @@ do {
 	init_success = true;
 	startWnd->show();
 	startWnd->startSearching();
+	//startWnd->showhelp();
+
 	QList<QString> devices;
 	do {
 		devices = startWnd->getSelectedDevices();
@@ -271,6 +273,7 @@ do {
 						 Qt::QueuedConnection);
 		startWnd->hide();
 		((MainWindow*)p_mainWnd)->show();
+		((MainWindow*)p_mainWnd)->showhelp();
 	} else {
 		QObject::connect((Multiaxis*)p_mainWnd, SIGNAL(InsertLineSgn(QDateTime, QString, QString, int, LogSettings*)),
 						 mlog,      SLOT(InsertLine(QDateTime, QString, QString, int, LogSettings*)),

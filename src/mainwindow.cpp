@@ -2274,3 +2274,39 @@ void MainWindow::OnTechSupportClicked()
 
 	QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
 }
+
+void MainWindow::showhelp()
+{
+	QWidget* b = new QWidget();
+	b->setWindowTitle("Starting hints");
+	b->move(this->x() - 400/* + this->width()*/, this->y()); 
+	b->setFixedWidth(400);
+	b->setFixedHeight(this->height());
+	//QWidget* b = new QWidget(pWindow);
+
+	QPixmap logo = QPixmap(":/startwindow/images/startwindow/question.png");
+	QLabel * llogo = new QLabel(b);
+	llogo->setGeometry(QRect(QPoint(0, 100), logo.size()));
+	llogo->setPixmap(logo);
+	//b->setMinimumSize(QSize(logo.width() * 4, logo.height()));
+	//b->setWindowTitle("License");
+	QTextBrowser * lictext = new QTextBrowser(b);
+	QFont f("Courrier", 8);
+	lictext->setFont(f);
+	lictext->setGeometry(QRect(logo.width(), 0, b->width()-50, b->height()-50));
+	//lictext->setHScrollBarMode(QScrollView::AlwaysOff);
+	lictext->setLineWidth(0);
+
+	QString copyright("Ghjcnj nfr");
+	//if (QFileInfo(copyright).exists())
+	lictext->setText(copyright);
+	//QSize s = qApp->desktop()->size();
+	//s = s - b->size();
+	//s /= 2;
+	//b->move(s.width(), s.height());
+
+	
+	b->show();
+	//b->show();
+
+}

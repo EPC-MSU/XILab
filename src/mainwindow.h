@@ -90,6 +90,7 @@ public:
 	ScriptDlg *scriptDlg;
 	SettingsDlg *settingsDlg;
 	bool inited;				//флаг, определяющий было ли инициализирована программа (если нет - при закрытии не сохранять данные)
+	void showhelp();
 
 private:
 	
