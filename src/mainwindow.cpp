@@ -2329,7 +2329,7 @@ void MainWindow::Onbut1Clicked()
 
 void MainWindow::Onbut2Clicked()
 {
-	if (currentStep < 2) {
+	if (currentStep < 4) {
 		currentStep += 1;
 		fixStep();
 	}
@@ -2348,6 +2348,16 @@ void MainWindow::fixStep()
 		logo = QPixmap(":/mainwindow/images/mainwindow/step_2.png");
 		llogo->setPixmap(logo);
 		lictext->setText("Step 2. In the settings window that appears, click Load settings from file...  - as shown in the figure below. ");
+		break;
+	case 3:
+		logo = QPixmap(":/mainwindow/images/mainwindow/step_3.png");
+		llogo->setPixmap(logo);
+		lictext->setText("Step 3. In the window that opens, select the folder of the corresponding manufacturer and the profile corresponding to the positioner, then click Open");
+		break;
+	case 4:
+		logo = QPixmap(":/mainwindow/images/mainwindow/step_4.png");
+		llogo->setPixmap(logo);
+		lictext->setText("Step 4. To apply this profile, click Apply or Ok in the Settings window. To not use the selected profile, click Cancel.");
 		break;
 	//default:
 	//	break;
