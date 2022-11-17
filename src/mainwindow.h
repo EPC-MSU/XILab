@@ -91,7 +91,7 @@ public:
 	SettingsDlg *settingsDlg;
 	bool inited;				//флаг, определяющий было ли инициализирована программа (если нет - при закрытии не сохранять данные)
 	void showhelp();
-	QWidget* b;
+	QWidget* b = 0;
 	QPixmap logo;
 	QLabel * llogo;
 	QLabel * lictext;

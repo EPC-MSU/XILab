@@ -44,6 +44,9 @@
 		<file>images/mainwindow/step_2.png</file>
 		<file>images/mainwindow/step_3.png</file>
 		<file>images/mainwindow/step_4.png</file>
+		<file>images/mainwindow/step_5.png</file>
+		<file>images/mainwindow/step_6.png</file>
+		<file>images/mainwindow/step_7.png</file>
     </qresource>
     <qresource prefix="/settingsdlg">
         <file>images/settingsdlg/settings.png</file>

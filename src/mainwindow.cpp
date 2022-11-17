@@ -142,6 +142,9 @@ MainWindow::~MainWindow()
 			devinterface->close_device();
 		}
 
+		if(b)
+			b->close();
+
 		delete ui;
 	}
 }
@@ -2277,46 +2280,59 @@ void MainWindow::OnTechSupportClicked()
 
 void MainWindow::showhelp()
 {
-	/*QWidget*/ b = new QWidget();
-	b->setWindowTitle("Starting hints");
-	b->move(this->x() - 440/* + this->width()*/, this->y()); 
-	b->setFixedWidth(420);
-	b->setFixedHeight(/*this->height()*/600);
+	XSettings settings(MakeProgramConfigFilename(), QSettings::IniFormat, QIODevice::ReadOnly);
 
-	QPixmap logo = QPixmap(":/mainwindow/images/mainwindow/step_1.png");
-	/*QLabel */ llogo = new QLabel(b);
-	llogo->setGeometry(QRect(QPoint(10, 120), logo.size()));
-	llogo->setPixmap(logo);
-	/*QLabel */ lictext = new QLabel(b);
-	QFont f("Courrier", 8);
-	lictext->setFont(f);
-	lictext->setGeometry(QRect(10, /*logo.height()+20*/10, b->width() - 20, 100));
-	lictext->setLineWidth(0);
+	settings.beginGroup("Start_window");
+	int firstLaunch = 0;
+	firstLaunch = settings.value("first_launch").toInt();
+	settings.endGroup();
+	if (firstLaunch == 0)
+	{
+		settings.beginGroup("Start_window");
+		settings.setValue("first_launch", 1);
+		settings.endGroup();
 
-	//QString copyright("Step 1: ");
+		/*QWidget*/ b = new QWidget();
+		b->setWindowTitle("Starting hints");
+		b->move(this->x() - 440/* + this->width()*/, this->y());
+		b->setFixedWidth(420);
+		b->setFixedHeight(/*this->height()*/620);
 
-	lictext->setText("Step 1. It is important when connecting a new positioner to install the correct profile for it in order to avoid breakage. To do this, click the Settings button - as shown in the figure below. ");
-	lictext->setWordWrap(true);
-	QPushButton * but1 = new QPushButton(b);
-	QPushButton * but2 = new QPushButton(b);
-	but1->setFixedWidth(150);
-	but1->setFixedHeight(50);
-	but1->setGeometry(QRect(10, b->height() - 60, 100, b->height() - 10));
-	but1->setFont(f);
-	but1->setText("Previous step");
+		QPixmap logo = QPixmap(":/mainwindow/images/mainwindow/step_1.png");
+		/*QLabel */ llogo = new QLabel(b);
+		llogo->setGeometry(QRect(QPoint(10, 140), logo.size()));
+		llogo->setPixmap(logo);
+		/*QLabel */ lictext = new QLabel(b);
+		QFont f("Courrier", 8);
+		lictext->setFont(f);
+		lictext->setGeometry(QRect(10, /*logo.height()+20*/10, b->width() - 20, 120));
+		lictext->setLineWidth(0);
 
-	but2->setFixedWidth(150);
-	but2->setFixedHeight(50);
-	but2->setGeometry(QRect(b->width() - 160, b->height() - 60, b->width() - 10, b->height() - 10));
-	but2->setFont(f);
-	but2->setText("Next step");
-	currentStep = 1;
+		//QString copyright("Step 1: ");
 
-	QObject::connect(but1, SIGNAL(clicked()), this, SLOT(Onbut1Clicked()));
-	QObject::connect(but2, SIGNAL(clicked()), this, SLOT(Onbut2Clicked()));
+		lictext->setText("Step 1. It is important when connecting a new positioner to install the correct profile for it in order to avoid breakage. To do this, click the Settings button - as shown in the figure below. ");
+		lictext->setWordWrap(true);
+		QPushButton * but1 = new QPushButton(b);
+		QPushButton * but2 = new QPushButton(b);
+		but1->setFixedWidth(150);
+		but1->setFixedHeight(50);
+		but1->setGeometry(QRect(10, b->height() - 60, 100, b->height() - 10));
+		but1->setFont(f);
+		but1->setText("Previous step");
 
-	
-	b->show();
+		but2->setFixedWidth(150);
+		but2->setFixedHeight(50);
+		but2->setGeometry(QRect(b->width() - 160, b->height() - 60, b->width() - 10, b->height() - 10));
+		but2->setFont(f);
+		but2->setText("Next step");
+		currentStep = 1;
+
+		QObject::connect(but1, SIGNAL(clicked()), this, SLOT(Onbut1Clicked()));
+		QObject::connect(but2, SIGNAL(clicked()), this, SLOT(Onbut2Clicked()));
+
+
+		b->show();
+	}
 }
 
 void MainWindow::Onbut1Clicked()
@@ -2329,7 +2345,7 @@ void MainWindow::Onbut1Clicked()
 
 void MainWindow::Onbut2Clicked()
 {
-	if (currentStep < 4) {
+	if (currentStep < 7) {
 		currentStep += 1;
 		fixStep();
 	}
@@ -2358,6 +2374,21 @@ void MainWindow::fixStep()
 		logo = QPixmap(":/mainwindow/images/mainwindow/step_4.png");
 		llogo->setPixmap(logo);
 		lictext->setText("Step 4. To apply this profile, click Apply or Ok in the Settings window. To not use the selected profile, click Cancel.");
+		break;
+	case 5:
+		logo = QPixmap(":/mainwindow/images/mainwindow/step_5.png");
+		llogo->setPixmap(logo);
+		lictext->setText("Step 5. Motion control is carried out from the main Xlab window. Using the buttons on the slider, you can make movements in both directions or make a stop. Precise movements can be carried out by setting values in the fields for moving and shifting, followed by pressing the corresponding buttons.");
+		break;
+	case 6:
+		logo = QPixmap(":/mainwindow/images/mainwindow/step_6.png");
+		llogo->setPixmap(logo);
+		lictext->setText("Step 6. To adjust motion parameters such as speed, acceleration, etc., you must use one of the three pages of the Settings window, depending on the type of motor used in the positioner, as shown below.");
+		break;
+	case 7:
+		logo = QPixmap(":/mainwindow/images/mainwindow/step_7.png");
+		llogo->setPixmap(logo);
+		lictext->setText("Step 7. The XiLab application also allows you to make movement both in motor units, such as steps revolutions per minute, etc., and in user units. When using user units, it is necessary to check the box in the User unit tab of the Settings window, as shown below.");
 		break;
 	//default:
 	//	break;
