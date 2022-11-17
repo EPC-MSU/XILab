@@ -2277,36 +2277,79 @@ void MainWindow::OnTechSupportClicked()
 
 void MainWindow::showhelp()
 {
-	QWidget* b = new QWidget();
+	/*QWidget*/ b = new QWidget();
 	b->setWindowTitle("Starting hints");
-	b->move(this->x() - 400/* + this->width()*/, this->y()); 
-	b->setFixedWidth(400);
-	b->setFixedHeight(this->height());
-	//QWidget* b = new QWidget(pWindow);
+	b->move(this->x() - 440/* + this->width()*/, this->y()); 
+	b->setFixedWidth(420);
+	b->setFixedHeight(/*this->height()*/600);
 
-	QPixmap logo = QPixmap(":/startwindow/images/startwindow/question.png");
-	QLabel * llogo = new QLabel(b);
-	llogo->setGeometry(QRect(QPoint(0, 100), logo.size()));
+	QPixmap logo = QPixmap(":/mainwindow/images/mainwindow/step_1.png");
+	/*QLabel */ llogo = new QLabel(b);
+	llogo->setGeometry(QRect(QPoint(10, 120), logo.size()));
 	llogo->setPixmap(logo);
-	//b->setMinimumSize(QSize(logo.width() * 4, logo.height()));
-	//b->setWindowTitle("License");
-	QTextBrowser * lictext = new QTextBrowser(b);
+	/*QLabel */ lictext = new QLabel(b);
 	QFont f("Courrier", 8);
 	lictext->setFont(f);
-	lictext->setGeometry(QRect(logo.width(), 0, b->width()-50, b->height()-50));
-	//lictext->setHScrollBarMode(QScrollView::AlwaysOff);
+	lictext->setGeometry(QRect(10, /*logo.height()+20*/10, b->width() - 20, 100));
 	lictext->setLineWidth(0);
 
-	QString copyright("Ghjcnj nfr");
-	//if (QFileInfo(copyright).exists())
-	lictext->setText(copyright);
-	//QSize s = qApp->desktop()->size();
-	//s = s - b->size();
-	//s /= 2;
-	//b->move(s.width(), s.height());
+	//QString copyright("Step 1: ");
+
+	lictext->setText("Step 1. It is important when connecting a new positioner to install the correct profile for it in order to avoid breakage. To do this, click the Settings button - as shown in the figure below. ");
+	lictext->setWordWrap(true);
+	QPushButton * but1 = new QPushButton(b);
+	QPushButton * but2 = new QPushButton(b);
+	but1->setFixedWidth(150);
+	but1->setFixedHeight(50);
+	but1->setGeometry(QRect(10, b->height() - 60, 100, b->height() - 10));
+	but1->setFont(f);
+	but1->setText("Previous step");
+
+	but2->setFixedWidth(150);
+	but2->setFixedHeight(50);
+	but2->setGeometry(QRect(b->width() - 160, b->height() - 60, b->width() - 10, b->height() - 10));
+	but2->setFont(f);
+	but2->setText("Next step");
+	currentStep = 1;
+
+	QObject::connect(but1, SIGNAL(clicked()), this, SLOT(Onbut1Clicked()));
+	QObject::connect(but2, SIGNAL(clicked()), this, SLOT(Onbut2Clicked()));
 
 	
 	b->show();
-	//b->show();
+}
 
+void MainWindow::Onbut1Clicked()
+{
+	if (currentStep > 1) {
+		currentStep -= 1;
+		fixStep();
+	}
+}
+
+void MainWindow::Onbut2Clicked()
+{
+	if (currentStep < 2) {
+		currentStep += 1;
+		fixStep();
+	}
+}
+
+void MainWindow::fixStep()
+{
+	switch (currentStep)
+	{
+	case 1:
+		logo = QPixmap(":/mainwindow/images/mainwindow/step_1.png");
+		llogo->setPixmap(logo);
+		lictext->setText("Step 1. It is important when connecting a new positioner to install the correct profile for it in order to avoid breakage. To do this, click the Settings button - as shown in the figure below.");
+		break;
+	case 2:
+		logo = QPixmap(":/mainwindow/images/mainwindow/step_2.png");
+		llogo->setPixmap(logo);
+		lictext->setText("Step 2. In the settings window that appears, click Load settings from file...  - as shown in the figure below. ");
+		break;
+	//default:
+	//	break;
+	}
 }

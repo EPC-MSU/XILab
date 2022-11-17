@@ -39,7 +39,9 @@
         <file>images/mainwindow/cyclic_off.png</file>
         <file>images/mainwindow/check.png</file>
         <file>images/mainwindow/antiplay.png</file>
-        <file>images/mainwindow/state_moving.png</file>
+        <file>images/mainwindow/state_moving.png</file>		
+		<file>images/mainwindow/step_1.png</file>
+		<file>images/mainwindow/step_2.png</file>
     </qresource>
     <qresource prefix="/settingsdlg">
         <file>images/settingsdlg/settings.png</file>
