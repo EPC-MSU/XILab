@@ -45,6 +45,16 @@ public:
 
 	void LoadAxisConfig(QList<uint32_t> serials);
 	bool inited;
+	void showhelp();
+	void setFullCountStep(int);
+	QWidget* returnHelpWidget();
+	QWidget* b = 0;
+	QPixmap logo;
+	QLabel * llogo;
+	QLabel * lictext;
+	//QPushButton * but1;
+	//QPushButton * but2;
+	int currentStep;
 
 private:
 
@@ -81,6 +91,8 @@ private:
 	void SetPicture();
 
 	void  ShowDeviseSelClic();
+
+	void fixStep();
 	
 	//void showhelp();
 
@@ -100,6 +112,8 @@ void deviceListRecieved(bool enum_ok, QStringList names, QStringList description
 	void timer1Full();
 	void timer2Full();
 	void SelClic();
+	void Onbut1Clicked();
+	void Onbut2Clicked();
 };
 
 #endif

@@ -81,6 +81,7 @@ public:
 	void Init();
     void ClearState(int device_mode = FIRMWARE_MODE);
 	void NormalState();
+	void helpClose(QWidget*);
 
     device_t device;
     char device_name[256];
@@ -98,6 +99,8 @@ public:
 	//QPushButton * but1;
 	//QPushButton * but2;
 	int currentStep;
+
+
 
 private:
 	

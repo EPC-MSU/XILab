@@ -2335,6 +2335,11 @@ void MainWindow::showhelp()
 	}
 }
 
+void MainWindow::helpClose(QWidget* widgetHelp)
+{
+	b = widgetHelp;
+}
+
 void MainWindow::Onbut1Clicked()
 {
 	if (currentStep > 1) {
