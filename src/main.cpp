@@ -284,6 +284,7 @@ do {
 		startWnd->hide();
 		startWnd->setFullCountStep(1);
 		((Multiaxis*)p_mainWnd)->show(); // although (QObject*) would do just fine
+		((Multiaxis*)p_mainWnd)->helpClose(startWnd->returnHelpWidget());
 	}
 
 	int result = 0;

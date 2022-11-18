@@ -93,11 +93,7 @@ public:
 	bool inited;				//флаг, определяющий было ли инициализирована программа (если нет - при закрытии не сохранять данные)
 	void showhelp();
 	QWidget* b = 0;
-	QPixmap logo;
-	QLabel * llogo;
-	QLabel * lictext;
-	//QPushButton * but1;
-	//QPushButton * but2;
+
 	int currentStep;
 
 
@@ -130,7 +126,6 @@ private:
     void keyPressEvent(QKeyEvent* event);
 	void keyReleaseEvent(QKeyEvent* event);
 	bool eventFilter(QObject *object, QEvent *event);
-	void fixStep();
 
 	InfoBox * exitBox;
 	InfoBox infoBox;
@@ -274,8 +269,6 @@ public slots:
 	void makeNewInstance();
 
 	void OnPIDCalibratorShow();
-	void Onbut1Clicked();
-	void Onbut2Clicked();
 };
 
 #endif // MAINWINDOW_H

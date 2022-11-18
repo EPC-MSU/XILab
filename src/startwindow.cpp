@@ -168,8 +168,8 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 StartWindow::~StartWindow()
 {
 	inited = false;
-	if (b)
-		b->close();
+	//if (b)
+	//	b->close();
 	delete m_ui;
 }
 
@@ -703,44 +703,41 @@ void StartWindow::showhelp()
 		settings.setValue("first_launch", 1);
 		settings.endGroup();
 
-		/*QWidget*/ b = new QWidget();
+		b = new QWidget();
 		b->setWindowTitle("Starting hints");
-		b->move(this->x() - 440/* + this->width()*/, this->y());
+		b->move(this->x() - 440, this->y());
 		b->setFixedWidth(420);
-		b->setFixedHeight(/*this->height()*/620);
+		b->setFixedHeight(600);
 
 		QPixmap logo = QPixmap(PixmapString[1]);
-		/*QLabel */ llogo = new QLabel(b);
-		llogo->setGeometry(QRect(QPoint(10, 140), logo.size()));
+		llogo = new QLabel(b);
+		llogo->setGeometry(QRect(QPoint(10, 130), logo.size()));
 		llogo->setPixmap(logo);
-		/*QLabel */ lictext = new QLabel(b);
+		lictext = new QLabel(b);
 		QFont f("Courrier", 8);
 		lictext->setFont(f);
-		lictext->setGeometry(QRect(10, /*logo.height()+20*/10, b->width() - 20, 120));
+		lictext->setGeometry(QRect(10,10, b->width() - 20, 110));
 		lictext->setLineWidth(0);
-
-		//QString copyright("Step 1: ");
 
 		lictext->setText(TextString[1]);
 		lictext->setWordWrap(true);
 		QPushButton * but1 = new QPushButton(b);
 		QPushButton * but2 = new QPushButton(b);
-		but1->setFixedWidth(150);
+		but1->setFixedWidth(120);
 		but1->setFixedHeight(50);
-		but1->setGeometry(QRect(10, b->height() - 60, 100, b->height() - 10));
+		but1->setGeometry(QRect(10, b->height() - 60, 150, b->height() - 10));
 		but1->setFont(f);
 		but1->setText("Previous step");
 
-		but2->setFixedWidth(150);
+		but2->setFixedWidth(120);
 		but2->setFixedHeight(50);
-		but2->setGeometry(QRect(b->width() - 160, b->height() - 60, b->width() - 10, b->height() - 10));
+		but2->setGeometry(QRect(b->width() - 130, b->height() - 60, b->width() - 10, b->height() - 10));
 		but2->setFont(f);
 		but2->setText("Next step");
 		currentStep = 1;
 
 		QObject::connect(but1, SIGNAL(clicked()), this, SLOT(Onbut1Clicked()));
 		QObject::connect(but2, SIGNAL(clicked()), this, SLOT(Onbut2Clicked()));
-
 
 		b->show();
 	}
@@ -768,7 +765,10 @@ void StartWindow::setFullCountStep(int reg=0)
 	startStep = 3;
 	if (reg)
 	{
-
+		PixmapString[3] = ":/mainwindow/images/mainwindow/step_1_multiaxis.png";
+		TextString[3] = "Step 1: when connecting a new positioner, it is important to set the correct profile for it to avoid breakage. To do this, click the Settings button - as shown in the figure below. The procedure for loading the corresponding profile must be performed for each positioner.";
+		PixmapString[7] = ":/mainwindow/images/mainwindow/step_5_multiaxis.png";
+		TextString[7] = "Step 5: precise movements can be performed by setting values in the fields for moving and shifting, followed by pressing the appropriate buttons. In this case, the movement will be carried out on all axes in which the values are set. To move freely, hold Ctrl on the green field and press the left mouse button.";
 	}
 	currentStep = 3;
 	fixStep();
@@ -776,9 +776,12 @@ void StartWindow::setFullCountStep(int reg=0)
 
 void StartWindow::fixStep()
 {
-	logo = QPixmap(PixmapString[currentStep]);
-	llogo->setPixmap(logo);
-	lictext->setText(TextString[currentStep]);
+	if (b)
+	{
+		logo = QPixmap(PixmapString[currentStep]);
+		llogo->setPixmap(logo);
+		lictext->setText(TextString[currentStep]);
+	}
 }
 
 QWidget* StartWindow::returnHelpWidget()

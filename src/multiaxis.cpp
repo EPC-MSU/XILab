@@ -381,6 +381,8 @@ void Multiaxis::closeEvent(QCloseEvent *event)
 			devinterfaces.at(i)->close_device();
 		}
 	}
+	if (b)
+		b->close();
 	event->accept();
 }
 
@@ -1457,4 +1459,9 @@ void Multiaxis::FromSettingsToUi(QSettings *settings)
 		resize(size);
 	}
 	settings->endGroup();
+}
+
+void Multiaxis::helpClose(QWidget* widgetHelp)
+{
+	b = widgetHelp;
 }
