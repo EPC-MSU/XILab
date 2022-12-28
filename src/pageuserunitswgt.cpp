@@ -131,9 +131,6 @@ QString PageUserUnitsWgt::FromSettingsToUi(QSettings *settings, QSettings *defau
 	else
 		stateUU = 1;
 
-	if (m_ui->enableChk ->isChecked())
-
-
 	if(settings->contains("Precision"))
 		m_ui->precisionValue->setValue(settings->value("Precision", 3).toUInt());
 	else if(default_stgs != NULL)

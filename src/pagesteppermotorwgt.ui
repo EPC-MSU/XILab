@@ -240,9 +240,6 @@
          </item>
          <item>
           <widget class="QComboBox" name="stepmodeBox">
-           <property name="toolTip">
-            <string>The microstep mode cannot be changed when working in user units.</string>
-           </property>
            <item>
             <property name="text">
              <string>full step</string>

@@ -26,6 +26,7 @@ public:
 
 	void disableDifferentialFeedback (bool flag);
 	unsigned int OnRadio();
+
 	void stepmodeBoxDisable();
 	void stepmodeBoxEnable();
 
