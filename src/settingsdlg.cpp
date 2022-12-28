@@ -1185,20 +1185,10 @@ void SettingsDlg::OnBtnBoxClicked(QAbstractButton* button)
     case QDialogButtonBox::Ok       :   //m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 										AllPagesFromUiToClassToDevice();
 										config_file = temp_config_file;
-										// Bug #65219 This code removes the ability to edit the microstep mode when user units are enabled.
-										if (((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->enableChkisChecked())
-											((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxDisable();
-										else
-											((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxEnable();
                                         break;
     case QDialogButtonBox::Apply    :   //m_ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 										AllPagesFromUiToClassToDevice();
 										config_file = temp_config_file;
-										// Bug #65219 This code removes the ability to edit the microstep mode when user units are enabled.
-										if (((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->enableChkisChecked())
-											((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxDisable();
-										else
-											((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxEnable();
                                         break;
     case QDialogButtonBox::Reset    :   //m_ui->buttonBox->button(QDialogButtonBox::Reset)->setEnabled(false);
 										m_ui->configLbl->setText(getFileName(config_file));
@@ -1671,6 +1661,12 @@ void SettingsDlg::setStyles(bool permanent)
 	((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->FromUiToClass(); // load potentially changed user units to uustgs class
 	curr_tmp_uuStgs = *uuStgs; // copy uustgs class for comparison
 	*uuStgs = save_tmp_uuStgs; // restore (potentially changed by ui load) user units settings back
+	
+	// Bug #65219 This code removes the ability to edit the microstep mode when user units are enabled.
+	if (((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->enableChkisChecked())
+		((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxDisable();
+	else
+		((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->stepmodeBoxEnable();
 }
 
 void SettingsDlg::OnSwitchCTP(unsigned int new_feedback_type)
