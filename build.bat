@@ -94,7 +94,7 @@ goto :eof
 @if not %errorlevel% == 0 goto FAIL
 rmdir /S /Q xiresource
 @if not %errorlevel% == 0 goto FAIL
-git clone "https://gitlab.ximc.ru/ximc/xiresource"
+git clone "anonymous:anonymous@gitlab.ximc.ru/ximc/xiresource"
 @if not %errorlevel% == 0 goto FAIL
 
 for %%G in (win32,win64) do (
