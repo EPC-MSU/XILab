@@ -15,53 +15,6 @@
 #define SLOW_SPEED	15
 #define FAST_SPEED	200
 
-// список этапов помощника
-enum HelpStep
-{
-	OpenDevaseStep = 1,
-	SetupDevaseStep,
-	InitialSettingsStep,
-	LoadSettingsStep,
-	ProfileUploadStep,
-	ApplySettingsStep,
-	MotionStep,
-	MotionSettingsStep,
-	UserUnitStep
-};
-
-// число шагов помощника
-int countStep = 2;
-int startStep = 1;
-
-// массив названий изображений
-QString PixmapString[10] = {
-	"",
-	":/mainwindow/images/mainwindow/step_opendevase.png",
-	":/mainwindow/images/mainwindow/step_setupdevase.png",
-	":/mainwindow/images/mainwindow/step_1.png",
-	":/mainwindow/images/mainwindow/step_2.png",
-	":/mainwindow/images/mainwindow/step_3.png",
-	":/mainwindow/images/mainwindow/step_4.png",
-	":/mainwindow/images/mainwindow/step_5.png",
-	":/mainwindow/images/mainwindow/step_6.png",
-	":/mainwindow/images/mainwindow/step_7.png"
-};
-
-// массив сообщений
-QString TextString[10] = {
-	"",
-	"Step open devase: you can select any device from the last by double-clicking on the corresponding line. To select multiple devices, use the Ctrl and Shift buttons.Opening multiple devices is performed by the Open selected button, as shown below.",
-	"Step setup devase: it is important when connecting a new positioner to install the correct profile for it in order to avoid breakage. To do this, click the Settings button - as shown in the figure below.",
-	"Step 1: it is important when connecting a new positioner to install the correct profile for it in order to avoid breakage. To do this, click the Settings button - as shown in the figure below.",
-	"Step 2: in the settings window that appears, click Load settings from file...  - as shown in the figure below. ",
-	"Step 3: in the window that opens, select the folder of the corresponding manufacturer and the profile corresponding to the positioner, then click Open",
-	"Step 4: to apply this profile, click Apply or Ok in the Settings window. To not use the selected profile, click Cancel.",
-	"Step 5: motion control is carried out from the main Xlab window. Using the buttons on the slider, you can make movements in both directions or make a stop. Precise movements can be carried out by setting values in the fields for moving and shifting, followed by pressing the corresponding buttons.",
-	"Step 6: to adjust motion parameters such as speed, acceleration, etc., you must use one of the three pages of the Settings window, depending on the type of motor used in the positioner, as shown below.",
-	"Step 7: the XiLab application also allows you to make movement both in motor units, such as steps revolutions per minute, etc., and in user units. When using user units, it is necessary to check the box in the User unit tab of the Settings window, as shown below."
-};
-
-
 const char* str_open = "Settings >>";
 const char* str_close = "Settings <<";
 
@@ -161,15 +114,11 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 
 	this->loadWindowGeometry(MakeProgramConfigFilename());
 	inited = true;
-
-	//showhelp();
 }
 
 StartWindow::~StartWindow()
 {
 	inited = false;
-	//if (b)
-	//	b->close();
 	delete m_ui;
 }
 
@@ -687,104 +636,4 @@ void StartWindow::noDevicesLinuxHelperClicked()
 	dlg.enableApple();
 	dlg.exec();
 #endif
-}
-
-void StartWindow::showhelp()
-{
-	XSettings settings(MakeProgramConfigFilename(), QSettings::IniFormat, QIODevice::ReadOnly);
-
-	settings.beginGroup("Start_window");
-	int firstLaunch = 0;
-	firstLaunch = settings.value("first_launch").toInt();
-	settings.endGroup();
-	if (firstLaunch == 0)
-	{
-		settings.beginGroup("Start_window");
-		settings.setValue("first_launch", 1);
-		settings.endGroup();
-
-		b = new QWidget();
-		b->setWindowTitle("Starting hints");
-		b->move(this->x() - 440, this->y());
-		b->setFixedWidth(420);
-		b->setFixedHeight(600);
-
-		QPixmap logo = QPixmap(PixmapString[1]);
-		llogo = new QLabel(b);
-		llogo->setGeometry(QRect(QPoint(10, 130), logo.size()));
-		llogo->setPixmap(logo);
-		lictext = new QLabel(b);
-		QFont f("Courrier", 8);
-		lictext->setFont(f);
-		lictext->setGeometry(QRect(10,10, b->width() - 20, 110));
-		lictext->setLineWidth(0);
-
-		lictext->setText(TextString[1]);
-		lictext->setWordWrap(true);
-		QPushButton * but1 = new QPushButton(b);
-		QPushButton * but2 = new QPushButton(b);
-		but1->setFixedWidth(120);
-		but1->setFixedHeight(50);
-		but1->setGeometry(QRect(10, b->height() - 60, 150, b->height() - 10));
-		but1->setFont(f);
-		but1->setText("Previous step");
-
-		but2->setFixedWidth(120);
-		but2->setFixedHeight(50);
-		but2->setGeometry(QRect(b->width() - 130, b->height() - 60, b->width() - 10, b->height() - 10));
-		but2->setFont(f);
-		but2->setText("Next step");
-		currentStep = 1;
-
-		QObject::connect(but1, SIGNAL(clicked()), this, SLOT(Onbut1Clicked()));
-		QObject::connect(but2, SIGNAL(clicked()), this, SLOT(Onbut2Clicked()));
-
-		b->show();
-	}
-}
-
-void StartWindow::Onbut1Clicked()
-{
-	if (currentStep > startStep) {
-		currentStep -= 1;
-		fixStep();
-	}
-}
-
-void StartWindow::Onbut2Clicked()
-{
-	if (currentStep < countStep) {
-		currentStep += 1;
-		fixStep();
-	}
-}
-
-void StartWindow::setFullCountStep(int reg=0)
-{
-	countStep = 9;
-	startStep = 3;
-	if (reg)
-	{
-		PixmapString[3] = ":/mainwindow/images/mainwindow/step_1_multiaxis.png";
-		TextString[3] = "Step 1: when connecting a new positioner, it is important to set the correct profile for it to avoid breakage. To do this, click the Settings button - as shown in the figure below. The procedure for loading the corresponding profile must be performed for each positioner.";
-		PixmapString[7] = ":/mainwindow/images/mainwindow/step_5_multiaxis.png";
-		TextString[7] = "Step 5: precise movements can be performed by setting values in the fields for moving and shifting, followed by pressing the appropriate buttons. In this case, the movement will be carried out on all axes in which the values are set. To move freely, hold Ctrl on the green field and press the left mouse button.";
-	}
-	currentStep = 3;
-	fixStep();
-}
-
-void StartWindow::fixStep()
-{
-	if (b)
-	{
-		logo = QPixmap(PixmapString[currentStep]);
-		llogo->setPixmap(logo);
-		lictext->setText(TextString[currentStep]);
-	}
-}
-
-QWidget* StartWindow::returnHelpWidget()
-{
-	return b;
 }

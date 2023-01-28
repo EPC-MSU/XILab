@@ -81,7 +81,6 @@ public:
 	void Init();
     void ClearState(int device_mode = FIRMWARE_MODE);
 	void NormalState();
-	void helpClose(QWidget*);
 
     device_t device;
     char device_name[256];
@@ -91,12 +90,6 @@ public:
 	ScriptDlg *scriptDlg;
 	SettingsDlg *settingsDlg;
 	bool inited;				//флаг, определяющий было ли инициализирована программа (если нет - при закрытии не сохранять данные)
-	void showhelp();
-	QWidget* b = 0;
-
-	int currentStep;
-
-
 
 private:
 	

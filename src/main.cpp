@@ -197,9 +197,6 @@ do {
 	init_success = true;
 	startWnd->show();
 	startWnd->startSearching();
-	startWnd->showhelp();
-	//startWnd->showhelp();
-
 	QList<QString> devices;
 	do {
 		devices = startWnd->getSelectedDevices();
@@ -273,18 +270,13 @@ do {
 						 mlog,                     SLOT(InsertLine(QDateTime, QString, QString, int, LogSettings*)),
 						 Qt::QueuedConnection);
 		startWnd->hide();
-		startWnd->setFullCountStep(0);
 		((MainWindow*)p_mainWnd)->show();
-		((MainWindow*)p_mainWnd)->helpClose(startWnd->returnHelpWidget());
-		//((MainWindow*)p_mainWnd)->showhelp();
 	} else {
 		QObject::connect((Multiaxis*)p_mainWnd, SIGNAL(InsertLineSgn(QDateTime, QString, QString, int, LogSettings*)),
 						 mlog,      SLOT(InsertLine(QDateTime, QString, QString, int, LogSettings*)),
 						 Qt::QueuedConnection);
 		startWnd->hide();
-		startWnd->setFullCountStep(1);
 		((Multiaxis*)p_mainWnd)->show(); // although (QObject*) would do just fine
-		((Multiaxis*)p_mainWnd)->helpClose(startWnd->returnHelpWidget());
 	}
 
 	int result = 0;

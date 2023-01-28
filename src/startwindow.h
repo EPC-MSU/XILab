@@ -45,17 +45,6 @@ public:
 
 	void LoadAxisConfig(QList<uint32_t> serials);
 	bool inited;
-	void showhelp();
-	void setFullCountStep(int);
-	QWidget* returnHelpWidget();
-	QWidget* b = 0;
-	QPixmap logo;
-	QLabel * llogo;
-	QLabel * lictext;
-	//QPushButton * but1;
-	//QPushButton * but2;
-	int currentStep;
-
 private:
 
     Ui::StartWindowClass *m_ui;
@@ -92,10 +81,6 @@ private:
 
 	void  ShowDeviseSelClic();
 
-	void fixStep();
-	
-	//void showhelp();
-
 public slots:
 void deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags);
 	void itemDoubleClicked(QTableWidgetItem*);
@@ -112,8 +97,12 @@ void deviceListRecieved(bool enum_ok, QStringList names, QStringList description
 	void timer1Full();
 	void timer2Full();
 	void SelClic();
-	void Onbut1Clicked();
-	void Onbut2Clicked();
 };
+
+
+
+
+
+
 
 #endif

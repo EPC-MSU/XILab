@@ -39,18 +39,7 @@
         <file>images/mainwindow/cyclic_off.png</file>
         <file>images/mainwindow/check.png</file>
         <file>images/mainwindow/antiplay.png</file>
-        <file>images/mainwindow/state_moving.png</file>	
-		<file>images/mainwindow/step_opendevase.png</file>
-		<file>images/mainwindow/step_setupdevase.png</file>		
-		<file>images/mainwindow/step_1.png</file>
-		<file>images/mainwindow/step_1_multiaxis.png</file>
-		<file>images/mainwindow/step_2.png</file>
-		<file>images/mainwindow/step_3.png</file>
-		<file>images/mainwindow/step_4.png</file>
-		<file>images/mainwindow/step_5.png</file>
-		<file>images/mainwindow/step_5_multiaxis.png</file>
-		<file>images/mainwindow/step_6.png</file>
-		<file>images/mainwindow/step_7.png</file>
+        <file>images/mainwindow/state_moving.png</file>
     </qresource>
     <qresource prefix="/settingsdlg">
         <file>images/settingsdlg/settings.png</file>

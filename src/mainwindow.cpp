@@ -142,9 +142,6 @@ MainWindow::~MainWindow()
 			devinterface->close_device();
 		}
 
-		if(b)
-			b->close();
-
 		delete ui;
 	}
 }
@@ -2276,9 +2273,4 @@ void MainWindow::OnTechSupportClicked()
 	
 
 	QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
-}
-
-void MainWindow::helpClose(QWidget* widgetHelp)
-{
-	b = widgetHelp;
 }

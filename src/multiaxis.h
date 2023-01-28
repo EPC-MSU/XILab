@@ -51,11 +51,9 @@ public:
 	LogDlg* logDlg;
 	LogSettings* logStgs;
 	bool inited;
-	QWidget* b = 0;
 
 	QStringList getSerials();
 	QString getSerialsSortedConcat();
-	void helpClose(QWidget*);
 signals:
 	void InsertLineSgn(QDateTime, QString, QString, int, LogSettings*);
 
