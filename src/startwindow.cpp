@@ -233,7 +233,10 @@ void  StartWindow::ShowDeviseSelClic()
 		if (count_row == 2)
 			m_ui->axisSelect->setText("Two axes are selected.");
 		else
-			m_ui->axisSelect->setText("three axes are selected.");
+			if (count_row == 3)
+				m_ui->axisSelect->setText("three axes are selected.");
+			else
+				m_ui->axisSelect->setText(QString::number(count_row) + " axes are selected.");
 	}
 
 	timer2.start(TIME_SHOW);
