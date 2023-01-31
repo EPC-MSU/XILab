@@ -71,10 +71,10 @@ mv ../ximc-[0-9\.]*[0-9].tar.gz ./
 tar -xf ximc-[0-9\.]*[0-9].tar.gz
 
 # pull resources
-if [ -z "$URL_XIRESOURCE" ] ; then
-	URL_XIRESOURCE="https://anonymous:anonymous@hg.ximc.ru/xiresource"
-fi
-$MERCURIAL clone $URL_XIRESOURCE
+#if [ -z "$URL_XIRESOURCE" ] ; then
+URL_XIRESOURCE="https://anonymous:anonymous@gitlab.ximc.ru/ximc/xiresource.git"
+# fi
+git -c http.sslVerify=false clone $URL_XIRESOURCE
 
 package_for_linux () {
 # function parameters
