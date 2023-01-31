@@ -74,7 +74,7 @@ tar -xf ximc-[0-9\.]*[0-9].tar.gz
 # if [ -z "$URL_XIRESOURCE" ] ; then
 URL_XIRESOURCE="https://anonymous:anonymous@gitlab.ximc.ru/ximc/xiresource.git"
 # fi
-git clone $URL_XIRESOURCE
+git -c http.sslVerify=false clone $URL_XIRESOURCE
 
 package_for_linux () {
 # function parameters
