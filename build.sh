@@ -145,7 +145,6 @@ cd ..
 mkdir -p ./$r_dir/usr/bin/ ./$r_dir/usr/lib/$archpath/ ./$r_dir/usr/share/libximc/ ./$r_dir/usr/share/xilab/ ./$r_dir/lib/$archpath/
 cp $wd/xilabdefault.cfg ./$r_dir/usr/share/xilab/
 for file in libximc.so.${major} libxibridge.so ; do cp $wd/usr/lib/$file ./$r_dir/usr/lib/ ; done
-cp $wd/usr/share/libximc/keyfile.sqlite ./$r_dir/usr/share/xilab/default_keyfile.sqlite
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ./$r_dir/usr/lib/
 cp /lib/$archpath/libpng12.so.0 ./$r_dir/lib/$archpath/
 
