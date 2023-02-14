@@ -12,8 +12,6 @@ HEADERS += ./src/aes.h \
     ./src/attenuator.h \
     ./src/axisobject.h \
     ./src/basethread.h \
-    ./src/bindy.h \
-    ./src/bindyusermodel.h \
     ./src/chartdlg.h \
     ./src/chartlog.h \
     ./src/choosefirmware.h \
@@ -117,7 +115,6 @@ SOURCES += ./src/aes.cpp \
     ./src/attenuator.cpp \
     ./src/axisobject.cpp \
     ./src/basethread.cpp \
-    ./src/bindyusermodel.cpp \
     ./src/chartdlg.cpp \
     ./src/chartlog.cpp \
     ./src/choosefirmware.cpp \
