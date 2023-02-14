@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
 		file.close();
 	}
 	//check for Bindy keyfile in user settings dir and copy one from installation dir if there isn't any
-	if (!QFile(BindyKeyfileName()).exists()) {
+/*	if (!QFile(BindyKeyfileName()).exists()) {
 		QFile keyfile(DefaultBindyKeyfileName());
 		if ( !keyfile.exists() ) {
 			QMessageBox::warning(0, "Error", "Cannot find default keyfile, your Xilab installation is damaged\n");
@@ -191,7 +191,7 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
-
+*/
 	/*StartWindow**/ startWnd = new StartWindow();
 do {
 	init_success = true;

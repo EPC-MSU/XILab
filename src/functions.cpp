@@ -294,11 +294,11 @@ QString DefaultScriptScratchName()
 	return getDefaultPath() + "/scratch.txt"; // since both windows and unix-types will process this kind of slash
 }
 
-QString BindyKeyfileName()
+/*QString BindyKeyfileName()
 {
 	return getDefaultPath() + "/keyfile.sqlite";
 }
-
+*/
 QString VirtualControllerBlobFilename(uint32_t serial)
 {
 	return QString("%1/%2%3").arg(getDefaultPath()).arg("V_").arg(serial);
@@ -317,7 +317,7 @@ QString DefaultConfigFilename()
 #endif
 }
 
-QString DefaultBindyKeyfileName()
+/*QString DefaultBindyKeyfileName()
 {
 	const char* fn = "/default_keyfile.sqlite";
 #if defined(WIN32) || defined(WIN64)
@@ -330,7 +330,7 @@ QString DefaultBindyKeyfileName()
 	return QApplication::applicationDirPath() + fn;
 #endif
 }
-
+*/
 QString DefaultLocalConfigFilename()
 {
 	return QApplication::applicationDirPath() + "/xilabdefault.cfg";

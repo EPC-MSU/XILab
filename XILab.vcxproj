@@ -224,17 +224,17 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
-      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug - usermode new|Win32'">
@@ -250,9 +250,9 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
-      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -262,8 +262,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release - usermode|x64'">
@@ -455,17 +454,17 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtXml4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtXml4.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
-      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug - servicemode new|Win32'">
@@ -481,9 +480,9 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtXml4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtXml4.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
-      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -493,8 +492,8 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release - servicemode|x64'">
@@ -3549,7 +3548,6 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\attenuator.cpp" />
     <ClCompile Include="src\axisobject.cpp" />
     <ClCompile Include="src\basethread.cpp" />
-    <ClCompile Include="src\bindyusermodel.cpp" />
     <ClCompile Include="src\chartdlg.cpp" />
     <ClCompile Include="src\chartlog.cpp" />
     <ClCompile Include="src\choosefirmware.cpp" />
@@ -4134,8 +4132,6 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
       <Outputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|x64'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='debug - usermode new|x64'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="src\bindy.h" />
-    <ClInclude Include="src\bindyusermodel.h" />
     <ClInclude Include="src\commonvars.h" />
     <ClInclude Include="src\comparesettingsdialog.h" />
     <CustomBuild Include="src\controllersettings.h">

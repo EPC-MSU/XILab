@@ -68,7 +68,7 @@ void PageAboutWgt::OnRemoveAllConfigsBtnClicked()
 		LoggedFile::remove(DefaultScriptScratchName());
 
 		// also delete keyfile.sqlite
-		LoggedFile::remove(BindyKeyfileName());
+		//LoggedFile::remove(BindyKeyfileName());
 		
 		save_configs = false;
 		emit exit_on_remove();
