@@ -143,7 +143,6 @@ Section "Application files" SecMain_64
   File  "${QTFILES64}\bin\QtXml4.dll"
   File  "${QWTFILES}\lib64\qwt.dll"
   File  "xilabdefault.cfg"
-  File  "default_keyfile.sqlite"
   File  "qt.conf"
 
   CreateDirectory "$INSTDIR\imageformats"
