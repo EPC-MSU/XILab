@@ -1,10 +1,10 @@
-# XILab
+# mDrive Direct Control
 
 ![](Resources/images/icons/motor_icon.png)
 
-Standa 8SMC5 motor controller software.
+Software for EPC MSU mDrive motor controllers
 
-Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMCn-USB/XILab_application_Users_guide.html).
+
 
 ## How to deploy a XiLab project on a Windows computer
 
