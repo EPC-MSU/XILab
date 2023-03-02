@@ -1,5 +1,11 @@
 # XILab
 
+![](Resources/images/icons/motor_icon.png)
+
+Standa 8SMC5 motor controller software.
+
+Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMCn-USB/XILab_application_Users_guide.html).
+
 ## How to deploy a XiLab project on a Windows computer
 
 **Important**: For Windows 10, XILab can only be build with administrator rights or by the administrator himself, otherwise you will get errors during the build
