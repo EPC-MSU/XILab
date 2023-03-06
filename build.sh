@@ -131,7 +131,7 @@ ls -l ../$r_dir/XILab_${bits}_user
 
 wd=`pwd`
 cd ..
-tar -czf xilab-$BUILD_SUFFIX.tar.gz ./$r_dir
+tar -czf mdrive_direct_control-$BUILD_SUFFIX.tar.gz ./$r_dir
 mv ./$r_dir/XILab_${bits}_user ./
 rm -r ./$r_dir/*
 mv ./XILab_${bits}_user ./$r_dir/
@@ -161,7 +161,7 @@ appimagetool-${pkgtype}.AppImage -n ./$r_dir/
 if [ -f "xilab.appdata.xml" ]; then  # imagetool on 32-bit Linux is bugged without "-n" switch
   mv "xilab.appdata.xml" "XILab-Intel_80386.AppImage"
 fi
-mv XILab-*.AppImage "xilab-${VER}-${pkgtype}.AppImage"
+mv XILab-*.AppImage "mdrive_direct_control-${VER}-${pkgtype}.AppImage"
 
 # add scripts and profiles
 cd -
@@ -169,20 +169,20 @@ mkdir -p ../$r_dir/AppImage
 cp -R ./xiresource/scripts ../$r_dir/AppImage
 cp -R ./xiresource/profiles ../$r_dir/AppImage
 cp -R ./xiresource/schemes/. ../$r_dir/AppImage/profiles
-mv ../xilab-${VER}-${pkgtype}.AppImage ../$r_dir/AppImage
+mv ../mdrive_direct_control-${VER}-${pkgtype}.AppImage ../$r_dir/AppImage
 cd ../$r_dir/AppImage
-tar -czf ../xilab-${VER}-${pkgtype}.tar.gz ./
+tar -czf ../mdrive_direct_control-${VER}-${pkgtype}.tar.gz ./
 cd -
-mv ../$r_dir/xilab-${VER}-${pkgtype}.tar.gz ../
+mv ../$r_dir/mdrive_direct_control-${VER}-${pkgtype}.tar.gz ../
 rm -r ../$r_dir/AppImage
 
 # move artifacts
 cd "$wd"
-mv ../xilab-$BUILD_SUFFIX.tar.gz ./
-mv ../xilab-${VER}-${pkgtype}.tar.gz ./
+mv ../mdrive_direct_control-$BUILD_SUFFIX.tar.gz ./
+mv ../mdrive_direct_control-${VER}-${pkgtype}.tar.gz ./
 
 # clean up
-rm -rf ../xilab-${VER}
+rm -rf ../mdrive_direct_control-${VER}
 clean_some_stuff
 }
 
@@ -266,7 +266,7 @@ done
 # package and create .dmg volume to hold the installer
 cd ..
 rm -rf installer.pkg
-rm -rf dmg xilab-*.dmg
+rm -rf dmg mdrive_direct_control-*.dmg
 mkdir ./$r_dir/Applications
 mv ./$r_dir/XILab.app ./$r_dir/Applications/
 plist="component.plist"
@@ -275,12 +275,12 @@ pkgbuild --root "./$r_dir/" --version "$VER" --component-plist "$plist" --identi
 rm "$plist"
 mkdir -p dmg
 cp -pR installer.pkg dmg
-hdiutil create xilab-${VER}.dmg -volname "XILab-${VER}" -fs HFS+ -srcfolder dmg
-tar -czf xilab-${VER}-osx64.tar.gz ./xilab-${VER}.dmg
-cd - && mv ../xilab-${VER}-osx64.tar.gz ./
+hdiutil create mdrive_direct_control-${VER}.dmg -volname "XILab-${VER}" -fs HFS+ -srcfolder dmg
+tar -czf mdrive_direct_control-${VER}-osx64.tar.gz ./mdrive_direct_control-${VER}.dmg
+cd - && mv ../mdrive_direct_control-${VER}-osx64.tar.gz ./
 
 # cleanup macosx
-rm -rf ../installer.pkg ../xilab-${VER}.dmg ../xilab-${VER} ../dmg
+rm -rf ../installer.pkg ../mdrive_direct_control-${VER}.dmg ../mdrive_direct_control-${VER} ../dmg
 clean_some_stuff
 }
 
