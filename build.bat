@@ -1,4 +1,5 @@
 @if 'x%MERCURIAL%'=='x' set MERCURIAL=hg
+@if 'x%GIT%'=='x' set GIT=git
 set BASEDIR=%CD%
 @cmd /C exit 0
 

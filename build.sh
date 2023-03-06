@@ -3,6 +3,8 @@ set -e
 
 param1=$1
 
+[ -n "$GIT" ] || GIT=git
+
 # update to hg revision
 [ -n "$MERCURIAL" ] || MERCURIAL=hg
 
