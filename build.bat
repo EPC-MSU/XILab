@@ -94,7 +94,8 @@ goto :eof
 @if not %errorlevel% == 0 goto FAIL
 rmdir /S /Q xiresource
 @if not %errorlevel% == 0 goto FAIL
-git -c http.sslVerify=false clone "https://anonymous:anonymous@gitlab.ximc.ru/ximc/xiresource.git"
+@if "x%URL_XIRESOURCE%" == "x" set URL_XIRESOURCE="https://gitlab.ximc.ru/ximc-public/xiresource.git"
+%GIT% clone "%URL_XIRESOURCE%"
 @if not %errorlevel% == 0 goto FAIL
 
 for %%G in (win32,win64) do (
