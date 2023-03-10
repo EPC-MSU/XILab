@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
+    <width>587</width>
     <height>760</height>
    </rect>
   </property>
@@ -315,7 +315,7 @@
                 <widget class="QToolButton" name="sstpBtn">
                  <property name="minimumSize">
                   <size>
-                   <width>48</width>
+                   <width>120</width>
                    <height>24</height>
                   </size>
                  </property>
@@ -913,19 +913,6 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="exitBtn">
-        <property name="minimumSize">
-         <size>
-          <width>90</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>E&amp;xit</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -948,7 +935,7 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="minimumSize">
          <size>
-          <width>120</width>
+          <width>90</width>
           <height>0</height>
          </size>
         </property>
@@ -962,7 +949,20 @@ p, li { white-space: pre-wrap; }
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When you click the technical support button, the email client will open, if it is installed. If it is not possible to identify the email client, the technical support page will open, where you can register if you have not yet contacted the technical support service and ask questions.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>Technical support</string>
+         <string>Tech. support</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exitBtn">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>E&amp;xit</string>
         </property>
        </widget>
       </item>
