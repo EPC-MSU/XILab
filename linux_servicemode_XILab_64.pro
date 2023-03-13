@@ -1,6 +1,6 @@
 TEMPLATE = app
 CONFIG += 64bit
-TARGET = XILab_64_service
+TARGET = mdrive_direct_control_service
 QMAKE_CXXFLAGS += -m64 -std=c++11
 DESTDIR = ./release_64
 QT += core gui script svg xml network

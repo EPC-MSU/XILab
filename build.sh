@@ -102,9 +102,9 @@ cp xilabdefault.cfg ../$r_dir/
 
 # add scripts and profiles
 mkdir -p ../$r_dir/Library/XILab/
-cp -R ./xiresource/scripts ../$r_dir/Library/XILab/
-cp -R ./xiresource/profiles ../$r_dir/Library/XILab/
-cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
+cp -R ./xiresource/scripts ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/profiles ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/schemes/. ../$r_dir/Library/mdrive_direct_control/profiles
 
 # add qwt
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/
@@ -116,25 +116,25 @@ sed "s/%qwtver/$QWT_VER/" --in-place ./linux_*_XILab_*.pro
 if [ "$param1" = "add_service_build" ] ; then
 	qmake linux_servicemode_XILab_${bits}.pro
 	make
-	mv release_${bits}/XILab_${bits}_service ../$r_dir
-	strip ../$r_dir/XILab_${bits}_service
-	ls -l ../$r_dir/XILab_${bits}_service
+	mv release_${bits}/mdrive_direct_control_${bits}_service ../$r_dir
+	strip ../$r_dir/mdrive_direct_control_${bits}_service
+	ls -l ../$r_dir/mdrive_direct_control_${bits}_service
 	
 	make clean
 fi
 
 qmake linux_usermode_XILab_${bits}.pro
 make
-mv release_${bits}/XILab_${bits}_user ../$r_dir
-strip ../$r_dir/XILab_${bits}_user
-ls -l ../$r_dir/XILab_${bits}_user
+mv release_${bits}/mdrive_direct_control_${bits}_user ../$r_dir
+strip ../$r_dir/mdrive_direct_control_${bits}_user
+ls -l ../$r_dir/mdrive_direct_control_${bits}_user
 
 wd=`pwd`
 cd ..
 tar -czf mdrive_direct_control-$BUILD_SUFFIX.tar.gz ./$r_dir
 mv ./$r_dir/XILab_${bits}_user ./
 rm -r ./$r_dir/*
-mv ./XILab_${bits}_user ./$r_dir/
+mv ./mdrive_direct_control_${bits}_user ./$r_dir/
 cd -
 
 # prepare files for AppImage
@@ -235,15 +235,15 @@ cp ./macosx/libximc.framework/Versions/${major}/Resources/keyfile.sqlite ../$r_d
 chmod -R ugo+rX ../$r_dir/XILab.app/Contents/Frameworks/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/libbindy.dylib ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
 
 # add scripts and profiles
-mkdir -p ../$r_dir/Library/XILab/
-cp -R ./xiresource/scripts ../$r_dir/Library/XILab/
-cp -R ./xiresource/profiles ../$r_dir/Library/XILab/
-cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
+mkdir -p ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/scripts ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/profiles ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/schemes/. ../$r_dir/Library/mdrive_direct_control/profiles
 
 # package profiles
 XIMC_DIR=./ximc-*/ximc
-CFG_DIR=../$r_dir/Library/XILab/profiles/STANDA
-mkdir -p ../$r_dir/Library/XILab
+CFG_DIR=../$r_dir/Library/mdrive_direct_control/profiles/STANDA
+mkdir -p ../$r_dir/Library/mdrive_direct_control
 ARCHIVE_DIR=.
 . ./profiles.sh
 
@@ -255,7 +255,7 @@ for path in $XIMC_DIR/c-profiles/*; do
 		echo "Compressing $filename"
 		tar -rvf "profile-$filename.tar" -C $XIMC_DIR "c-profiles/$filename"
 		tar -rvf "profile-$filename.tar" -C $XIMC_DIR "python-profiles/$filename"
-		tar -rvf "profile-$filename.tar" -C ../$r_dir/Library/XILab "profiles/$filename"
+		tar -rvf "profile-$filename.tar" -C ../$r_dir/Library/mdrive_direct_control "profiles/$filename"
 		gzip "profile-$filename.tar"
 		if [ ! $ARCHIVE_DIR -ef . ]; then
 			mv "profile-$filename.tar.gz" $ARCHIVE_DIR
@@ -275,7 +275,7 @@ pkgbuild --root "./$r_dir/" --version "$VER" --component-plist "$plist" --identi
 rm "$plist"
 mkdir -p dmg
 cp -pR installer.pkg dmg
-hdiutil create mdrive_direct_control-${VER}.dmg -volname "XILab-${VER}" -fs HFS+ -srcfolder dmg
+hdiutil create mdrive_direct_control-${VER}.dmg -volname "mdrive_direct_control-${VER}" -fs HFS+ -srcfolder dmg
 tar -czf mdrive_direct_control-${VER}-osx64.tar.gz ./mdrive_direct_control-${VER}.dmg
 cd - && mv ../mdrive_direct_control-${VER}-osx64.tar.gz ./
 

@@ -1,6 +1,6 @@
 TEMPLATE = app
 CONFIG += 32bit
-TARGET = XILab_32_user
+TARGET = mdrive_direct_control32_user
 QMAKE_CXXFLAGS += -m32 -std=c++11
 DESTDIR = ./release_32
 QT += core gui script svg xml network
