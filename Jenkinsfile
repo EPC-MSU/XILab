@@ -65,7 +65,7 @@ pipeline {
               sh "./build.sh add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.tar.gz"
               sh "ls"
-              stash name: "result-${BUILDOS}", includes: "xilab-*.AppImage,xilab-*.tar.gz,profile-*.tar.gz"
+              stash name: "result-${BUILDOS}", includes: "mdrive_direct_control-*.AppImage,mdrive_direct_control-*.tar.gz,profile-*.tar.gz"
             }
           } // stage
 
@@ -79,7 +79,7 @@ pipeline {
               powershell "Invoke-WebRequest -Uri https://artifacts.ci.ximc.ru/jenkins/libximc/libximc-${LIBXIMC_VERSION}-all.tar.gz -OutFile ximc-0.0.tar.gz"
               bat "build.bat add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.exe"
-              stash name: "result-${BUILDOS}", includes: "xilab-*.exe, xilab-*.7z"
+              stash name: "result-${BUILDOS}", includes: "mdrive_direct_control-*.exe, mdrive_direct_control-*.7z"
             }
           } // stage
         } // stages
@@ -104,9 +104,9 @@ pipeline {
         unstash "result-win"
         unstash "result-osx"
         sh "ls"
-        sh "7z a -mx0 xilab-release_${BRANCH_NAME}_build-${BUILD_ID}.7z xilab-*.tar.gz xilab-win32.7z xilab-win64.7z xilab-*.exe xilab-*.AppImage"
-        sh "7z l xilab-release_${BRANCH_NAME}_build-${BUILD_ID}.7z"
-        archiveArtifacts artifacts: "xilab-release*7z,profile-*.tar.gz"
+        sh "7z a -mx0 mdrive_direct_control-release_${BRANCH_NAME}_build-${BUILD_ID}.7z mdrive_direct_control-*.tar.gz mdrive_direct_control-win32.7z mdrive_direct_control-win64.7z mdrive_direct_control-*.exe mdrive_direct_control-*.AppImage"
+        sh "7z l mdrive_direct_control-release_${BRANCH_NAME}_build-${BUILD_ID}.7z"
+        archiveArtifacts artifacts: "mdrive_direct_control-release*7z,profile-*.tar.gz"
       }
     } // stage
 
