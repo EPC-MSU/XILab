@@ -32,7 +32,7 @@
    <enum>Qt::DefaultContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>XILab</string>
+   <string>mDrive Direct Control</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Resources/XILab.qrc">

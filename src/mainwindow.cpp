@@ -163,7 +163,7 @@ void MainWindow::InitUI()
 #ifdef __APPLE__
 	//меню для MacOS
 	menuBar = new QMenuBar;
-	QMenu *menu = menuBar->addMenu("New instance of XILab");
+	QMenu *menu = menuBar->addMenu("New instance of mDrive Direct Control");
 	connect(menu, SIGNAL(aboutToShow()), this, SLOT(makeNewInstance()));
 	setMenuBar(menuBar);
 #endif
@@ -256,7 +256,7 @@ void MainWindow::InitUI()
 
 	eeprLbl.setFixedWidth(ST_PANE_WIDTH);
 	eeprLbl.setAlignment(Qt::AlignHCenter);
-	eeprLbl.setToolTip(tr("Lights up green when the stage is equipped with EEPROM memory chip. \nThe built - in stage profile is uploaded from the EEPROM memory chip \nif the EEPROM_PRECEDENCE flag(XILab Settings->About device tab) is enabled, \nallowing you to connect various stages to the controller with automatic setup."));
+	eeprLbl.setToolTip(tr("Lights up green when the stage is equipped with EEPROM memory chip. \nThe built - in stage profile is uploaded from the EEPROM memory chip \nif the EEPROM_PRECEDENCE flag(mDrive Direct Control Settings->About device tab) is enabled, \nallowing you to connect various stages to the controller with automatic setup."));
 	eeprLbl.setFont(font);
 	eeprLbl.setPalette(palette_green);
 	eeprLbl.setText("EEPR");
@@ -310,7 +310,7 @@ void MainWindow::InitUI()
 
 	slipLbl.setFixedWidth(ST_PANE_WIDTH);
 	slipLbl.setAlignment(Qt::AlignHCenter);
-	slipLbl.setToolTip(tr("Motor slip detected. Flag is set when encoder position and step position are too far apart. \nYou can disable the \"Position control\" flag or increase the error \nin the \"threshold\" field on the XILab Settings->Position control tab to stop these error from happening."));
+	slipLbl.setToolTip(tr("Motor slip detected. Flag is set when encoder position and step position are too far apart. \nYou can disable the \"Position control\" flag or increase the error \nin the \"threshold\" field on the mDrive Direct Control Settings->Position control tab to stop these error from happening."));
 	slipLbl.setFont(font);
 	slipLbl.setPalette(palette_red);
 	slipLbl.setText("SLIP");
@@ -337,7 +337,7 @@ void MainWindow::InitUI()
 
 	extLbl.setFixedWidth(ST_PANE_WIDTH);
 	extLbl.setAlignment(Qt::AlignHCenter);
-	extLbl.setToolTip(tr("The error is caused by the external EXTIO input signal \nset to cause this error in the settings (XILab Settings->EXTIO tab)."));
+	extLbl.setToolTip(tr("The error is caused by the external EXTIO input signal \nset to cause this error in the settings (mDrive Direct Control Settings->EXTIO tab)."));
 	extLbl.setFont(font);
 	extLbl.setPalette(palette_red);
 	extLbl.setText("EXTi");
@@ -346,7 +346,7 @@ void MainWindow::InitUI()
 
 	errcLbl.setFixedWidth(ST_PANE_WIDTH);
 	errcLbl.setAlignment(Qt::AlignHCenter);
-	errcLbl.setToolTip(tr("Command error encountered. \nThe command received is not in the list of controller known commands. \nMost possible reason is the outdated firmware that can be updated \nin XILab Settings->About device tab->Autoupdate button."));
+	errcLbl.setToolTip(tr("Command error encountered. \nThe command received is not in the list of controller known commands. \nMost possible reason is the outdated firmware that can be updated \nin mDrive Direct Control Settings->About device tab->Autoupdate button."));
 	errcLbl.setFont(font);
 	errcLbl.setPalette(palette_red);
 	errcLbl.setText("ErrC");
@@ -880,7 +880,7 @@ void MainWindow::UpdateState()
 	else 
 		title.append(QString(settingsDlg->controllerStgs->device_info.ManufacturerId)
 						   + toStr(settingsDlg->controllerStgs->serialnumber));
-	wndTitle = "XILab " + QString(XILAB_VERSION)+ " - " + title;
+	wndTitle = "mDrive Direct Control " + QString(XILAB_VERSION)+ " - " + title;
 	settingsDlg->setWindowTitle("Settings " + title);
 	scriptDlg->setWindowTitle("Scripts " + title);
 	chartDlg->setWindowTitle("Charts " + title);
@@ -2203,14 +2203,14 @@ void MainWindow::OnTechSupportClicked()
 	const unsigned short WIN_10 = 0x00c0;
 
 	if (QSysInfo::WindowsVersion >= QSysInfo::WV_WINDOWS8/*160*/) {
-		mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new?issue[description]=<The text of the letter>";
+		mail_data = "https://physlab.ru/?issue[description]=<The text of the letter>";
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "You will be directed to the technical support page.");
 		sep = "\n";
 	}
 	else
 #endif		
 	{
-		mail_data = "mailto:8smc4@standa.lt?subject= &body=<The text of the letter>";
+		mail_data = "mailto:?subject= &body=<The text of the letter>";
 		//mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new?issue[description]=<The text of the letter>";
 	}
 		mail_data.append(sep);
@@ -2218,7 +2218,7 @@ void MainWindow::OnTechSupportClicked()
 		mail_data.append("Service information ");
 
 		mail_data.append(sep);
-		mail_data.append(" >> XiLab version -- ");
+		mail_data.append(" >> mDrive Direct Control version -- ");
 		mail_data.append(xilab_ver);
 
 		result_t result;
