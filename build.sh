@@ -58,7 +58,7 @@ export QTDIR PATH LD_LIBRARY_PATH
 major="7" #major version, autodetection will be added later
 libximc_linux="libximc.so.$major.0.0"
 VER=$(grep VERSION src/main.h | sed 's/#define XILAB_VERSION "\([0-9a-zA-Z\ \.]*\)*"/\1/' | tr -d ' \r')
-r_dir="xilab-$VER"
+r_dir="mdrive_direct_control-$VER"
 
 # cleanup first
 clean_some_stuff
@@ -101,10 +101,10 @@ cp ./usr/lib/$libximc_linux ../$r_dir/
 cp xilabdefault.cfg ../$r_dir/
 
 # add scripts and profiles
-mkdir -p ../$r_dir/Library/XILab/
-cp -R ./xiresource/scripts ../$r_dir/Library/XILab/
-cp -R ./xiresource/profiles ../$r_dir/Library/XILab/
-cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
+mkdir -p ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/scripts ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/profiles ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/schemes/. ../$r_dir/Library/mdrive_direct_control/profiles
 
 # add qwt
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/
