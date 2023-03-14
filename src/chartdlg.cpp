@@ -1192,20 +1192,20 @@ void ChartDlg::OnLoadBtnClicked()
 		file.close();
 
 		QString header(header_str);
-		if(header.startsWith("XILabGraphs_v2.0"))
+		if(header.startsWith("mDriveGraphs_v2.0"))
 			LoadFile_v20(filename);
-		else if(header.startsWith("XILabGraphs_v2.")) // version 2 graphs are forward-compatible
+		else if(header.startsWith("mDriveGraphs_v2.")) // version 2 graphs are forward-compatible
 			LoadFile_v20(filename); // so use the latest _v2x reading function to load newer unknown 2.x version
-		else if(header.startsWith("XILabGraphs_v1.2"))
+		else if(header.startsWith("mDriveGraphs_v1.2"))
 			LoadFile_v12(filename);
-		else if(header.startsWith("XILabGraphs_v1.1"))
+		else if(header.startsWith("mDriveGraphs_v1.1"))
 			LoadFile_v11(filename);
-		else if(header.startsWith("XILabGraphs_v1.0"))
+		else if(header.startsWith("mDriveGraphs_v1.0"))
 			LoadFile_v10(filename);
-		else if(header.startsWith("XILabGraphs_v"))
+		else if(header.startsWith("mDriveGraphs_v"))
 			throw my_exception("The file has unknown version.");
 		else
-			throw my_exception("The file doesn't look like a XILab graphs file.");
+			throw my_exception("The file doesn't look like a mDrive Direct Control graphs file.");
 
 		if(log->size == 0) return;
 
@@ -1322,7 +1322,7 @@ void ChartDlg::OnSaveBtnClicked()
 	file.seek(0);
 
 	//----File header----//
-	const char* header = "XILabGraphs_v2.0";
+	const char* header = "mDriveGraphs_v2.0";
 	file.write(header);
 
 	file.seek(16);

@@ -18,7 +18,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>XILab</string>
+   <string>mDrive Direct Control</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>

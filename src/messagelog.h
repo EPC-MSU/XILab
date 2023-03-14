@@ -9,7 +9,7 @@
 #include <QFile>
 #include <QTimer>
 
-#define SOURCE_XILAB	"XiLab"
+#define SOURCE_XILAB	"mDrive"
 #define SOURCE_SCRIPT	"Script"
 #define SOURCE_LIBRARY	"libximc"
 

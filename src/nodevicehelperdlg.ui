@@ -73,7 +73,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Rationale: some Linux distributions do not add users to the 'dialout' group by default. Membership in the 'dialout' group is required to be able to access serial-like devices. Since XIMC devices are represented as ttyACM USB-COM adapters Xilab needs this permission to work with XIMC devices. If you click the button below then currect user will be added to the 'dialout' group. You will need to restart your login session for the change to take effect.</string>
+         <string>Rationale: some Linux distributions do not add users to the 'dialout' group by default. Membership in the 'dialout' group is required to be able to access serial-like devices. Since XIMC devices are represented as ttyACM USB-COM adapters mDrive Direct Control needs this permission to work with XIMC devices. If you click the button below then currect user will be added to the 'dialout' group. You will need to restart your login session for the change to take effect.</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -155,7 +155,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Rationale: Xilab can access XIMC devices by its serial number if an udev mapping is available. As a standalone AppImage application Xilab does not have installation stage where it could add udev rules to the system. If you click the button below then an udev rules file will be added to the /etc/udev/rules.d/ path on your system.</string>
+         <string>Rationale: mDrive Direct Control can access XIMC devices by its serial number if an udev mapping is available. As a standalone AppImage application mDrive Direct Control does not have installation stage where it could add udev rules to the system. If you click the button below then an udev rules file will be added to the /etc/udev/rules.d/ path on your system.</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -249,7 +249,7 @@
          </font>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rationale: If your Ximc device is connected over a local network but it does not appear in the list of devices, XiLab allows you to tell where to look. To do this, go to &amp;lt;&amp;lt;Settings&amp;gt;&amp;gt;. Enable &amp;lt;&amp;lt;Enumerate network devices&amp;gt;&amp;gt;. Click &amp;lt;&amp;lt;XIMC Scan for local servers&amp;gt;&amp;gt;. If for some reason the devices are not found, manually set the IP address value in the IP/Host field. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rationale: If your Ximc device is connected over a local network but it does not appear in the list of devices, mDrive Direct Control allows you to tell where to look. To do this, go to &amp;lt;&amp;lt;Settings&amp;gt;&amp;gt;. Enable &amp;lt;&amp;lt;Enumerate network devices&amp;gt;&amp;gt;. Click &amp;lt;&amp;lt;XIMC Scan for local servers&amp;gt;&amp;gt;. If for some reason the devices are not found, manually set the IP address value in the IP/Host field. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
