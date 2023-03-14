@@ -121,7 +121,7 @@
    <item row="4" column="0" colspan="3">
     <widget class="QLabel" name="update_label">
      <property name="text">
-      <string>&lt;a href=&quot;https://files.xisupport.com/Software.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Latest mDrive Direct Control software can be found here&lt;/span&gt;&lt;/a&gt;</string>
+      <string>&lt;a href=&quot;https://physlab.ru/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Latest mDrive Direct Control software can be found here&lt;/span&gt;&lt;/a&gt;</string>
      </property>
     </widget>
    </item>
