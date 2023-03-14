@@ -116,23 +116,23 @@ sed "s/%qwtver/$QWT_VER/" --in-place ./linux_*_XILab_*.pro
 if [ "$param1" = "add_service_build" ] ; then
 	qmake linux_servicemode_XILab_${bits}.pro
 	make
-	mv release_${bits}/XILab_${bits}_service ../$r_dir
-	strip ../$r_dir/XILab_${bits}_service
-	ls -l ../$r_dir/XILab_${bits}_service
+	mv release_${bits}/mdrive_direct_control_${bits}_service ../$r_dir
+	strip ../$r_dir/mdrive_direct_control_${bits}_service
+	ls -l ../$r_dir/mdrive_direct_control_${bits}_service
 	
 	make clean
 fi
 
 qmake linux_usermode_XILab_${bits}.pro
 make
-mv release_${bits}/XILab_${bits}_user ../$r_dir
-strip ../$r_dir/XILab_${bits}_user
-ls -l ../$r_dir/XILab_${bits}_user
+mv release_${bits}/mdrive_direct_control_${bits}_user ../$r_dir
+strip ../$r_dir/mdrive_direct_control_${bits}_user
+ls -l ../$r_dir/mdrive_direct_control_${bits}_user
 
 wd=`pwd`
 cd ..
 tar -czf mdrive_direct_control-$BUILD_SUFFIX.tar.gz ./$r_dir
-mv ./$r_dir/XILab_${bits}_user ./
+mv ./$r_dir/mdrive_direct_control_${bits}_user ./
 rm -r ./$r_dir/*
 mv ./XILab_${bits}_user ./$r_dir/
 cd -
@@ -149,7 +149,7 @@ cp $wd/usr/share/libximc/keyfile.sqlite ./$r_dir/usr/share/xilab/default_keyfile
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ./$r_dir/usr/lib/
 cp /lib/$archpath/libpng12.so.0 ./$r_dir/lib/$archpath/
 
-mv ./$r_dir/XILab_${bits}_user ./$r_dir/usr/bin/xilab
+mv ./$r_dir/mdrive_direct_control_${bits}_user ./$r_dir/usr/bin/xilab
 sed 's#/usr/share/#././/share/#' --in-place ./$r_dir/usr/bin/xilab  # patch xilab binary - relative paths
 sed "s#%ver#$VER#" --in-place ./$r_dir/xilab.desktop  # patch desktop file - version
 for name in Core DBus Gui Network Script Svg Xml ; do cp /usr/lib/$archpath/libQt${name}.so.${QT_VER_MAJOR} ./$r_dir/usr/lib/$archpath/ ; done
@@ -275,7 +275,7 @@ pkgbuild --root "./$r_dir/" --version "$VER" --component-plist "$plist" --identi
 rm "$plist"
 mkdir -p dmg
 cp -pR installer.pkg dmg
-hdiutil create mdrive_direct_control-${VER}.dmg -volname "XILab-${VER}" -fs HFS+ -srcfolder dmg
+hdiutil create mdrive_direct_control-${VER}.dmg -volname "mdrive_direct_control-${VER}" -fs HFS+ -srcfolder dmg
 tar -czf mdrive_direct_control-${VER}-osx64.tar.gz ./mdrive_direct_control-${VER}.dmg
 cd - && mv ../mdrive_direct_control-${VER}-osx64.tar.gz ./
 
