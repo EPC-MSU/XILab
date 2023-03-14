@@ -116,7 +116,7 @@ sed "s/%qwtver/$QWT_VER/" --in-place ./linux_*_XILab_*.pro
 if [ "$param1" = "add_service_build" ] ; then
 	qmake linux_servicemode_XILab_${bits}.pro
 	make
-	mv release_${bits}/mdrive_direct_control_${bits}_service ../$r_dir
+	mv release_${bits}/XILab_${bits}_service ../$r_dir/mdrive_direct_control_${bits}_service
 	strip ../$r_dir/mdrive_direct_control_${bits}_service
 	ls -l ../$r_dir/mdrive_direct_control_${bits}_service
 	
@@ -125,7 +125,7 @@ fi
 
 qmake linux_usermode_XILab_${bits}.pro
 make
-mv release_${bits}/mdrive_direct_control_${bits}_user ../$r_dir
+mv release_${bits}/XILab_${bits}_user ../$r_dir/mdrive_direct_control_${bits}_user
 strip ../$r_dir/mdrive_direct_control_${bits}_user
 ls -l ../$r_dir/mdrive_direct_control_${bits}_user
 
@@ -134,7 +134,7 @@ cd ..
 tar -czf mdrive_direct_control-$BUILD_SUFFIX.tar.gz ./$r_dir
 mv ./$r_dir/mdrive_direct_control_${bits}_user ./
 rm -r ./$r_dir/*
-mv ./XILab_${bits}_user ./$r_dir/
+mv ./mdrive_direct_control_${bits}_user ./$r_dir/
 cd -
 
 # prepare files for AppImage
