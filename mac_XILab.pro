@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = mdrive_direct_control
+TARGET = XILab
 CONFIG += app_bundle
 CONFIG += x86_64
 DESTDIR = ./release
