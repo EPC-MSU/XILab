@@ -52,6 +52,18 @@ MainWindow::MainWindow(QWidget *parent, QString _device_name, DeviceInterface *_
 	ui->positionSldr->setFocusPolicy(Qt::StrongFocus);
 	ui->lastUpdateValue->hide();
 	ui->lastUpdateLbl->hide();
+	for (int i = 0; i < 11; i++)
+	{
+		widgetStatusBar[i] = new QWidget();
+		myGridLayout[i] = new QGridLayout(widgetStatusBar[i]);
+		myGridLayout[i]->setHorizontalSpacing(0);
+		myGridLayout[i]->setVerticalSpacing(0);
+		myGridLayout[i]->setRowStretch(0,0);
+		myGridLayout[i]->setRowStretch(1,0);
+		myGridLayout[i]->setColumnStretch(0, 0);
+		myGridLayout[i]->setMargin(0);
+	}
+	//ui->statusBar->setLayout(myGridLayout);
 
 	QApplication::processEvents();	
 
@@ -242,7 +254,7 @@ void MainWindow::InitUI()
     onPix.load(":/mainwindow/images/mainwindow/ind_on.png");
     offPix.load(":/mainwindow/images/mainwindow/ind_off.png");
 	redPix.load(":/mainwindow/images/mainwindow/ind_red.png");
-
+	
 	for (int i=0; i<INDICATOR_COUNT; i++) {
 		btns[i].setFixedWidth(ST_BAR_WIDTH);
 		btns[i].setAlignment(Qt::AlignHCenter);
@@ -251,9 +263,32 @@ void MainWindow::InitUI()
 		btns[i].setPalette(palette_rainbow[i]);
 		btns[i].setText(abbr[i]);
 		btns[i].setDisabled(true);
-		ui->statusBar->addPermanentWidget(&btns[i]);
+		switch (i)
+		{
+		case 0:
+			myGridLayout[0]->addWidget(&btns[i], 0, 0);
+			break;
+		case 1:
+			myGridLayout[0]->addWidget(&btns[i], 1, 0);
+			break;
+		case 2:
+			myGridLayout[1]->addWidget(&btns[i], 0, 0);
+			break;
+		case 3:
+			myGridLayout[1]->addWidget(&btns[i], 1, 0);
+			break;
+		case 4:
+			myGridLayout[2]->addWidget(&btns[i], 0, 0);
+			break;
+		case 5:
+			myGridLayout[2]->addWidget(&btns[i], 1, 0);
+			break;
+		case 6:
+			myGridLayout[3]->addWidget(&btns[i], 0, 0);
+			break;
+		}
 	}
-
+	
 	eeprLbl.setFixedWidth(ST_PANE_WIDTH);
 	eeprLbl.setAlignment(Qt::AlignHCenter);
 	eeprLbl.setToolTip(tr("Lights up green when the stage is equipped with EEPROM memory chip. \nThe built - in stage profile is uploaded from the EEPROM memory chip \nif the EEPROM_PRECEDENCE flag(XILab Settings->About device tab) is enabled, \nallowing you to connect various stages to the controller with automatic setup."));
@@ -261,7 +296,9 @@ void MainWindow::InitUI()
 	eeprLbl.setPalette(palette_green);
 	eeprLbl.setText("EEPR");
 	eeprLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&eeprLbl);
+	//ui->statusBar->addPermanentWidget(&eeprLbl);
+	//ui->horizontalLayout_12->addWidget(&eeprLbl);
+	myGridLayout[4]->addWidget(&eeprLbl, 0, 0);
 
 	homdLbl.setFixedWidth(ST_PANE_WIDTH);
 	homdLbl.setAlignment(Qt::AlignHCenter);
@@ -270,7 +307,9 @@ void MainWindow::InitUI()
 	homdLbl.setPalette(palette_green);
 	homdLbl.setText("HOMD");
 	homdLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&homdLbl);
+	//ui->statusBar->addPermanentWidget(&homdLbl);
+	//ui->horizontalLayout_12->addWidget(&homdLbl);
+	myGridLayout[4]->addWidget(&homdLbl, 1, 0);
 
 	wnd1Lbl.setFixedWidth(ST_PANE_WIDTH);
 	wnd1Lbl.setAlignment(Qt::AlignHCenter);
@@ -279,7 +318,9 @@ void MainWindow::InitUI()
 	wnd1Lbl.setPalette(palette_grey);
 	wnd1Lbl.setText("WndA");
 	wnd1Lbl.setEnabled(true);
-	ui->statusBar->addPermanentWidget(&wnd1Lbl);
+	//ui->statusBar->addPermanentWidget(&wnd1Lbl);
+	//ui->horizontalLayout_12->addWidget(&wnd1Lbl);
+	myGridLayout[5]->addWidget(&wnd1Lbl, 0, 0);
 
 	wnd2Lbl.setFixedWidth(ST_PANE_WIDTH);
 	wnd2Lbl.setAlignment(Qt::AlignHCenter);
@@ -288,7 +329,9 @@ void MainWindow::InitUI()
 	wnd2Lbl.setPalette(palette_grey);
 	wnd2Lbl.setText("WndB");
 	wnd2Lbl.setEnabled(true);
-	ui->statusBar->addPermanentWidget(&wnd2Lbl);
+	//ui->statusBar->addPermanentWidget(&wnd2Lbl);
+	//ui->horizontalLayout_12->addWidget(&wnd2Lbl);
+	myGridLayout[5]->addWidget(&wnd2Lbl, 1, 0);
 
 	encdLbl.setFixedWidth(ST_PANE_WIDTH);
 	encdLbl.setAlignment(Qt::AlignHCenter);
@@ -297,7 +340,9 @@ void MainWindow::InitUI()
 	encdLbl.setPalette(palette_grey);
 	encdLbl.setText("ENCD");
 	encdLbl.setEnabled(true);
-	ui->statusBar->addPermanentWidget(&encdLbl);
+	//ui->statusBar->addPermanentWidget(&encdLbl);
+	//ui->horizontalLayout_12->addWidget(&encdLbl);
+	myGridLayout[6]->addWidget(&encdLbl, 0, 0);
 
 	pwhtLbl.setFixedWidth(ST_PANE_WIDTH);
 	pwhtLbl.setAlignment(Qt::AlignHCenter);
@@ -306,7 +351,9 @@ void MainWindow::InitUI()
 	pwhtLbl.setPalette(palette_red);
 	pwhtLbl.setText("PWHT");
 	pwhtLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&pwhtLbl);
+	//ui->statusBar->addPermanentWidget(&pwhtLbl);
+	//ui->horizontalLayout_12->addWidget(&pwhtLbl);
+	myGridLayout[6]->addWidget(&pwhtLbl, 1, 0);
 
 	slipLbl.setFixedWidth(ST_PANE_WIDTH);
 	slipLbl.setAlignment(Qt::AlignHCenter);
@@ -315,7 +362,8 @@ void MainWindow::InitUI()
 	slipLbl.setPalette(palette_red);
 	slipLbl.setText("SLIP");
 	slipLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&slipLbl);
+	//ui->statusBar->addPermanentWidget(&slipLbl);
+	myGridLayout[7]->addWidget(&slipLbl, 0, 0);
 
 	wrmLbl.setFixedWidth(ST_PANE_WIDTH);
 	wrmLbl.setAlignment(Qt::AlignHCenter);
@@ -324,7 +372,8 @@ void MainWindow::InitUI()
 	wrmLbl.setPalette(palette_red);
 	wrmLbl.setText("WRM");
 	wrmLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&wrmLbl);
+	//ui->statusBar->addPermanentWidget(&wrmLbl);
+	myGridLayout[7]->addWidget(&wrmLbl, 1, 0);
 
 	engLbl.setFixedWidth(ST_PANE_WIDTH);
 	engLbl.setAlignment(Qt::AlignHCenter);
@@ -333,7 +382,8 @@ void MainWindow::InitUI()
 	engLbl.setPalette(palette_red);
 	engLbl.setText("ENGR");
 	engLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&engLbl);
+	//ui->statusBar->addPermanentWidget(&engLbl);
+	myGridLayout[8]->addWidget(&engLbl, 0, 0);
 
 	extLbl.setFixedWidth(ST_PANE_WIDTH);
 	extLbl.setAlignment(Qt::AlignHCenter);
@@ -342,7 +392,8 @@ void MainWindow::InitUI()
 	extLbl.setPalette(palette_red);
 	extLbl.setText("EXTi");
 	extLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&extLbl);
+	//ui->statusBar->addPermanentWidget(&extLbl);
+	myGridLayout[8]->addWidget(&extLbl, 1, 0);
 
 	errcLbl.setFixedWidth(ST_PANE_WIDTH);
 	errcLbl.setAlignment(Qt::AlignHCenter);
@@ -351,7 +402,8 @@ void MainWindow::InitUI()
 	errcLbl.setPalette(palette_red);
 	errcLbl.setText("ErrC");
 	errcLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&errcLbl);
+	//ui->statusBar->addPermanentWidget(&errcLbl);
+	myGridLayout[9]->addWidget(&errcLbl, 0, 0);
     
 	errdLbl.setFixedWidth(ST_PANE_WIDTH);
 	errdLbl.setAlignment(Qt::AlignHCenter);
@@ -360,7 +412,8 @@ void MainWindow::InitUI()
 	errdLbl.setPalette(palette_red);
 	errdLbl.setText("ErrD");
 	errdLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&errdLbl);
+	//ui->statusBar->addPermanentWidget(&errdLbl);
+	myGridLayout[9]->addWidget(&errdLbl, 1, 0);
 
 	errvLbl.setFixedWidth(ST_PANE_WIDTH);
 	errvLbl.setAlignment(Qt::AlignHCenter);
@@ -369,7 +422,8 @@ void MainWindow::InitUI()
 	errvLbl.setPalette(palette_red);
 	errvLbl.setText("ErrV");
 	errvLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&errvLbl);
+	//ui->statusBar->addPermanentWidget(&errvLbl);
+	myGridLayout[10]->addWidget(&errvLbl, 0, 0);
 
 	ctblLbl.setFixedWidth(ST_PANE_WIDTH);
 	ctblLbl.setAlignment(Qt::AlignHCenter);
@@ -378,7 +432,11 @@ void MainWindow::InitUI()
 	ctblLbl.setPalette(palette_green);
 	ctblLbl.setText("Ctbl");
 	ctblLbl.setDisabled(true);
-	ui->statusBar->addPermanentWidget(&ctblLbl);
+	//ui->statusBar->addPermanentWidget(&ctblLbl);
+	myGridLayout[10]->addWidget(&ctblLbl, 1, 0);
+
+	for (int i = 0; i < 11;i++)
+		ui->statusBar->addPermanentWidget(widgetStatusBar[i], 0);
 
 	ui->movingStateLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/state_moving.png"));
 	ui->targetSpeedLbl->setPixmap(QPixmap(":/mainwindow/images/mainwindow/check.png"));

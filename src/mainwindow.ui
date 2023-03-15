@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
+    <width>666</width>
     <height>760</height>
    </rect>
   </property>
@@ -42,7 +42,7 @@
    <string/>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_x" stretch="0,0,0,0,0">
+   <layout class="QVBoxLayout" name="verticalLayout_x" stretch="0,0,0,0,0,0">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_10">
       <item>
@@ -890,6 +890,12 @@ p, li { white-space: pre-wrap; }
      <layout class="QHBoxLayout" name="horzLayout">
       <item>
        <widget class="QTableWidget" name="logEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -971,6 +977,9 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
      </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_12"/>
     </item>
    </layout>
   </widget>

@@ -97,6 +97,9 @@ private:
 	Cactus *cs;
     Ui::MainWindowClass *ui;
 	QMenuBar *menuBar;
+	QStatusBar *statusBar1;
+	QGridLayout *myGridLayout[11];
+	QWidget *widgetStatusBar[11];
     ChartDlg *chartDlg;
 	SliderScaleDraw *sliderScaleDraw;
 	Attenuator* attenuator;
