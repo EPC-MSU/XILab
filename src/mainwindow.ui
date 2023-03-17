@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>700</height>
+    <height>740</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -137,6 +137,9 @@
                    <property name="text">
                     <string>123 456 / 256</string>
                    </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -212,7 +215,7 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>65</width>
+                   <width>60</width>
                    <height>24</height>
                   </size>
                  </property>
@@ -241,7 +244,7 @@
                 <widget class="QToolButton" name="leftBtn">
                  <property name="minimumSize">
                   <size>
-                   <width>65</width>
+                   <width>60</width>
                    <height>24</height>
                   </size>
                  </property>
@@ -283,7 +286,7 @@
                 <widget class="QToolButton" name="sstpBtn">
                  <property name="minimumSize">
                   <size>
-                   <width>65</width>
+                   <width>60</width>
                    <height>24</height>
                   </size>
                  </property>
@@ -406,7 +409,7 @@
                 <widget class="QPushButton" name="homeBtn">
                  <property name="minimumSize">
                   <size>
-                   <width>55</width>
+                   <width>60</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -419,7 +422,7 @@
                 <widget class="QPushButton" name="zeroBtn">
                  <property name="minimumSize">
                   <size>
-                   <width>55</width>
+                   <width>60</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -432,7 +435,7 @@
                 <widget class="QPushButton" name="stopBtn">
                  <property name="minimumSize">
                   <size>
-                   <width>55</width>
+                   <width>60</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -461,7 +464,7 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>55</width>
+                   <width>60</width>
                    <height>0</height>
                   </size>
                  </property>
