@@ -38,7 +38,7 @@ void PageAboutWgt::OnRemoveAllConfigsBtnClicked()
 {
 	QMessageBox msgBox;
 	msgBox.setWindowTitle(m_ui->delAll->text());
-	msgBox.setText("This will remove all saved configuration files for all controllers and reset all XiLab settings to their defaults.\nXiLab will then close and will need to be reopened.");
+	msgBox.setText("This will remove all saved configuration files for all controllers and reset all mDrive Direct Control settings to their defaults.\nmDrive Direct Control will then close and will need to be reopened.");
 	msgBox.setInformativeText("Do you wish to continue?");
 	msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
 	msgBox.setDefaultButton(QMessageBox::Cancel);

@@ -19,7 +19,7 @@ void PageLogSettingsWgt::FromUiToSettings(QSettings *settings)
 {
 	settings->beginGroup("Log_setup");
 
-	settings->setValue("Xilab_loglevel", m_ui->comboBoxXLL->currentIndex());
+	settings->setValue("mDrive_loglevel", m_ui->comboBoxXLL->currentIndex());
 	settings->setValue("script_loglevel", m_ui->comboBoxSLL->currentIndex());
 	settings->setValue("library_loglevel", m_ui->comboBoxLLL->currentIndex());
 	settings->setValue("Autosave_enabled", m_ui->AutosaveChk->isChecked());
@@ -36,12 +36,12 @@ QString PageLogSettingsWgt::FromSettingsToUi(QSettings *settings, QSettings *def
 	if(default_stgs != NULL)
 		default_stgs->beginGroup("Log_setup");
 
-	if(settings->contains("Xilab_loglevel"))
-		m_ui->comboBoxXLL->setCurrentIndex(settings->value("Xilab_loglevel", 3).toInt());
+	if(settings->contains("mDrive_loglevel"))
+		m_ui->comboBoxXLL->setCurrentIndex(settings->value("mDrive_loglevel", 3).toInt());
 	else if(default_stgs != NULL)
-		m_ui->comboBoxXLL->setCurrentIndex(default_stgs->value("Xilab_loglevel", 3).toInt());
+		m_ui->comboBoxXLL->setCurrentIndex(default_stgs->value("mDrive_loglevel", 3).toInt());
 	else 
-		errors+="\"Xilab_loglevel\" key is not found\n";
+		errors+="\"mDrive_loglevel\" key is not found\n";
 
 	if(settings->contains("script_loglevel"))
 		m_ui->comboBoxSLL->setCurrentIndex(settings->value("script_loglevel", 3).toInt());

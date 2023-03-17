@@ -25,7 +25,7 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 
 	setWindowFlags(Qt::Window |Qt::CustomizeWindowHint);
 
-	m_ui->titleLbl->setText(QString("XILab ")+QString(XILAB_VERSION));
+	m_ui->titleLbl->setText(QString("mDrive Direct Control ")+QString(XILAB_VERSION));
 	m_ui->releaseDateLbl->setText(QString("release date: ")+compileDate());
 	m_ui->exBtn->setText(str_open);
 

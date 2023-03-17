@@ -39,7 +39,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>XILab</string>
+   <string>mDrive Direct Control</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
@@ -76,7 +76,7 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;New fields could have been added in this version of XILab. These fields are missing from the uploaded profile. Since the profile you are uploading is not fully compatible with this version of XILab. The missing fields in the uploaded profile will be filled with zeros. The correct operation of the stage is not guaranteed! &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;New fields could have been added in this version of mDrive Direct Control. These fields are missing from the uploaded profile. Since the profile you are uploading is not fully compatible with this version of mDrive Direct Control. The missing fields in the uploaded profile will be filled with zeros. The correct operation of the stage is not guaranteed! &lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Click Apply in the main settings window &lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;to use your profile&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;or Cancel to cancel the download&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

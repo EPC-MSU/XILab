@@ -47,7 +47,7 @@ PageAboutDeviceWgt::PageAboutDeviceWgt(QWidget *parent, MotorSettings *_motorStg
 	connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotFinished(QNetworkReply*)));
 	QNetworkRequest request;
 	request.setUrl(QUrl(update_xml_addr));
-	request.setRawHeader("User-Agent", QString("XiLab %1").arg(xilab_ver).toUtf8());
+	request.setRawHeader("User-Agent", QString("mDrive Direct Control %1").arg(xilab_ver).toUtf8());
 	manager->get(request);
 	m_ui->progressBar->hide();
 	m_ui->doc_label->setOpenExternalLinks(true);
@@ -168,7 +168,7 @@ QString mail_data;
 	const unsigned short WIN_10 = 0x00c0;
 
 	if (QSysInfo::WindowsVersion >= QSysInfo::WV_WINDOWS8/*160*/) {
-		mail_data = "https://en.xisupport.com/projects/enxisupport/issues/new?issue[description]=<The text of the letter>";
+		mail_data = "https://physlab.ru/?issue[description]=<The text of the letter>";
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "You will be directed to the technical support page.");
 		sep = "\n";
 	}
@@ -182,7 +182,7 @@ QString mail_data;
 		mail_data.append("Service information ");
 
 		mail_data.append(sep);
-		mail_data.append(" >> XiLab version -- ");
+		mail_data.append(" >> mDrive Direct Control version -- ");
 		mail_data.append(xilab_ver);
 
 		result_t result;
@@ -283,7 +283,7 @@ void PageAboutDeviceWgt::RetryInternetConn(QUrl resource_address)
 	showProgress();
 	QNetworkRequest request;
     request.setUrl(resource_address);
-	request.setRawHeader("User-Agent", QString("XiLab %1").arg(xilab_ver).toUtf8()); // todo : check how to get i10n urls correctly
+	request.setRawHeader("User-Agent", QString("mDrive Direct Control %1").arg(xilab_ver).toUtf8()); // todo : check how to get i10n urls correctly
 	reply = manager->get(request);
 }
 

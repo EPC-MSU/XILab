@@ -542,7 +542,7 @@ void Multiaxis::UpdateState() {
 		else { // someone was naughty; let's error
 			exiting = false;
 			exitBox->close();
-			QMessageBox::warning(this, tr("XILab"), tr("Exit aborted because of external command interrupt (joystick, sync in, etc.)."), QMessageBox::Ok);
+			QMessageBox::warning(this, tr("mDrive Direct Control"), tr("Exit aborted because of external command interrupt (joystick, sync in, etc.)."), QMessageBox::Ok);
 		}
 	}
 	int wd = plotXY->axisWidget(QwtPlot::yLeft)->width();
@@ -553,7 +553,7 @@ void Multiaxis::UpdateState() {
 	ui.axis_label_X_invis->setFixedHeight(ht);
 	ui.axis_label_Z->setVisible(false);
 
-	QString wndTitle = "XILab multiaxis ", title;
+	QString wndTitle = "mDrive Direct Control multiaxis ", title;
 	for (int e=0; e<devcount; e++) {
 		int i = translate(e);
 

@@ -109,7 +109,7 @@ int chek_hwmajor(unsigned int major, unsigned int minor)
 		
 
 
-		mes1.setText("Warning: This version of XILab added new features that are not present in the 8SMC4 controller. Therefore, this version of XILab is not fully compatible with your 8SMC4 controller. For full compatibility and proper operation of the controller, please install XILab 1.14.12 and firmware 3.9.22 or use the  <html><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;> compatibility table.</span></a></html>");
+		mes1.setText("Warning: This version of mDrive Direct Control added new features that are not present in the 8SMC4 controller. Therefore, this version of mDrive Direct Control is not fully compatible with your 8SMC4 controller. For full compatibility and proper operation of the controller, please install XILab 1.14.12 and firmware 3.9.22 or use the  <html><a href=http://files.xisupport.com/Software.en.html#compatibility-table><span style= text-decoration: underline; color:#0000ff;> compatibility table.</span></a></html>");
 		mes1.setInformativeText("If you still want to open the controller, click OK. To exit, click Cancel");
 		mes1.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);//
 
@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
 	if (!QFile(BindyKeyfileName()).exists()) {
 		QFile keyfile(DefaultBindyKeyfileName());
 		if ( !keyfile.exists() ) {
-			QMessageBox::warning(0, "Error", "Cannot find default keyfile, your Xilab installation is damaged\n");
+			QMessageBox::warning(0, "Error", "Cannot find default keyfile, your mDrive Direct Control installation is damaged\n");
 		} else {
 			if ( !keyfile.copy(BindyKeyfileName()) ) {
 				QMessageBox::warning(0, "Error", "Cannot write to user settings directory\n");
