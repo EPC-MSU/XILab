@@ -76,6 +76,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="scriptBtn">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Scripts...</string>
         </property>
@@ -611,6 +617,12 @@ p, li { white-space: pre-wrap; }
             <layout class="QGridLayout" name="gridLayout_4">
              <item row="0" column="1">
               <widget class="QPushButton" name="moveBtn">
+               <property name="minimumSize">
+                <size>
+                 <width>90</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Move to</string>
                </property>
