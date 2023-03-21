@@ -61,7 +61,7 @@ pipeline {
               // Just to be sure delete any local leftover files
               sh "rm -fv *ximc*.tar.gz"
               // Fetch libximc artifact, any local filename is okay
-              sh "curl -Ss -o ximc-0.0.tar.gz https://artifacts.ci.ximc.ru/jenkins/libximc/libximc-${LIBXIMC_VERSION}-all.tar.gz"
+              sh "curl -Ss -o ximc-0.0.tar.gz https://ci.cif.ximc.ru/job/libximc-pipeline/job/t-76749/lastSuccessfulBuild/artifact/dist/ximc-${LIBXIMC_VERSION}.tar.gz"  
               sh "./build.sh add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.tar.gz"
               sh "ls"
@@ -76,7 +76,7 @@ pipeline {
               // Just to be sure delete any local leftover files
               powershell "Remove-Item *ximc*.tar.gz"
               // Fetch libximc artifact, any local filename is okay
-              powershell "Invoke-WebRequest -Uri https://artifacts.ci.ximc.ru/jenkins/libximc/libximc-${LIBXIMC_VERSION}-all.tar.gz -OutFile ximc-0.0.tar.gz"
+              powershell "Invoke-WebRequest -Uri https://ci.cif.ximc.ru/job/libximc-pipeline/job/t-76749/lastSuccessfulBuild/artifact/dist/ximc-${LIBXIMC_VERSION}.tar.gz -OutFile ximc-0.0.tar.gz"
               bat "build.bat add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.exe"
               stash name: "result-${BUILDOS}", includes: "xilab-*.exe, xilab-*.7z"
