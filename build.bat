@@ -204,6 +204,7 @@ xcopy /Y /I xilabdefault.cfg %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
 
 :: Needed for the standalone version
+powershell -Command "dir ximc*\ximc*\%1 "
 powershell -Command "cp ximc*\ximc*\%1\keyfile.sqlite .\%DISTARCH%\default_keyfile.sqlite "
 @if not %errorlevel% == 0 goto FAIL
 :: Also copy keyfile to the base dir so that NSIS can find it
