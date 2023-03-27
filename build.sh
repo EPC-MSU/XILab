@@ -76,7 +76,8 @@ tar -xf ximc-[0-9\.]*[0-9].tar.gz
 if [ -z "$URL_XIRESOURCE" ] ; then
 	URL_XIRESOURCE="https://gitlab.ximc.ru/ximc-public/xiresource.git"
 fi
-$GIT clone $URL_XIRESOURCE
+$GIT clone "$URL_XIRESOURCE"
+
 
 package_for_linux () {
 # function parameters
@@ -147,7 +148,7 @@ cd ..
 mkdir -p ./$r_dir/usr/bin/ ./$r_dir/usr/lib/$archpath/ ./$r_dir/usr/share/libximc/ ./$r_dir/usr/share/xilab/ ./$r_dir/lib/$archpath/
 cp $wd/xilabdefault.cfg ./$r_dir/usr/share/xilab/
 for file in libbindy.so libximc.so.${major} libxiwrapper.so ; do cp $wd/usr/lib/$file ./$r_dir/usr/lib/ ; done
-cp $wd/usr/share/libximc/keyfile.sqlite ./$r_dir/usr/share/xilab/default_keyfile.sqlite
+cp $wd/keyfile.sqlite ./$r_dir/usr/share/xilab/default_keyfile.sqlite
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ./$r_dir/usr/lib/
 cp /lib/$archpath/libpng12.so.0 ./$r_dir/lib/$archpath/
 
@@ -231,7 +232,7 @@ cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../
 cp xilabdefault.cfg ../$r_dir/XILab.app/Contents/MacOS/
 
 # add default libximc keyfile (for bindy) to program dir
-cp ./macosx/libximc.framework/Versions/${major}/Resources/keyfile.sqlite ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
+cp keyfile.sqlite ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
 
 # fix permissions for framework and bindy because original permissions are proabably missing
 chmod -R ugo+rX ../$r_dir/XILab.app/Contents/Frameworks/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/libbindy.dylib ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
