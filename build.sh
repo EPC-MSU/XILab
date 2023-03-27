@@ -229,7 +229,7 @@ cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../
 cp xilabdefault.cfg ../$r_dir/XILab.app/Contents/MacOS/
 
 # add default libximc keyfile (for bindy) to program dir
-cp ./macosx/libximc.framework/Versions/${major}/Resources/keyfile.sqlite ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
+cp keyfile.sqlite ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
 
 # fix permissions for framework and bindy because original permissions are proabably missing
 chmod -R ugo+rX ../$r_dir/XILab.app/Contents/Frameworks/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/libbindy.dylib ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
