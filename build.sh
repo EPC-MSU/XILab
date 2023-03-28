@@ -96,6 +96,8 @@ tar -xf data.tar.gz
 cp ./ximc-*/ximc/ximc.h ./
 cp ./usr/lib/libximc.so.$major ./usr/lib/libximc.so
 cp ./usr/lib/$libximc_linux ../$r_dir/
+cp ./bindy/deb/${bits}/libbindy.so ./usr/lib/libbindy.so
+cp ./bindy/deb/${bits}/keyfile.sqlite ./usr/share/libximc/keyfile.sqlite
 
 # copy extra files
 cp xilabdefault.cfg ../$r_dir/
@@ -194,6 +196,8 @@ mkdir ../$r_dir
 # unpack libximc artifact
 cp ./ximc-*/ximc/ximc.h ./
 cp -R ./ximc-*/ximc/macosx ./
+cp ./bindy/macosx/libbindy.dylib ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib
+cp ./bindy/macosx/keyfile.sqlite ./macosx/libximc.framework/Versions/${major}/Resources/keyfile.sqlite
 
 # rewrite qwt version in .pro build files (mac)
 sed -i '' "s/%qwtver/$QWT_VER/" ./mac_XILab.pro

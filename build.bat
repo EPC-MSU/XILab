@@ -109,6 +109,15 @@ powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libx
 @if not %errorlevel% == 0 goto FAIL
 powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
 @if not %errorlevel% == 0 goto FAIL
+
+:: copying bindy from the XILAB folder to the library folder.
+powershell -Command "cp bindy\%%G\bindy.dll  ximc*\ximc*\%%G\bindy.dll"
+@if not %errorlevel% == 0 goto FAIL
+powershell -Command "cp bindy\%%G\bindy.lib  ximc*\ximc*\%%G\bindy.lib"
+@if not %errorlevel% == 0 goto FAIL
+powershell -Command "cp bindy\%%G\keyfile.sqlite  ximc*\ximc*\%%G\keyfile.sqlite"
+@if not %errorlevel% == 0 goto FAIL
+
 powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
 @if not %errorlevel% == 0 goto FAIL
 powershell -Command "cp ximc*\ximc*\%%G\bindy.lib ..\libximc-win\ximc\%%G\bindy.lib"
