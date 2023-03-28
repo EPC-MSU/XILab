@@ -233,7 +233,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -262,7 +262,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -293,7 +293,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -325,7 +325,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -351,7 +351,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -381,7 +381,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -408,7 +408,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -439,7 +439,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -464,7 +464,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -493,7 +493,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -522,7 +522,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -553,7 +553,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"
 xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

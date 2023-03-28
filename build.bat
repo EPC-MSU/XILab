@@ -107,7 +107,7 @@ powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libx
 @if not %errorlevel% == 0 goto FAIL
 powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
 @if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xiwrapper.dll ..\libximc-win\ximc\%%G\xiwrapper.dll"
+powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
 @if not %errorlevel% == 0 goto FAIL
 powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
 @if not %errorlevel% == 0 goto FAIL
@@ -217,7 +217,7 @@ xcopy /Y /I %DEPDIR%\%1\msvcr120.dll %DISTARCH%\
 
 powershell -Command "cp ximc*\ximc*\%1\libximc.dll .\%DISTARCH%\ "
 @if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%1\xiwrapper.dll .\%DISTARCH%\ "
+powershell -Command "cp ximc*\ximc*\%1\xibridge.dll .\%DISTARCH%\ "
 @if not %errorlevel% == 0 goto FAIL
 powershell -Command "cp ximc*\ximc*\%1\bindy.dll .\%DISTARCH%\ "
 @if not %errorlevel% == 0 goto FAIL
