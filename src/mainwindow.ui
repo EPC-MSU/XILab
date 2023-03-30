@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>378</width>
     <height>740</height>
    </rect>
   </property>
@@ -56,6 +56,16 @@
         <property name="text">
          <string>&amp;Settings...</string>
         </property>
+        <property name="icon">
+         <iconset resource="../Resources/XILab.qrc">
+          <normaloff>:/mainwindow/images/mainwindow/settings.png</normaloff>:/mainwindow/images/mainwindow/settings.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>12</height>
+         </size>
+        </property>
        </widget>
       </item>
       <item>
@@ -72,6 +82,16 @@
         <property name="text">
          <string>&amp;Charts...</string>
         </property>
+        <property name="icon">
+         <iconset resource="../Resources/XILab.qrc">
+          <normaloff>:/mainwindow/images/mainwindow/charts.png</normaloff>:/mainwindow/images/mainwindow/charts.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>12</height>
+         </size>
+        </property>
        </widget>
       </item>
       <item>
@@ -84,6 +104,16 @@
         </property>
         <property name="text">
          <string>Scripts...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../Resources/XILab.qrc">
+          <normaloff>:/mainwindow/images/mainwindow/script.png</normaloff>:/mainwindow/images/mainwindow/script.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>12</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -420,7 +450,17 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Go home</string>
+                  <string>Home</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../Resources/XILab.qrc">
+                   <normaloff>:/mainwindow/images/mainwindow/home.png</normaloff>:/mainwindow/images/mainwindow/home.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>16</width>
+                   <height>12</height>
+                  </size>
                  </property>
                 </widget>
                </item>
@@ -434,6 +474,16 @@
                  </property>
                  <property name="text">
                   <string>Zero</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../Resources/XILab.qrc">
+                   <normaloff>:/mainwindow/images/mainwindow/zero.png</normaloff>:/mainwindow/images/mainwindow/zero.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>16</width>
+                   <height>12</height>
+                  </size>
                  </property>
                 </widget>
                </item>
@@ -476,6 +526,16 @@
                  </property>
                  <property name="text">
                   <string>Cyclic</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../Resources/XILab.qrc">
+                   <normaloff>:/mainwindow/images/mainwindow/cyclic.png</normaloff>:/mainwindow/images/mainwindow/cyclic.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>16</width>
+                   <height>12</height>
+                  </size>
                  </property>
                  <property name="checkable">
                   <bool>false</bool>
