@@ -40,6 +40,12 @@
         <file>images/mainwindow/check.png</file>
         <file>images/mainwindow/antiplay.png</file>
         <file>images/mainwindow/state_moving.png</file>
+        <file>images/mainwindow/charts.png</file>
+        <file>images/mainwindow/cyclic.png</file>
+        <file>images/mainwindow/home.png</file>
+        <file>images/mainwindow/script.png</file>
+        <file>images/mainwindow/settings.png</file>
+        <file>images/mainwindow/zero.png</file>
     </qresource>
     <qresource prefix="/settingsdlg">
         <file>images/settingsdlg/settings.png</file>
