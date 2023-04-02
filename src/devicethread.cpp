@@ -109,7 +109,7 @@ void DeviceThread::run()
 		}
 		int namesCount;
 		std::vector<char*> deviceUrls;
-		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
+		//libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
 		if (dev_enum == 0) {
 			emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);

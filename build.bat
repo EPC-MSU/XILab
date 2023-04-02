@@ -107,11 +107,9 @@ powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libx
 @if not %errorlevel% == 0 goto FAIL
 powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
 @if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xiwrapper.dll ..\libximc-win\ximc\%%G\xiwrapper.dll"
+powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
 @if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\bindy.lib ..\libximc-win\ximc\%%G\bindy.lib"
+powershell -Command "cp ximc*\ximc*\%%G\xibridge.lib ..\libximc-win\ximc\%%G\xibridge.lib"
 @if not %errorlevel% == 0 goto FAIL
 )
 goto :eof
@@ -204,11 +202,7 @@ xcopy /Y /I xilabdefault.cfg %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
 
 :: Needed for the standalone version
-powershell -Command "cp ximc*\ximc*\%1\keyfile.sqlite .\%DISTARCH%\default_keyfile.sqlite "
-@if not %errorlevel% == 0 goto FAIL
 :: Also copy keyfile to the base dir so that NSIS can find it
-powershell -Command "cp .\%DISTARCH%\default_keyfile.sqlite .\ "
-@if not %errorlevel% == 0 goto FAIL
 
 xcopy /Y /I %DEPDIR%\%1\msvcp120.dll %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
@@ -217,9 +211,7 @@ xcopy /Y /I %DEPDIR%\%1\msvcr120.dll %DISTARCH%\
 
 powershell -Command "cp ximc*\ximc*\%1\libximc.dll .\%DISTARCH%\ "
 @if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%1\xiwrapper.dll .\%DISTARCH%\ "
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%1\bindy.dll .\%DISTARCH%\ "
+powershell -Command "cp ximc*\ximc*\%1\xibridge.dll .\%DISTARCH%\ "
 @if not %errorlevel% == 0 goto FAIL
 @if "%1" == "win32" set QWTBINDIR=%QWTDIR%\lib32
 @if "%1" == "win64" set QWTBINDIR=%QWTDIR%\lib64
