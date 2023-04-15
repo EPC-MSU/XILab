@@ -79,14 +79,7 @@ void DeviceThread::run()
 			*/
 			qs = QString("addr=");
 			for (int i = 0; i < dss->Server_hosts.size(); i++) {
-				if (QString::compare(dss->Protocol_list.at(i), QString("xi-udp://"), Qt::CaseInsensitive) == 0)
-					qs.append(QString("xi-udp://")).append(dss->Server_hosts.at(i)).append(",");
-				else
-					if (QString::compare(dss->Protocol_list.at(i), QString("xi-tcp://"), Qt::CaseInsensitive) == 0)
-						qs.append(QString("xi-tcp://")).append(dss->Server_hosts.at(i)).append(",");
-					else
-						qs.append(dss->Server_hosts.at(i)).append(",");
-				
+				qs.append(dss->Protocol_list.at(i)).append(dss->Server_hosts.at(i)).append(",");
 			}
 			qs.chop(1);
 		}
