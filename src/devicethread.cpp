@@ -63,15 +63,17 @@ void DeviceThread::run()
 	{
 		if (dss->Server_hosts.size() == 0)
 		{
-			qs = QString("addr=");
+			qs = QString("addr=127.0.0.1");
 			/*
 			 * Adding the 0th interface to the search and generating the number of search passes.
 			*/
+            /*
 			if (list_interfase.size() > 0)
 			{
 				qs = QString("addr=\nadapter_addr=") + list_interfase.at(0);
 				fl_ch = list_interfase.size();
 			}
+            */
 		}
 		else {
 			/*
