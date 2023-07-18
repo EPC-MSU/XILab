@@ -39,6 +39,7 @@ int PageADNum;
 int PageRootServiceNum;
 int PageCalibNum;
 int PageKeyNum;
+int PageNetworkNum;
 int PageDbgNum;
 int PageSliderSetupNum;
 int PageIntrfSettingsNum;
@@ -201,6 +202,26 @@ void SettingsDlg::changeEvent(QEvent *e)
     }
 }
 
+void SettingsDlg::LoadNetworkSettings()
+{
+    result_t result;
+    bool saved_state = devinterface->cs->updatesEnabled();
+    devinterface->cs->setUpdatesEnabled(false);
+
+    try {
+        result_t result = devinterface->get_network_settings(&network_settings);
+        if (result != result_ok) {
+            throw my_exception("Error calling get_network_settings");
+        }
+    }
+    catch (my_exception &e) {
+        e.text();
+        devinterface->close_device(); // Will trigger NoDevice according to requirements in bug #8220
+    }
+   
+    devinterface->cs->setUpdatesEnabled(saved_state);
+}
+
 void SettingsDlg::firmwareUploaded(result_t result)
 {
 	if (result != result_ok)
@@ -241,6 +262,7 @@ void SettingsDlg::firmwareUploaded(result_t result)
 
 
 	controllerStgs->LoadControllerSettings();
+    LoadNetworkSettings();
 	motorStgs->LoadFirstInfo();
 	motorTypeChanged(motorStgs->entype.EngineType);
 	AllPagesFromDeviceToClassToUi();
@@ -332,8 +354,11 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 		motorStgs->need_name_load = !(motorStgs->name == tmpStgs.name);
 
 		motorStgs->FromDeviceToClass(load_all_settings);	//если load_all_settings == false, загружаются только измененные при последнем сохранении настройки,
-		if(load_all_settings)						//параметры контроллера здесь не изменяются, поэтому при неполной загрузке они не загружаются
-			controllerStgs->LoadControllerSettings();
+        if (load_all_settings)						//параметры контроллера здесь не изменяются, поэтому при неполной загрузке они не загружаются
+        {
+            controllerStgs->LoadControllerSettings();
+            LoadNetworkSettings();
+        }
 	}
 	((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->FromClassToUi(true); // must set new userunits before all other pages that depend on them
 	curr_tmp_uuStgs = *uuStgs; // should go after pageuserunits class to ui
@@ -847,6 +872,12 @@ void SettingsDlg::InitControls()
     pageWgtsLst.push_back((QWidget*)new PageStep3Wgt(NULL, updateThread, controllerStgs, devinterface));
 	connect(pageWgtsLst[PageKeyNum], SIGNAL( serialUpdatedSgn() ), pageWgtsLst[PageADNum], SLOT( OnUpdateSerialFinished() ));
 
+    PageKeyNum = i++;
+    childItem = new QTreeWidgetItem(parentItem);
+    childItem->setText(0, tr("Network"));
+    treeWgtsLst.push_back(childItem);
+    pageWgtsLst.push_back((QWidget*)new PageNetSetWgt(NULL, updateThread, &network_settings, devinterface));
+  
 	//Service->Debug
 	PageDbgNum=i++;
     childItem = new QTreeWidgetItem(parentItem);

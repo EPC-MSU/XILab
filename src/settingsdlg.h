@@ -49,6 +49,7 @@
 	#include <pagecalibwgt.h>
 	#include <pagestep3wgt.h>
 	#include <pagedebugwgt.h>
+    #include <pagenetsetwgt.h>
 #endif
 
 #define TIME_MOVIE 2000
@@ -76,6 +77,7 @@ extern int PageRootServiceNum;
 extern int PageCalibNum;
 extern int PageKeyNum;
 extern int PageDbgNum;
+extern int PageNetworkNum;
 extern int PageIntrfSettingsNum;//attenuator skin
 extern int PageSliderSetupNum;//general skin
 extern int PageCyclicNum;
@@ -169,6 +171,7 @@ private:
     Ui::SettingsDlg *m_ui;
 	unsigned int old_feedback_type;
 	QTimer timer3;
+    network_settings_t network_settings;
 public: // temporary plug for multiaxis ui until device interface class gets obsoleted by libximc syncs and we get rid of it entirely
 	UpdateThread *updateThread;
 private:
@@ -191,6 +194,7 @@ private:
 	void FromUiToClass(StageSettings* stgs);
 
 	void CheckProfileFwHwVersions(XSettings *settings);
+    void LoadNetworkSettings();
 
 public slots:
 	void CheckProfileFwHwVersions();
