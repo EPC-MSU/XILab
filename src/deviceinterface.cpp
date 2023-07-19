@@ -183,6 +183,7 @@ GETSET(edges, settings);
 GETSET(pid, settings);
 GETSET(emf, settings);
 GETSET(network, settings);
+GETSET(password, settings);
 GETSET(sync_in, settings);
 GETSET(sync_out, settings);
 GETSET(extio, settings);

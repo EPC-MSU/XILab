@@ -94,6 +94,8 @@ public:
 	result_t set_emf_settings(const emf_settings_t* emf_settings);
     result_t get_network_settings(network_settings_t* network_settings);
     result_t set_network_settings(const network_settings_t* network_settings);
+    result_t get_password_settings(password_settings_t* network_settings);
+    result_t set_password_settings(const password_settings_t* network_settings);
 
 
 	result_t get_home_settings_calb (home_settings_calb_t* home_settings, calibration_t* calibration);

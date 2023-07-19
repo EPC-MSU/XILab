@@ -198,8 +198,9 @@ void PageStep3Wgt::OnRebootToBoot()
 
 void PageStep3Wgt::SetKey(QString text)
 {
-	//m_ui->keyBox->setText(text);
-	//Base16to256(text, &key);
+   
+	m_ui->keyBox->setText(text);
+	Base16to256(text, &key);
 }
 
 QString PageStep3Wgt::GetKey()

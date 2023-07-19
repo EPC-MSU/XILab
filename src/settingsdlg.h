@@ -45,6 +45,7 @@
 #include <logsettings.h>
 #include <attensettings.h>
 #include <xsettings.h>
+#include <netsettings.H>
 #ifdef SERVICEMODE
 	#include <pagecalibwgt.h>
 	#include <pagestep3wgt.h>
@@ -151,7 +152,7 @@ public:
 	UserUnitSettings prev_tmp_uuStgs; // previous user unit settings for comparison (not saved)
 	UserUnitSettings curr_tmp_uuStgs; // current active user unit settings for comparison (not saved)
 	DeviceInterface *devinterface;
-
+    NetworkSettings *netStgs;
 	QList<QTreeWidgetItem*> treeWgtsLst;
 	QList<QWidget*> pageWgtsLst;
 	//QMovie movie;
@@ -171,7 +172,7 @@ private:
     Ui::SettingsDlg *m_ui;
 	unsigned int old_feedback_type;
 	QTimer timer3;
-    network_settings_t network_settings;
+ 
 public: // temporary plug for multiaxis ui until device interface class gets obsoleted by libximc syncs and we get rid of it entirely
 	UpdateThread *updateThread;
 private:

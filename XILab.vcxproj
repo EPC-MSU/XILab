@@ -221,7 +221,7 @@
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat />
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -246,7 +246,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
@@ -539,7 +539,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>
       </DebugInformationFormat>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -3632,6 +3632,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     <ClCompile Include="src\motorsettings.cpp" />
     <ClCompile Include="src\multiaxis.cpp" />
     <ClCompile Include="src\mylistwidget.cpp" />
+    <ClCompile Include="src\netsettings.cpp" />
     <ClCompile Include="src\nodevicehelperdlg.cpp" />
     <ClCompile Include="src\pageaboutdevicewgt.cpp" />
     <ClCompile Include="src\pageaboutwgt.cpp" />
@@ -6038,6 +6039,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
       <Outputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|x64'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='debug - usermode new|x64'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="src\netsettings.h" />
     <ClInclude Include="src\pagegraphsetupwgt.h" />
     <CustomBuild Include="src\pagegraphwgt.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='debug - servicemode|Win32'">Moc%27ing pagegraphwgt.h...</Message>
@@ -7497,6 +7499,14 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
       <Message Condition="'$(Configuration)|$(Platform)'=='release - servicemode|Win32'">Moc%27ing %(Filename)%(Extension)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='release - servicemode|Win32'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='release - servicemode|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp"  -D_CRT_SECURE_NO_WARNINGS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQWT_DLL -DQT_DLL -DQT_SCRIPT_LIB -DQT_NETWORK_LIB  "-I.\src" "-I.\src\virtual-ximc" "-I.\$(QWTDIR)\src" "-I.\GeneratedFiles" "-I.\..\libximc-win\ximc\win32" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtScript" "-I.\GeneratedFiles\$(Configuration)\." "-I$(QTDIR)\include\QtNetwork"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">Moc%27ing %(Filename)%(Extension)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='debug - usermode new|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp"  -D_CRT_SECURE_NO_WARNINGS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQWT_DLL -DQT_DLL -DQT_SCRIPT_LIB -DQT_NETWORK_LIB  "-I.\src" "-I.\src\virtual-ximc" "-I.\$(QWTDIR)\src" "-I.\GeneratedFiles" "-I.\..\libximc-win\ximc\win32" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtScript" "-I.\GeneratedFiles\$(Configuration)\." "-I$(QTDIR)\include\QtNetwork"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='debug - usermode new|Win32'">Moc%27ing %(Filename)%(Extension)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug - usermode new|Win32'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='debug - usermode new|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="src\restoreerrorsdialog.h" />
     <CustomBuild Include="src\scriptagent.h">

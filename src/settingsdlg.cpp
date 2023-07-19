@@ -17,6 +17,7 @@
 #include <main.h>
 #include <status.h>
 
+
 //константы меню
 int PageRootDeviceConfigurationNum;
 int PageBordersNum;
@@ -120,6 +121,7 @@ SettingsDlg::SettingsDlg(QWidget *parent, UpdateThread *_updateThread, DeviceInt
 	logStgs = new LogSettings();
 	intStgs = new AttenSettings();
 	uuStgs = new UserUnitSettings();
+    netStgs = new NetworkSettings(devinterface);
 	force_save_all = false;
 
     m_ui->setupUi(this);
@@ -169,6 +171,7 @@ SettingsDlg::~SettingsDlg()
 	delete cyclicStgs;
 	delete sliderStgs;
 	delete logStgs;
+    delete netStgs;
 }
 
 void SettingsDlg::closeEvent(QCloseEvent *e)
@@ -204,22 +207,7 @@ void SettingsDlg::changeEvent(QEvent *e)
 
 void SettingsDlg::LoadNetworkSettings()
 {
-    result_t result;
-    bool saved_state = devinterface->cs->updatesEnabled();
-    devinterface->cs->setUpdatesEnabled(false);
-
-    try {
-        result_t result = devinterface->get_network_settings(&network_settings);
-        if (result != result_ok) {
-            throw my_exception("Error calling get_network_settings");
-        }
-    }
-    catch (my_exception &e) {
-        e.text();
-        devinterface->close_device(); // Will trigger NoDevice according to requirements in bug #8220
-    }
-   
-    devinterface->cs->setUpdatesEnabled(saved_state);
+    netStgs->LoadNetworkSettings();
 }
 
 void SettingsDlg::firmwareUploaded(result_t result)
@@ -262,7 +250,9 @@ void SettingsDlg::firmwareUploaded(result_t result)
 
 
 	controllerStgs->LoadControllerSettings();
+#ifdef SERVICEMODE
     LoadNetworkSettings();
+#endif
 	motorStgs->LoadFirstInfo();
 	motorTypeChanged(motorStgs->entype.EngineType);
 	AllPagesFromDeviceToClassToUi();
@@ -357,7 +347,9 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
         if (load_all_settings)						//параметры контроллера здесь не изменяются, поэтому при неполной загрузке они не загружаются
         {
             controllerStgs->LoadControllerSettings();
+#ifdef SERVICEMODE
             LoadNetworkSettings();
+#endif
         }
 	}
 	((PageUserUnitsWgt*)pageWgtsLst[PageUserUnitsNum])->FromClassToUi(true); // must set new userunits before all other pages that depend on them
@@ -425,6 +417,9 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 	((PageGraphWgt*)pageWgtsLst[PageGraphTempNum])->FromClassToUi();
 	((PageGraphWgt*)pageWgtsLst[PageGraphJoyNum])->FromClassToUi();
 	((PageGraphWgt*)pageWgtsLst[PageGraphPotNum])->FromClassToUi();
+#ifdef SERVICEMODE
+    ((PageNetSetWgt*)pageWgtsLst[PageNetworkNum])->FromClassToUi();
+#endif
 	return true;
 }
 
@@ -433,6 +428,8 @@ void SettingsDlg::AllPagesFromUiToClassToDevice()
 #ifdef SERVICEMODE
 	// Service
 	((PageStep3Wgt*)pageWgtsLst[PageKeyNum])->FromUiToClass();
+    // Network
+    ((PageNetSetWgt*)pageWgtsLst[PageNetworkNum])->FromUiToClass();
 #endif
 	
 	//save userunits before new changes are applied
@@ -871,12 +868,13 @@ void SettingsDlg::InitControls()
     treeWgtsLst.push_back(childItem);
     pageWgtsLst.push_back((QWidget*)new PageStep3Wgt(NULL, updateThread, controllerStgs, devinterface));
 	connect(pageWgtsLst[PageKeyNum], SIGNAL( serialUpdatedSgn() ), pageWgtsLst[PageADNum], SLOT( OnUpdateSerialFinished() ));
-
-    PageKeyNum = i++;
+    
+    //Network
+    PageNetworkNum=i++;
     childItem = new QTreeWidgetItem(parentItem);
     childItem->setText(0, tr("Network"));
     treeWgtsLst.push_back(childItem);
-    pageWgtsLst.push_back((QWidget*)new PageNetSetWgt(NULL, updateThread, &network_settings, devinterface));
+    pageWgtsLst.push_back((QWidget*)new PageNetSetWgt(NULL, updateThread, netStgs, devinterface));
   
 	//Service->Debug
 	PageDbgNum=i++;
