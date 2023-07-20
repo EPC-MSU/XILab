@@ -45,7 +45,7 @@
 #include <logsettings.h>
 #include <attensettings.h>
 #include <xsettings.h>
-#include <netsettings.H>
+#include <netsettings.h>
 #ifdef SERVICEMODE
 	#include <pagecalibwgt.h>
 	#include <pagestep3wgt.h>
