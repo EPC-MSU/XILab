@@ -92,7 +92,7 @@ static void from_qstr_touint20(const QString& s, unsigned int inta[20])
     int i = 0;
     for (auto ch : d)
     {
-        inta[i++] = (unsigned int)ch.toAscii();
+        inta[i++] = (unsigned int)ch.unicode();
     }
     inta[i] = 0;
 }
