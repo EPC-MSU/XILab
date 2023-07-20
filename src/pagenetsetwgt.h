@@ -30,11 +30,10 @@ private:
     UpdateThread *updateThread;
 	NetworkSettings *pnetsets;
 	
-public slots:
+private slots:
     
-	void OnWriteBtnPressed();
-    void OnWritePswBtnPressed();
-
+	void OnWrBtnPressed();
+    void OnWrPswBtnPressed();
 };
 
 #endif // PAGENETSETWGT_H

@@ -257,20 +257,14 @@
     </widget>
    </item>
    <item row="1" column="2">
-    <widget class="QPushButton" name="writePswBtn">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+    <widget class="QPushButton" name="wrPswBtn">
      <property name="text">
       <string>Set password</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="QPushButton" name="writeBtn">
+   <item row="2" column="2" rowspan = "2">
+    <widget class="QPushButton" name="wrBtn">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -278,12 +272,16 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Set other settings</string>
+      <string>Set</string>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>wrBtn</tabstop>
+  <tabstop>wrPswBtn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

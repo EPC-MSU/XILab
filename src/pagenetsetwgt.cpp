@@ -18,9 +18,8 @@ PageNetSetWgt::PageNetSetWgt(QWidget *parent, UpdateThread *_updateThread, Netwo
 
     m_ui->setupUi(this);
 
-
-    bool ret = QObject::connect(m_ui->writePswBtn, SIGNAL(clicked()), this, SLOT(OnWritePswBtnPressed()));
-    QObject::connect(m_ui->writeBtn, SIGNAL(clicked()), this, SLOT(OnWriteBtnPressed()));
+   QObject::connect(m_ui->wrPswBtn, SIGNAL(clicked()), this, SLOT(OnWrPswBtnPressed()));
+   QObject::connect(m_ui->wrBtn, SIGNAL(clicked()), this, SLOT(OnWrBtnPressed()));
 }
 
 PageNetSetWgt::~PageNetSetWgt()
@@ -98,7 +97,7 @@ static void from_qstr_touint20(const QString& s, unsigned int inta[20])
     inta[i] = 0;
 }
 
-void PageNetSetWgt::OnWritePswBtnPressed()
+void PageNetSetWgt::OnWrPswBtnPressed()
 {
     FromUiToClass();
     bool saved_state = devinterface->cs->updatesEnabled();
@@ -108,11 +107,12 @@ void PageNetSetWgt::OnWritePswBtnPressed()
     infoBox.setButtonsVisible(false);
     infoBox.setMovieVisible(true);
     infoBox.setIcon(QMessageBox::Information);
-    infoBox.setText("Please wait while web interface password is updating");
+    infoBox.setText("Please wait while web interface password of network settings is being updated");
     infoBox.show();
     QApplication::processEvents();
     
     password_settings_t pst;
+    memset(&pst, 0, sizeof(password_settings_t));
     from_qstr_touint20(pnetsets->passw, pst.UserPassword);
 
     result_t result = devinterface->set_password_settings(&pst);
@@ -127,18 +127,17 @@ void PageNetSetWgt::OnWritePswBtnPressed()
         infoBox.setIcon(QMessageBox::Information);
         infoBox.setButtons(QDialogButtonBox::Ok);
         infoBox.setMovieVisible(false);
-        infoBox.setText("Password was updated succesfully");
+        infoBox.setText("Web page password of network settings was updated succesfully");
         infoBox.exec();
         }
         else{
         infoBox.setIcon(QMessageBox::Critical);
         infoBox.setMovieVisible(false);
         infoBox.setButtons(QDialogButtonBox::Ok);
-        infoBox.setText(QString("Command was executed succesfully, but Password hasn't been changed"));
+        infoBox.setText(QString("Command was executed succesfully, but password hasn't been changed"));
         infoBox.exec();
         }
-        
-    }
+     }
     else{
         QString error_code;
         switch (result){
@@ -150,12 +149,12 @@ void PageNetSetWgt::OnWritePswBtnPressed()
         infoBox.setIcon(QMessageBox::Critical);
         infoBox.setMovieVisible(false);
         infoBox.setButtons(QDialogButtonBox::Ok);
-        infoBox.setText("Passowrd settings updating error.\nReturned value: " + error_code);
+        infoBox.setText("Web page password of network settings updating error.\nReturned value: " + error_code);
         infoBox.exec();
     }
 }
 
-void PageNetSetWgt::OnWriteBtnPressed()
+void PageNetSetWgt::OnWrBtnPressed()
 {
     FromUiToClass();
 
@@ -166,13 +165,10 @@ void PageNetSetWgt::OnWriteBtnPressed()
 	infoBox.setButtonsVisible(false);
 	infoBox.setMovieVisible(true);
 	infoBox.setIcon(QMessageBox::Information);
-	infoBox.setText("Please wait while serial number is updating");
+	infoBox.setText("Please wait while network settings are being updated");
 	infoBox.show();
 	QApplication::processEvents();
 
-	//devinterface->close_device();
-	//	sleep_act(2*BOOTLOADER_DELAY);
-	//	devinterface->open_device(updateThread->device_name);
 	result_t result = devinterface->set_network_settings(&(pnetsets->net_set));
 	
 	devinterface->cs->setUpdatesEnabled(saved_state);
@@ -197,7 +193,6 @@ void PageNetSetWgt::OnWriteBtnPressed()
 			infoBox.setText(QString("Command was executed succesfully, but network settings havn't been changed"));
 			infoBox.exec();
 		}
-	
     }
 	else{
 		QString error_code;

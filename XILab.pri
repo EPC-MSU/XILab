@@ -53,6 +53,7 @@ HEADERS += ./src/aes.h \
     ./src/motorsettings.h \
     ./src/multiaxis.h \
     ./src/myexception.h \
+    ./src/netsettings.h \
     ./src/nodevicehelperdlg.h \
     ./src/pageaboutdevicewgt.h \
     ./src/pageaboutwgt.h \
@@ -155,6 +156,7 @@ SOURCES += ./src/aes.cpp \
     ./src/messagelog.cpp \
     ./src/motorsettings.cpp \
     ./src/multiaxis.cpp \
+    ./src/netsettings.cpp \
     ./src/nodevicehelperdlg.cpp \
     ./src/pageaboutdevicewgt.cpp \
     ./src/pageaboutwgt.cpp \

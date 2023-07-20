@@ -17,6 +17,8 @@ static QString from_uint20_toqstr(const unsigned int inta[20])
 NetworkSettings::NetworkSettings(DeviceInterface *_devinterface)
 {
 	devinterface = _devinterface;
+
+    memset(&net_set, 0, sizeof(network_settings_t));
 }
 
 NetworkSettings::~NetworkSettings(void)
