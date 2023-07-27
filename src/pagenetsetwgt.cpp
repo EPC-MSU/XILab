@@ -190,7 +190,9 @@ void PageNetSetWgt::OnWrBtnPressed()
 			infoBox.setIcon(QMessageBox::Critical);
 			infoBox.setMovieVisible(false);
 			infoBox.setButtons(QDialogButtonBox::Ok);
-			infoBox.setText(QString("Command was executed succesfully, but network settings havn't been changed"));
+    pnetsets->net_set.DHCPEnabled = m_ui->checkBox->isChecked() ? 1 : 0;
+    infoBox.setText(QString("Command was executed succesfully, but network settings havn't been changed.") + 
+                    QString(pnetsets->net_set.DHCPEnabled ? "\nProbably, you switched on the DHCP server option, then the other settings cannot be applied." : ""));
 			infoBox.exec();
 		}
     }
