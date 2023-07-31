@@ -211,7 +211,7 @@
    <item row="7" column="0" colspan="2">
     <widget class="QCheckBox" name="checkBox">
      <property name="text">
-      <string>DHCP server</string>
+      <string>DHCP</string>
      </property>
     </widget>
    </item>
