@@ -102,10 +102,10 @@ Section "Application files" SecMain_32
   File  /oname=iconengines\qsvgicon4.dll "${QTFILES32}\plugins\iconengines\qsvgicon4.dll"
 
   CreateDirectory "$INSTDIR\driver"
-  File  /oname=driver\Standa_8SMC4-5.inf "driver\Standa_8SMC4-5.inf"
-  File  /oname=driver\standa_8smc4-5.cat "driver\standa_8smc4-5.cat"
-  File  /oname=$WINDIR\Inf\Standa_8SMC4-5.inf "driver\Standa_8SMC4-5.inf"
-  File  /oname=$WINDIR\Inf\standa_8smc4-5.cat "driver\standa_8smc4-5.cat"
+  File  /oname=driver\mdrive.inf "driver\mdrive.inf"
+  File  /oname=driver\mdrive.cat "driver\mdrive.cat"
+  File  /oname=$WINDIR\Inf\mdrive.inf "driver\mdrive.inf"
+  File  /oname=$WINDIR\Inf\mdrive.cat "driver\.cat"
   File  /oname=mdrive_direct_control.exe "${RELEASEFILES}\mdrive_direct_control [release - usermode].exe"
   
   CreateDirectory "$INSTDIR\scripts"
@@ -157,10 +157,10 @@ Section "Application files" SecMain_64
   File  /oname=iconengines\qsvgicon4.dll "${QTFILES64}\plugins\iconengines\qsvgicon4.dll"
 
   CreateDirectory "$INSTDIR\driver"
-  File  /oname=driver\Standa_8SMC4-5.inf "driver\Standa_8SMC4-5.inf"
-  File  /oname=driver\standa_8smc4-5.cat "driver\standa_8smc4-5.cat"
-  File  /oname=$WINDIR\Inf\Standa_8SMC4-5.inf "driver\Standa_8SMC4-5.inf"
-  File  /oname=$WINDIR\Inf\standa_8smc4-5.cat "driver\standa_8smc4-5.cat"
+  File  /oname=driver\mdrive.inf "driver\mdrive.inf"
+  File  /oname=driver\mdrive.cat "driver\mdrive.cat"
+  File  /oname=$WINDIR\Inf\mdrive.inf "driver\mdrive.inf"
+  File  /oname=$WINDIR\Inf\mdrive.cat "driver\mdrive.cat"
   File  /oname=mdrive_direct_control.exe "${RELEASEFILES}\mdrive_direct_control [release - usermode].exe"
   
   CreateDirectory "$INSTDIR\scripts"
@@ -185,7 +185,7 @@ Section "Drivers" SecDrivers
   SetOverwrite on
 
   ShowWindow $HWNDPARENT ${SW_MINIMIZE} ; A hack to show popunder "Operation completed succesfully" dialog on Windows8 after executing next line
-  ExecWait 'InfDefaultInstall "$INSTDIR\driver\Standa_8SMC4-5.inf"'
+  ExecWait 'InfDefaultInstall "$INSTDIR\driver\mdrive.inf"'
   ShowWindow $HWNDPARENT ${SW_NORMAL}
 ${If} ${RunningX64}
   Call vcredist_test_64
@@ -247,7 +247,7 @@ ${EndIf}
   ; удаление хлама от старых версий
   Delete "$INSTDIR\ftd2xx.dll"
   Delete "$INSTDIR\libxidcusb.dll"
-  Delete "$INSTDIR\Standa_8SMC4-5.inf"
+  Delete "$INSTDIR\mdrive.inf"
   RMDir "$INSTDIR\ftdi_drivers\i386"
   RMDir "$INSTDIR\ftdi_drivers\amd64"
   RMDir "$INSTDIR\ftdi_drivers"
@@ -260,8 +260,8 @@ ${EndIf}
   Delete "$INSTDIR\iconengines\qsvgicon4.dll"
   RMDir "$INSTDIR\iconengines"
 
-  Delete "$INSTDIR\driver\Standa_8SMC4-5.inf"
-  Delete "$INSTDIR\driver\standa_8smc4-5.cat"
+  Delete "$INSTDIR\driver\mdrive.inf"
+  Delete "$INSTDIR\driver\mdrive.cat"
   RMDir "$INSTDIR\driver"
 
   Delete "$INSTDIR\scripts\cyclic.txt"
