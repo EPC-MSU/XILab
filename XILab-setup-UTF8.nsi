@@ -105,7 +105,7 @@ Section "Application files" SecMain_32
   File  /oname=driver\mdrive.inf "driver\mdrive.inf"
   File  /oname=driver\mdrive.cat "driver\mdrive.cat"
   File  /oname=$WINDIR\Inf\mdrive.inf "driver\mdrive.inf"
-  File  /oname=$WINDIR\Inf\mdrive.cat "driver\.cat"
+  File  /oname=$WINDIR\Inf\mdrive.cat "driver\mdrive.cat"
   File  /oname=mdrive_direct_control.exe "${RELEASEFILES}\mdrive_direct_control [release - usermode].exe"
   
   CreateDirectory "$INSTDIR\scripts"
