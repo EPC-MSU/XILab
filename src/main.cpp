@@ -26,7 +26,7 @@ bool first_start = true;
 MessageLog *mlog;
 QThread *messageLogThread;
 bool singleaxis;
-const char* valid_manufacturer = "XIMC";
+const char* valid_manufacturer = "EPC ";
 //QMovie movie;
 
 static void XIMC_CALLCONV myCallback(int loglevel, const wchar_t* message, void *user_data)
