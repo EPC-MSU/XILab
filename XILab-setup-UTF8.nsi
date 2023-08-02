@@ -3,7 +3,7 @@ SetCompressor /SOLID lzma
 ;Ярлыки ставим для всех пользователей.
 ;В программе надо сделать, чтобы все настройки сохранялись не в директорию установки (programfiles), а в общие доки пользователей (%appdata% в контексте ShellVars:all)
 RequestExecutionLevel admin
-!define PRODUCT_NAME "mdrive_direct_control""
+!define PRODUCT_NAME "mdrive_direct_control"
 !searchparse /file src/main.h `#define XILAB_VERSION "` VER_MAJOR `.` VER_MINOR `.` VER_RELEASE `"`
 !define PRODUCT_VERSION "${VER_MAJOR}.${VER_MINOR}.${VER_RELEASE}"
 
