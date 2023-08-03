@@ -243,7 +243,8 @@ do {
 				retry_open(iface, (*i).toLocal8Bit().data(), 400);
 #ifndef SERVICEMODE
 				device_information_t dev_info;
-				if (iface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
+				if (iface->get_device_information(&dev_info) != result_ok ||
+					(strcmp(dev_info.Manufacturer, valid_manufacturer) != 0 && strcmp(dev_info.Manufacturer, legacy_manufacturer) != 0)) {
 					startWnd->hide();
 					throw my_exception("Error: devices identification failed");
 				}
