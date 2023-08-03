@@ -27,6 +27,7 @@ MessageLog *mlog;
 QThread *messageLogThread;
 bool singleaxis;
 const char* valid_manufacturer = "EPC ";
+const char* legacy_manufacturer = "XIMC";  // It's a crunch to allow opening xi-emu device in usermode. #84385#note-3
 //QMovie movie;
 
 static void XIMC_CALLCONV myCallback(int loglevel, const wchar_t* message, void *user_data)
@@ -215,7 +216,8 @@ do {
 			}
 #ifndef SERVICEMODE
 			device_information_t dev_info;
-			if (devinterface->get_device_information(&dev_info) != result_ok || strcmp(dev_info.Manufacturer, valid_manufacturer) != 0) {
+			if (devinterface->get_device_information(&dev_info) != result_ok ||
+				(strcmp(dev_info.Manufacturer, valid_manufacturer) != 0 && strcmp(dev_info.Manufacturer, legacy_manufacturer) != 0)) {
 				startWnd->hide();
 				devinterface->close_device();
 				throw my_exception("Error: device identification failed");
