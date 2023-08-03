@@ -356,8 +356,9 @@ Multiaxis::Multiaxis(QWidget *parent, Qt::WFlags flags, QList<QString> _device_n
 	LoadSingleConfigs1(); // needs getSerials(), which needs translate(), which is initialized above
 
 	// Feature #64766 In multi-axis XiLab, when opened, coordinates are displayed only in steps
-	for (int i = 0; i<devcount; i++) {		
-		settingsDlgs.at(i)->AllPagesFromUiToClassToDevice();
+	for (int i = 0; i<devcount; i++) {
+		if (settingsDlgs.at(i)->AllPagesFromDeviceToClassToUi() == true)
+			settingsDlgs.at(i)->AllPagesFromUiToClassToDevice();
 	}
 
 	inited = true;
