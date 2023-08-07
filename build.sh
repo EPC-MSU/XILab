@@ -162,9 +162,9 @@ cp /usr/lib/$archpath/libaudio.so.2 ./$r_dir/usr/lib/$archpath/
 # create AppImage
 appimagetool-${pkgtype}.AppImage -n ./$r_dir/
 if [ -f "xilab.appdata.xml" ]; then  # imagetool on 32-bit Linux is bugged without "-n" switch
-  mv "xilab.appdata.xml" "XILab-Intel_80386.AppImage"
+  mv "xilab.appdata.xml" "mDrive-Intel_80386.AppImage"
 fi
-mv XILab-*.AppImage "mdrive_direct_control-${VER}-${pkgtype}.AppImage"
+mv mDrive-*.AppImage "mdrive_direct_control-${VER}-${pkgtype}.AppImage"
 
 # add scripts and profiles
 cd -
