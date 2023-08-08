@@ -81,6 +81,8 @@ private:
 
 	void  ShowDeviseSelClic();
 
+    void setVisibleFrameButtons(bool visible);
+
 public slots:
 void deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags);
 	void itemDoubleClicked(QTableWidgetItem*);
