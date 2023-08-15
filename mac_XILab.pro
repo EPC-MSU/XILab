@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = XILab
+TARGET = mDrive_direct_control
 CONFIG += app_bundle
 CONFIG += x86_64
 DESTDIR = ./release
@@ -8,7 +8,7 @@ ICON = Resources/images/icons/motor-usb14.icns
 QT += core gui script svg xml network
 INCLUDEPATH += ./GeneratedFiles \
     ./src \
-    /usr/local/qwt-%qwtver/lib/qwt.framework/Headers \
+    /usr/local/qwt-6.0.0/lib/qwt.framework/Headers \
     ./macosx
 QMAKE_MAC_SDK = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
@@ -16,7 +16,7 @@ QMAKE_CXXFLAGS += -std=c++11
 QMAKE_LFLAGS += -Wl,-rpath,@executable_path/../Frameworks
 LIBS += -F./macosx/ -framework libximc \
 "./macosx/libximc.framework/Versions/*/Frameworks/libbindy.dylib" \
--F/usr/local/qwt-%qwtver/lib -framework qwt
+-F/usr/local/qwt-6.0.0/lib -framework qwt
 MOC_DIR += ./GeneratedFiles
 OBJECTS_DIR += ./release/obj
 UI_DIR += ./GeneratedFiles

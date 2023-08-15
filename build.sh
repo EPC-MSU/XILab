@@ -205,37 +205,37 @@ sed -i '' "s/%qwtver/$QWT_VER/" ./mac_XILab.pro
 qmake mac_XILab.pro -spec unsupported/macx-clang-libc++
 make
 
-# rewrite Qt paths inside Xilab with Qt tool
-macdeployqt release/XILab.app
-mv release/XILab.app/ ../$r_dir/
-strip ../$r_dir/XILab.app/Contents/MacOS/XILab
-ls -l ../$r_dir/XILab.app
+# rewrite Qt paths inside mDrive with Qt tool
+macdeployqt release/mDrive_direct_control.app
+mv release/mDrive_direct_control.app/ ../$r_dir/
+strip ../$r_dir/mDrive_direct_control.app/Contents/MacOS/mDrive_direct_control
+ls -l ../$r_dir/mDrive_direct_control.app
 
 # add qwt to the bundle
-mkdir -p ../$r_dir/XILab.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/
-cp /usr/local/qwt-${QWT_VER}/lib/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt ../$r_dir/XILab.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
+mkdir -p ../$r_dir/mDrive_direct_control.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/
+cp /usr/local/qwt-${QWT_VER}/lib/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt ../$r_dir/mDrive_direct_control.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
 
 # rewrite Qt paths inside Qwt with our own hands
 qt_root="$QTDIR/lib"
 for sublib in QtCore QtGui QtSvg ; do
   subpath="${sublib}.framework/Versions/${QT_VER_MAJOR}/$sublib"
-  install_name_tool -change "$qt_root/$subpath" "@executable_path/../Frameworks/$subpath" ../$r_dir/XILab.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
+  install_name_tool -change "$qt_root/$subpath" "@executable_path/../Frameworks/$subpath" ../$r_dir/mDrive_direct_control.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
 done
 
 # add libximc framework (with xiwrapper and bindy inside) to the bundle
-cp -r ./macosx/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/
+cp -r ./macosx/libximc.framework ../$r_dir/mDrive_direct_control.app/Contents/Frameworks/
 
 # add bindy dylib (needed since Xilab 1.13) to the bundle
-cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../$r_dir/XILab.app/Contents/Frameworks/
+cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../$r_dir/mDrive_direct_control.app/Contents/Frameworks/
 
 # add xilabdefault.cfg to program dir
-cp xilabdefault.cfg ../$r_dir/XILab.app/Contents/MacOS/
+cp xilabdefault.cfg ../$r_dir/mDrive_direct_control.app/Contents/MacOS/
 
 # add default libximc keyfile (for bindy) to program dir
-cp keyfile.sqlite ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
+cp keyfile.sqlite ../$r_dir/mDrive_direct_control.app/Contents/MacOS/default_keyfile.sqlite
 
 # fix permissions for framework and bindy because original permissions are proabably missing
-chmod -R ugo+rX ../$r_dir/XILab.app/Contents/Frameworks/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/libbindy.dylib ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
+chmod -R ugo+rX ../$r_dir/mDrive_direct_control.app/Contents/Frameworks/libximc.framework ../$r_dir/mDrive_direct_control.app/Contents/Frameworks/libbindy.dylib ../$r_dir/mDrive_direct_control.app/Contents/MacOS/default_keyfile.sqlite
 
 # add scripts and profiles
 mkdir -p ../$r_dir/Library/XILab/
@@ -271,7 +271,7 @@ cd ..
 rm -rf installer.pkg
 rm -rf dmg mdrive_direct_control-*.dmg
 mkdir ./$r_dir/Applications
-mv ./$r_dir/XILab.app ./$r_dir/Applications/
+mv ./$r_dir/mDrive_direct_control.app ./$r_dir/Applications/
 plist="component.plist"
 pkgbuild --analyze --root "./$r_dir/" "$plist"
 pkgbuild --root "./$r_dir/" --version "$VER" --component-plist "$plist" --identifier "com.ximc.xilab" --install-location "/"  installer.pkg
