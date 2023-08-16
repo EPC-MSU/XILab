@@ -53,6 +53,7 @@ HEADERS += ./src/aes.h \
     ./src/motorsettings.h \
     ./src/multiaxis.h \
     ./src/myexception.h \
+    ./src/netsettings.h \
     ./src/nodevicehelperdlg.h \
     ./src/pageaboutdevicewgt.h \
     ./src/pageaboutwgt.h \
@@ -74,6 +75,7 @@ HEADERS += ./src/aes.h \
     ./src/pagelimitswgt.h \
     ./src/pagelogsettingswgt.h \
     ./src/pagemotortypewgt.h \
+    ./src/pagenetsetwgt.h \
     ./src/pagepidwgt.h \
     ./src/pagepositionernamewgt.h \
     ./src/pagepowerwgt.h \
@@ -154,6 +156,7 @@ SOURCES += ./src/aes.cpp \
     ./src/messagelog.cpp \
     ./src/motorsettings.cpp \
     ./src/multiaxis.cpp \
+    ./src/netsettings.cpp \
     ./src/nodevicehelperdlg.cpp \
     ./src/pageaboutdevicewgt.cpp \
     ./src/pageaboutwgt.cpp \
@@ -175,6 +178,7 @@ SOURCES += ./src/aes.cpp \
     ./src/pagelimitswgt.cpp \
     ./src/pagelogsettingswgt.cpp \
     ./src/pagemotortypewgt.cpp \
+    ./src/pagenetsetwgt.cpp \
     ./src/pagepidwgt.cpp \
     ./src/pagepositionernamewgt.cpp \
     ./src/pagepowerwgt.cpp \
@@ -242,6 +246,7 @@ FORMS += ./src/attenuator.ui \
     ./src/pagelimitswgt.ui \
     ./src/pagelogsettingswgt.ui \
     ./src/pagemotortypewgt.ui \
+    ./src/pagenetsetwgt.ui \
     ./src/pagepidwgt.ui \
     ./src/pagepositionernamewgt.ui \
     ./src/pagepowerwgt.ui \
