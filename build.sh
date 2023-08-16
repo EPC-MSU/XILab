@@ -101,7 +101,7 @@ cp ./usr/lib/libximc.so.$major ./usr/lib/libximc.so
 cp ./usr/lib/$libximc_linux ../$r_dir/
 
 # copy extra files
-cp xilabdefault.cfg ../$r_dir/
+cp mdrivedefault.cfg ../$r_dir/
 
 # add scripts and profiles
 mkdir -p ../$r_dir/Library/mdrive_direct_control/
@@ -146,7 +146,7 @@ cp ./appimg/mDrive.png ../$r_dir/
 cp ./appimg/mDrive.desktop ../$r_dir/
 cd ..
 mkdir -p ./$r_dir/usr/bin/ ./$r_dir/usr/lib/$archpath/ ./$r_dir/usr/share/libximc/ ./$r_dir/usr/share/mDrive/ ./$r_dir/lib/$archpath/
-cp $wd/xilabdefault.cfg ./$r_dir/usr/share/mDrive/
+cp $wd/mdrivedefault.cfg ./$r_dir/usr/share/mDrive/
 for file in libbindy.so libximc.so.${major} libxiwrapper.so ; do cp $wd/usr/lib/$file ./$r_dir/usr/lib/ ; done
 cp $wd/keyfile.sqlite ./$r_dir/usr/share/mDrive/default_keyfile.sqlite
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ./$r_dir/usr/lib/
@@ -228,8 +228,8 @@ cp -r ./macosx/libximc.framework ../$r_dir/mDrive_Direct_Control.app/Contents/Fr
 # add bindy dylib (needed since Xilab 1.13) to the bundle
 cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/
 
-# add xilabdefault.cfg to program dir
-cp xilabdefault.cfg ../$r_dir/mDrive_Direct_Control.app/Contents/MacOS/
+# add mdrivedefault.cfg to program dir
+cp mdrivedefault.cfg ../$r_dir/mDrive_Direct_Control.app/Contents/MacOS/
 
 # add default libximc keyfile (for bindy) to program dir
 cp keyfile.sqlite ../$r_dir/mDrive_Direct_Control.app/Contents/MacOS/default_keyfile.sqlite
