@@ -37,7 +37,8 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	movie.setCacheMode(QMovie::CacheAll);
 	movie.start();
 	
-	m_ui->buttonsFrame->setVisible(false);
+	//m_ui->buttonsFrame->setVisible(false);
+    setVisibleFrameButtons(false);
 	move(qApp->desktop()->availableGeometry(this).center()-rect().center());
 	b_move = false;
 	
@@ -255,6 +256,13 @@ void StartWindow::startSearching()
 	devicethread->start();
 }
 
+void StartWindow::setVisibleFrameButtons(bool visible)
+{
+    m_ui->retryBtn->setVisible(visible);
+    m_ui->selectBtn->setVisible(visible);
+    m_ui->openLastConfigBtn->setVisible(visible);
+}
+
 void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags)
 {
 	Q_UNUSED(descriptions)
@@ -271,7 +279,8 @@ void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringLis
 	//найдено 0 девайсов и 0 виртуальных
 
 	m_ui->noDevicesLinuxHelper->setVisible(names.empty());
-	m_ui->buttonsFrame->setVisible(true);
+	//m_ui->buttonsFrame->setVisible(true);
+    setVisibleFrameButtons(true);
 	m_ui->deviceListTable->clearContents();
 	m_ui->deviceListTable->setRowCount(0);
 
@@ -284,7 +293,8 @@ void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringLis
 	}
 	else { //найдено больше 1 девайса или мы наблюдали ошибку инициализации
 		state = STATE_LIST;
-		m_ui->deviceListTable->setVisible(true);
+		//m_ui->deviceListTable->setVisible(true);
+        setVisibleFrameButtons(true);
 		m_ui->selectBtn->setEnabled(true);
 		for(int i=0; i<names.size(); i++){
 			m_ui->deviceListTable->insertRow(m_ui->deviceListTable->rowCount());
@@ -459,7 +469,8 @@ void StartWindow::retryBtnClicked()
 	movie.start();
 	m_ui->pixLbl->setMovie(&movie);
 	m_ui->pixLbl->update();
-	m_ui->buttonsFrame->setVisible(false);
+	//m_ui->buttonsFrame->setVisible(false);
+    setVisibleFrameButtons(false);
 	startSearching();
 }
 

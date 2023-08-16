@@ -201,7 +201,7 @@ xcopy /Y /I /S xiresource\profiles %DISTARCH%\profiles
 @if not %errorlevel% == 0 goto FAIL
 xcopy /Y /I /S xiresource\schemes %DISTARCH%\profiles
 @if not %errorlevel% == 0 goto FAIL
-xcopy /Y /I xilabdefault.cfg %DISTARCH%\
+xcopy /Y /I mdrivedefault.cfg %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
 
 :: Needed for the standalone version

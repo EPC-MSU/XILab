@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Version=1.0
+Version=%ver
 Name=mDrive
 Comment=mDrive motor controller application
-Exec=xilab
-Icon=xilab
+Exec=mDrive_Direct_Control
+Icon=mDrive
 Terminal=false
 Categories=Utility;

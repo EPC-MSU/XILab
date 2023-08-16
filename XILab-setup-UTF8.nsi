@@ -90,7 +90,7 @@ Section "Application files" SecMain_32
   File  "${QTFILES32}\bin\QtNetwork4.dll"
   File  "${QTFILES32}\bin\QtXml4.dll"
   File  "${QWTFILES}\lib32\qwt.dll"
-  File  "xilabdefault.cfg"
+  File  "mdrivedefault.cfg"
   File  "default_keyfile.sqlite"
   File  "qt.conf"
 
@@ -145,7 +145,7 @@ Section "Application files" SecMain_64
   File  "${QTFILES64}\bin\QtNetwork4.dll"
   File  "${QTFILES64}\bin\QtXml4.dll"
   File  "${QWTFILES}\lib64\qwt.dll"
-  File  "xilabdefault.cfg"
+  File  "mdrivedefault.cfg"
   File  "default_keyfile.sqlite"
   File  "qt.conf"
 
@@ -306,7 +306,7 @@ ${EndIf}
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\qwt5.dll"
   Delete "$INSTDIR\qwt.dll"
-  Delete "$INSTDIR\xilabdefault.cfg"
+  Delete "$INSTDIR\mdrivedefault.cfg"
   Delete "$INSTDIR\qt.conf"
   Delete "$INSTDIR\changelog.txt"
   Delete "$INSTDIR\mdrive_direct_control.exe"

@@ -182,6 +182,8 @@ GETSET(secure, settings);
 GETSET(edges, settings);
 GETSET(pid, settings);
 GETSET(emf, settings);
+GETSET(network, settings);
+GETSET(password, settings);
 GETSET(sync_in, settings);
 GETSET(sync_out, settings);
 GETSET(extio, settings);
@@ -192,6 +194,7 @@ GETSET(ctp, settings);
 GETSET(uart, settings);
 GETSET(controller, name);
 GETSET(nonvolatile, memory);
+
 
 GETSET_CALB(home, settings);
 GETSET_CALB(move, settings);
