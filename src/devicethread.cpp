@@ -60,13 +60,16 @@ void DeviceThread::run()
 
     if (dss->Enumerate_network)
     {
-        qs = QString("addr=127.0.0.1,");
+        QHostAddress local_host = QHostAddress(QHostAddress::LocalHost);
+        qs = QString("addr=") + local_host.toString() + ",";
         /*
          * Network interface search is not performed when specifying a specific IP address.
          */
 
         for (int i = 0; i < dss->Server_hosts.size(); i++) {
-            qs.append(dss->Server_hosts.at(i)).append(",");
+            const QHostAddress &host = QHostAddress(dss->Server_hosts.at(i));
+            if (host != local_host)
+                qs.append(dss->Server_hosts.at(i)).append(",");
         }
         qs.chop(1);
     }
