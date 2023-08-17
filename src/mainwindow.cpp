@@ -547,7 +547,7 @@ void MainWindow::Init()
 				this, SLOT(changeInterface(AttenSettings,bool)));
 
 
-	//загрузка из конфига DCxxx.cfg, при его отсутствии - из xilabdefault.cfg (сначала по пути инсталляции, потом в директории программы)
+	//загрузка из конфига DCxxx.cfg, при его отсутствии - из mdrivedefault.cfg (сначала по пути инсталляции, потом в директории программы)
 	if (QFile::exists(settingsDlg->MakeConfigFilename()))
 		LoadConfigs(settingsDlg->MakeConfigFilename());
 	else

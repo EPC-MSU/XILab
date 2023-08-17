@@ -307,13 +307,13 @@ QString VirtualControllerBlobFilename(uint32_t serial)
 QString DefaultConfigFilename()
 {
 #if defined(WIN32) || defined(WIN64)
-	return QApplication::applicationDirPath() + "/xilabdefault.cfg";
+	return QApplication::applicationDirPath() + "/mdrivedefault.cfg";
 #endif
 #ifdef __LINUX__
-	return "/usr/share/xilab/xilabdefault.cfg";
+	return "/usr/share/xilab/mdrivedefault.cfg";
 #endif
 #ifdef __APPLE__
-	return QApplication::applicationDirPath() + "/xilabdefault.cfg";
+	return QApplication::applicationDirPath() + "/mdrivedefault.cfg";
 #endif
 }
 
@@ -333,7 +333,7 @@ QString DefaultBindyKeyfileName()
 
 QString DefaultLocalConfigFilename()
 {
-	return QApplication::applicationDirPath() + "/xilabdefault.cfg";
+	return QApplication::applicationDirPath() + "/mdrivedefault.cfg";
 }
 
 QString getDefaultUserfilesInstallPath()
