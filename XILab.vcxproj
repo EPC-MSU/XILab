@@ -106,12 +106,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName) [$(Configuration)]</TargetName>
+    <TargetName>mdrive_direct_control  [$(Configuration)]</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release - usermode|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName) [$(Configuration)]</TargetName>
+    <TargetName>mdrive_direct_control  [$(Configuration)]</TargetName>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug - usermode|Win32'">
@@ -138,12 +138,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release - servicemode|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName) [$(Configuration)]</TargetName>
+    <TargetName>mdrive_direct_control  [$(Configuration)]</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release - servicemode|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName) [$(Configuration)]</TargetName>
+    <TargetName>mdrive_direct_control  [$(Configuration)]</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">
     <ClCompile>
@@ -158,7 +158,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
+      <OutputFile>$(OutDir)mdrive_direct_control  [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -186,7 +186,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </ClCompile>
     <Link>
       <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
+      <OutputFile>$(OutDir)mdrive_direct_control  [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win64;$(QTDIR)\lib;$(QWTDIR)\lib64;..\libximc-win\deps\win64\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -328,7 +328,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </ClCompile>
     <Link>
       <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtXml4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
+      <OutputFile>$(OutDir)mdrive_direct_control  [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -356,7 +356,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </ClCompile>
     <Link>
       <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
+      <OutputFile>$(OutDir)mdrive_direct_control  [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win64;$(QTDIR)\lib;$(QWTDIR)\lib64;..\libximc-win\deps\win64\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -8314,12 +8314,6 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
       <Command Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='debug - usermode|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug - usermode|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug - servicemode|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='debug - servicemode|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='debug - servicemode|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='debug - usermode|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
