@@ -45,6 +45,17 @@ QStringList DeviceThread::SearchAdapters()
 	return url;
 }
 
+static bool is_self_address(const QHostAddress& ha)
+{
+    for (const QHostAddress &address : QNetworkInterface::allAddresses()) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol)
+        {
+            if (address == ha)
+                return true;
+        }
+    }
+    return false;
+}
 
 void DeviceThread::run()
 {
@@ -68,7 +79,7 @@ void DeviceThread::run()
 
         for (int i = 0; i < dss->Server_hosts.size(); i++) {
             const QHostAddress &host = QHostAddress(dss->Server_hosts.at(i));
-            if (host != local_host)
+            if (!is_self_address(host))
                 qs.append(dss->Server_hosts.at(i)).append(",");
         }
         qs.chop(1);
