@@ -4,7 +4,7 @@
 #include <QProcess>
 #include <QFile>
 
-const char* rulesname = "60-ximc.rules";
+const char* rulesname = "60-mdrive.rules";
 const char* etcrulespath = "/etc/udev/rules.d/";
 const char* dialout = "dialout";
 
