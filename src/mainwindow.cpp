@@ -557,7 +557,6 @@ void MainWindow::Init()
 			if (QFile::exists(DefaultLocalConfigFilename()))
 				LoadConfigs(DefaultLocalConfigFilename());
 			else {
-                printf("FFFFilname %s\n", DefaultLocalConfigFilename().toAscii().data());
 				throw my_exception("Couldn't find either saved or default configuration file.");
 			}
 	QApplication::processEvents();
