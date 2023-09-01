@@ -310,7 +310,7 @@ QString DefaultConfigFilename()
 	return QApplication::applicationDirPath() + "/mdrivedefault.cfg";
 #endif
 #ifdef __LINUX__
-	return "/usr/share/xilab/mdrivedefault.cfg";
+	return "/usr/share/mDrive/mdrivedefault.cfg";
 #endif
 #ifdef __APPLE__
 	return QApplication::applicationDirPath() + "/mdrivedefault.cfg";
@@ -324,7 +324,7 @@ QString DefaultBindyKeyfileName()
 	return QApplication::applicationDirPath() + fn;
 #endif
 #ifdef __LINUX__
-	return QString("/usr/share/xilab") + fn;
+	return QString("/usr/share/mDrive") + fn;
 #endif
 #ifdef __APPLE__
 	return QApplication::applicationDirPath() + fn;
@@ -342,7 +342,7 @@ QString getDefaultUserfilesInstallPath()
 	return QCoreApplication::applicationDirPath();
 #endif
 #ifdef __LINUX__
-	return "/usr/share/xilab/";
+	return "/usr/share/mDrive/";
 #endif
 #ifdef __APPLE__
 	return "/Library/XILab/";
