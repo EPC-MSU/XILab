@@ -117,7 +117,7 @@ pipeline {
       echo "Failure, sending emails..."
       emailext body: '$DEFAULT_CONTENT',
                to: '$DEFAULT_RECIPIENTS',
-               recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'CulpritsRecipientProvider']],
+               recipientProviders: [[$class: 'CulpritsRecipientProvider']],
                subject: '$DEFAULT_SUBJECT'
     }
     cleanup {
