@@ -37,23 +37,23 @@ QString PageLogSettingsWgt::FromSettingsToUi(QSettings *settings, QSettings *def
 		default_stgs->beginGroup("Log_setup");
 
 	if(settings->contains("Xilab_loglevel"))
-		m_ui->comboBoxXLL->setCurrentIndex(settings->value("Xilab_loglevel", LOGLEVEL_WARNING).toInt());
+		m_ui->comboBoxXLL->setCurrentIndex(settings->value("Xilab_loglevel", 3).toInt());
 	else if(default_stgs != NULL)
-		m_ui->comboBoxXLL->setCurrentIndex(default_stgs->value("Xilab_loglevel", LOGLEVEL_WARNING).toInt());
+		m_ui->comboBoxXLL->setCurrentIndex(default_stgs->value("Xilab_loglevel", 3).toInt());
 	else 
 		errors+="\"Xilab_loglevel\" key is not found\n";
 
 	if(settings->contains("script_loglevel"))
-		m_ui->comboBoxSLL->setCurrentIndex(settings->value("script_loglevel", LOGLEVEL_INFO).toInt());
+		m_ui->comboBoxSLL->setCurrentIndex(settings->value("script_loglevel", 3).toInt());
 	else if(default_stgs != NULL)
-		m_ui->comboBoxSLL->setCurrentIndex(default_stgs->value("script_loglevel", LOGLEVEL_INFO).toInt());
+		m_ui->comboBoxSLL->setCurrentIndex(default_stgs->value("script_loglevel", 3).toInt());
 	else 
 		errors+="\"script_loglevel\" key is not found\n";
 
 	if(settings->contains("library_loglevel"))
-		m_ui->comboBoxLLL->setCurrentIndex(settings->value("library_loglevel", LOGLEVEL_WARNING).toInt());
+		m_ui->comboBoxLLL->setCurrentIndex(settings->value("library_loglevel", 3).toInt());
 	else if(default_stgs != NULL)
-		m_ui->comboBoxLLL->setCurrentIndex(default_stgs->value("library_loglevel", LOGLEVEL_WARNING).toInt());
+		m_ui->comboBoxLLL->setCurrentIndex(default_stgs->value("library_loglevel", 3).toInt());
 	else 
 		errors+="\"library_loglevel\" key is not found\n";
 
