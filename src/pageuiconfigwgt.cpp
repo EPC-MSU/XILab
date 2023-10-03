@@ -10,6 +10,9 @@ PageUiConfigWgt::PageUiConfigWgt(QWidget *parent, AttenSettings* settings) :
     ui->GenSkinBut->setChecked(true);
     connect(ui->GenSkinBut,SIGNAL(toggled(bool)), this, SLOT(GeneralChoose(bool)));
     connect(ui->AttenSkinBut,SIGNAL(toggled(bool)),this,SLOT(AttenuatorChoose(bool)));
+	
+	// Hide this functionality. See #86690
+	ui->AttenSkinBut->hide();
 }
 
 PageUiConfigWgt::~PageUiConfigWgt()

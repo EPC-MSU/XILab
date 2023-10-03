@@ -380,6 +380,8 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 		treeWgtsLst[PageIntrfSettingsNum]->setFlags(Qt::NoItemFlags);
 	else
 		treeWgtsLst[PageSliderSetupNum]->setFlags(Qt::NoItemFlags);
+	// Hide attenuator page. See #86690
+	treeWgtsLst[PageIntrfSettingsNum]->setHidden(true);
 
 	((PageHomePositionWgt*)pageWgtsLst[PageHomePositionNum])->FromClassToUi();
 	((PagePidWgt*)pageWgtsLst[PagePidNum])->FromClassToUi();
