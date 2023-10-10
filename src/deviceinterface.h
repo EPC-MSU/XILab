@@ -16,6 +16,15 @@ namespace libximc
 
 using namespace libximc;
 
+typedef enum{
+	dtUnknown,
+	dtSerial,
+	dtVirtual,
+	dtNet,
+	dtUdp,
+	dtTcp
+} protocol_t;
+
 typedef struct
 	{
 		status_t status;
@@ -199,11 +208,13 @@ public:
 	result_t command_reset ();
 
 	int getMode();
+	protocol_t getProtocolType();
 	device_t getDeviceId();
 
 private:
 	result_t result;
 	device_t id;
+	protocol_t protocol;
 	int device_mode;
 	device_information_t info;
 
