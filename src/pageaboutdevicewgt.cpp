@@ -30,6 +30,19 @@ PageAboutDeviceWgt::PageAboutDeviceWgt(QWidget *parent, MotorSettings *_motorStg
 	choosefirmwaredlg->setWindowFlags(Qt::WindowMaximizeButtonHint | Qt::Tool);
 	m_ui->setupUi(this);
 
+	// Firmware update is only allowed in serial regime. #86820
+	if (devinterface->getProtocolType() != dtSerial)
+	{
+		m_ui->updateFirmwareBtn->setEnabled(false);
+		m_ui->updateFirmwareBtn->setToolTip(QString("Update via Ethernet isn't allowed"));
+
+		m_ui->updateFirmwareInternetBtn->setEnabled(false);
+		m_ui->updateFirmwareInternetBtn->setToolTip(QString("Update via Ethernet isn't allowed"));
+
+		m_ui->chooseFirmware->setEnabled(false);
+		m_ui->chooseFirmware->setToolTip(QString("Update via Ethernet isn't allowed"));
+	}
+
 	connect(m_ui->updateFirmwareBtn,	SIGNAL(clicked()),  this,  SLOT(OnUpdateFirmwareBtnClicked()));
 	connect(m_ui->updateFirmwareInternetBtn, SIGNAL(clicked()), this, SLOT(OnUpdateFirmwareInternetBtnClicked()));
 	connect(m_ui->eepromPrecedenceBox,	SIGNAL(toggled(bool)),  this,  SIGNAL(precedenceCheckedSgn(bool)));
