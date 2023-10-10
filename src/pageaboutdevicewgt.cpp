@@ -132,7 +132,7 @@ void PageAboutDeviceWgt::OnUpdateFirmwareBtnClicked()
 {
 	if (this->devinterface->getProtocolType() != dtSerial)
 	{
-		QMessageBox::warning(this, "Error", "Cannot update firmware via Ethernet.", QMessageBox::Ok);
+		QMessageBox::warning(this, "Error", "Cannot update firmware via Ethernet.\nUse USB connection.", QMessageBox::Ok);
 		return;
 	}
 	QString filename, firmware_path;
@@ -281,7 +281,7 @@ void PageAboutDeviceWgt::updateChooseFirmware(QString url, QString hash)
 {
 	if (this->devinterface->getProtocolType() != dtSerial)
 	{
-		QMessageBox::warning(this, "Error", "Cannot update firmware via Ethernet.", QMessageBox::Ok);
+		QMessageBox::warning(this, "Error", "Cannot update firmware via Ethernet.\nUse USB connection.", QMessageBox::Ok);
 		return;
 	}
 	hash_string = hash;
@@ -409,7 +409,7 @@ void PageAboutDeviceWgt::OnUpdateFirmwareInternetBtnClicked()
 {
 		if (this->devinterface->getProtocolType() != dtSerial)
 		{
-			QMessageBox::warning(this, "Error", "Cannot auto-update firmware via Ethernet.", QMessageBox::Ok);
+			QMessageBox::warning(this, "Error", "Cannot auto-update firmware via Ethernet.\nUse USB connection.", QMessageBox::Ok);
 			return;
 		}
 		showProgress();
