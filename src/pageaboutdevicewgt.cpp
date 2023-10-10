@@ -30,19 +30,6 @@ PageAboutDeviceWgt::PageAboutDeviceWgt(QWidget *parent, MotorSettings *_motorStg
 	choosefirmwaredlg->setWindowFlags(Qt::WindowMaximizeButtonHint | Qt::Tool);
 	m_ui->setupUi(this);
 
-	// Firmware update is only allowed in serial regime. #86820
-	if (devinterface->getProtocolType() != dtSerial)
-	{
-		m_ui->updateFirmwareBtn->setEnabled(false);
-		m_ui->updateFirmwareBtn->setToolTip(QString("Update via Ethernet isn't allowed"));
-
-		m_ui->updateFirmwareInternetBtn->setEnabled(false);
-		m_ui->updateFirmwareInternetBtn->setToolTip(QString("Update via Ethernet isn't allowed"));
-
-		m_ui->chooseFirmware->setEnabled(false);
-		m_ui->chooseFirmware->setToolTip(QString("Update via Ethernet isn't allowed"));
-	}
-
 	connect(m_ui->updateFirmwareBtn,	SIGNAL(clicked()),  this,  SLOT(OnUpdateFirmwareBtnClicked()));
 	connect(m_ui->updateFirmwareInternetBtn, SIGNAL(clicked()), this, SLOT(OnUpdateFirmwareInternetBtnClicked()));
 	connect(m_ui->eepromPrecedenceBox,	SIGNAL(toggled(bool)),  this,  SIGNAL(precedenceCheckedSgn(bool)));
@@ -143,6 +130,11 @@ void PageAboutDeviceWgt::FwUpdateRoutine(QByteArray data)
 
 void PageAboutDeviceWgt::OnUpdateFirmwareBtnClicked()
 {
+	if (this->devinterface->getProtocolType() != dtSerial)
+	{
+		QMessageBox::warning(this, "Error", "Cannot update firmware via Ethernet.", QMessageBox::Ok);
+		return;
+	}
 	QString filename, firmware_path;
 	if((*default_firmware_path == "") || (isDefaultLocation))
 		firmware_path = getDefaultPath();
@@ -287,6 +279,11 @@ void PageAboutDeviceWgt::slotReadyRead()
 
 void PageAboutDeviceWgt::updateChooseFirmware(QString url, QString hash)
 {
+	if (this->devinterface->getProtocolType() != dtSerial)
+	{
+		QMessageBox::warning(this, "Error", "Cannot update firmware via Ethernet.", QMessageBox::Ok);
+		return;
+	}
 	hash_string = hash;
 	RetryInternetConn(QUrl(url));
 }
@@ -410,6 +407,11 @@ void PageAboutDeviceWgt::slotError(QNetworkReply::NetworkError error)
 
 void PageAboutDeviceWgt::OnUpdateFirmwareInternetBtnClicked()
 {
+		if (this->devinterface->getProtocolType() != dtSerial)
+		{
+			QMessageBox::warning(this, "Error", "Cannot auto-update firmware via Ethernet.", QMessageBox::Ok);
+			return;
+		}
 		showProgress();
 		m_ui->progressBar->setValue(0);
 		//get information about latest firmware
