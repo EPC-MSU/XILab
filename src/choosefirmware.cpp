@@ -166,6 +166,11 @@ void ChooseFirmware::up_list(){
 }
 
 void ChooseFirmware::checkClk(){
+	if (devinterface->getProtocolType() != dtSerial)
+	{
+		emit clicked("", "");
+		return;
+	}
 	if (ui->treeWidget->selectedItems().length() > 0) {
 		showMessageAndClose("Downloading firmware...", false);
 		emit clicked(ui->treeWidget->selectedItems().at(0)->data(URL_DATA_COLUMN, Qt::UserRole).toString(),

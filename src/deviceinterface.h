@@ -16,6 +16,15 @@ namespace libximc
 
 using namespace libximc;
 
+typedef enum{
+	dtUnknown,
+	dtSerial,
+	dtVirtual,
+	dtNet,
+	dtUdp,
+	dtTcp
+} protocol_t;
+
 typedef struct
 	{
 		status_t status;
@@ -92,6 +101,11 @@ public:
 	result_t set_nonvolatile_memory (const nonvolatile_memory_t* nonvolatile_memory);
 	result_t get_emf_settings(emf_settings_t* emf_settings);
 	result_t set_emf_settings(const emf_settings_t* emf_settings);
+    result_t get_network_settings(network_settings_t* network_settings);
+    result_t set_network_settings(const network_settings_t* network_settings);
+    result_t get_password_settings(password_settings_t* network_settings);
+    result_t set_password_settings(const password_settings_t* network_settings);
+
 
 	result_t get_home_settings_calb (home_settings_calb_t* home_settings, calibration_t* calibration);
 	result_t set_home_settings_calb (const home_settings_calb_t* home_settings, calibration_t* calibration);
@@ -107,6 +121,7 @@ public:
 	result_t set_sync_out_settings_calb (const sync_out_settings_calb_t* sync_out_settings, calibration_t* calibration);
 	result_t get_control_settings_calb (control_settings_calb_t* control_settings, calibration_t* calibration);
 	result_t set_control_settings_calb (const control_settings_calb_t* control_settings, calibration_t* calibration);
+    
 
 	// Группа команд управления движением
 	result_t command_power_off ();
@@ -193,11 +208,13 @@ public:
 	result_t command_reset ();
 
 	int getMode();
+	protocol_t getProtocolType();
 	device_t getDeviceId();
 
 private:
 	result_t result;
 	device_t id;
+	protocol_t protocol;
 	int device_mode;
 	device_information_t info;
 

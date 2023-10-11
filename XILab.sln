@@ -19,14 +19,14 @@ Global
 		release - usermode|x64 = release - usermode|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|Win32.ActiveCfg = debug - servicemode new|Win32
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|Win32.Build.0 = debug - servicemode new|Win32
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|x64.ActiveCfg = debug - servicemode new|x64
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|x64.Build.0 = debug - servicemode new|x64
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|Win32.ActiveCfg = debug - usermode new|Win32
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|Win32.Build.0 = debug - usermode new|Win32
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|x64.ActiveCfg = debug - usermode new|x64
-		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|x64.Build.0 = debug - usermode new|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|Win32.ActiveCfg = debug - servicemode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|Win32.Build.0 = debug - servicemode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|x64.ActiveCfg = debug - servicemode|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - servicemode|x64.Build.0 = debug - servicemode|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|Win32.ActiveCfg = debug - usermode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|Win32.Build.0 = debug - usermode|Win32
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|x64.ActiveCfg = debug - usermode|x64
+		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.debug - usermode|x64.Build.0 = debug - usermode|x64
 		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - servicemode|Win32.ActiveCfg = release - servicemode|Win32
 		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - servicemode|Win32.Build.0 = release - servicemode|Win32
 		{47EEAFF7-E4E4-412C-BD75-EB1BB7F2FD0F}.release - servicemode|x64.ActiveCfg = release - servicemode|x64

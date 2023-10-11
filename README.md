@@ -1,6 +1,10 @@
 # XILab
 
+![](Resources/images/icons/motor_icon.png)
 
+Standa 8SMC5 motor controller software.
+
+Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMCn-USB/XILab_application_Users_guide.html).
 
 ## How to deploy a XiLab project on a Windows computer
 
@@ -9,15 +13,15 @@
 1. Clone the XiLab repository https://github.com/EPC-MSU/XILab to ***C:\Projects\xilab***. Go to the desired branch and the required state in it. Or on https://github.com/EPC-MSU/XILab select the desired state and download the archive. Which to unpack in  ***C:\Projects\xilab***. 
 
 2. Clone the **libximc** repository https://github.com/EPC-MSU/libximc to the **C:\Projects\libximc-win** folder
-
+   
    - In the repository, install the commit corresponding to the state specified in the XiLab Version file XIMC_VER==
    - Download the collected library archive of the desired version, for example, from the SOFTWARE download page:http://files.xisupport.com/Software.en.html#all-libximc-microsmc-and-ximc-labview-versions
    - Copy the downloaded archive to a folder ***C:\Projects\xilab***.
    - Unpack the **ximc** folder from the downloaded archive to **C:\projects\libximc-win**
    - Inside **ximc** folder, copy the **ximc.h** file to the **win32** and **win64** folders.
 
-3.  Installing dependencies.
-
+3. Installing dependencies.
+   
    - Clone the **XILab-dependencies** repository https://github.com/EPC-MSU/XILab-dependencies to the **C:\Projects\dependency_files**
    - Move **Qwt** folder from the repository  on the C: \ drive.
    - Unpack the archive in them **Qwt** - **C:\Qwt\msvc2013\qwt-6.0.0**. 
@@ -31,9 +35,6 @@
      C:\Qwt\msvc2013\qwt-6.0.0\lib32;C:\Qwt\msvc2013\qwt-6.0.0\lib64;C:\Qt\msvc2013\4.8.6\bin;C:\Qt\msvc2013\4.8.6_x64\bin
    - To create a distribution, you need to install **NSIS**. To do this, install the NSIS package from the repository.
    - You must specify the path of the file location **makensis.exe** in PATH.
-   
-
-
 
 ## Editing and debugging
 
@@ -42,10 +43,6 @@ For editing and debugging you need to install development software such as **MSV
 In **QtCreator**, it is convenient to perform visual editing of Windows.
 
 In **MSVC2013**, you can edit and debug code, as well as build it. 
-
-
-
-
 
 ## Build a release using a Microsoft Visual Studio 2013
 
@@ -57,8 +54,6 @@ To build releases for Windows, you can use the  Microsoft Visual Studio
 
 - In the **Build** menu, select **Build Solution**.
 
-  
-
 ## Build a release using a build script
 
 To build releases for Windows, you can use the **build.bat** build script.
@@ -69,7 +64,4 @@ To build releases for Windows, you can use the **build.bat** build script.
 
 - The installer after the build is located in the folder **C:\Projects\xilab**.
 
-  
-
 Building **XiLab** is also possible under **linux** and **Mac**.
-

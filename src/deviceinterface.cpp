@@ -90,6 +90,29 @@ void DeviceInterface::open_device (const char* name)
 {
 	id = libximc::open_device(name);
 	device_mode = UNKNOWN_MODE;
+
+	// parse uri scheme to determine protocol type. #86820
+	const int max_scheme_len = 10;
+	char scheme[max_scheme_len] = { '\0' };
+	const char *scheme_beg = name;
+	const char *scheme_end = strchr(name, ':');
+	if (!scheme_end)
+		return;
+	if (scheme_end - scheme_beg >= max_scheme_len)
+		return;
+	memcpy(scheme, name, scheme_end - scheme_beg);
+	if (strcmp(scheme,"xi-com") == 0)
+		this->protocol = dtSerial;
+	else if (strcmp(scheme, "xi-emu") == 0)
+		this->protocol = dtVirtual;
+	else if (strcmp(scheme, "xi-net") == 0)
+		this->protocol = dtNet;
+	else if (strcmp(scheme, "xi-udp") == 0)
+		this->protocol = dtUdp;
+	else if (strcmp(scheme, "xi-tcp") == 0)
+		this->protocol = dtTcp;
+	else
+		this->protocol = dtUnknown;
 }
 
 result_t DeviceInterface::close_device ()
@@ -185,6 +208,8 @@ GETSET(secure, settings);
 GETSET(edges, settings);
 GETSET(pid, settings);
 GETSET(emf, settings);
+GETSET(network, settings);
+GETSET(password, settings);
 GETSET(sync_in, settings);
 GETSET(sync_out, settings);
 GETSET(extio, settings);
@@ -195,6 +220,7 @@ GETSET(ctp, settings);
 GETSET(uart, settings);
 GETSET(controller, name);
 GETSET(nonvolatile, memory);
+
 
 GETSET_CALB(home, settings);
 GETSET_CALB(move, settings);
@@ -638,6 +664,11 @@ int DeviceInterface::getMode()
 	}
 
 	return device_mode;
+}
+
+protocol_t DeviceInterface::getProtocolType()
+{
+	return this->protocol;
 }
 
 device_t DeviceInterface::getDeviceId()
