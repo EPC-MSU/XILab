@@ -166,8 +166,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release - usermode|x64'">
@@ -197,8 +196,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug - usermode|Win32'">
@@ -223,8 +221,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug - usermode|x64'">
@@ -253,8 +250,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug - servicemode|Win32'">
@@ -311,8 +307,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release - servicemode|Win32'">
@@ -336,8 +331,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release - servicemode|x64'">
@@ -365,8 +359,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\libximc.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xiwrapper.dll" "$(OutDir)"
-xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\bindy.dll" "$(OutDir)"</Command>
+xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
