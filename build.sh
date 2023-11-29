@@ -257,7 +257,7 @@ ARCHIVE_DIR=.
 
 for path in $XIMC_DIR/c-profiles/*; do
 	filename="${path##*/}"
-	if [ "$filename" = "STANDA"]; then
+	if [ "$filename" = "STANDA" ]; then
 		continue  # mDrive Direct Control shouldn's use STANDA's profilesm #87855
 	fi
 	echo "Compressing $filename"
