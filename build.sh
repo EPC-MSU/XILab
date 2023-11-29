@@ -174,6 +174,8 @@ mkdir -p ../$r_dir/AppImage
 cp -R ./xiresource/scripts ../$r_dir/AppImage
 cp -R ./xiresource/profiles ../$r_dir/AppImage
 cp -R ./xiresource/schemes/. ../$r_dir/AppImage/profiles
+# mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
+rm -r ../$r_dir/AppImage/profiles/STANDA
 mv ../mdrive_direct_control-${VER}-${pkgtype}.AppImage ../$r_dir/AppImage
 cd ../$r_dir/AppImage
 tar -czf ../mdrive_direct_control-${VER}-${pkgtype}.tar.gz ./
@@ -244,6 +246,9 @@ mkdir -p ../$r_dir/Library/XILab/
 cp -R ./xiresource/scripts ../$r_dir/Library/XILab/
 cp -R ./xiresource/profiles ../$r_dir/Library/XILab/
 cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
+# mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
+rm -r ../$r_dir/Library/mdrive_direct_control/profiles/STANDA
+
 
 # package profiles
 XIMC_DIR=./ximc-*/ximc
