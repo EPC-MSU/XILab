@@ -247,7 +247,7 @@ cp -R ./xiresource/scripts ../$r_dir/Library/XILab/
 cp -R ./xiresource/profiles ../$r_dir/Library/XILab/
 cp -R ./xiresource/schemes/. ../$r_dir/Library/XILab/profiles
 # mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
-rm -r ../$r_dir/Library/mdrive_direct_control/profiles/STANDA
+rm -r ../$r_dir/Library/XILab/profiles/STANDA
 
 
 # package profiles
