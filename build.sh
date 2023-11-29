@@ -252,24 +252,18 @@ rm -r ../$r_dir/Library/XILab/profiles/STANDA
 
 # package profiles
 XIMC_DIR=./ximc-*/ximc
-CFG_DIR=../$r_dir/Library/XILab/profiles/STANDA
 mkdir -p ../$r_dir/Library/XILab
 ARCHIVE_DIR=.
-. ./profiles.sh
 
 for path in $XIMC_DIR/c-profiles/*; do
 	filename="${path##*/}"
-	if [ "$filename" = "STANDA" ]; then
-		echo "STANDA already compressed"
-	else
-		echo "Compressing $filename"
-		tar -rvf "profile-$filename.tar" -C $XIMC_DIR "c-profiles/$filename"
-		tar -rvf "profile-$filename.tar" -C $XIMC_DIR "python-profiles/$filename"
-		tar -rvf "profile-$filename.tar" -C ../$r_dir/Library/XILab "profiles/$filename"
-		gzip "profile-$filename.tar"
-		if [ ! $ARCHIVE_DIR -ef . ]; then
-			mv "profile-$filename.tar.gz" $ARCHIVE_DIR
-		fi
+	echo "Compressing $filename"
+	tar -rvf "profile-$filename.tar" -C $XIMC_DIR "c-profiles/$filename"
+	tar -rvf "profile-$filename.tar" -C $XIMC_DIR "python-profiles/$filename"
+	tar -rvf "profile-$filename.tar" -C ../$r_dir/Library/XILab "profiles/$filename"
+	gzip "profile-$filename.tar"
+	if [ ! $ARCHIVE_DIR -ef . ]; then
+		mv "profile-$filename.tar.gz" $ARCHIVE_DIR
 	fi
 done
 
