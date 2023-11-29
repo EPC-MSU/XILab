@@ -108,6 +108,8 @@ mkdir -p ../$r_dir/Library/mdrive_direct_control/
 cp -R ./xiresource/scripts ../$r_dir/Library/mdrive_direct_control/
 cp -R ./xiresource/profiles ../$r_dir/Library/mdrive_direct_control/
 cp -R ./xiresource/schemes/. ../$r_dir/Library/mdrive_direct_control/profiles
+# mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
+rm -r ../$r_dir/Library/mdrive_direct_control/profiles/STANDA
 
 # add qwt
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/

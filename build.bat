@@ -197,7 +197,8 @@ xcopy /Y /I driver %DISTARCH%\driver
 @if not %errorlevel% == 0 goto FAIL
 xcopy /Y /I /S xiresource\scripts %DISTARCH%\scripts
 @if not %errorlevel% == 0 goto FAIL
-xcopy /Y /I /S xiresource\profiles %DISTARCH%\profiles
+:: mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
+xcopy /Y /I /S /EXCLUDE:\Standa\ xiresource\profiles %DISTARCH%\profiles
 @if not %errorlevel% == 0 goto FAIL
 xcopy /Y /I /S xiresource\schemes %DISTARCH%\profiles
 @if not %errorlevel% == 0 goto FAIL
