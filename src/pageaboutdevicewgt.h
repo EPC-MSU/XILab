@@ -53,6 +53,7 @@ private:
 	QString hash_string;
 	void FwUpdateRoutine(QByteArray data);
 	QDateTime download_start_time;
+	QString getServiceMailInfo(const QString line_sep);
 
 public slots:
 	void OnUpdateFirmwareBtnClicked();

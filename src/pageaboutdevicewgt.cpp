@@ -161,87 +161,89 @@ void PageAboutDeviceWgt::OnUpdateFirmwareBtnClicked()
 	}
 }
 
+
+QString PageAboutDeviceWgt::getServiceMailInfo(const QString line_sep)
+{
+	QString service_info;
+	service_info.append(" >> mDrive Direct Control version -- ");
+	service_info.append(xilab_ver);
+
+	result_t result;
+	libximc::device_information_t inf1;
+	service_info.append(line_sep);
+	service_info.append(" >> Hardware version -- ");
+	result = devinterface->get_device_information(&inf1);
+	service_info.append(QString::number(inf1.Major) + "." + QString::number(inf1.Minor) + "." + QString::number(inf1.Release));
+
+	service_info.append(line_sep);
+	service_info.append(" >> Firmware version -- ");
+	QString data1;
+	data1 = m_ui->firmVer->text();
+	service_info.append(data1);
+
+	service_info.append(line_sep);
+	service_info.append(" >> Library version -- ");
+	char version11[32];
+	libximc::ximc_version(version11);
+	service_info.append(version11);
+
+	service_info.append(line_sep);
+	service_info.append(" >> Serial number -- ");
+	data1 = m_ui->snEdit->text();
+	service_info.append(data1);
+
+	status_t state1;
+	result = devinterface->get_status(&state1);
+
+	if ((result == result_ok) && (state1.Flags & STATE_EEPROM_CONNECTED))
+	{
+		service_info.append(line_sep);
+		service_info.append(" >> EEPROM connect ");
+		stage_information_t stage_inf;
+		result = devinterface->get_stage_information(&stage_inf);
+		if (result == result_ok)
+		{
+			service_info.append(line_sep);
+			service_info.append(" >> Part number -- ");
+			service_info.append(stage_inf.PartNumber);
+		}
+	}
+	else
+	{
+		service_info.append(line_sep);
+		service_info.append(" >> EEPROM no connect   ");
+	}
+	return service_info;
+}
+
+
 void PageAboutDeviceWgt::OnTechSupportClicked()
 {
-QString mail_data;
+	QString service_info;
 #if defined(__LINUX__) || defined(__APPLE__)
 	QString sep = "\r\n";
 #endif
 #if defined(WIN32) || defined(WIN64)
 	
 	QString sep = "%0D%0A";
-	const unsigned short WIN_10 = 0x00c0;
 
 	if (QSysInfo::WindowsVersion >= QSysInfo::WV_WINDOWS8/*160*/) {
-		mail_data = "https://physlab.ru/?issue[description]=<The text of the letter>";
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "You will be directed to the technical support page.");
-		sep = "\n";
+		QDesktopServices::openUrl(QUrl("https://physlab.ru/contacts", QUrl::TolerantMode));
 	}
 	else
-#endif		
+#endif
 	{
-		mail_data = "mailto:8smc4@standa.lt?subject= &body=<The text of the letter>";
-	}
+		QString mail_data;
+		mail_data = "mailto:support@mdrive.tech?subject= &body=<The text of the letter>";
 		mail_data.append(sep);
 		mail_data.append(sep);
 		mail_data.append("Service information ");
-
 		mail_data.append(sep);
-		mail_data.append(" >> mDrive Direct Control version -- ");
-		mail_data.append(xilab_ver);
-
-		result_t result;
-		libximc::device_information_t inf1;
-		mail_data.append(sep);
-		mail_data.append(" >> Hardware version -- ");
-		result = devinterface->get_device_information(&inf1);
-		mail_data.append(QString::number(inf1.Major) + "." + QString::number(inf1.Minor) + "." + QString::number(inf1.Release));
-
-		mail_data.append(sep);
-		mail_data.append(" >> Firmware version -- ");
-		QString data1;
-		data1 = m_ui->firmVer->text();
-		mail_data.append(data1);
-
-		mail_data.append(sep);
-		mail_data.append(" >> Library version -- ");
-		char version11[32];
-		libximc::ximc_version(version11);
-		mail_data.append(version11);
-
-		mail_data.append(sep);
-		mail_data.append(" >> Serial number -- ");
-		data1 = m_ui->snEdit->text();
-		mail_data.append(data1);
-
-		status_t state1;
-		result = devinterface->get_status(&state1);
-
-		if ((result == result_ok) && (state1.Flags & STATE_EEPROM_CONNECTED))
-
-		{
-			mail_data.append(sep);
-			mail_data.append(" >> EEPROM connect ");
-			//stage_name_t stage_name1;
-			stage_information_t stage_inf;
-			result = devinterface->get_stage_information(&stage_inf);
-			//result = devinterface->get_stage_name(&stage_name1);
-			if (result == result_ok)
-			{
-				mail_data.append(sep);
-				mail_data.append(" >> Part number -- ");
-				mail_data.append(stage_inf.PartNumber);// stage_name1.PositionerName
-			}
-		}
-		else
-		{
-			mail_data.append(sep);
-			mail_data.append(" >> EEPROM no connect   ");
-		}
+		mail_data.append(this->getServiceMailInfo(sep));
 		QWhatsThis::showText(QPoint(cursor().pos().x(), cursor().pos().y()), "Opens the mail client if it is installed.");
-	
-
-	QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
+		QDesktopServices::openUrl(QUrl(mail_data.toUtf8(), QUrl::TolerantMode));
+	}
 }
 
 void PageAboutDeviceWgt::OnUpdateFirmwareFinished(result_t result)
