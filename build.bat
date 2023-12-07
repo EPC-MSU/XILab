@@ -1,4 +1,3 @@
-@if 'x%MERCURIAL%'=='x' set MERCURIAL=hg
 set BASEDIR=%CD%
 @cmd /C exit 0
 
@@ -8,32 +7,6 @@ set FIRSTPARAM="%1"
 
 :: skip checkout magic for pipeline builds
 @if not "%BUILDOS%" == "" goto END_REFRESH
-
-:: skip checkout magic for git repository builds
-@if '%1' == 'git' goto END_REFRESH
-@if '%2' == 'git' goto END_REFRESH
-
-:: Prefer XIMC_REVISION
-@if NOT 'x%XIMC_REVISION%' == 'x' (@set MERCURIAL_SUFFIX=-r %XIMC_REVISION%
-) else if NOT 'x%MERCURIAL_REVISION%' == 'x' (@set MERCURIAL_SUFFIX=-r %MERCURIAL_REVISION%)
-@echo Using checkout command: hg update -c %MERCURIAL_SUFFIX%
-:: pull again because working copy often contain only one branch
-%MERCURIAL% pull
-@if not %errorlevel% == 0 goto FAIL
-:: update -c fails on uncommited changes
-:: XXX skipped it because xilab build is in the dirty directory
-%MERCURIAL% update  %MERCURIAL_SUFFIX%
-@if not %errorlevel% == 0 goto FAIL
-
-@if 'x%XIMC_REVISION%' == 'x' goto END_REFRESH
-@if 'x%MERCURIAL_REVISION%' == 'x' goto END_REFRESH
-@echo Script could be refreshed script
-@if '%1' == 'refresh' goto END_REFRESH
-@echo Refresing script
-call build.bat refresh
-:: our job here is done, exiting
-@goto :eof
-:END_REFRESH
 
 :: -------------------------------------
 :: ---------- entry point --------------
