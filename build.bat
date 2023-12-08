@@ -1,12 +1,13 @@
 set BASEDIR=%CD%
+@if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
+
+set "LOCAL_BUILD="
+@if "%1" == "local" ( set "LOCAL_BUILD=y" ) else ( set "LOCAL_BUILD=" )
 
 set FIRSTPARAM="%1"
 @if '%2' == 'add_service_build' set FIRSTPARAM="%2"
 @if %FIRSTPARAM% == "cleandist" call :CLEAN && exit /B 0
-
-:: skip checkout magic for pipeline builds
-@if not "%BUILDOS%" == "" goto END_REFRESH
 
 :: -------------------------------------
 :: ---------- entry point --------------
@@ -17,7 +18,7 @@ for /f "eol=# delims== tokens=1,2" %%i in ( %~dp0\VERSIONS ) do (
 )
 
 set DISTDIR=dist_dir
-set DEPDIR=C:\dependency_files
+@if defined LOCAL_BUILD ( set "DEPDIR=C:\projects\XILab-dependencies" ) else ( set "DEPDIR=C:\dependency_files" )
 set QWTDIR=C:\Qwt\msvc2013\qwt-%QWT_VER%
 set QTBASEDIR=C:\Qt\msvc2013
 set QMAKESPEC=win32-msvc2013
@@ -52,10 +53,8 @@ exit /B 1
 :: ----------------------------
 :: ---------- clean -----------
 :CLEAN
-::%MERCURIAL% purge -a
-::@if not %errorlevel% == 0 goto FAIL
-::@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
-::@if not %errorlevel% == 0 goto FAIL
+@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
+@if not %errorlevel% == 0 goto FAIL
 goto :eof
 
 :: ----------------------------
@@ -71,6 +70,7 @@ rmdir /S /Q xiresource
 %GIT% clone "%URL_XIRESOURCE%"
 @if not %errorlevel% == 0 goto FAIL
 
+echo Creating temporary directory ..\libximc-win and filling it with libximc, xiwrapper and bindy libraries...
 for %%G in (win32,win64) do (
 powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
 @if not %errorlevel% == 0 goto FAIL
@@ -123,6 +123,7 @@ goto :eof
 
 @if "%1" == "win32" set QTDIR=%QTBASEDIR%\%QT_VER%
 @if not %errorlevel% == 0 goto FAIL
+echo "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
 @if "%1" == "win32" call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86
 @if not %errorlevel% == 0 goto FAIL
 

@@ -18,7 +18,7 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
   git clone https://github.com/EPC-MSU/XILab
   ```
 
-- Clone [**libximc** repository](https://github.com/EPC-MSU/libximc) to `C:\Projects\libximc-win` folder.
+- Clone [**libximc** repository](https://github.com/EPC-MSU/libximc) to `C:\Projects\libximc-win` folder. ???
   
   ```batch
   :: Cloning libximc
@@ -40,9 +40,7 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
 
 - Copy the downloaded archive to a folder `C:\Projects\XILab`.
 
-- Unpack the **ximc** folder from the downloaded archive to `C:\projects\libximc-win`
-
-- Inside **ximc** folder, copy the **ximc.h** file to the **win32** and **win64** folders.
+- Unpack the **ximc** folder from the downloaded archive to `C:\projects\libximc-win` ???
 
 - Installing dependencies.
   
