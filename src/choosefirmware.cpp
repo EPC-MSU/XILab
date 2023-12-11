@@ -11,7 +11,7 @@ const char* UTCTime = "utc";
 const char* SHA1 = "sha1";
 const char* URL = "url";
 const char* separator = ".";
-const char* ximc = "ximc";
+const char* mdrive = "mdrive";
 const int URL_DATA_COLUMN = 0;
 const int SHA_DATA_COLUMN = 1;
 

@@ -46,15 +46,6 @@ void ControllerSettings::LoadControllerSettings(void)
 			if (result != result_ok) {
 				throw my_exception("Error calling get_firmware_version");
 			}
-			else
-			{
-				if (firmware_version.major == 0 && firmware_version.minor == 0 && firmware_version.release == 0)
-				{
-					firmware_version.major = 4;
-					firmware_version.minor = 3;
-					firmware_version.release = 0;
-				}
-			}
 		}
 		if(!bootloader_version_loaded)
 		{
@@ -76,15 +67,7 @@ void ControllerSettings::LoadControllerSettings(void)
 		e.text();
 		devinterface->close_device(); // Will trigger NoDevice according to requirements in bug #8220
 	}
-	// See #4799. For old bootloader which does not support hw version numbers.
-	version_t lower = {0, 0, 0};
-	version_t higher = {2, 2, 8};
-	if (is_three_asc_order(lower, bootloader_version, higher)) {
-		device_info.Major = 2;
-		device_info.Minor = 3;
-		device_info.Release = 0;
-	}
-
+	
 	devinterface->cs->setUpdatesEnabled(saved_state);
 }
 

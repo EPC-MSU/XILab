@@ -15,7 +15,7 @@ extern const char* version;
 extern const char* UTCTime;
 extern const char* SHA1;
 extern const char* URL;
-extern const char* ximc;
+extern const char* mdrive;
 
 PageAboutDeviceWgt::PageAboutDeviceWgt(QWidget *parent, MotorSettings *_motorStgs, ControllerSettings *controllerStgs_loc, FirmwareUpdateThread *firmwareUpdate_loc, DeviceInterface *_devinterface, QString *_default_firmware_path)
     : QWidget(parent),
@@ -327,24 +327,15 @@ void PageAboutDeviceWgt::slotFinished(QNetworkReply* reply)
 			return;
 		}
 
-		XMLElement* Firmware = doc.RootElement()->FirstChildElement( ximc );
+		XMLElement* Firmware = doc.RootElement()->FirstChildElement( mdrive );
 		XMLElement* element = Firmware;
 		leaf_element_t max_allowed_firmware;
 		hardware_version_t hw_ver;
 
-		// Added to fix the iron version for the erroneous iron version 1.3.1
-		if (controllerStgs_local->device_info.Major == 1 && controllerStgs_local->device_info.Minor == 3 && controllerStgs_local->device_info.Release == 1)
-		{
-			hw_ver.major = 2;
-			hw_ver.minor = 3;
-			hw_ver.release = 3;
-		}
-		else
-		{		
 		hw_ver.major = controllerStgs_local->device_info.Major;
 		hw_ver.minor = controllerStgs_local->device_info.Minor;
 		hw_ver.release = controllerStgs_local->device_info.Release;
-		}
+		
 		choosefirmwaredlg->fill_treeWdg(element, &max_allowed_firmware, hw_ver);//fill window with firmwares, find max allowed firmware for the given hardware version
 		emit networkResultSgn(" ", false, LOGLEVEL_DEBUG);
 
