@@ -24,21 +24,21 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
     
     ```batch
     :: Cloning XILab-dependencies
-    cd C:\
+    cd C:\projects\
     git clone https://github.com/EPC-MSU/XILab-dependencies
     ```
   
   - Move **Qwt** folder from the repository  on the `C:\` drive.
     
     ```batch
-    move C:\XILab-dependencies\Qwt C:\
+    move C:\projects\XILab-dependencies\Qwt C:\
     ```
   
   - Unpack `C:\Qwt\msvc2013.7z` to `C:\Qwt\`.
   
-  - To run XiLab, you also need some system libraries. For this purpose, you can install **vcredist_xXX_2013.exe**  version 12.0.30501, which can be found in `C:\XILab-dependencies\` or downloaded from [the link](https://www.microsoft.com/en-us/download/details.aspx?id=40784). 
+  - To run XiLab, you also need some system libraries. For this purpose, you can install **vcredist_xXX_2013.exe**  version 12.0.30501, which can be found in `C:\projects\XILab-dependencies\` or downloaded from [the link](https://www.microsoft.com/en-us/download/details.aspx?id=40784). 
     
-     :bookmark_tabs: If you don't want to install the entire package, you can copy the necessary files from the `C:\XILab-dependencies\WinXX` folders to the assembly directory.  Files `msvcm90.dll`, `msvcp90.dll`, `msvcr90.dll` have a product version 9.00.30729.6161. Files `msvcp120.dll`, `msvcr120.dll` have a product version 12.00.21005.1.
+     :bookmark_tabs: If you don't want to install the entire package, you can copy the necessary files from the `C:\projects\XILab-dependencies\WinXX` folders to the assembly directory.  Files `msvcm90.dll`, `msvcp90.dll`, `msvcr90.dll` have a product version 9.00.30729.6161. Files `msvcp120.dll`, `msvcr120.dll` have a product version 12.00.21005.1.
   
   - Download the Qt 4.8.6. Qt no longer supports version 4.8.6, but a saved copy can be downloaded from our [server](https://files.xisupport.com/XiLab_dependencies/Qt/msvc2013.7z) as an archive.
   
@@ -61,7 +61,7 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
     setx PATH %PATH%;C:\Qwt\msvc2013\qwt-6.0.0\lib32;C:\Qwt\msvc2013\qwt-6.0.0\lib64;C:\Qt\msvc2013\4.8.6\bin;C:\Qt\msvc2013\4.8.6_x64\bin
     ```
   
-  - To create a distribution, you need to install **NSIS**. To do this, install the NSIS package using an executable located in `C:\XILab-dependencies\NSIS\`.
+  - To create a distribution, you need to install **NSIS**. To do this, install the NSIS package using an executable located in `C:\project\XILab-dependencies\NSIS\`.
   
   - You must specify the path of the file location **makensis.exe** in PATH.
   
@@ -74,15 +74,14 @@ To build releases for Windows, you can use the `C:\projects\XILab\build.bat` scr
 - Run the script with parameter:
   
   ```batch
-  build.bat
+  build.bat local
   :: If the build is not successful for all platforms then run the full build command "build git add_service_build".
   ```
 
-- Portable software packages for different bit sizes after the build are located in the folder `C:\projects\XILab\dist_dir`.
+Portable software packages for different bit sizes after the build are located in the folder `C:\projects\XILab\dist_dir`.
+ The installer after the build is located in the folder `C:\projects\XILab`.
 
-- The installer after the build is located in the folder `C:\projects\XILab`.
-
-Building **XiLab** is also possible under **linux** and **Mac**.
+:bookmark_tabs: Building **XiLab** is also possible under **linux** and **Mac**.
 
 ## Building a release using a Microsoft Visual Studio 2013
 
@@ -102,6 +101,8 @@ To build releases for Windows (and also to debug), you can use the  Microsoft Vi
   - Open `C:\projects\XILab\XILab.sln` file in Microsoft Visual Studio.
   -  In the `BUILD>Configuration Manager...` menu, select the build type and platform.
   - Run builing in `BUILD>Build Solution`.
+
+Portable software packages for different bit sizes after the build are located in the folder `C:\projects\XILab\dist_dir`.
 
 ## Editing and debugging
 

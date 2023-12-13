@@ -2,9 +2,9 @@ set BASEDIR=%CD%
 @if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-set FIRSTPARAM="%1"
-@if '%2' == "add_service_build" set FIRSTPARAM="%2"
-@if %FIRSTPARAM% == "cleandist" call :CLEAN && exit /B 0
+@if '%1' == "local" set "LOCAL_BUILD=y"
+@if '%2' == "add_service_build" set "SERVICE_BUILD=y"
+@if '%1' == "cleandist" call :CLEAN && exit /B 0
 
 :: -------------------------------------
 :: ---------- entry point --------------
@@ -15,6 +15,7 @@ for /f "eol=# delims== tokens=1,2" %%i in ( %~dp0\VERSIONS ) do (
 )
 
 set DISTDIR=dist_dir
+@if defined LOCAL_BUILD ( set "DEPDIR=C:\projects\XILab-dependencies" ) else ( set "DEPDIR=C:\dependency_files" )
 set QWTDIR=C:\Qwt\msvc2013\qwt-%QWT_VER%
 set QTBASEDIR=C:\Qt\msvc2013
 set QMAKESPEC=win32-msvc2013
@@ -107,11 +108,11 @@ goto :eof
 :APP
 cd %BASEDIR%
 @if not %errorlevel% == 0 goto FAIL
-@if %FIRSTPARAM% == "add_service_build" call :XILAB win32 servicemode Win32
+@if defined SERVICE_BUILD call :XILAB win32 servicemode Win32
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win32 usermode Win32
 @if not %errorlevel% == 0 goto FAIL
-@if %FIRSTPARAM% == "add_service_build" call :XILAB win64 servicemode x64
+@if defined SERVICE_BUILD call :XILAB win64 servicemode x64
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win64 usermode x64
 @if not %errorlevel% == 0 goto FAIL
