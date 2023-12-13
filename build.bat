@@ -2,7 +2,6 @@ set BASEDIR=%CD%
 @if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-set "LOCAL_BUILD="
 @if "%1" == "local" ( set "LOCAL_BUILD=y" ) else ( set "LOCAL_BUILD=" )
 
 set FIRSTPARAM="%1"
@@ -26,9 +25,9 @@ set QMAKESPEC=win32-msvc2013
 echo "CERTNAME=%CERTNAME%"
 echo "XIMC_RELEASE_TYPE=%XIMC_RELEASE_TYPE%"
 
-call :LIB
+@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
 @if not %errorlevel% == 0 goto FAIL
-call :CLEAN
+call :LIB
 @if not %errorlevel% == 0 goto FAIL
 call :APP
 @if not %errorlevel% == 0 goto FAIL
@@ -53,13 +52,30 @@ exit /B 1
 :: ----------------------------
 :: ---------- clean -----------
 :CLEAN
+powershell "Remove-Item *ximc*.tar.gz"
+powershell "Remove-Item *ximc*.tar"
+@if exist ximc-%XIMC_VER% rmdir /S /Q ximc-%XIMC_VER%
 @if exist %DISTDIR% rmdir /S /Q %DISTDIR%
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 @if not %errorlevel% == 0 goto FAIL
 goto :eof
 
 :: ----------------------------
 :: ---------- clean -----------
 :LIB
+:: ximc-0.0.tar.gz existing means we are under Jenkins build process which downloads right version and rename it
+:: to ...-0.0.tar.gz for convenience
+if not exist .\ximc-0.0.tar.gz (
+    :: So, we are under manual build. Need to download libximc
+    powershell "Invoke-WebRequest -Uri https://files.xisupport.com/libximc/libximc-%XIMC_VER%-all.tar.gz -OutFile ximc-0.0.tar.gz"
+    @if not %errorlevel% == 0 (
+        echo Unable to download libximc-%XIMC_VER%-all.tar.gz. Probable reasons:
+        echo * No Internet connection
+        echo * The version you require isn't public. You may try downloading the closest public version and pray the build will succeed.
+        echo Remember to rename downloaded archive to ximc-0.0.tar.gz
+        goto FAIL
+    )
+)
 7z x -y ximc-*.tar.gz
 @if not %errorlevel% == 0 goto FAIL
 7z x -y ximc-*.tar
@@ -72,20 +88,20 @@ rmdir /S /Q xiresource
 
 echo Creating temporary directory ..\libximc-win and filling it with libximc, xiwrapper and bindy libraries...
 for %%G in (win32,win64) do (
-powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xiwrapper.dll ..\libximc-win\ximc\%%G\xiwrapper.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\bindy.lib ..\libximc-win\ximc\%%G\bindy.lib"
-@if not %errorlevel% == 0 goto FAIL
+    powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\xiwrapper.dll ..\libximc-win\ximc\%%G\xiwrapper.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\bindy.lib ..\libximc-win\ximc\%%G\bindy.lib"
+    @if not %errorlevel% == 0 goto FAIL
 )
 goto :eof
 
@@ -102,6 +118,7 @@ call :XILAB win32 usermode Win32
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win64 usermode x64
 @if not %errorlevel% == 0 goto FAIL
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 call :NSIS
 @if not %errorlevel% == 0 goto FAIL
 goto :eof
