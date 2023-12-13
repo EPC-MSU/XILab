@@ -54,7 +54,6 @@ powershell "Remove-Item *ximc*.tar.gz"
 powershell "Remove-Item *ximc*.tar"
 @if exist ximc-%XIMC_VER% rmdir /S /Q ximc-%XIMC_VER%
 @if exist %DISTDIR% rmdir /S /Q %DISTDIR%
-@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 @if not %errorlevel% == 0 goto FAIL
 goto :eof
 
@@ -114,7 +113,6 @@ call :XILAB win32 usermode Win32
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win64 usermode x64
 @if not %errorlevel% == 0 goto FAIL
-@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 call :NSIS
 @if not %errorlevel% == 0 goto FAIL
 goto :eof
