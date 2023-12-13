@@ -1,39 +1,10 @@
-@if 'x%MERCURIAL%'=='x' set MERCURIAL=hg
 set BASEDIR=%CD%
+@if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-set FIRSTPARAM="%1"
-@if '%2' == 'add_service_build' set FIRSTPARAM="%2"
-@if %FIRSTPARAM% == "cleandist" call :CLEAN && exit /B 0
-
-:: skip checkout magic for pipeline builds
-@if not "%BUILDOS%" == "" goto END_REFRESH
-
-:: skip checkout magic for git repository builds
-@if '%1' == 'git' goto END_REFRESH
-@if '%2' == 'git' goto END_REFRESH
-
-:: Prefer XIMC_REVISION
-@if NOT 'x%XIMC_REVISION%' == 'x' (@set MERCURIAL_SUFFIX=-r %XIMC_REVISION%
-) else if NOT 'x%MERCURIAL_REVISION%' == 'x' (@set MERCURIAL_SUFFIX=-r %MERCURIAL_REVISION%)
-@echo Using checkout command: hg update -c %MERCURIAL_SUFFIX%
-:: pull again because working copy often contain only one branch
-%MERCURIAL% pull
-@if not %errorlevel% == 0 goto FAIL
-:: update -c fails on uncommited changes
-:: XXX skipped it because xilab build is in the dirty directory
-%MERCURIAL% update  %MERCURIAL_SUFFIX%
-@if not %errorlevel% == 0 goto FAIL
-
-@if 'x%XIMC_REVISION%' == 'x' goto END_REFRESH
-@if 'x%MERCURIAL_REVISION%' == 'x' goto END_REFRESH
-@echo Script could be refreshed script
-@if '%1' == 'refresh' goto END_REFRESH
-@echo Refresing script
-call build.bat refresh
-:: our job here is done, exiting
-@goto :eof
-:END_REFRESH
+@if '%1' == "local" set "LOCAL_BUILD=y"
+@if '%2' == "add_service_build" set "SERVICE_BUILD=y"
+@if '%1' == "cleandist" call :CLEAN && exit /B 0
 
 :: -------------------------------------
 :: ---------- entry point --------------
@@ -44,7 +15,7 @@ for /f "eol=# delims== tokens=1,2" %%i in ( %~dp0\VERSIONS ) do (
 )
 
 set DISTDIR=dist_dir
-set DEPDIR=C:\dependency_files
+@if defined LOCAL_BUILD ( set "DEPDIR=C:\projects\XILab-dependencies" ) else ( set "DEPDIR=C:\dependency_files" )
 set QWTDIR=C:\Qwt\msvc2013\qwt-%QWT_VER%
 set QTBASEDIR=C:\Qt\msvc2013
 set QMAKESPEC=win32-msvc2013
@@ -52,9 +23,9 @@ set QMAKESPEC=win32-msvc2013
 echo "CERTNAME=%CERTNAME%"
 echo "XIMC_RELEASE_TYPE=%XIMC_RELEASE_TYPE%"
 
-call :LIB
+@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
 @if not %errorlevel% == 0 goto FAIL
-call :CLEAN
+call :LIB
 @if not %errorlevel% == 0 goto FAIL
 call :APP
 @if not %errorlevel% == 0 goto FAIL
@@ -79,15 +50,30 @@ exit /B 1
 :: ----------------------------
 :: ---------- clean -----------
 :CLEAN
-::%MERCURIAL% purge -a
-::@if not %errorlevel% == 0 goto FAIL
-::@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
-::@if not %errorlevel% == 0 goto FAIL
+powershell "Remove-Item *ximc*.tar.gz"
+powershell "Remove-Item *ximc*.tar"
+@if exist ximc-%XIMC_VER% rmdir /S /Q ximc-%XIMC_VER%
+@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
+@if not %errorlevel% == 0 goto FAIL
 goto :eof
 
 :: ----------------------------
-:: ---------- clean -----------
+:: ----------  LIB  -----------
 :LIB
+:: ximc-0.0.tar.gz existing means we are under Jenkins build process which downloads right version and rename it
+:: to ...-0.0.tar.gz for convenience
+if not exist .\ximc-0.0.tar.gz (
+    :: So, we are under manual build. Need to download libximc
+    powershell "Invoke-WebRequest -Uri https://files.xisupport.com/libximc/libximc-%XIMC_VER%-all.tar.gz -OutFile ximc-0.0.tar.gz"
+    @if not %errorlevel% == 0 (
+        echo Unable to download libximc-%XIMC_VER%-all.tar.gz. Probable reasons:
+        echo * No Internet connection
+        echo * The version you require isn't public. You may try downloading the closest public version and pray the build will succeed.
+        echo Remember to rename downloaded archive to ximc-0.0.tar.gz
+        goto FAIL
+    )
+)
 7z x -y ximc-*.tar.gz
 @if not %errorlevel% == 0 goto FAIL
 7z x -y ximc-*.tar
@@ -98,19 +84,20 @@ rmdir /S /Q xiresource
 %GIT% clone "%URL_XIRESOURCE%"
 @if not %errorlevel% == 0 goto FAIL
 
+echo Creating temporary directory ..\libximc-win and filling it with libximc, xiwrapper and bindy libraries...
 for %%G in (win32,win64) do (
-powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xibridge.lib ..\libximc-win\ximc\%%G\xibridge.lib"
-@if not %errorlevel% == 0 goto FAIL
+    powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\xibridge.lib ..\libximc-win\ximc\%%G\xibridge.lib"
+    @if not %errorlevel% == 0 goto FAIL
 )
 goto :eof
 
@@ -119,14 +106,15 @@ goto :eof
 :APP
 cd %BASEDIR%
 @if not %errorlevel% == 0 goto FAIL
-@if %FIRSTPARAM% == "add_service_build" call :XILAB win32 servicemode Win32
+@if defined SERVICE_BUILD call :XILAB win32 servicemode Win32
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win32 usermode Win32
 @if not %errorlevel% == 0 goto FAIL
-@if %FIRSTPARAM% == "add_service_build" call :XILAB win64 servicemode x64
+@if defined SERVICE_BUILD call :XILAB win64 servicemode x64
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win64 usermode x64
 @if not %errorlevel% == 0 goto FAIL
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 call :NSIS
 @if not %errorlevel% == 0 goto FAIL
 goto :eof
