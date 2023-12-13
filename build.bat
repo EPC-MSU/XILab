@@ -86,18 +86,18 @@ rmdir /S /Q xiresource
 
 echo Creating temporary directory ..\libximc-win and filling it with libximc, xiwrapper and bindy libraries...
 for %%G in (win32,win64) do (
-powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xibridge.lib ..\libximc-win\ximc\%%G\xibridge.lib"
-@if not %errorlevel% == 0 goto FAIL
+    powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\xibridge.lib ..\libximc-win\ximc\%%G\xibridge.lib"
+    @if not %errorlevel% == 0 goto FAIL
 )
 goto :eof
 
