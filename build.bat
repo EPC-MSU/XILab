@@ -1,40 +1,10 @@
-@if 'x%MERCURIAL%'=='x' set MERCURIAL=hg
-@if 'x%GIT%'=='x' set GIT=git
 set BASEDIR=%CD%
+@if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-set FIRSTPARAM="%1"
-@if '%2' == 'add_service_build' set FIRSTPARAM="%2"
-@if %FIRSTPARAM% == "cleandist" call :CLEAN && exit /B 0
-
-:: skip checkout magic for pipeline builds
-@if not "%BUILDOS%" == "" goto END_REFRESH
-
-:: skip checkout magic for git repository builds
-@if '%1' == 'git' goto END_REFRESH
-@if '%2' == 'git' goto END_REFRESH
-
-:: Prefer XIMC_REVISION
-@if NOT 'x%XIMC_REVISION%' == 'x' (@set MERCURIAL_SUFFIX=-r %XIMC_REVISION%
-) else if NOT 'x%MERCURIAL_REVISION%' == 'x' (@set MERCURIAL_SUFFIX=-r %MERCURIAL_REVISION%)
-@echo Using checkout command: hg update -c %MERCURIAL_SUFFIX%
-:: pull again because working copy often contain only one branch
-%MERCURIAL% pull
-@if not %errorlevel% == 0 goto FAIL
-:: update -c fails on uncommited changes
-:: XXX skipped it because xilab build is in the dirty directory
-%MERCURIAL% update  %MERCURIAL_SUFFIX%
-@if not %errorlevel% == 0 goto FAIL
-
-@if 'x%XIMC_REVISION%' == 'x' goto END_REFRESH
-@if 'x%MERCURIAL_REVISION%' == 'x' goto END_REFRESH
-@echo Script could be refreshed script
-@if '%1' == 'refresh' goto END_REFRESH
-@echo Refresing script
-call build.bat refresh
-:: our job here is done, exiting
-@goto :eof
-:END_REFRESH
+@if '%1' == "local" set "LOCAL_BUILD=y"
+@if '%2' == "add_service_build" set "SERVICE_BUILD=y"
+@if '%1' == "cleandist" call :CLEAN && exit /B 0
 
 :: -------------------------------------
 :: ---------- entry point --------------
@@ -45,7 +15,7 @@ for /f "eol=# delims== tokens=1,2" %%i in ( %~dp0\VERSIONS ) do (
 )
 
 set DISTDIR=dist_dir
-set DEPDIR=C:\dependency_files
+@if defined LOCAL_BUILD ( set "DEPDIR=C:\projects\XILab-dependencies" ) else ( set "DEPDIR=C:\dependency_files" )
 set QWTDIR=C:\Qwt\msvc2013\qwt-%QWT_VER%
 set QTBASEDIR=C:\Qt\msvc2013
 set QMAKESPEC=win32-msvc2013
@@ -53,9 +23,9 @@ set QMAKESPEC=win32-msvc2013
 echo "CERTNAME=%CERTNAME%"
 echo "XIMC_RELEASE_TYPE=%XIMC_RELEASE_TYPE%"
 
-call :LIB
+@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
 @if not %errorlevel% == 0 goto FAIL
-call :CLEAN
+call :LIB
 @if not %errorlevel% == 0 goto FAIL
 call :APP
 @if not %errorlevel% == 0 goto FAIL
@@ -63,9 +33,9 @@ call :APP
 @if "%NODE_NAME%" == "" goto SUCCESS
 
 cd "%DISTDIR%"
-7z a %BASEDIR%\mdrive_direct_control-win32.7z win32\
+7z a %BASEDIR%\xilab-win32.7z win32\
 @if not %errorlevel% == 0 goto FAIL
-7z a %BASEDIR%\mdrive_direct_control-win64.7z win64\
+7z a %BASEDIR%\xilab-win64.7z win64\
 @if not %errorlevel% == 0 goto FAIL
 
 :: it is an exit
@@ -80,15 +50,30 @@ exit /B 1
 :: ----------------------------
 :: ---------- clean -----------
 :CLEAN
-::%MERCURIAL% purge -a
-::@if not %errorlevel% == 0 goto FAIL
-::@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
-::@if not %errorlevel% == 0 goto FAIL
+powershell "Remove-Item *ximc*.tar.gz"
+powershell "Remove-Item *ximc*.tar"
+@if exist ximc-%XIMC_VER% rmdir /S /Q ximc-%XIMC_VER%
+@if exist %DISTDIR% rmdir /S /Q %DISTDIR%
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
+@if not %errorlevel% == 0 goto FAIL
 goto :eof
 
 :: ----------------------------
-:: ---------- clean -----------
+:: ----------  LIB  -----------
 :LIB
+:: ximc-0.0.tar.gz existing means we are under Jenkins build process which downloads right version and rename it
+:: to ...-0.0.tar.gz for convenience
+if not exist .\ximc-0.0.tar.gz (
+    :: So, we are under manual build. Need to download libximc
+    powershell "Invoke-WebRequest -Uri https://files.xisupport.com/libximc/libximc-%XIMC_VER%-all.tar.gz -OutFile ximc-0.0.tar.gz"
+    @if not %errorlevel% == 0 (
+        echo Unable to download libximc-%XIMC_VER%-all.tar.gz. Probable reasons:
+        echo * No Internet connection
+        echo * The version you require isn't public. You may try downloading the closest public version and pray the build will succeed.
+        echo Remember to rename downloaded archive to ximc-0.0.tar.gz
+        goto FAIL
+    )
+)
 7z x -y ximc-*.tar.gz
 @if not %errorlevel% == 0 goto FAIL
 7z x -y ximc-*.tar
@@ -99,21 +84,22 @@ rmdir /S /Q xiresource
 %GIT% clone "%URL_XIRESOURCE%"
 @if not %errorlevel% == 0 goto FAIL
 
+echo Creating temporary directory ..\libximc-win and filling it with libximc, xiwrapper and bindy libraries...
 for %%G in (win32,win64) do (
-powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\xiwrapper.dll ..\libximc-win\ximc\%%G\xiwrapper.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
-@if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%%G\bindy.lib ..\libximc-win\ximc\%%G\bindy.lib"
-@if not %errorlevel% == 0 goto FAIL
+    powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\ximc.h ..\libximc-win\ximc\%%G\ximc.h"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.lib ..\libximc-win\ximc\%%G\libximc.lib"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\xiwrapper.dll ..\libximc-win\ximc\%%G\xiwrapper.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\bindy.lib ..\libximc-win\ximc\%%G\bindy.lib"
+    @if not %errorlevel% == 0 goto FAIL
 )
 goto :eof
 
@@ -122,14 +108,15 @@ goto :eof
 :APP
 cd %BASEDIR%
 @if not %errorlevel% == 0 goto FAIL
-@if %FIRSTPARAM% == "add_service_build" call :XILAB win32 servicemode Win32
+@if defined SERVICE_BUILD call :XILAB win32 servicemode Win32
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win32 usermode Win32
 @if not %errorlevel% == 0 goto FAIL
-@if %FIRSTPARAM% == "add_service_build" call :XILAB win64 servicemode x64
+@if defined SERVICE_BUILD call :XILAB win64 servicemode x64
 @if not %errorlevel% == 0 goto FAIL
 call :XILAB win64 usermode x64
 @if not %errorlevel% == 0 goto FAIL
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 call :NSIS
 @if not %errorlevel% == 0 goto FAIL
 goto :eof
@@ -151,6 +138,7 @@ goto :eof
 
 @if "%1" == "win32" set QTDIR=%QTBASEDIR%\%QT_VER%
 @if not %errorlevel% == 0 goto FAIL
+echo "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
 @if "%1" == "win32" call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86
 @if not %errorlevel% == 0 goto FAIL
 
@@ -161,15 +149,15 @@ goto :eof
 
 devenv /nologo /build %SOLCONF% XILab.sln 
 @if not %errorlevel% == 0 goto FAIL
-move /Y %ARCH%\%BINDIR%\"mdrive_direct_control "[%BINDIR%].exe a.exe
+move /Y %ARCH%\%BINDIR%\"XILab "[%BINDIR%].exe a.exe
 @if not %errorlevel% == 0 goto FAIL
 :: Sign binaries only in release build and if CERTNAME is given
 @if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' if 'x%CERTNAME%' NEQ 'x' SignTool.exe sign /v /n %CERTNAME% a.exe
 
 @if not %errorlevel% == 0 goto FAIL
-move /Y a.exe %ARCH%\%BINDIR%\"mdrive_direct_control "[%BINDIR%].exe
+move /Y a.exe %ARCH%\%BINDIR%\"XILab "[%BINDIR%].exe
 @if not %errorlevel% == 0 goto FAIL
-copy %ARCH%\%BINDIR%\"mdrive_direct_control ["%BINDIR%"].exe" %DISTARCH%
+copy %ARCH%\%BINDIR%\"XILab ["%BINDIR%"].exe" %DISTARCH%
 @if not %errorlevel% == 0 goto FAIL
 
 copy %QTDIR%\bin\QtCore4.dll %DISTARCH%
@@ -197,14 +185,11 @@ xcopy /Y /I driver %DISTARCH%\driver
 @if not %errorlevel% == 0 goto FAIL
 xcopy /Y /I /S xiresource\scripts %DISTARCH%\scripts
 @if not %errorlevel% == 0 goto FAIL
-:: mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
-echo \STANDA\>excludelist.txt
-xcopy /Y /I /S /EXCLUDE:excludelist.txt xiresource\profiles %DISTARCH%\profiles
-del .\excludelist.txt
+xcopy /Y /I /S xiresource\profiles %DISTARCH%\profiles
 @if not %errorlevel% == 0 goto FAIL
 xcopy /Y /I /S xiresource\schemes %DISTARCH%\profiles
 @if not %errorlevel% == 0 goto FAIL
-xcopy /Y /I mdrivedefault.cfg %DISTARCH%\
+xcopy /Y /I xilabdefault.cfg %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
 
 :: Needed for the standalone version
@@ -238,9 +223,9 @@ copy %QWTBINDIR%\qwt.dll %DISTARCH%\qwt.dll
 :NSIS
 makensis XILab-setup-UTF8.nsi
 @if not %errorlevel% == 0 goto FAIL
-ren mdrive_direct_control-*.exe mdrive_direct_control-*.exe
+ren XILab-*.exe xilab-*.exe
 @if not %errorlevel% == 0 goto FAIL
 :: Sign binaries only in release build
-@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' SignTool.exe sign /v /n %CERTNAME% mdrive_direct_control-*.exe
+@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' SignTool.exe sign /v /n %CERTNAME% xilab-*.exe
 @if not %errorlevel% == 0 goto FAIL
 @goto :eof
