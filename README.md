@@ -38,7 +38,7 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
   
   - To run XiLab, you also need some system libraries. For this purpose, you can install **vcredist_xXX_2013.exe**  version 12.0.30501, which can be found in `C:\XILab-dependencies\` or downloaded from [the link](https://www.microsoft.com/en-us/download/details.aspx?id=40784). 
     
-     :bookmark_tabs: If you do not want to install the entire package, you can copy the necessary files from the `C:\XILab-dependencies\WinXX` folders to the assembly directory.  Files `msvcm90.dll`, `msvcp90.dll`, `msvcr90.dll` have a product version 9.00.30729.6161. Files `msvcp120.dll`, `msvcr120.dll` have a product version 12.00.21005.1.
+     :bookmark_tabs: If you don't want to install the entire package, you can copy the necessary files from the `C:\XILab-dependencies\WinXX` folders to the assembly directory.  Files `msvcm90.dll`, `msvcp90.dll`, `msvcr90.dll` have a product version 9.00.30729.6161. Files `msvcp120.dll`, `msvcr120.dll` have a product version 12.00.21005.1.
   
   - Download the Qt 4.8.6. Qt no longer supports version 4.8.6, but a saved copy can be downloaded from our [server](https://files.xisupport.com/XiLab_dependencies/Qt/msvc2013.7z) as an archive.
   
@@ -86,7 +86,7 @@ Building **XiLab** is also possible under **linux** and **Mac**.
 
 ## Building a release using a Microsoft Visual Studio 2013
 
-To build releases for Windows (and also to debug), you can use the  Microsoft Visual Studio. For that you need to create some extra folders used by VS.
+To build releases for Windows (and also to debug), you can use the  Microsoft Visual Studio.
 * Preparations:
   - Find required libximc version in `C:\projects\XILab\VERSIONS` (look for `XIMC_VER`)
   - Download an archive with that version from [doc.xisupport.com](doc.xisupport.com).
