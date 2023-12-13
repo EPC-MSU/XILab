@@ -67,24 +67,6 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
   
   :bookmark_tabs: After setting new environmental variables ypu need to restart `cmd` session.
 
-## Editing and debugging
-
-For editing and debugging you need to install development software such as **MSVC2013** and **QtCreator**.
-
-* In **QtCreator**, it is convenient to perform visual editing of Windows.
-
-* In **MSVC2013**, you can edit and debug code, as well as build it. 
-
-## Building a release using a Microsoft Visual Studio 2013
-
-To build releases for Windows, you can use the  Microsoft Visual Studio 
-
-- Open `C:\projects\XILab\XILab.sln` file in Microsoft Visual Studio.
-
-- In the `BUILD>Configuration Manager...` menu, select the build type and platform.
-
-- Run builing in `BUILD>Build Solution`.
-
 ## Build a release using a build script
 
 To build releases for Windows, you can use the `C:\projects\XILab\build.bat` script.
@@ -92,7 +74,7 @@ To build releases for Windows, you can use the `C:\projects\XILab\build.bat` scr
 - Run the script with parameter:
   
   ```batch
-  build local
+  build.bat
   :: If the build is not successful for all platforms then run the full build command "build git add_service_build".
   ```
 
@@ -101,3 +83,30 @@ To build releases for Windows, you can use the `C:\projects\XILab\build.bat` scr
 - The installer after the build is located in the folder `C:\projects\XILab`.
 
 Building **XiLab** is also possible under **linux** and **Mac**.
+
+## Building a release using a Microsoft Visual Studio 2013
+
+To build releases for Windows (and also to debug), you can use the  Microsoft Visual Studio. For that you need to create some extra folders used by VS.
+* Preparations:
+  - Find required libximc version in `C:\projects\XILab\VERSIONS` (look for `XIMC_VER`)
+  - Download an archive with that version from [doc.xisupport.com](doc.xisupport.com).
+  - The archive contains a folder `ximc-*.*.*`. Unpack this folder to `C:\projects\`. As a result you will get `C:\projects\ximc-*.*.*`.
+  - Rename folder `ximc-*.*.*` to `libximc-win`.
+  - Copy ximc.h to win32 and win64 folders:
+    ```batch
+    cd C:\projects\libximc-win\ximc
+    copy ximc.h win32
+    copy ximc.h win64
+    ```
+* Building:
+  - Open `C:\projects\XILab\XILab.sln` file in Microsoft Visual Studio.
+  -  In the `BUILD>Configuration Manager...` menu, select the build type and platform.
+  - Run builing in `BUILD>Build Solution`.
+
+## Editing and debugging
+
+For editing and debugging you need to install development software such as **MSVC2013** and **QtCreator**.
+
+* In **QtCreator**, it is convenient to perform visual editing of Windows.
+
+* In **MSVC2013**, you can edit and debug code, as well as build it.

@@ -2,10 +2,8 @@ set BASEDIR=%CD%
 @if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-@if "%1" == "local" ( set "LOCAL_BUILD=y" ) else ( set "LOCAL_BUILD=" )
-
 set FIRSTPARAM="%1"
-@if '%2' == 'add_service_build' set FIRSTPARAM="%2"
+@if '%2' == "add_service_build" set FIRSTPARAM="%2"
 @if %FIRSTPARAM% == "cleandist" call :CLEAN && exit /B 0
 
 :: -------------------------------------
@@ -17,7 +15,6 @@ for /f "eol=# delims== tokens=1,2" %%i in ( %~dp0\VERSIONS ) do (
 )
 
 set DISTDIR=dist_dir
-@if defined LOCAL_BUILD ( set "DEPDIR=C:\projects\XILab-dependencies" ) else ( set "DEPDIR=C:\dependency_files" )
 set QWTDIR=C:\Qwt\msvc2013\qwt-%QWT_VER%
 set QTBASEDIR=C:\Qt\msvc2013
 set QMAKESPEC=win32-msvc2013
@@ -61,7 +58,7 @@ powershell "Remove-Item *ximc*.tar"
 goto :eof
 
 :: ----------------------------
-:: ---------- clean -----------
+:: ----------  LIB  -----------
 :LIB
 :: ximc-0.0.tar.gz existing means we are under Jenkins build process which downloads right version and rename it
 :: to ...-0.0.tar.gz for convenience
