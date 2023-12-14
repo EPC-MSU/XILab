@@ -148,10 +148,13 @@ result_t DeviceInterface::probe_device (const char* name)
 
 libximc::device_enumeration_t DeviceInterface::enumerate_devices(int probe_devices, const char* hints)
 {
-	libximc::device_enumeration_t result = libximc::enumerate_devices(probe_devices, hints);
-	if (result != result_ok)
+    return libximc::enumerate_devices(probe_devices, hints);
+    /*
+    libximc::device_enumeration_t result = libximc::enumerate_devices(probe_devices, hints);
+	if ( != result_ok)
 		emit errorSignal("enumerate_devices", result);
 	return result;
+    */
 }
 
 result_t DeviceInterface::free_enumerate_devices (device_enumeration_t dev_enum)

@@ -66,9 +66,6 @@ void PageAboutWgt::OnRemoveAllConfigsBtnClicked()
 
 		// removes scratch.txt
 		LoggedFile::remove(DefaultScriptScratchName());
-
-		// also delete keyfile.sqlite
-		LoggedFile::remove(BindyKeyfileName());
 		
 		save_configs = false;
 		emit exit_on_remove();
