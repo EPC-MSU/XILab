@@ -2,7 +2,6 @@
 #include "ui_pageprogramconfig.h"
 #include "devicesearchsettings.h"
 #include <QHostAddress>
-//#include "bindyusermodel.h"
 #include <QDialog>
 #include <QLineEdit>
 #include <QMessageBox>
@@ -30,13 +29,6 @@ PageProgramConfigWgt::PageProgramConfigWgt(QWidget *parent, DeviceSearchSettings
     ui->setupUi(this);
 
 	dss = _dss;
-	/*try {
-		bindy = new bindy::Bindy(BindyKeyfileName().toStdString(), false, false);
-	} catch (std::runtime_error &e) {
-		(void)e;
-	}
-	conn_id = bindy::conn_id_invalid;
-	*/
 	x_icon.addFile(":/settingsdlg/images/settingsdlg/x.png");
 	w_icon.addFile(":/settingsdlg/images/settingsdlg/wrench.png");
 	connect( ui->detectBtn, SIGNAL( clicked() ), this, SLOT( DetectHosts() ) );
@@ -51,10 +43,6 @@ PageProgramConfigWgt::PageProgramConfigWgt(QWidget *parent, DeviceSearchSettings
 	connect(ui->pushButton_newRemote, SIGNAL(clicked()), this, SLOT(createUserRemote()));*/
 	fixGrayout(ui->networkChk);
 
-	//bindy::user_vector_t empty;
-	//ui->localUserTableView->setModel(new BindyUserModel(empty));
-	//ui->remoteUserTableView->setModel(new BindyUserModel(empty));
-
 	//ui->localUserTableView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	//ui->remoteUserTableView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	srand(time(0));
@@ -66,7 +54,6 @@ PageProgramConfigWgt::PageProgramConfigWgt(QWidget *parent, DeviceSearchSettings
 PageProgramConfigWgt::~PageProgramConfigWgt()
 {
     delete ui;
-//	delete bindy;
 }
 
 void PageProgramConfigWgt::DetectHosts()
@@ -82,7 +69,6 @@ void PageProgramConfigWgt::DetectHosts()
 	libximc::device_enumeration_t tmp_enum;
 	libximc::device_network_information_t netinfo;
 
-	//libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 	tmp_enum = libximc::enumerate_devices(ENUMERATE_PROBE | ENUMERATE_NETWORK, "addr=");
 	if (tmp_enum == 0) {
 		displayStatus("Failure in enumerate_devices.");
@@ -177,31 +163,6 @@ void PageProgramConfigWgt::displayStatusServerCount(uint64_t count)
 	displayStatus(QString("%1 server(s) found.").arg(count));
 }
 
-/*void PageProgramConfigWgt::refreshUserLists()
-{
-	try {
-		auto users_future = bindy->list_users_remote(conn_id);
-		auto status = users_future.wait_for(std::chrono::milliseconds(FUTURE_WAIT_MS));
-		if (status != std::future_status::ready)
-			throw std::runtime_error("timed out waiting for result");
-		remote_users = users_future.get();
-
-		local_users = bindy->list_users_local();
-	}
-	catch (std::runtime_error &e) {
-		displayStatus("Exception: " + QString(e.what()));
-		return;
-	}
-	catch (...) {
-		return;
-	}
-	delete ui->localUserTableView->model();
-	delete ui->remoteUserTableView->model();
-
-	ui->localUserTableView->setModel(new BindyUserModel(local_users));
-	ui->remoteUserTableView->setModel(new BindyUserModel(remote_users));
-}
-*/
 void PageProgramConfigWgt::slotCellClicked ( int row, int column )
 {
 	if (column == 2 && row != ui->tableWidget->rowCount()-1)
@@ -214,22 +175,6 @@ void PageProgramConfigWgt::slotCellClicked ( int row, int column )
 
 		// Reconnect to specified address
 		std::string address = ui->tableWidget->item(row, 1)->text().toStdString();
-		/*bindy->disconnect(conn_id);
-		try {
-			conn_id = bindy->connect(address, std::string());
-		}
-		catch (...) { // CryptoPP::Socket::Err
-			conn_id = bindy::conn_id_invalid;
-		}
-		if (conn_id == bindy::conn_id_invalid) {
-			displayStatus("Connection failed");
-			ui->userManageBox->setEnabled(false);
-			return;
-		}
-		ui->userManageBox->setEnabled(true);
-		displayStatus("Connection ok");
-
-		refreshUserLists();*/
 	}
 }
 
@@ -352,142 +297,3 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 
 	tw->blockSignals(false);
 }
-
-/*void PageProgramConfigWgt::copyUsersLocalToRemote ( )
-{
-	bindy::user_vector_t copy_list;
-	QItemSelectionModel *local_model = ui->localUserTableView->selectionModel();
-	if (local_model == nullptr) {
-		return;
-	}
-	for (auto item : local_model->selectedRows()) {
-		copy_list.push_back( local_users.at( item.row() ) );
-	}
-	for (auto user : copy_list) {
-		try {
-			bindy->add_user_remote(conn_id, user.name, user.key);
-		} catch (...) {
-			displayStatus(QString("Failed to copy user %1 local -> remote").arg(QString::fromStdString(user.name)));
-		}
-	} 
-	refreshUserLists();
-}
-
-void PageProgramConfigWgt::copyUsersRemoteToLocal ( )
-{
-	bindy::user_vector_t copy_list;
-	QItemSelectionModel *remote_model = ui->remoteUserTableView->selectionModel();
-	if (remote_model == nullptr) {
-		return;
-	}
-	for (auto item : remote_model->selectedRows()) {
-		copy_list.push_back( remote_users.at( item.row() ) );
-	}
-	for (auto user : copy_list) {
-		try {
-			bindy->add_user_local(user.name, user.key);
-		} catch (...) {
-			displayStatus(QString("Failed to copy user %1 remote -> local").arg(QString::fromStdString(user.name)));
-		}
-	}
-	refreshUserLists();
-}
-
-void PageProgramConfigWgt::deleteUsersLocal ( )
-{
-	bindy::user_vector_t del_list;
-	QItemSelectionModel *local_model = ui->localUserTableView->selectionModel();
-	if (local_model == nullptr) {
-		return;
-	}
-	for (auto item : local_model->selectedRows()) {
-		del_list.push_back( local_users.at( item.row() ) );
-	}
-	try {
-		for (auto user : del_list) {
-			bindy->del_user_local(user.uid);
-		}
-	} catch (...) {
-		displayStatus("Failed to delete local users");
-	}
-	refreshUserLists();
-}
-
-void PageProgramConfigWgt::deleteUsersRemote ( )
-{
-	bindy::user_vector_t del_list;
-	QItemSelectionModel *remote_model = ui->remoteUserTableView->selectionModel();
-	if (remote_model == nullptr) {
-		return;
-	}
-	for (auto item : remote_model->selectedRows()) {
-		del_list.push_back( remote_users.at( item.row() ) );
-	}
-	try {
-		for (auto user : del_list) {
-			bindy->del_user_remote(conn_id, user.uid);
-		}
-	} catch (...) {
-		displayStatus("Failed to delete remote users");
-	}
-	refreshUserLists();
-}
-
-typedef struct {
-	bool ok;
-	std::string name;
-	bindy::aes_key_t key;
-} namepair_t;
-
-namepair_t askForNameKey()
-{
-	namepair_t result;
-	QMessageBox msgBox;
-	msgBox.setWindowTitle("Enter user name");
-	msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-	msgBox.setDefaultButton(QMessageBox::Cancel);
-	QAbstractButton *okBtn = msgBox.button(QMessageBox::Ok);
-	QLineEdit *line = new QLineEdit();
-	msgBox.layout()->addWidget(line);
-	msgBox.exec();
-	msgBox.layout()->removeWidget(line);
-	result.name = line->text().toStdString();
-	int keylen = sizeof(result.key);
-	for (int i = 0 ; i < keylen ; i++) {
-		result.key.bytes[i] = static_cast<uint8_t>(rand());
-	}
-	result.ok = (msgBox.clickedButton() == okBtn);
-	delete line;
-
-	return result;
-}
-*/
-/*
-void PageProgramConfigWgt::createUserLocal()
-{
-	auto result = askForNameKey();
-	if (result.ok) {
-		try {
-			bindy->add_user_local(result.name, result.key);
-		}
-		catch (...) {
-			displayStatus("Failed to create local user");
-		}
-		refreshUserLists();
-	}
-}
-
-void PageProgramConfigWgt::createUserRemote()
-{
-	auto result = askForNameKey();
-	if (result.ok) {
-		try {
-			bindy->add_user_remote(conn_id, result.name, result.key);
-		}
-		catch (...) {
-			displayStatus("Failed to create remote user");
-		}
-		refreshUserLists();
-	}
-}
-*/

@@ -71,8 +71,6 @@ QString MakeProgramConfigFilename();
 QString DefaultScriptScratchName();
 QString DefaultConfigFilename();
 QString DefaultLocalConfigFilename();
-//QString BindyKeyfileName();
-//QString DefaultBindyKeyfileName();
 QString VirtualControllerBlobFilename(uint32_t serial);
 QString TruncateDeviceName (const char* device_name);
 void fixGrayout(QAbstractButton* btn);

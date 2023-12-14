@@ -2,9 +2,9 @@ set BASEDIR=%CD%
 @if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-@if '%1' == "local" set "LOCAL_BUILD=y"
-@if '%2' == "add_service_build" set "SERVICE_BUILD=y"
-@if '%1' == "cleandist" call :CLEAN && exit /B 0
+@if "%1" == "local" set "LOCAL_BUILD=y"
+@if "%2" == "add_service_build" set "SERVICE_BUILD=y"
+@if "%1" == "cleandist" call :CLEAN && exit /B 0
 
 :: -------------------------------------
 :: ---------- entry point --------------
@@ -52,6 +52,7 @@ exit /B 1
 :CLEAN
 powershell "Remove-Item *ximc*.tar.gz"
 powershell "Remove-Item *ximc*.tar"
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 @if exist ximc-%XIMC_VER% rmdir /S /Q ximc-%XIMC_VER%
 @if exist %DISTDIR% rmdir /S /Q %DISTDIR%
 @if not %errorlevel% == 0 goto FAIL
@@ -62,14 +63,13 @@ goto :eof
 :LIB
 :: ximc-0.0.tar.gz existing means we are under Jenkins build process which downloads right version and rename it
 :: to ...-0.0.tar.gz for convenience
-if not exist .\ximc-0.0.tar.gz (
+@if not exist .\ximc-0.0.tar.gz (
     :: So, we are under manual build. Need to download libximc
-    powershell "Invoke-WebRequest -Uri https://files.xisupport.com/libximc/libximc-%XIMC_VER%-all.tar.gz -OutFile ximc-0.0.tar.gz"
-    @if not %errorlevel% == 0 (
-        echo Unable to download libximc-%XIMC_VER%-all.tar.gz. Probable reasons:
-        echo * No Internet connection
-        echo * The version you require isn't public. You may try downloading the closest public version and pray the build will succeed.
-        echo Remember to rename downloaded archive to ximc-0.0.tar.gz
+    powershell "Invoke-WebRequest -Uri https://files.xisupport.com/libximc/libximc-%XIMC_VER%-all.tar.gz -OutFile ximc-0.0.tar.gz" || (
+        @echo Unable to download libximc-%XIMC_VER%-all.tar.gz. Probable reasons:
+        @echo * No Internet connection
+        @echo * The version you require isn't public. You may try downloading the closest public version and pray the build will succeed.
+        @echo Remember to rename downloaded archive to ximc-0.0.tar.gz
         goto FAIL
     )
 )

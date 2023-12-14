@@ -157,7 +157,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -184,7 +184,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"</Com
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win64;$(QTDIR)\lib;$(QWTDIR)\lib64;..\libximc-win\deps\win64\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -212,7 +212,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Com
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Debug;.\bindy\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -240,7 +240,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"</Com
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win64;$(QTDIR)\lib;$(QWTDIR)\lib64;..\libximc-win\deps\win64\bindy\Debug;.\bindy\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -266,7 +266,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Com
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Debug;.\bindy\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -296,7 +296,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\bindy.dll" "$(OutDir)"</Comman
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;QtCored4.lib;QtGuid4.lib;libximc.lib;qwtd.lib;QtScriptd4.lib;setupapi.lib;QtNetworkd4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win64;$(QTDIR)\lib;$(QWTDIR)\lib64;..\libximc-win\deps\win64\bindy\Debug;.\bindy\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -322,7 +322,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Com
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtXml4.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtSvg4.lib;QtXml4.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win32;$(QTDIR)\lib;$(QWTDIR)\lib32;..\libximc-win\deps\win32\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -349,7 +349,7 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win32\xibridge.dll" "$(OutDir)"</Com
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtNetwork4.lib;ws2_32.lib;bindy.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;QtCore4.lib;QtGui4.lib;libximc.lib;qwt.lib;QtScript4.lib;setupapi.lib;QtNetwork4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName) [$(Configuration)].exe</OutputFile>
       <AdditionalLibraryDirectories>..\libximc-win\ximc\win64;$(QTDIR)\lib;$(QWTDIR)\lib64;..\libximc-win\deps\win64\bindy\Release;.\bindy\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile />
@@ -2594,7 +2594,6 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Com
     <ClCompile Include="src\attenuator.cpp" />
     <ClCompile Include="src\axisobject.cpp" />
     <ClCompile Include="src\basethread.cpp" />
-    <ClCompile Include="src\bindyusermodel.cpp" />
     <ClCompile Include="src\chartdlg.cpp" />
     <ClCompile Include="src\chartlog.cpp" />
     <ClCompile Include="src\choosefirmware.cpp" />
@@ -3042,8 +3041,6 @@ xcopy /y "$(ProjectDir)\..\libximc-win\ximc\win64\xibridge.dll" "$(OutDir)"</Com
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|x64'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='release - usermode|x64'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="src\bindy.h" />
-    <ClInclude Include="src\bindyusermodel.h" />
     <ClInclude Include="src\commonvars.h" />
     <ClInclude Include="src\comparesettingsdialog.h" />
     <CustomBuild Include="src\controllersettings.h">

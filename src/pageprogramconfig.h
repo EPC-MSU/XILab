@@ -7,7 +7,6 @@
 #include <xsettings.h>
 #include <functions.h>
 #include <devicesearchsettings.h>
-//#include "bindy.h"
 
 #define XI_NET "xi-net://" /*"xi-net://"*/
 #define XI_UDP "xi-udp://"/*"udp"*/
@@ -34,9 +33,6 @@ private:
 	DeviceSearchSettings* dss;
 	void SetTable(QList<QString> list, QList<QString> list_protocol);
 	QIcon x_icon, w_icon;
-	//bindy::Bindy *bindy;
-	//bindy::conn_id_t conn_id;
-	//bindy::user_vector_t local_users, remote_users;
 
 	void displayStatus (QString text);
 	void displayStatusServerCount(uint64_t);
