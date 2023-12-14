@@ -62,14 +62,13 @@ goto :eof
 :LIB
 :: ximc-0.0.tar.gz existing means we are under Jenkins build process which downloads right version and rename it
 :: to ...-0.0.tar.gz for convenience
-if not exist .\ximc-0.0.tar.gz (
+@if not exist .\ximc-0.0.tar.gz (
     :: So, we are under manual build. Need to download libximc
-    powershell "Invoke-WebRequest -Uri https://files.xisupport.com/libximc/libximc-%XIMC_VER%-all.tar.gz -OutFile ximc-0.0.tar.gz"
-    @if not %errorlevel% == 0 (
-        echo Unable to download libximc-%XIMC_VER%-all.tar.gz. Probable reasons:
-        echo * No Internet connection
-        echo * The version you require isn't public. You may try downloading the closest public version and pray the build will succeed.
-        echo Remember to rename downloaded archive to ximc-0.0.tar.gz
+    powershell "Invoke-WebRequest -Uri https://files.xisupport.com/libximc/libximc-%XIMC_VER%-all.tar.gz -OutFile ximc-0.0.tar.gz" || (
+        @echo Unable to download libximc-%XIMC_VER%-all.tar.gz. Probable reasons:
+        @echo * No Internet connection
+        @echo * The version you require isn't public. You may try downloading the closest public version and pray the build will succeed.
+        @echo Remember to rename downloaded archive to ximc-0.0.tar.gz
         goto FAIL
     )
 )
