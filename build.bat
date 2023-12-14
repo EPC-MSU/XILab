@@ -33,9 +33,9 @@ call :APP
 @if "%NODE_NAME%" == "" goto SUCCESS
 
 cd "%DISTDIR%"
-7z a %BASEDIR%\xilab-win32.7z win32\
+7z a %BASEDIR%\mdrive_direct_control-win32.7z win32\
 @if not %errorlevel% == 0 goto FAIL
-7z a %BASEDIR%\xilab-win64.7z win64\
+7z a %BASEDIR%\mdrive_direct_control-win64.7z win64\
 @if not %errorlevel% == 0 goto FAIL
 
 :: it is an exit
@@ -83,7 +83,6 @@ rmdir /S /Q xiresource
 %GIT% clone "%URL_XIRESOURCE%"
 @if not %errorlevel% == 0 goto FAIL
 
-echo Creating temporary directory ..\libximc-win and filling it with libximc, xiwrapper and bindy libraries...
 for %%G in (win32,win64) do (
     powershell -Command "New-Item -ItemType File -Path ..\libximc-win\ximc\%%G\ximc.h -Force"
     @if not %errorlevel% == 0 goto FAIL
@@ -136,7 +135,6 @@ goto :eof
 
 @if "%1" == "win32" set QTDIR=%QTBASEDIR%\%QT_VER%
 @if not %errorlevel% == 0 goto FAIL
-echo "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
 @if "%1" == "win32" call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86
 @if not %errorlevel% == 0 goto FAIL
 
@@ -147,15 +145,15 @@ echo "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
 
 devenv /nologo /build %SOLCONF% XILab.sln 
 @if not %errorlevel% == 0 goto FAIL
-move /Y %ARCH%\%BINDIR%\"XILab "[%BINDIR%].exe a.exe
+move /Y %ARCH%\%BINDIR%\"mdrive_direct_control "[%BINDIR%].exe a.exe
 @if not %errorlevel% == 0 goto FAIL
 :: Sign binaries only in release build and if CERTNAME is given
 @if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' if 'x%CERTNAME%' NEQ 'x' SignTool.exe sign /v /n %CERTNAME% a.exe
 
 @if not %errorlevel% == 0 goto FAIL
-move /Y a.exe %ARCH%\%BINDIR%\"XILab "[%BINDIR%].exe
+move /Y a.exe %ARCH%\%BINDIR%\"mdrive_direct_control "[%BINDIR%].exe
 @if not %errorlevel% == 0 goto FAIL
-copy %ARCH%\%BINDIR%\"XILab ["%BINDIR%"].exe" %DISTARCH%
+copy %ARCH%\%BINDIR%\"mdrive_direct_control ["%BINDIR%"].exe" %DISTARCH%
 @if not %errorlevel% == 0 goto FAIL
 
 copy %QTDIR%\bin\QtCore4.dll %DISTARCH%
@@ -183,11 +181,14 @@ xcopy /Y /I driver %DISTARCH%\driver
 @if not %errorlevel% == 0 goto FAIL
 xcopy /Y /I /S xiresource\scripts %DISTARCH%\scripts
 @if not %errorlevel% == 0 goto FAIL
-xcopy /Y /I /S xiresource\profiles %DISTARCH%\profiles
+:: mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
+echo \STANDA\>excludelist.txt
+xcopy /Y /I /S /EXCLUDE:excludelist.txt xiresource\profiles %DISTARCH%\profiles
+del .\excludelist.txt
 @if not %errorlevel% == 0 goto FAIL
 xcopy /Y /I /S xiresource\schemes %DISTARCH%\profiles
 @if not %errorlevel% == 0 goto FAIL
-xcopy /Y /I xilabdefault.cfg %DISTARCH%\
+xcopy /Y /I mdrivedefault.cfg %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
 
 :: Needed for the standalone version
@@ -221,9 +222,9 @@ copy %QWTBINDIR%\qwt.dll %DISTARCH%\qwt.dll
 :NSIS
 makensis XILab-setup-UTF8.nsi
 @if not %errorlevel% == 0 goto FAIL
-ren XILab-*.exe xilab-*.exe
+ren mdrive_direct_control-*.exe mdrive_direct_control-*.exe
 @if not %errorlevel% == 0 goto FAIL
 :: Sign binaries only in release build
-@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' SignTool.exe sign /v /n %CERTNAME% xilab-*.exe
+@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' SignTool.exe sign /v /n %CERTNAME% mdrive_direct_control-*.exe
 @if not %errorlevel% == 0 goto FAIL
 @goto :eof
