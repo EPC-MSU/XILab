@@ -2,9 +2,9 @@ set BASEDIR=%CD%
 @if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-@if '%1' == "local" set "LOCAL_BUILD=y"
-@if '%2' == "add_service_build" set "SERVICE_BUILD=y"
-@if '%1' == "cleandist" call :CLEAN && exit /B 0
+@if "%1" == "local" set "LOCAL_BUILD=y"
+@if "%2" == "add_service_build" set "SERVICE_BUILD=y"
+@if "%1" == "cleandist" call :CLEAN && exit /B 0
 
 :: -------------------------------------
 :: ---------- entry point --------------
@@ -52,6 +52,7 @@ exit /B 1
 :CLEAN
 powershell "Remove-Item *ximc*.tar.gz"
 powershell "Remove-Item *ximc*.tar"
+@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 @if exist ximc-%XIMC_VER% rmdir /S /Q ximc-%XIMC_VER%
 @if exist %DISTDIR% rmdir /S /Q %DISTDIR%
 @if not %errorlevel% == 0 goto FAIL
