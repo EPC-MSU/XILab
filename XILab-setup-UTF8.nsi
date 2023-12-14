@@ -81,7 +81,8 @@ Section "Application files" SecMain_32
   SetOverwrite on
   ;--Files--Для сборки в других системах обновить эти пути и строку реестра в функции vcredist_test--;
   File  "${RELEASEFILES}\libximc.dll"
-  File  "${RELEASEFILES}\xibridge.dll"
+  File  "${RELEASEFILES}\xiwrapper.dll"
+  File  "${RELEASEFILES}\bindy.dll"
   File  "${QTFILES32}\bin\QtCore4.dll"
   File  "${QTFILES32}\bin\QtGui4.dll"
   File  "${QTFILES32}\bin\QtSvg4.dll"
@@ -90,6 +91,7 @@ Section "Application files" SecMain_32
   File  "${QTFILES32}\bin\QtXml4.dll"
   File  "${QWTFILES}\lib32\qwt.dll"
   File  "xilabdefault.cfg"
+  File  "default_keyfile.sqlite"
   File  "qt.conf"
 
   CreateDirectory "$INSTDIR\imageformats"
@@ -134,7 +136,8 @@ Section "Application files" SecMain_64
   SetOverwrite on
   ;--Files--Для сборки в других системах обновить эти пути и строку реестра в функции vcredist_test--;
   File  "${RELEASEFILES}\libximc.dll"
-  File  "${RELEASEFILES}\xibridge.dll"
+  File  "${RELEASEFILES}\xiwrapper.dll"
+  File  "${RELEASEFILES}\bindy.dll"
   File  "${QTFILES64}\bin\QtCore4.dll"
   File  "${QTFILES64}\bin\QtGui4.dll"
   File  "${QTFILES64}\bin\QtSvg4.dll"
@@ -143,6 +146,7 @@ Section "Application files" SecMain_64
   File  "${QTFILES64}\bin\QtXml4.dll"
   File  "${QWTFILES}\lib64\qwt.dll"
   File  "xilabdefault.cfg"
+  File  "default_keyfile.sqlite"
   File  "qt.conf"
 
   CreateDirectory "$INSTDIR\imageformats"
@@ -289,8 +293,11 @@ ${EndIf}
   RMDir "$INSTDIR\profiles" ; Doesn't do anything as long as there are profiles remaining in that directory
 
   Delete "$INSTDIR\libximc.dll"
-  Delete "$INSTDIR\xibridge.dll"
+  Delete "$INSTDIR\bindy.dll"
+  Delete "$INSTDIR\xiwrapper.dll"
   Delete "$INSTDIR\keyfile.bin"
+  Delete "$INSTDIR\keyfile.sqlite"
+  Delete "$INSTDIR\default_keyfile.sqlite"
   Delete "$INSTDIR\QtCore4.dll"
   Delete "$INSTDIR\QtGui4.dll"
   Delete "$INSTDIR\QtScript4.dll"

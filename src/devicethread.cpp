@@ -45,123 +45,133 @@ QStringList DeviceThread::SearchAdapters()
 	return url;
 }
 
-static bool is_self_address(const QHostAddress& ha)
-{
-    for (const QHostAddress &address : QNetworkInterface::allAddresses()) {
-        if (address.protocol() == QAbstractSocket::IPv4Protocol)
-        {
-            if (address == ha)
-                return true;
-        }
-    }
-    return false;
-}
 
 void DeviceThread::run()
 {
-    int open_flags = 0;
-    open_flags += ENUMERATE_PROBE * dss->Enumerate_probe;
-    open_flags += ENUMERATE_ALL_COM * dss->Enumerate_all_com;
-    open_flags += ENUMERATE_NETWORK * dss->Enumerate_network;
-    QString qs;
-    /*
-    * Getting a list of network interfaces.
-    */
-    QStringList list_interfase = DeviceThread::SearchAdapters();
+	int fl_ch = 1;
+	int open_flags = 0;
+	open_flags += ENUMERATE_PROBE * dss->Enumerate_probe;
+	open_flags += ENUMERATE_ALL_COM * dss->Enumerate_all_com;
+	open_flags += ENUMERATE_NETWORK * dss->Enumerate_network;
+	QString qs;
+	/*
+	 * Getting a list of network interfaces.
+	*/
+	QStringList list_interfase = DeviceThread::SearchAdapters();
 
-    if (dss->Enumerate_network)
-    {
-        QHostAddress local_host = QHostAddress(QHostAddress::LocalHost);
-        qs = QString("addr=") + local_host.toString() + ",";
-        /*
-         * Network interface search is not performed when specifying a specific IP address.
-         */
+	if (dss->Enumerate_network)
+	{
+		if (dss->Server_hosts.size() == 0)
+		{
+			qs = QString("addr=");
+			/*
+			 * Adding the 0th interface to the search and generating the number of search passes.
+			*/
+			if (list_interfase.size() > 0)
+			{
+				qs = QString("addr=\nadapter_addr=") + list_interfase.at(0);
+				fl_ch = list_interfase.size();
+			}
+		}
+		else {
+			/*
+			 * Network interface search is not performed when specifying a specific IP address.			 
+			*/
+			qs = QString("addr=");
+			for (int i = 0; i < dss->Server_hosts.size(); i++) {
+				if (QString::compare(dss->Protocol_list.at(i), QString("xi-udp://"), Qt::CaseInsensitive) == 0)
+					qs.append(QString("xi-udp://")).append(dss->Server_hosts.at(i)).append(",");
+				else
+					if (QString::compare(dss->Protocol_list.at(i), QString("xi-tcp://"), Qt::CaseInsensitive) == 0)
+						qs.append(QString("xi-tcp://")).append(dss->Server_hosts.at(i)).append(",");
+					else
+						qs.append(dss->Server_hosts.at(i)).append(",");
+				
+			}
+			qs.chop(1);
+		}
+	}
+	QByteArray qa = qs.toAscii();
 
-        for (int i = 0; i < dss->Server_hosts.size(); i++) {
-            const QHostAddress &host = QHostAddress(dss->Server_hosts.at(i));
-            if (!is_self_address(host))
-                qs.append(dss->Server_hosts.at(i)).append(",");
-        }
-        qs.chop(1);
-    }
-    else
-        qs = QString("addr=");
+	QList<Qt::ItemFlags> flags;
+	QStringList urls, descriptions, friendlyNames, positionerNames;
+	QList<uint32_t> serials;
+	bool full_enum = false;
 
-    QByteArray qa = qs.toAscii();
+	/*
+	 * Search cycle for all interfaces.
+	*/
+	for (int ch = 0; ch < fl_ch; ch++) {
+		if (ch>0)
+		{
+			qs = QString("addr=\nadapter_addr=") + list_interfase.at(ch);
+			qa = qs.toAscii();
+		}
+		int namesCount;
+		std::vector<char*> deviceUrls;
+		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
+		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
+		if (dev_enum == 0) {
+			emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);
+			return;
+		}
+		namesCount = get_device_count(dev_enum);
+		deviceUrls.resize(namesCount);
+		for (int i = 0; i < namesCount; i++) {
+			deviceUrls.at(i) = get_device_name(dev_enum, i);
+		}
+		qDebug() << "Found " << namesCount << " devices";
 
-    QList<Qt::ItemFlags> flags;
-    QStringList urls, descriptions, friendlyNames, positionerNames;
-    QList<uint32_t> serials;
-    bool full_enum = false;
+		if (namesCount == 0){
+			emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
+			return;
+		}
 
-    /*
-    * Search cycle for all interfaces.
-    */
+		for (int i = 0; i < namesCount; i++)
+		{
+			/*
+			 * Checks if the device is not in the list on subsequent passes
+			*/
+			if (urls.indexOf(QString(deviceUrls[i]), 0) == -1)
+			{
+				if (wait_for_exit) return;
 
-    int namesCount;
-    std::vector<char*> deviceUrls;
-   
-    dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
-    if (dev_enum == 0) {
-        emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);
-        return;
-    }
-    namesCount = get_device_count(dev_enum);
-    deviceUrls.resize(namesCount);
-    for (int i = 0; i < namesCount; i++) {
-        deviceUrls.at(i) = get_device_name(dev_enum, i);
-    }
-    qDebug() << "Found " << namesCount << " devices";
+				uint32_t sn;
+				///device_information_t device_info;
+				controller_name_t controller_name;
+				stage_name_t stage_name;
 
-    if (namesCount == 0){
-        emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
-        return;
-    }
+				if (devinterface->get_enumerate_device_serial(dev_enum, i, &sn) == result_ok) {
+					serials.append(sn);
+				}
+				else {
+					serials.append(0);
+				}
 
-    for (int i = 0; i < namesCount; i++)
-    {
-        /*
-        * Checks if the device is not in the list on subsequent passes
-        */
-        if (urls.indexOf(QString(deviceUrls[i]), 0) == -1)
-        {
-            if (wait_for_exit) return;
+				if (devinterface->get_enumerate_device_controller_name(dev_enum, i, &controller_name) == result_ok) {
+					friendlyNames.append(QString(controller_name.ControllerName));
+				}
+				else {
+					friendlyNames.append("");
+				}
 
-            uint32_t sn;
-            ///device_information_t device_info;
-            controller_name_t controller_name;
-            stage_name_t stage_name;
+				if (devinterface->get_enumerate_device_stage_name(dev_enum, i, &stage_name) == result_ok) {
+					positionerNames.append(QString(stage_name.PositionerName));
+				}
+				else {
+					positionerNames.append("");
+				}
 
-            if (devinterface->get_enumerate_device_serial(dev_enum, i, &sn) == result_ok) {
-                serials.append(sn);
-            }
-            else {
-                serials.append(0);
-            }
+				flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
+				urls.append(QString(deviceUrls[i]));
+				descriptions.append("Description?");
+			}
 
-            if (devinterface->get_enumerate_device_controller_name(dev_enum, i, &controller_name) == result_ok) {
-                friendlyNames.append(QString(controller_name.ControllerName));
-            }
-            else {
-                friendlyNames.append("");
-            }
+		}
+		free_enumerate_devices(dev_enum);
+	}
 
-            if (devinterface->get_enumerate_device_stage_name(dev_enum, i, &stage_name) == result_ok) {
-                positionerNames.append(QString(stage_name.PositionerName));
-            }
-            else {
-                positionerNames.append("");
-            }
-
-            flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-            urls.append(QString(deviceUrls[i]));
-            descriptions.append("Description?");
-        }
-
-    }
-    free_enumerate_devices(dev_enum);
-
-    emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
+	emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
 }
 
 QString DeviceThread::getPortName(char *name)
