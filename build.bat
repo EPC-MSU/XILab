@@ -2,9 +2,9 @@ set BASEDIR=%CD%
 @if "%GIT%" == "" set GIT=git
 @cmd /C exit 0
 
-@if "%1" == "local" set "LOCAL_BUILD=y"
-@if "%2" == "add_service_build" set "SERVICE_BUILD=y"
-@if "%1" == "cleandist" call :CLEAN && exit /B 0
+@if '%1' == "local" set "LOCAL_BUILD=y"
+@if '%2' == "add_service_build" set "SERVICE_BUILD=y"
+@if '%1' == "cleandist" call :CLEAN && exit /B 0
 
 :: -------------------------------------
 :: ---------- entry point --------------
@@ -52,7 +52,6 @@ exit /B 1
 :CLEAN
 powershell "Remove-Item *ximc*.tar.gz"
 powershell "Remove-Item *ximc*.tar"
-@if exist ..\libximc-win rmdir /S /Q ..\libximc-win
 @if exist ximc-%XIMC_VER% rmdir /S /Q ximc-%XIMC_VER%
 @if exist %DISTDIR% rmdir /S /Q %DISTDIR%
 @if not %errorlevel% == 0 goto FAIL
@@ -93,9 +92,11 @@ for %%G in (win32,win64) do (
     @if not %errorlevel% == 0 goto FAIL
     powershell -Command "cp ximc*\ximc*\%%G\libximc.dll ..\libximc-win\ximc\%%G\libximc.dll"
     @if not %errorlevel% == 0 goto FAIL
-    powershell -Command "cp ximc*\ximc*\%%G\xibridge.dll ..\libximc-win\ximc\%%G\xibridge.dll"
+    powershell -Command "cp ximc*\ximc*\%%G\xiwrapper.dll ..\libximc-win\ximc\%%G\xiwrapper.dll"
     @if not %errorlevel% == 0 goto FAIL
-    powershell -Command "cp ximc*\ximc*\%%G\xibridge.lib ..\libximc-win\ximc\%%G\xibridge.lib"
+    powershell -Command "cp ximc*\ximc*\%%G\bindy.dll ..\libximc-win\ximc\%%G\bindy.dll"
+    @if not %errorlevel% == 0 goto FAIL
+    powershell -Command "cp ximc*\ximc*\%%G\bindy.lib ..\libximc-win\ximc\%%G\bindy.lib"
     @if not %errorlevel% == 0 goto FAIL
 )
 goto :eof
@@ -134,6 +135,7 @@ goto :eof
 
 @if "%1" == "win32" set QTDIR=%QTBASEDIR%\%QT_VER%
 @if not %errorlevel% == 0 goto FAIL
+echo "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
 @if "%1" == "win32" call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86
 @if not %errorlevel% == 0 goto FAIL
 
@@ -188,7 +190,11 @@ xcopy /Y /I xilabdefault.cfg %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
 
 :: Needed for the standalone version
+powershell -Command "cp .\keyfile.sqlite .\%DISTARCH%\default_keyfile.sqlite "
+@if not %errorlevel% == 0 goto FAIL
 :: Also copy keyfile to the base dir so that NSIS can find it
+powershell -Command "cp .\%DISTARCH%\default_keyfile.sqlite .\ "
+@if not %errorlevel% == 0 goto FAIL
 
 xcopy /Y /I %DEPDIR%\%1\msvcp120.dll %DISTARCH%\
 @if not %errorlevel% == 0 goto FAIL
@@ -197,7 +203,9 @@ xcopy /Y /I %DEPDIR%\%1\msvcr120.dll %DISTARCH%\
 
 powershell -Command "cp ximc*\ximc*\%1\libximc.dll .\%DISTARCH%\ "
 @if not %errorlevel% == 0 goto FAIL
-powershell -Command "cp ximc*\ximc*\%1\xibridge.dll .\%DISTARCH%\ "
+powershell -Command "cp ximc*\ximc*\%1\xiwrapper.dll .\%DISTARCH%\ "
+@if not %errorlevel% == 0 goto FAIL
+powershell -Command "cp ximc*\ximc*\%1\bindy.dll .\%DISTARCH%\ "
 @if not %errorlevel% == 0 goto FAIL
 @if "%1" == "win32" set QWTBINDIR=%QWTDIR%\lib32
 @if "%1" == "win64" set QWTBINDIR=%QWTDIR%\lib64

@@ -51,7 +51,7 @@ void ScriptDlg::InitUI()
 
 	LoggedFile file(DefaultScriptScratchName());
 	if (!file.exists()) { // no scratch file, let's try loading default script
-		file.setFileName(getDefaultUserfilesInstallPath() + "/scripts/simple_scripts/single_axis_cyclic_movement.txt");
+		file.setFileName(getDefaultUserfilesInstallPath() + "/scripts/cyclic.txt");
 	}
 	file.open(QIODevice::ReadOnly);
 	QTextStream in(&file);

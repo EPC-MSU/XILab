@@ -15,7 +15,7 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
 QMAKE_CXXFLAGS += -std=c++11
 QMAKE_LFLAGS += -Wl,-rpath,@executable_path/../Frameworks
 LIBS += -F./macosx/ -framework libximc \
-"./macosx/libximc.framework/Versions/*/Frameworks/libxibridge.dylib" \
+"./macosx/libximc.framework/Versions/*/Frameworks/libbindy.dylib" \
 -F/usr/local/qwt-%qwtver/lib -framework qwt
 MOC_DIR += ./GeneratedFiles
 OBJECTS_DIR += ./release/obj

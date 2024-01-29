@@ -16,7 +16,7 @@ LIBS += \
     -L"./usr/lib/" \
     -L"/usr/local/qwt-%qwtver/lib/" \
     -lqwt \
-    -lxibridge \
+    -lbindy \
     -lximc
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles_32
