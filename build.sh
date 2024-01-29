@@ -144,8 +144,7 @@ cp ./appimg/xilab.desktop ../$r_dir/
 cd ..
 mkdir -p ./$r_dir/usr/bin/ ./$r_dir/usr/lib/$archpath/ ./$r_dir/usr/share/libximc/ ./$r_dir/usr/share/xilab/ ./$r_dir/lib/$archpath/
 cp $wd/xilabdefault.cfg ./$r_dir/usr/share/xilab/
-for file in libbindy.so libximc.so.${major} libxiwrapper.so ; do cp $wd/usr/lib/$file ./$r_dir/usr/lib/ ; done
-cp $wd/keyfile.sqlite ./$r_dir/usr/share/xilab/default_keyfile.sqlite
+for file in libximc.so.${major} libxibridge.so ; do cp $wd/usr/lib/$file ./$r_dir/usr/lib/ ; done
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ./$r_dir/usr/lib/
 cp /lib/$archpath/libpng12.so.0 ./$r_dir/lib/$archpath/
 
@@ -219,20 +218,18 @@ for sublib in QtCore QtGui QtSvg ; do
   install_name_tool -change "$qt_root/$subpath" "@executable_path/../Frameworks/$subpath" ../$r_dir/XILab.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
 done
 
-# add libximc framework (with xiwrapper and bindy inside) to the bundle
+# add libximc framework (with libxibridge inside) to the bundle
 cp -r ./macosx/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/
 
-# add bindy dylib (needed since Xilab 1.13) to the bundle
-cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../$r_dir/XILab.app/Contents/Frameworks/
+# add libxibridge dylib (needed since Xilab 1.13) to the bundle
+cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libxibridge.dylib ../$r_dir/XILab.app/Contents/Frameworks/
 
 # add xilabdefault.cfg to program dir
 cp xilabdefault.cfg ../$r_dir/XILab.app/Contents/MacOS/
 
-# add default libximc keyfile (for bindy) to program dir
-cp keyfile.sqlite ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
 
-# fix permissions for framework and bindy because original permissions are proabably missing
-chmod -R ugo+rX ../$r_dir/XILab.app/Contents/Frameworks/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/libbindy.dylib ../$r_dir/XILab.app/Contents/MacOS/default_keyfile.sqlite
+# fix permissions for framework and libxibridge because original permissions are proabably missing
+chmod -R ugo+rX ../$r_dir/XILab.app/Contents/Frameworks/libximc.framework ../$r_dir/XILab.app/Contents/Frameworks/libxibridge.dylib
 
 # add scripts and profiles
 mkdir -p ../$r_dir/Library/XILab/

@@ -6,7 +6,7 @@
 using namespace tinyxml2;
 
 extern QString xilab_ver;
-const char* update_xml_addr = "http://files.xisupport.com/products.xml";
+const char* update_xml_addr = "http://files.ximc.ru/products.xml";
 
 extern const char* major;
 extern const char* minor;

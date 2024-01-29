@@ -8,7 +8,6 @@
 #include <devicethread.h>
 #include <devicesearchsettings.h>
 #include <mainwindow.h>
-#include "bindy.h"
 
 namespace Ui {
     class StartWindowClass;
