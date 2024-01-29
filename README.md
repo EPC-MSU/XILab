@@ -8,7 +8,7 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
 
 ## How to deploy a XiLab project on a Windows computer
 
-:warning: *For Windows 10, XILab can only be build with administrator rights.*
+:warning: *For Windows 10 and above, XILab can only be build with administrator rights.*
 
 - Clone [**XiLab** repository](https://github.com/EPC-MSU/XILab) to `C:\projects\XILab` or download a repository archive and unpack it to `C:\projects\XILab`.
   
@@ -18,7 +18,7 @@ Description and documentation [here](https://doc.xisupport.com/en/8smc5-usb/8SMC
   git clone https://github.com/EPC-MSU/XILab
   ```
 
-- Installing dependencies.
+- Install dependencies.
   
   - Clone  [**XILab-dependencies** repository](https://github.com/EPC-MSU/XILab-dependencies).
     
@@ -86,12 +86,14 @@ Portable software packages for different bit sizes after the build are located i
 ## Building a release using a Microsoft Visual Studio 2013
 
 To build releases for Windows (and also to debug), you can use the  Microsoft Visual Studio.
+
 * Preparations:
   - Find required libximc version in `C:\projects\XILab\VERSIONS` (look for `XIMC_VER`)
   - Download an archive with that version from [doc.xisupport.com](doc.xisupport.com).
   - The archive contains a folder `ximc-*.*.*`. Unpack this folder to `C:\projects\`. As a result you will get `C:\projects\ximc-*.*.*`.
   - Rename folder `ximc-*.*.*` to `libximc-win`.
   - Copy ximc.h to win32 and win64 folders:
+    
     ```batch
     cd C:\projects\libximc-win\ximc
     copy ximc.h win32
@@ -99,7 +101,7 @@ To build releases for Windows (and also to debug), you can use the  Microsoft Vi
     ```
 * Building:
   - Open `C:\projects\XILab\XILab.sln` file in Microsoft Visual Studio.
-  -  In the `BUILD>Configuration Manager...` menu, select the build type and platform.
+  - In the `BUILD>Configuration Manager...` menu, select the build type and platform.
   - Run builing in `BUILD>Build Solution`.
 
 Portable software packages for different bit sizes after the build are located in the folder `C:\projects\XILab\dist_dir`.
