@@ -15,10 +15,8 @@
 
 #define FUTURE_WAIT_MS 2000
 
-QString ProtocolSelectionStyle = { //"border: 1px solid gray;"
+QString ProtocolSelectionStyle = {
 "border - radius: 2px;"
-//"padding: 1px 18px 1px 3px;"
-//"min - width: 6em;" 
 };
 
 
@@ -35,16 +33,8 @@ PageProgramConfigWgt::PageProgramConfigWgt(QWidget *parent, DeviceSearchSettings
 	connect( ui->tableWidget, SIGNAL( cellClicked (int, int) ), this, SLOT( slotCellClicked( int, int ) ) );
 	connect( ui->tableWidget, SIGNAL( cellChanged (int, int) ), this, SLOT( slotCellChanged( int, int ) ) );
 
-	/*connect(ui->pushButton_toRight, SIGNAL(clicked()), this, SLOT(copyUsersLocalToRemote()));
-	connect(ui->pushButton_toLeft, SIGNAL(clicked()), this, SLOT(copyUsersRemoteToLocal()));
-	connect(ui->pushButton_trashLocal, SIGNAL(clicked()), this, SLOT(deleteUsersLocal()));
-	connect(ui->pushButton_trashRemote, SIGNAL(clicked()), this, SLOT(deleteUsersRemote()));
-	connect(ui->pushButton_newLocal, SIGNAL(clicked()), this, SLOT(createUserLocal()));
-	connect(ui->pushButton_newRemote, SIGNAL(clicked()), this, SLOT(createUserRemote()));*/
 	fixGrayout(ui->networkChk);
 
-	//ui->localUserTableView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-	//ui->remoteUserTableView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 	srand(time(0));
 
 	// No servers found by default
@@ -60,7 +50,6 @@ void PageProgramConfigWgt::DetectHosts()
 {
 	QPushButton *btn = ui->detectBtn;
 	QString btn_text = btn->text();
-	// displayStatus("Detecting...");
 	ui->detectBtn->setText("Detecting...");
 	ui->detectBtn->setEnabled(false);
 
@@ -126,8 +115,7 @@ void PageProgramConfigWgt::FromUiToClass()
 		QComboBox *boxProtocol;		
 		boxProtocol = qobject_cast<QComboBox*>(
 			ui->tableWidget->cellWidget(i, 0));
-		dss->Protocol_list.append(/*ui->tableWidget->item(i, 0) == 0 ? QString(" ") : *//*ui->tableWidget->item(i, 0)->text()*/boxProtocol->currentText());
-		//boxProtocol->setStyleSheet(ProtocolSelectionStyle);		
+		dss->Protocol_list.append(boxProtocol->currentText());
 	}
 }
 
@@ -169,10 +157,6 @@ void PageProgramConfigWgt::slotCellClicked ( int row, int column )
 		ui->tableWidget->removeRow(row);
 
 	if (column == 3 && row != ui->tableWidget->rowCount()-1) {
-		// First clear the old models so that lists become greyed out
-		//delete ui->localUserTableView->model();
-		//delete ui->remoteUserTableView->model();
-
 		// Reconnect to specified address
 		std::string address = ui->tableWidget->item(row, 1)->text().toStdString();
 	}
