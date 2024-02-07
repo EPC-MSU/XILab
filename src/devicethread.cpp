@@ -61,7 +61,7 @@ void DeviceThread::run()
 
 	if (dss->Enumerate_network)
 	{
-		if (dss->Server_hosts.size() == 0)
+		if (dss->url.size() == 0)
 		{
 			qs = QString("addr=");
 			/*
@@ -78,14 +78,14 @@ void DeviceThread::run()
 			 * Network interface search is not performed when specifying a specific IP address.			 
 			*/
 			qs = QString("addr=");
-			for (int i = 0; i < dss->Server_hosts.size(); i++) {
-				if (QString::compare(dss->Protocol_list.at(i), QString("xi-udp://"), Qt::CaseInsensitive) == 0)
-					qs.append(QString("xi-udp://")).append(dss->Server_hosts.at(i)).append(",");
+			for (int i = 0; i < dss->url.size(); i++) {
+				if (QString::compare(dss->url.at(i).first, QString("xi-udp://"), Qt::CaseInsensitive) == 0)
+					qs.append(QString("xi-udp://")).append(dss->url.at(i).second).append(",");
 				else
-					if (QString::compare(dss->Protocol_list.at(i), QString("xi-tcp://"), Qt::CaseInsensitive) == 0)
-						qs.append(QString("xi-tcp://")).append(dss->Server_hosts.at(i)).append(",");
+					if (QString::compare(dss->url.at(i).first, QString("xi-tcp://"), Qt::CaseInsensitive) == 0)
+						qs.append(QString("xi-tcp://")).append(dss->url.at(i).second).append(",");
 					else
-						qs.append(dss->Server_hosts.at(i)).append(",");
+						qs.append(dss->url.at(i).second).append(",");
 				
 			}
 			qs.chop(1);

@@ -13,9 +13,8 @@ public:
 	bool Enumerate_probe;
 	bool Enumerate_all_com;
 	bool Enumerate_network;
-	QList<QString> Server_hosts;
+	QList<std::pair<QString, QString>> url;
 	unsigned int Virtual_devices;
-	QList<QString> Protocol_list;
 
 private:
 	QString filename;
