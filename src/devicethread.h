@@ -28,7 +28,7 @@ protected:
 	QStringList SearchAdapters();
 	void run();
 signals:
-	void finished(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t>, QList<Qt::ItemFlags> flags);
+	void finished(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QList<uint32_t>, QList<Qt::ItemFlags> flags);
 };
 
 

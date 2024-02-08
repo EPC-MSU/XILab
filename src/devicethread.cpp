@@ -93,7 +93,7 @@ void DeviceThread::run()
 	QByteArray qa = qs.toAscii();
 
 	QList<Qt::ItemFlags> flags;
-	QStringList urls, descriptions, friendlyNames, positionerNames;
+	QStringList urls, descriptions, friendlyNames;
 	QList<uint32_t> serials;
 	bool full_enum = false;
 
@@ -111,7 +111,7 @@ void DeviceThread::run()
 		libximc::set_bindy_key(BindyKeyfileName().toLocal8Bit());
 		dev_enum = devinterface->enumerate_devices(open_flags, qa.constData());
 		if (dev_enum == 0) {
-			emit finished(full_enum, urls, descriptions, friendlyNames, positionerNames, serials, flags);
+			emit finished(full_enum, urls, descriptions, friendlyNames, serials, flags);
 			return;
 		}
 		namesCount = get_device_count(dev_enum);
@@ -122,7 +122,7 @@ void DeviceThread::run()
 		qDebug() << "Found " << namesCount << " devices";
 
 		if (namesCount == 0){
-			emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
+			emit finished(true, urls, descriptions, friendlyNames, serials, flags);
 			return;
 		}
 
@@ -137,7 +137,6 @@ void DeviceThread::run()
 
 				uint32_t sn;
 				controller_name_t controller_name;
-				stage_name_t stage_name;
 
 				if (devinterface->get_enumerate_device_serial(dev_enum, i, &sn) == result_ok) {
 					serials.append(sn);
@@ -153,13 +152,6 @@ void DeviceThread::run()
 					friendlyNames.append("");
 				}
 
-				if (devinterface->get_enumerate_device_stage_name(dev_enum, i, &stage_name) == result_ok) {
-					positionerNames.append(QString(stage_name.PositionerName));
-				}
-				else {
-					positionerNames.append("");
-				}
-
 				flags.append(Qt::NoItemFlags | Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 				urls.append(QString(deviceUrls[i]));
 				descriptions.append("Description?");
@@ -169,7 +161,7 @@ void DeviceThread::run()
 		free_enumerate_devices(dev_enum);
 	}
 
-	emit finished(true, urls, descriptions, friendlyNames, positionerNames, serials, flags);
+	emit finished(true, urls, descriptions, friendlyNames, serials, flags);
 }
 
 QString DeviceThread::getPortName(char *name)

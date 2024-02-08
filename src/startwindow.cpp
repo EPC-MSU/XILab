@@ -44,9 +44,9 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	
 	// set header for devices table
 	this->m_ui->deviceListTable->setRowCount(0);
-	this->m_ui->deviceListTable->setColumnCount(4);
+	this->m_ui->deviceListTable->setColumnCount(3);
 	QStringList header;
-	header << QString("URI") << QString("Serial") << QString("Friendly name") << QString("Stage name");
+	header << QString("URI") << QString("S/N") << QString("Friendly name");
 	this->m_ui->deviceListTable->setHorizontalHeaderLabels(header);
 
 	// set row height
@@ -88,7 +88,7 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	qRegisterMetaType<QList<Qt::ItemFlags> >("QList<Qt::ItemFlags>");
 	qRegisterMetaType<QList<uint32_t> >("QList<uint32_t>");
 
-	connect(devicethread, SIGNAL(finished(bool, QStringList, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)), this, SLOT(deviceListRecieved(bool, QStringList, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)));
+	connect(devicethread, SIGNAL(finished(bool, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)), this, SLOT(deviceListRecieved(bool, QStringList, QStringList, QStringList, QList<uint32_t>, QList<Qt::ItemFlags>)));
 
 	/*
 	 * When pressed, a timer starts to control double-tapping so that the hint is not displayed.
@@ -263,7 +263,7 @@ void StartWindow::setVisibleFrameButtons(bool visible)
     m_ui->openLastConfigBtn->setVisible(visible);
 }
 
-void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags)
+void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags)
 {
 	Q_UNUSED(descriptions)
 	Q_UNUSED(flags)
@@ -301,7 +301,6 @@ void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringLis
 			m_ui->deviceListTable->setItem(i, Columns::COLUMN_URI, new QTableWidgetItem(names[i]));
 			m_ui->deviceListTable->setItem(i, Columns::COLUMN_SERIAL, new QTableWidgetItem(QString::number(serials.at(i))));
 			m_ui->deviceListTable->setItem(i, Columns::COLUMN_FRIENDLY_NAME, new QTableWidgetItem(friendlyNames.at(i)));
-			m_ui->deviceListTable->setItem(i, Columns::COLUMN_STAGE, new QTableWidgetItem(positionerNames.at(i)));
 		}
 
 		for (unsigned int i = 0; i<dss->Virtual_devices; i++){
@@ -313,7 +312,6 @@ void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringLis
 			m_ui->deviceListTable->setItem(m_ui->deviceListTable->rowCount() - 1, Columns::COLUMN_URI, new QTableWidgetItem(url));
 			m_ui->deviceListTable->setItem(m_ui->deviceListTable->rowCount() - 1, Columns::COLUMN_SERIAL, new QTableWidgetItem(serial));
 			m_ui->deviceListTable->setItem(m_ui->deviceListTable->rowCount() - 1, Columns::COLUMN_FRIENDLY_NAME, new QTableWidgetItem(""));
-			m_ui->deviceListTable->setItem(m_ui->deviceListTable->rowCount() - 1, Columns::COLUMN_STAGE, new QTableWidgetItem(""));
 
 		}
 		m_ui->deviceListTable->setCurrentCell(0, 1);

@@ -29,8 +29,7 @@ namespace Columns
 	{
 		COLUMN_URI,
 		COLUMN_SERIAL,
-		COLUMN_FRIENDLY_NAME,
-		COLUMN_STAGE
+		COLUMN_FRIENDLY_NAME
 	};
 };
 
@@ -84,7 +83,7 @@ private:
     void setVisibleFrameButtons(bool visible);
 
 public slots:
-void deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QStringList positionerNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags);
+void deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags);
 	void itemDoubleClicked(QTableWidgetItem*);
 	void itemClicked(QTableWidgetItem *item);
 	void itemPressed(QTableWidgetItem *item);
