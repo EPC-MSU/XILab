@@ -77,10 +77,10 @@ void DeviceThread::run()
          * Network interface search is not performed when specifying a specific IP address.
          */
 
-        for (int i = 0; i < dss->Server_hosts.size(); i++) {
-            const QHostAddress &host = QHostAddress(dss->Server_hosts.at(i));
+        for (int i = 0; i < dss->scheme_host_pairs.size(); i++) {
+            const QHostAddress &host = QHostAddress(dss->scheme_host_pairs.at(i).second);
             if (!is_self_address(host))
-                qs.append(dss->Server_hosts.at(i)).append(",");
+                qs.append(dss->scheme_host_pairs.at(i).second).append(",");
         }
         qs.chop(1);
     }
