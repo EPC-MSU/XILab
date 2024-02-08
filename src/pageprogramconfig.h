@@ -31,7 +31,7 @@ public:
 private:
     Ui::PageProgramConfigWgt* ui;
 	DeviceSearchSettings* dss;
-	void SetTable(QList<QString> list, QList<QString> list_protocol);
+	void SetTable(QList<std::pair<QString, QString>> scheme_host_pairs);
 	QIcon x_icon, w_icon;
 
 	void displayStatus (QString text);
@@ -42,6 +42,7 @@ private slots:
 	void DetectHosts();
 	void slotCellClicked ( int row, int column );
 	void slotCellChanged ( int row, int column );
+	void slotSchemeChanged ();
 	//void copyUsersLocalToRemote();
 	//void copyUsersRemoteToLocal();
 	//void deleteUsersLocal();
