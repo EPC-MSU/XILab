@@ -29,25 +29,30 @@ void DeviceSearchSettings::load()
 	if (sizehosts > sizeprotocol) size = sizeprotocol;
 	else size = sizehosts;
 
-	settings.beginReadArray("Server_hosts");
+	QList<QString> schemes, hosts;
 
-	Server_hosts.clear();
+	settings.beginReadArray("Server_hosts");
 	for (int i = 0; i < size; i++) {
 		settings.setArrayIndex(i);
 		QString host = settings.value("hostname").toString();
-		Server_hosts.append(host);
+		hosts.append(host);
 	}
 	settings.endArray();
 
 	settings.beginReadArray("Protocol_list");
-
-	Protocol_list.clear();
 	for (int i = 0; i < size; i++) {
 		settings.setArrayIndex(i);
 		QString protocol = settings.value("protocol").toString();
-		Protocol_list.append(protocol);
+		schemes.append(protocol);
 	}
 	settings.endArray();
+
+	scheme_host_pairs.clear();
+	for (int i = 0; i < size; i++)
+		scheme_host_pairs.append(std::make_pair(schemes.at(i), hosts.at(i)));
+
+	schemes.clear();
+	hosts.clear();
 
 	Virtual_devices = settings.value("Virtual_devices", 2).toUInt();
 	settings.endGroup();
@@ -64,17 +69,17 @@ void DeviceSearchSettings::save()
 
 	settings.remove("Server_hosts");
 	settings.beginWriteArray("Server_hosts");
-	for (int i = 0; i < Server_hosts.size(); i++) {
+	for (int i = 0; i < scheme_host_pairs.size(); i++) {
 		settings.setArrayIndex(i);
-		settings.setValue("hostname", Server_hosts.at(i));
+		settings.setValue("hostname", scheme_host_pairs.at(i).second);
 	}
 	settings.endArray();
 
 	settings.remove("Protocol_list");
 	settings.beginWriteArray("Protocol_list");
-	for (int i = 0; i < Protocol_list.size(); i++) {
+	for (int i = 0; i < scheme_host_pairs.size(); i++) {
 		settings.setArrayIndex(i);
-		settings.setValue("protocol", Protocol_list.at(i));
+		settings.setValue("protocol", scheme_host_pairs.at(i).first);
 	}
 	settings.endArray();
 

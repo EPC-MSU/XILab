@@ -16,10 +16,8 @@
 
 #define FUTURE_WAIT_MS 2000
 
-QString ProtocolSelectionStyle = { //"border: 1px solid gray;"
+QString ProtocolSelectionStyle = {
 "border - radius: 2px;"
-//"padding: 1px 18px 1px 3px;"
-//"min - width: 6em;" 
 };
 
 
@@ -73,7 +71,6 @@ void PageProgramConfigWgt::DetectHosts()
 {
 	QPushButton *btn = ui->detectBtn;
 	QString btn_text = btn->text();
-	// displayStatus("Detecting...");
 	ui->detectBtn->setText("Detecting...");
 	ui->detectBtn->setEnabled(false);
 
@@ -89,13 +86,13 @@ void PageProgramConfigWgt::DetectHosts()
 		return;
 	}
 	int count = libximc::get_device_count(tmp_enum);
-	std::vector<QString> v;
+	std::vector<std::pair<QString, QString>> v;
 
 	// get information about servers from each controller network enumerate info
 	for (int i=0; i<count; i++) {
 		result_t result = libximc::get_enumerate_device_network_information(tmp_enum, i, &netinfo);
 		if (result == result_ok && netinfo.ipv4 != 0) {  // ignore all-zero address coming from empty memory of virtual controller
-			v.push_back(QHostAddress(ntohl(netinfo.ipv4)).toString());
+			v.push_back(std::make_pair(QString("xi-net://"), QHostAddress(ntohl(netinfo.ipv4)).toString()));
 		}
 		else {
 			qDebug() << "ignoring failed enumerate";
@@ -108,15 +105,17 @@ void PageProgramConfigWgt::DetectHosts()
 
 	// add rows from the table
 	for (int i=0; i<ui->tableWidget->rowCount()-1; i++) { // last row is edit row which has no items
-		v.push_back( ui->tableWidget->item(i, 1)->text() );
+		QComboBox *boxProtocol;
+		boxProtocol = qobject_cast<QComboBox*>(ui->tableWidget->cellWidget(i, 0));
+		v.push_back( std::make_pair(boxProtocol->currentText(), ui->tableWidget->item(i, 1)->text()) );
 	}
 	// once more sort and clear dupes
 	std::sort(v.begin(), v.end()); 
     v.erase(std::unique(v.begin(), v.end()), v.end());
-	
-	QList<QString> list = QList<QString>::fromVector( QVector<QString>::fromStdVector(v) );
 
-	SetTable(list, dss->Protocol_list);
+	QList<std::pair<QString, QString>> list = QList<std::pair<QString, QString>>::fromVector(QVector<std::pair<QString, QString>>::fromStdVector(v));
+
+	SetTable(list);
 
 	libximc::free_enumerate_devices(tmp_enum);
 	displayStatusServerCount(v_size);
@@ -132,16 +131,12 @@ void PageProgramConfigWgt::FromUiToClass()
 	dss->Enumerate_network = ui->networkChk->isChecked();
 	dss->Virtual_devices = ui->virtualDevicesSpinBox->value();
 
-	dss->Server_hosts.clear();
-	dss->Protocol_list.clear();
+	dss->scheme_host_pairs.clear();
 	
 	for (int i = 0; i < ui->tableWidget->rowCount()-1; ++i) { // last row is edit row which has no items
-		dss->Server_hosts.append(ui->tableWidget->item(i,1)->text() );
-		QComboBox *boxProtocol;		
-		boxProtocol = qobject_cast<QComboBox*>(
-			ui->tableWidget->cellWidget(i, 0));
-		dss->Protocol_list.append(/*ui->tableWidget->item(i, 0) == 0 ? QString(" ") : *//*ui->tableWidget->item(i, 0)->text()*/boxProtocol->currentText());
-		//boxProtocol->setStyleSheet(ProtocolSelectionStyle);		
+		QComboBox *boxProtocol;
+		boxProtocol = qobject_cast<QComboBox*>(ui->tableWidget->cellWidget(i, 0));
+		dss->scheme_host_pairs.append(std::make_pair(boxProtocol->currentText(), ui->tableWidget->item(i, 1)->text()));
 	}
 }
 
@@ -152,7 +147,7 @@ void PageProgramConfigWgt::FromClassToUi()
 	ui->networkChk->setChecked(dss->Enumerate_network);
 	ui->virtualDevicesSpinBox->setValue(dss->Virtual_devices);
 
-	SetTable(dss->Server_hosts, dss->Protocol_list);
+	SetTable(dss->scheme_host_pairs);
 }
 
 void PageProgramConfigWgt::FromUiToSettings()
@@ -165,6 +160,11 @@ void PageProgramConfigWgt::FromSettingsToUi()
 {
 	dss->load();
 	FromClassToUi();
+}
+
+void PageProgramConfigWgt::slotSchemeChanged()
+{
+	this->FromUiToSettings();
 }
 
 void PageProgramConfigWgt::displayStatus (QString text)
@@ -269,23 +269,26 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 		boxProtocol->addItem(XI_UDP);
 		boxProtocol->addItem(XI_TCP);
 		
-		//boxProtocol->setCurrentIndex(0);
 		//вставляем в таблицу QTableWidget в колонку №0
 		ui->tableWidget->setCellWidget(ui->tableWidget->rowCount() - 1, 0, boxProtocol);
+		QObject::connect(boxProtocol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSchemeChanged()));
 	} else if (column == 1 && row != tw->rowCount()-1 && tw->item(row, column)->text().trimmed() == QString("") ) { // remove empty line
 		tw->removeRow(row);
 	}
 	tw->blockSignals(false);
+
+	// Update list of IPs and schemes
+	FromUiToSettings();
 }
 
-void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_protocol)
+void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> scheme_host_pairs)
 {
 	QTableWidget *tw = ui->tableWidget;
 
 	tw->blockSignals(true);
 
 	tw->clearContents();
-	tw->setRowCount(list.size()+1);
+	tw->setRowCount(scheme_host_pairs.size()+1);
 	tw->setColumnCount(4);
 
 	QStringList qslist;
@@ -300,9 +303,9 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 	h->setResizeMode(3, QHeaderView::ResizeToContents);
 	v->hide();
 
-	for (int i=0; i<list.size(); ++i) {
-		tw->setItem(i, 1, new QTableWidgetItem( list.at(i) ) );
-		tw->setItem(i, 0, new QTableWidgetItem( list_protocol.at(i) ) );
+	for (int i=0; i < tw->rowCount()-1 ; ++i) {
+		tw->setItem(i, 0, new QTableWidgetItem( scheme_host_pairs.at(i).first ) );
+		tw->setItem(i, 1, new QTableWidgetItem( scheme_host_pairs.at(i).second ) );
 		QComboBox *boxProtocol = new QComboBox;
 		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
 		int curr_ind;
@@ -311,13 +314,12 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 		boxProtocol->addItem(XI_NET);
 		boxProtocol->addItem(XI_UDP);
 		boxProtocol->addItem(XI_TCP);
-		if (list_protocol.at(i) == XI_UDP)
+		if (scheme_host_pairs.at(i).first == XI_UDP)
 			curr_ind = 1;
+		else if (scheme_host_pairs.at(i).first == XI_TCP)
+			curr_ind = 2;
 		else
-		if (list_protocol.at(i) == XI_TCP)
-				curr_ind = 2;
-			else
-				curr_ind = 0;
+			curr_ind = 0;
 
 		boxProtocol->setCurrentIndex(curr_ind);
 		//вставляем в таблицу QTableWidget в колонку №0
@@ -332,6 +334,8 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 		icon_item2->setIcon(w_icon);
 		icon_item2->setFlags(Qt::ItemIsEnabled);
 		tw->setItem(i, 3, icon_item2 );
+
+		QObject::connect(boxProtocol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSchemeChanged()));
 	}
 
 	QComboBox *boxProtocol = new QComboBox;
@@ -342,13 +346,13 @@ void PageProgramConfigWgt::SetTable(QList<QString> list, QList<QString> list_pro
 	boxProtocol->addItem(XI_NET);
 	boxProtocol->addItem(XI_UDP);
 	boxProtocol->addItem(XI_TCP);
-	ui->tableWidget->setCellWidget(list.size(), 0, boxProtocol);
+	ui->tableWidget->setCellWidget(scheme_host_pairs.size(), 0, boxProtocol);
 
 	// this is the edit line
-	tw->setItem(list.size(), 2, new QTableWidgetItem());
-	tw->setItem(list.size(), 3, new QTableWidgetItem());
-	tw->item(list.size(), 2)->setFlags(Qt::NoItemFlags);
-	tw->item(list.size(), 3)->setFlags(Qt::NoItemFlags);
+	tw->setItem(scheme_host_pairs.size(), 2, new QTableWidgetItem());
+	tw->setItem(scheme_host_pairs.size(), 3, new QTableWidgetItem());
+	tw->item(scheme_host_pairs.size(), 2)->setFlags(Qt::NoItemFlags);
+	tw->item(scheme_host_pairs.size(), 3)->setFlags(Qt::NoItemFlags);
 
 	tw->blockSignals(false);
 }
