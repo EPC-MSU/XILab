@@ -43,15 +43,8 @@ private:
 	void refreshUserLists ();
 
 private slots:
-	void DetectHosts();
 	void slotCellClicked ( int row, int column );
 	void slotCellChanged ( int row, int column );
-	void copyUsersLocalToRemote();
-	void copyUsersRemoteToLocal();
-	void deleteUsersLocal();
-	void deleteUsersRemote();
-	void createUserLocal();
-	void createUserRemote();
 	void slotSchemeChanged();
 };
 
