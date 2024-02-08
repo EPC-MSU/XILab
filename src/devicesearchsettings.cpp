@@ -47,9 +47,9 @@ void DeviceSearchSettings::load()
 	}
 	settings.endArray();
 
-	url.clear();
+	scheme_host_pairs.clear();
 	for (int i = 0; i < size; i++)
-		url.append(std::make_pair(schemes.at(i), hosts.at(i)));
+		scheme_host_pairs.append(std::make_pair(schemes.at(i), hosts.at(i)));
 
 	schemes.clear();
 	hosts.clear();
@@ -69,17 +69,17 @@ void DeviceSearchSettings::save()
 
 	settings.remove("Server_hosts");
 	settings.beginWriteArray("Server_hosts");
-	for (int i = 0; i < url.size(); i++) {
+	for (int i = 0; i < scheme_host_pairs.size(); i++) {
 		settings.setArrayIndex(i);
-		settings.setValue("hostname", url.at(i).second);
+		settings.setValue("hostname", scheme_host_pairs.at(i).second);
 	}
 	settings.endArray();
 
 	settings.remove("Protocol_list");
 	settings.beginWriteArray("Protocol_list");
-	for (int i = 0; i < url.size(); i++) {
+	for (int i = 0; i < scheme_host_pairs.size(); i++) {
 		settings.setArrayIndex(i);
-		settings.setValue("protocol", url.at(i).first);
+		settings.setValue("protocol", scheme_host_pairs.at(i).first);
 	}
 	settings.endArray();
 

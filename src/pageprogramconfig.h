@@ -32,7 +32,7 @@ public:
 private:
     Ui::PageProgramConfigWgt* ui;
 	DeviceSearchSettings* dss;
-	void SetTable(QList<std::pair<QString, QString>> url);
+	void SetTable(QList<std::pair<QString, QString>> scheme_host_pairs);
 	QIcon x_icon, w_icon;
 	bindy::Bindy *bindy;
 	bindy::conn_id_t conn_id;
@@ -52,6 +52,7 @@ private slots:
 	void deleteUsersRemote();
 	void createUserLocal();
 	void createUserRemote();
+	void slotSchemeChanged();
 };
 
 

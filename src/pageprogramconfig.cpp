@@ -131,12 +131,12 @@ void PageProgramConfigWgt::FromUiToClass()
 	dss->Enumerate_network = ui->networkChk->isChecked();
 	dss->Virtual_devices = ui->virtualDevicesSpinBox->value();
 
-	dss->url.clear();
+	dss->scheme_host_pairs.clear();
 	
 	for (int i = 0; i < ui->tableWidget->rowCount()-1; ++i) { // last row is edit row which has no items
 		QComboBox *boxProtocol;
 		boxProtocol = qobject_cast<QComboBox*>(ui->tableWidget->cellWidget(i, 0));
-		dss->url.append(std::make_pair(boxProtocol->currentText(), ui->tableWidget->item(i, 1)->text()));
+		dss->scheme_host_pairs.append(std::make_pair(boxProtocol->currentText(), ui->tableWidget->item(i, 1)->text()));
 	}
 }
 
@@ -147,7 +147,7 @@ void PageProgramConfigWgt::FromClassToUi()
 	ui->networkChk->setChecked(dss->Enumerate_network);
 	ui->virtualDevicesSpinBox->setValue(dss->Virtual_devices);
 
-	SetTable(dss->url);
+	SetTable(dss->scheme_host_pairs);
 }
 
 void PageProgramConfigWgt::FromUiToSettings()
@@ -160,6 +160,11 @@ void PageProgramConfigWgt::FromSettingsToUi()
 {
 	dss->load();
 	FromClassToUi();
+}
+
+void PageProgramConfigWgt::slotSchemeChanged()
+{
+	this->FromUiToSettings();
 }
 
 void PageProgramConfigWgt::displayStatus (QString text)
@@ -271,18 +276,18 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 	}
 	tw->blockSignals(false);
 
-	// Update interanl data using ui->TableWidget
+	// Update list of IPs and schemes
 	FromUiToSettings();
 }
 
-void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> url)
+void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> scheme_host_pairs)
 {
 	QTableWidget *tw = ui->tableWidget;
 
 	tw->blockSignals(true);
 
 	tw->clearContents();
-	tw->setRowCount(url.size()+1);
+	tw->setRowCount(scheme_host_pairs.size()+1);
 	tw->setColumnCount(4);
 
 	QStringList qslist;
@@ -298,8 +303,8 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> url)
 	v->hide();
 
 	for (int i=0; i < tw->rowCount()-1 ; ++i) {
-		tw->setItem(i, 0, new QTableWidgetItem( url.at(i).first ) );
-		tw->setItem(i, 1, new QTableWidgetItem( url.at(i).second ) );
+		tw->setItem(i, 0, new QTableWidgetItem( scheme_host_pairs.at(i).first ) );
+		tw->setItem(i, 1, new QTableWidgetItem( scheme_host_pairs.at(i).second ) );
 		QComboBox *boxProtocol = new QComboBox;
 		boxProtocol->setStyleSheet(ProtocolSelectionStyle);
 		int curr_ind;
@@ -308,9 +313,9 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> url)
 		boxProtocol->addItem(XI_NET);
 		boxProtocol->addItem(XI_UDP);
 		boxProtocol->addItem(XI_TCP);
-		if (url.at(i).first == XI_UDP)
+		if (scheme_host_pairs.at(i).first == XI_UDP)
 			curr_ind = 1;
-		else if (url.at(i).first == XI_TCP)
+		else if (scheme_host_pairs.at(i).first == XI_TCP)
 			curr_ind = 2;
 		else
 			curr_ind = 0;
@@ -328,6 +333,8 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> url)
 		icon_item2->setIcon(w_icon);
 		icon_item2->setFlags(Qt::ItemIsEnabled);
 		tw->setItem(i, 3, icon_item2 );
+
+		QObject::connect(boxProtocol, SIGNAL(currentTextChanged(int)), this, SLOT(slotSchemeChanged()));
 	}
 
 	QComboBox *boxProtocol = new QComboBox;
@@ -338,13 +345,13 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> url)
 	boxProtocol->addItem(XI_NET);
 	boxProtocol->addItem(XI_UDP);
 	boxProtocol->addItem(XI_TCP);
-	ui->tableWidget->setCellWidget(url.size(), 0, boxProtocol);
+	ui->tableWidget->setCellWidget(scheme_host_pairs.size(), 0, boxProtocol);
 
 	// this is the edit line
-	tw->setItem(url.size(), 2, new QTableWidgetItem());
-	tw->setItem(url.size(), 3, new QTableWidgetItem());
-	tw->item(url.size(), 2)->setFlags(Qt::NoItemFlags);
-	tw->item(url.size(), 3)->setFlags(Qt::NoItemFlags);
+	tw->setItem(scheme_host_pairs.size(), 2, new QTableWidgetItem());
+	tw->setItem(scheme_host_pairs.size(), 3, new QTableWidgetItem());
+	tw->item(scheme_host_pairs.size(), 2)->setFlags(Qt::NoItemFlags);
+	tw->item(scheme_host_pairs.size(), 3)->setFlags(Qt::NoItemFlags);
 
 	tw->blockSignals(false);
 }

@@ -13,7 +13,7 @@ public:
 	bool Enumerate_probe;
 	bool Enumerate_all_com;
 	bool Enumerate_network;
-	QList<std::pair<QString, QString>> url;
+	QList<std::pair<QString, QString>> scheme_host_pairs;
 	unsigned int Virtual_devices;
 
 private:
