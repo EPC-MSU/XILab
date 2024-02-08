@@ -271,6 +271,7 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 		
 		//вставляем в таблицу QTableWidget в колонку №0
 		ui->tableWidget->setCellWidget(ui->tableWidget->rowCount() - 1, 0, boxProtocol);
+		QObject::connect(boxProtocol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSchemeChanged()));
 	} else if (column == 1 && row != tw->rowCount()-1 && tw->item(row, column)->text().trimmed() == QString("") ) { // remove empty line
 		tw->removeRow(row);
 	}
@@ -334,7 +335,7 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> scheme_ho
 		icon_item2->setFlags(Qt::ItemIsEnabled);
 		tw->setItem(i, 3, icon_item2 );
 
-		QObject::connect(boxProtocol, SIGNAL(currentTextChanged(int)), this, SLOT(slotSchemeChanged()));
+		QObject::connect(boxProtocol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSchemeChanged()));
 	}
 
 	QComboBox *boxProtocol = new QComboBox;
