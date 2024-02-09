@@ -70,12 +70,10 @@ MainWindow::MainWindow(QWidget *parent, QString _device_name, DeviceInterface *_
 	QObject::connect(ui->settingsBtn,  SIGNAL(clicked()),  this,  SLOT(OnSettingsBtnPressed()));
 	QObject::connect(ui->chartBtn,     SIGNAL(clicked()),  this,  SLOT(OnChartBtnPressed()));
 	QObject::connect(ui->scriptBtn,    SIGNAL(clicked()),  this,  SLOT(OnScriptBtnPressed()));
-	QObject::connect(ui->leftBdrBtn,   SIGNAL(clicked()),  this,  SLOT(OnLeftBdrBtnPressed()));
 	QObject::connect(ui->leftBtn,      SIGNAL(clicked()),  this,  SLOT(OnLeftBtnPressed()));
 	QObject::connect(ui->stopBtn,      SIGNAL(clicked()),  this,  SLOT(OnStopBtnPressed()));
 	QObject::connect(ui->sstpBtn,      SIGNAL(clicked()),  this,  SLOT(OnSstpBtnPressed()));
 	QObject::connect(ui->rightBtn,     SIGNAL(clicked()),  this,  SLOT(OnRightBtnPressed()));
-	QObject::connect(ui->rightBdrBtn,  SIGNAL(clicked()),  this,  SLOT(OnRightBdrBtnPressed()));
 	QObject::connect(ui->moveBtn,      SIGNAL(clicked()),  this,  SLOT(OnMoveBtnPressed()));
 	QObject::connect(ui->shiftBtn,     SIGNAL(clicked()),  this,  SLOT(OnShiftBtnPressed()));
 	QObject::connect(ui->homeBtn,      SIGNAL(clicked()),  this,  SLOT(OnGoHomeBtnPressed()));
@@ -1690,12 +1688,9 @@ void MainWindow::ClearState(int device_mode)
     ui->temperatureValue->setPalette(ui->temperatureLbl->palette());
     ui->deviceValue->setPalette(ui->deviceLbl->palette());
 
-	//
-	ui->leftBdrBtn->setEnabled(false);
 	ui->leftBtn->setEnabled(false);
 	ui->stopBtn->setEnabled(false);
 	ui->sstpBtn->setEnabled(false);
-	ui->rightBdrBtn->setEnabled(false);
 	ui->rightBtn->setEnabled(false);
 	ui->shiftBtn->setEnabled(false);
 	ui->moveBtn->setEnabled(false);
@@ -1721,11 +1716,9 @@ void MainWindow::NormalState()
 	ui->targetSpeedLbl->setEnabled(true);
 	ui->antiplayLbl->setEnabled(true);
 
-	ui->leftBdrBtn->setEnabled(true);
 	ui->leftBtn->setEnabled(true);
 	ui->stopBtn->setEnabled(true);
 	ui->sstpBtn->setEnabled(true);
-	ui->rightBdrBtn->setEnabled(true);
 	ui->rightBtn->setEnabled(true);
 	ui->shiftBtn->setEnabled(true);
 	ui->moveBtn->setEnabled(true);
@@ -1820,12 +1813,6 @@ void MainWindow::OnCyclicBtnPressed()
 	attenuator->setCalibrationStatus(Calibration::NO_CALIBRATION);
 }
 
-void MainWindow::OnLeftBdrBtnPressed()
-{
-	cyclic = false;
-	doMove(ui->positionSldr->minValue());
-}
-
 void MainWindow::OnLeftBtnPressed()
 {
 	move_to_left_bdr = false;
@@ -1866,12 +1853,6 @@ void MainWindow::OnRightBtnPressed()
 	cyclic = false;
 
 	devinterface->command_right();
-}
-
-void MainWindow::OnRightBdrBtnPressed()
-{
-	cyclic = false;
-	doMove(ui->positionSldr->maxValue());
 }
 
 void MainWindow::OnMoveBtnPressed()

@@ -246,12 +246,10 @@ public slots:
 	void CheckForceStopCondition();
 	void OnTechSupportClicked();
 
-    void OnLeftBdrBtnPressed();
     void OnLeftBtnPressed();
     void OnStopBtnPressed();
     void OnSstpBtnPressed();
     void OnRightBtnPressed();
-    void OnRightBdrBtnPressed();
     void OnMoveBtnPressed();
     void OnShiftBtnPressed();
 
