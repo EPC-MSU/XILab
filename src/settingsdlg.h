@@ -60,7 +60,6 @@ extern int PageRootDeviceConfigurationNum;
 extern int PageBordersNum;
 extern int PageLimitsNum;
 extern int PageMotorTypeNum;
-extern int PageDCMotorNum;
 extern int PageBLDCMotorNum;
 extern int PageStepperMotorNum;
 extern int PagePowerNum;

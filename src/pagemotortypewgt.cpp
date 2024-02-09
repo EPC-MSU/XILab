@@ -8,7 +8,6 @@ PageMotorTypeWgt::PageMotorTypeWgt(QWidget *parent, MotorSettings *motorStgs) :
     m_ui->setupUi(this);
 	mStgs = motorStgs;
 
-	QObject::connect(m_ui->dcMotorBtn, SIGNAL(toggled(bool)), this, SLOT(setMotorTypeDC(bool)));
 	QObject::connect(m_ui->stepperMotorBtn, SIGNAL(toggled(bool)), this, SLOT(setMotorTypeStep(bool)));
 	QObject::connect(m_ui->bldcMotorBtn, SIGNAL(toggled(bool)), this, SLOT(setMotorTypeBLDC(bool)));
 
@@ -20,7 +19,6 @@ PageMotorTypeWgt::PageMotorTypeWgt(QWidget *parent, MotorSettings *motorStgs) :
 	m_ui->discreteDriverBtn->setDisabled(true);
 #endif
 
-	m_ui->dcMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
 	m_ui->stepperMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
 	m_ui->bldcMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
 	m_ui->unknownMotorBtn->setStyleSheet("QRadioButton { color : #B0A000; }");
@@ -40,18 +38,10 @@ unsigned int PageMotorTypeWgt::getCurrentMotorType()
 {
 	if(m_ui->stepperMotorBtn->isChecked())
 		return ENGINE_TYPE_STEP;
-	else if(m_ui->dcMotorBtn->isChecked())
-		return ENGINE_TYPE_DC;
 	else if(m_ui->bldcMotorBtn->isChecked())
 		return ENGINE_TYPE_BRUSHLESS;
 	else
 		return ENGINE_TYPE_NONE;
-}
-
-void PageMotorTypeWgt::setMotorTypeDC(bool checked)
-{
-	if (checked)
-		emit SgnMotorTypeChanged(ENGINE_TYPE_DC);
 }
 
 void PageMotorTypeWgt::setMotorTypeStep(bool checked)
@@ -70,9 +60,6 @@ void PageMotorTypeWgt::FromClassToUi()
 {
 	switch(mStgs->entype.EngineType)
 	{
-		case ENGINE_TYPE_DC:
-			m_ui->dcMotorBtn->setChecked(true);
-			break;
 		case ENGINE_TYPE_STEP:
 			m_ui->stepperMotorBtn->setChecked(true);
 			break;
@@ -103,9 +90,7 @@ void PageMotorTypeWgt::FromClassToUi()
 
 void PageMotorTypeWgt::FromUiToClass(MotorSettings *lmStgs)
 {
-	if(m_ui->dcMotorBtn->isChecked())
-		lmStgs->entype.EngineType = ENGINE_TYPE_DC;
-	else if(m_ui->bldcMotorBtn->isChecked())
+	if(m_ui->bldcMotorBtn->isChecked())
 		lmStgs->entype.EngineType = ENGINE_TYPE_BRUSHLESS;
 	else if(m_ui->stepperMotorBtn->isChecked())
 		lmStgs->entype.EngineType = ENGINE_TYPE_STEP;

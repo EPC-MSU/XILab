@@ -30,7 +30,6 @@ private:
 	MotorSettings *mStgs;
 	
 private slots:
-	void setMotorTypeDC(bool);
 	void setMotorTypeStep(bool);
 	void setMotorTypeBLDC(bool);
 

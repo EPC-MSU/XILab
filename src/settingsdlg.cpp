@@ -23,7 +23,6 @@ int PageRootDeviceConfigurationNum;
 int PageBordersNum;
 int PageLimitsNum;
 int PageMotorTypeNum;
-int PageDCMotorNum;
 int PageBLDCMotorNum;
 int PageStepperMotorNum;
 int PageStepperMotorEMFNum;
@@ -283,15 +282,11 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 		// Disable all unused engine type pages and switch away if needed
 		motorTypeChanged(entype);
 		if(entype == ENGINE_TYPE_STEP){
-			if (treeWgtsLst[PageDCMotorNum]->isSelected() || treeWgtsLst[PageBLDCMotorNum]->isSelected())
+			if (treeWgtsLst[PageBLDCMotorNum]->isSelected())
 				m_ui->treeWgt->setCurrentItem(treeWgtsLst[PageStepperMotorNum]);
 		}
-		if(entype == ENGINE_TYPE_DC){
-			if (treeWgtsLst[PageBLDCMotorNum]->isSelected() || treeWgtsLst[PageStepperMotorNum]->isSelected())
-				m_ui->treeWgt->setCurrentItem(treeWgtsLst[PageDCMotorNum]);
-		}
 		if (entype == ENGINE_TYPE_BRUSHLESS) {
-			if (treeWgtsLst[PageDCMotorNum]->isSelected() || treeWgtsLst[PageStepperMotorNum]->isSelected())
+			if (treeWgtsLst[PageStepperMotorNum]->isSelected())
 				m_ui->treeWgt->setCurrentItem(treeWgtsLst[PageBLDCMotorNum]);
 		}
 		//Засериваем часть Program configuration в режиме Multiaxis
@@ -308,7 +303,6 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 		((PageLimitsWgt*)pageWgtsLst[PageLimitsNum])->disableCriticalUSB(controllerStgs->treatAs8SMC5());
 		
 		((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->disableDifferentialFeedback(!controllerStgs->treatAs8SMC5());
-		((PageDCMotorWgt*)pageWgtsLst[PageDCMotorNum])->disableDifferentialFeedback(!controllerStgs->treatAs8SMC5());
 		((PageBLDCMotorWgt*)pageWgtsLst[PageBLDCMotorNum])->disableDifferentialFeedback(!controllerStgs->treatAs8SMC5());
 
 		// # 22484, disable BLDC motor type for 8SMC4
@@ -361,7 +355,6 @@ bool SettingsDlg::AllPagesFromDeviceToClassToUi(bool load_settings/* = true*/, b
 	// Motor page Ui load should happen first, because it might trigger encoder feedback change, which will recalculate all stepspinbox values on all pages
 	// Load all 3 pages, but emit only on active page
 	// TODO: should we emit at all here
-	((PageDCMotorWgt*)pageWgtsLst[PageDCMotorNum])->FromClassToUi(! treeWgtsLst[PageDCMotorNum]->isDisabled());
 	((PageBLDCMotorWgt*)pageWgtsLst[PageBLDCMotorNum])->FromClassToUi(! treeWgtsLst[PageBLDCMotorNum]->isDisabled());
 	((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->FromClassToUi(! treeWgtsLst[PageStepperMotorNum]->isDisabled());
 
@@ -656,9 +649,6 @@ void SettingsDlg::FromUiToClass(MotorSettings *stgs)
 	((PageLimitsWgt*)pageWgtsLst[PageLimitsNum])->FromUiToClass(stgs);
 	((PageMotorTypeWgt*)pageWgtsLst[PageMotorTypeNum])->FromUiToClass(stgs);
 
-	if (((QTreeWidgetItem*)treeWgtsLst[PageDCMotorNum])->flags().testFlag(Qt::ItemIsEnabled)) {
-		((PageDCMotorWgt*)pageWgtsLst[PageDCMotorNum])->FromUiToClass(stgs);
-	}
 	if (((QTreeWidgetItem*)treeWgtsLst[PageBLDCMotorNum])->flags().testFlag(Qt::ItemIsEnabled)) {
 		((PageBLDCMotorWgt*)pageWgtsLst[PageBLDCMotorNum])->FromUiToClass(stgs);
 	}
@@ -742,13 +732,6 @@ void SettingsDlg::InitControls()
     treeWgtsLst.push_back(childItem);
     pageWgtsLst.push_back((QWidget*)new PageMotorTypeWgt(NULL, motorStgs));
 
-	//Device configuration->DC motor
-	PageDCMotorNum=i++;
-    childItem = new QTreeWidgetItem(parentItem);
-    childItem->setText(0, tr("DC motor"));
-    treeWgtsLst.push_back(childItem);
-    pageWgtsLst.push_back((QWidget*)new PageDCMotorWgt(NULL, motorStgs));
-
 	//Device configuration->BLDC motor
 	PageBLDCMotorNum=i++;
 	childItem = new QTreeWidgetItem(parentItem);
@@ -792,7 +775,6 @@ void SettingsDlg::InitControls()
     pageWgtsLst.push_back((QWidget*)new PageControlPositionWgt(NULL, motorStgs));
 	QObject::connect(pageWgtsLst[PageStepperMotorNum], SIGNAL(SgnChangeFrac(unsigned int)), this, SLOT(OnChangeFrac(unsigned int)));
 	QObject::connect(pageWgtsLst[PageStepperMotorNum], SIGNAL(SgnSwitchCTP(unsigned int)), this, SLOT(OnSwitchCTP(unsigned int)));
-	QObject::connect(pageWgtsLst[PageDCMotorNum], SIGNAL(SgnSwitchCTP(unsigned int)), this, SLOT(OnSwitchCTP(unsigned int)));
 	QObject::connect(pageWgtsLst[PageBLDCMotorNum], SIGNAL(SgnSwitchCTP(unsigned int)), this, SLOT(OnSwitchCTP(unsigned int)));
 
 	//Device configuration->Home position
@@ -1608,7 +1590,6 @@ void SettingsDlg::motorTypeChanged(unsigned int entype)
 		treeWgtsLst[PagePidNum]->setFlags((feedback_type == FEEDBACK_ENCODER/* || feedback_type == FEEDBACK_EMF*/) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
 	}
 
-	treeWgtsLst[PageDCMotorNum]->setFlags((entype == ENGINE_TYPE_DC) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
 	treeWgtsLst[PageBLDCMotorNum]->setFlags((entype == ENGINE_TYPE_BRUSHLESS) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
 	treeWgtsLst[PageStepperMotorNum]->setFlags((entype == ENGINE_TYPE_STEP) ? (Qt::ItemIsSelectable | Qt::ItemIsEnabled) : (Qt::NoItemFlags));
 
@@ -1668,7 +1649,6 @@ void SettingsDlg::setStyles(bool permanent)
 
 	if (permanent) {// if this is a permanent change, then it might be one done on startup, load from class to ui then
 		// Call all Ui loaders with emitters disabled, else they will also call setStyles through signal connections and mess everything up
-		((PageDCMotorWgt*)pageWgtsLst[PageDCMotorNum])->FromClassToUi(false);
 		((PageBLDCMotorWgt*)pageWgtsLst[PageBLDCMotorNum])->FromClassToUi(false);
 		((PageStepperMotorWgt*)pageWgtsLst[PageStepperMotorNum])->FromClassToUi(false);
 		((PageHomePositionWgt*)pageWgtsLst[PageHomePositionNum])->FromClassToUi();
