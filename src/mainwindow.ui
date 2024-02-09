@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>378</width>
+    <width>490</width>
     <height>740</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>490</width>
     <height>0</height>
    </size>
   </property>
@@ -605,8 +605,33 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_4">
+             <item row="1" column="1">
+              <widget class="QPushButton" name="shiftBtn">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>90</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Shift on</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="1">
               <widget class="QPushButton" name="moveBtn">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>90</width>
@@ -615,13 +640,6 @@ p, li { white-space: pre-wrap; }
                </property>
                <property name="text">
                 <string>Move to</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QPushButton" name="shiftBtn">
-               <property name="text">
-                <string>Shift on</string>
                </property>
               </widget>
              </item>
@@ -638,7 +656,7 @@ p, li { white-space: pre-wrap; }
                </property>
               </spacer>
              </item>
-             <item row="0" column="2">
+             <item row="0" column="3">
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -650,6 +668,12 @@ p, li { white-space: pre-wrap; }
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="0" column="2">
+              <widget class="QSpinBox" name="spinBox"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="spinBox_2"/>
              </item>
             </layout>
            </item>
@@ -1033,7 +1057,7 @@ p, li { white-space: pre-wrap; }
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>1</height>
+          <height>137</height>
          </size>
         </property>
        </widget>

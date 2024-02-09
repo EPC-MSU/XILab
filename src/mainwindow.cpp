@@ -185,6 +185,10 @@ void MainWindow::InitUI()
 	shiftSpinBox.setAlignment(Qt::AlignHCenter);
 	moveSpinBox.setObjectName("moveSpinBox");
 	shiftSpinBox.setObjectName("shiftSpinBox");
+	moveSpinBox.setMinimumSize(QSize(120, 23));
+	shiftSpinBox.setMinimumSize(QSize(120, 23));
+	moveSpinBox.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+	shiftSpinBox.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
 	ui->gridLayout_4->addWidget(&moveSpinBox, 0, 2);
 	ui->gridLayout_4->addWidget(&shiftSpinBox, 1, 2);
