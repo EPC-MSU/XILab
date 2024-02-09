@@ -36,7 +36,6 @@ PageProgramConfigWgt::PageProgramConfigWgt(QWidget *parent, DeviceSearchSettings
 	conn_id = bindy::conn_id_invalid;
 
 	x_icon.addFile(":/settingsdlg/images/settingsdlg/x.png");
-	w_icon.addFile(":/settingsdlg/images/settingsdlg/wrench.png");
 	connect( ui->tableWidget, SIGNAL( cellClicked (int, int) ), this, SLOT( slotCellClicked( int, int ) ) );
 	connect( ui->tableWidget, SIGNAL( cellChanged (int, int) ), this, SLOT( slotCellChanged( int, int ) ) );
 
@@ -131,25 +130,6 @@ void PageProgramConfigWgt::slotCellClicked ( int row, int column )
 {
 	if (column == 2 && row != ui->tableWidget->rowCount()-1)
 		ui->tableWidget->removeRow(row);
-
-	if (column == 3 && row != ui->tableWidget->rowCount()-1) {
-		// Reconnect to specified address
-		std::string address = ui->tableWidget->item(row, 1)->text().toStdString();
-		bindy->disconnect(conn_id);
-		try {
-			conn_id = bindy->connect(address, std::string());
-		}
-		catch (...) { // CryptoPP::Socket::Err
-			conn_id = bindy::conn_id_invalid;
-		}
-		if (conn_id == bindy::conn_id_invalid) {
-			displayStatus("Connection failed");
-			return;
-		}
-		displayStatus("Connection ok");
-
-		refreshUserLists();
-	}
 }
 
 void PageProgramConfigWgt::slotCellChanged ( int row, int column )
@@ -168,12 +148,6 @@ void PageProgramConfigWgt::slotCellChanged ( int row, int column )
 		icon_item->setIcon(x_icon);
 		icon_item->setFlags(Qt::ItemIsEnabled);
 		tw->setItem(row, 2, icon_item);
-
-		// Add "wrench" icon in the edited row (right column)
-		QTableWidgetItem* icon_item2 = new QTableWidgetItem();
-		icon_item2->setIcon(w_icon);
-		icon_item2->setFlags(Qt::ItemIsEnabled);
-		tw->setItem(row, 3, icon_item2);
 
 		// Disable right column of the new row
 		tw->setItem(row+1, 2, new QTableWidgetItem());
@@ -208,10 +182,10 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> scheme_ho
 
 	tw->clearContents();
 	tw->setRowCount(scheme_host_pairs.size()+1);
-	tw->setColumnCount(4);
+	tw->setColumnCount(3);
 
 	QStringList qslist;
-	qslist << QString("Protocol") << QString("IP/Host[:port]") << QString() << QString() ;
+	qslist << QString("Protocol") << QString("IP/Host[:port]") << QString() ;
 	ui->tableWidget->setHorizontalHeaderLabels(qslist);	
 	QHeaderView * h = ui->tableWidget->horizontalHeader();
 	QHeaderView * v = ui->tableWidget->verticalHeader();
@@ -219,7 +193,6 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> scheme_ho
 	h->setResizeMode(1, QHeaderView::Stretch);
 	h->setResizeMode(0, QHeaderView::ResizeToContents);
 	h->setResizeMode(2, QHeaderView::ResizeToContents);
-	h->setResizeMode(3, QHeaderView::ResizeToContents);
 	v->hide();
 
 	for (int i=0; i < tw->rowCount()-1 ; ++i) {
@@ -249,11 +222,6 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> scheme_ho
 		icon_item->setFlags(Qt::ItemIsEnabled);
 		tw->setItem(i, 2, icon_item );
 
-		QTableWidgetItem* icon_item2 = new QTableWidgetItem();
-		icon_item2->setIcon(w_icon);
-		icon_item2->setFlags(Qt::ItemIsEnabled);
-		tw->setItem(i, 3, icon_item2 );
-
 		QObject::connect(boxProtocol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSchemeChanged()));
 	}
 
@@ -269,9 +237,7 @@ void PageProgramConfigWgt::SetTable(QList<std::pair<QString, QString>> scheme_ho
 
 	// this is the edit line
 	tw->setItem(scheme_host_pairs.size(), 2, new QTableWidgetItem());
-	tw->setItem(scheme_host_pairs.size(), 3, new QTableWidgetItem());
 	tw->item(scheme_host_pairs.size(), 2)->setFlags(Qt::NoItemFlags);
-	tw->item(scheme_host_pairs.size(), 3)->setFlags(Qt::NoItemFlags);
 
 	tw->blockSignals(false);
 }
