@@ -90,7 +90,6 @@ void deviceListRecieved(bool enum_ok, QStringList names, QStringList description
 	void selectBtnClicked();
 	void retryBtnClicked();
 	void cancelBtnClicked();
-	void openLastConfigBtnClicked();
 	void exBtnClicked();
 	void noDevicesLinuxHelperClicked();
 	void timerUpdate();

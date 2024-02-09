@@ -306,7 +306,7 @@
             </font>
            </property>
            <property name="text">
-            <string> </string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -377,37 +377,6 @@
            </property>
            <property name="text">
             <string>Open selected</string>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="openLastConfigBtn">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Open last</string>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>62</width>
-             <height>16</height>
-            </size>
            </property>
            <property name="autoDefault">
             <bool>false</bool>

@@ -101,7 +101,6 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 	connect(m_ui->selectBtn, SIGNAL(clicked()), this, SLOT(selectBtnClicked()));
 	connect(m_ui->retryBtn, SIGNAL(clicked()), this, SLOT(retryBtnClicked()));
 	connect(m_ui->cancelBtn, SIGNAL(clicked()), this, SLOT(cancelBtnClicked()));
-	connect(m_ui->openLastConfigBtn, SIGNAL(clicked()), this, SLOT(openLastConfigBtnClicked()));
 	connect(m_ui->exBtn, SIGNAL(clicked()), this, SLOT(exBtnClicked()));
 	connect(m_ui->noDevicesLinuxHelper, SIGNAL(clicked()), this, SLOT(noDevicesLinuxHelperClicked()));
 	connect(&timer, SIGNAL(timeout()), this, SLOT(timerUpdate()), Qt::DirectConnection);
@@ -260,7 +259,6 @@ void StartWindow::setVisibleFrameButtons(bool visible)
 {
     m_ui->retryBtn->setVisible(visible);
     m_ui->selectBtn->setVisible(visible);
-    m_ui->openLastConfigBtn->setVisible(visible);
 }
 
 void StartWindow::deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags)
@@ -479,28 +477,6 @@ void StartWindow::cancelBtnClicked()
 	selectedDevices.insert(0, "nodevices");
 }
 
-void StartWindow::openLastConfigBtnClicked()
-{
-	QMutexLocker locker(&mutex);
-
-	selectedDevices.clear();
-
-	QSet<QString> set;
-	QSet<QString>::iterator si;
-	
-	for (int i = 0; i < m_ui->deviceListTable->rowCount(); i++) {
-
-		unsigned int sn = m_ui->deviceListTable->item(i, Columns::COLUMN_SERIAL)->text().toUInt();
-		QString url = m_ui->deviceListTable->item(i, Columns::COLUMN_URI)->text();
-		if (serials.contains( sn )) {
-			set.insert( url );
-		}
-	}
-	for (si = set.begin(); si != set.end(); ++si) {
-		selectedDevices.append( *si );
-	}
-}
-
 void StartWindow::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
@@ -584,8 +560,6 @@ void StartWindow::LoadAxisConfig(QList<uint32_t> all_serials)
 		}
 	}
 	settings.endGroup();
-
-	m_ui->openLastConfigBtn->setEnabled(group_not_empty && all_devices_found);
 }
 
 void StartWindow::hideRight()
