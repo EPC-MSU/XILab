@@ -82,6 +82,9 @@ private:
 
     void setVisibleFrameButtons(bool visible);
 
+protected:
+	void closeEvent(QCloseEvent *event) override;
+
 public slots:
 void deviceListRecieved(bool enum_ok, QStringList names, QStringList descriptions, QStringList friendlyNames, QList<uint32_t> serials, QList<Qt::ItemFlags> flags);
 	void itemDoubleClicked(QTableWidgetItem*);
@@ -89,7 +92,6 @@ void deviceListRecieved(bool enum_ok, QStringList names, QStringList description
 	void itemPressed(QTableWidgetItem *item);
 	void selectBtnClicked();
 	void retryBtnClicked();
-	void cancelBtnClicked();
 	void exBtnClicked();
 	void noDevicesLinuxHelperClicked();
 	void timerUpdate();

@@ -404,44 +404,6 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QToolButton" name="leftBdrBtn">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>25</width>
-                   <height>23</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777210</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="focusPolicy">
-                  <enum>Qt::StrongFocus</enum>
-                 </property>
-                 <property name="text">
-                  <string>Left</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/mainwindow/images/mainwindow/left_bdr.png</normaloff>:/mainwindow/images/mainwindow/left_bdr.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>12</height>
-                  </size>
-                 </property>
-                 <property name="toolButtonStyle">
-                  <enum>Qt::ToolButtonIconOnly</enum>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="homeBtn">
                  <property name="minimumSize">
                   <size>
@@ -539,38 +501,6 @@
                  </property>
                  <property name="checkable">
                   <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="rightBdrBtn">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>25</width>
-                   <height>23</height>
-                  </size>
-                 </property>
-                 <property name="focusPolicy">
-                  <enum>Qt::StrongFocus</enum>
-                 </property>
-                 <property name="text">
-                  <string>Left</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../Resources/XILab.qrc">
-                   <normaloff>:/mainwindow/images/mainwindow/right_bdr.png</normaloff>:/mainwindow/images/mainwindow/right_bdr.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>12</height>
-                  </size>
-                 </property>
-                 <property name="toolButtonStyle">
-                  <enum>Qt::ToolButtonIconOnly</enum>
                  </property>
                 </widget>
                </item>

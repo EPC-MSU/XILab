@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 #include <QDate>
+#include <qevent.h>
 #include <ui_startwindow.h>
 #include <startwindow.h>
 #include <functions.h>
@@ -23,7 +24,7 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 {
 	m_ui->setupUi(this);
 
-	setWindowFlags(Qt::Window |Qt::CustomizeWindowHint);
+	setWindowFlags(Qt::Window);
 
 	m_ui->titleLbl->setText(QString("mDrive Direct Control ")+QString(XILAB_VERSION));
 	m_ui->releaseDateLbl->setText(QString("release date: ")+compileDate());
@@ -100,7 +101,6 @@ StartWindow::StartWindow(QWidget *parent): QWidget(parent), m_ui(new Ui::StartWi
 
 	connect(m_ui->selectBtn, SIGNAL(clicked()), this, SLOT(selectBtnClicked()));
 	connect(m_ui->retryBtn, SIGNAL(clicked()), this, SLOT(retryBtnClicked()));
-	connect(m_ui->cancelBtn, SIGNAL(clicked()), this, SLOT(cancelBtnClicked()));
 	connect(m_ui->exBtn, SIGNAL(clicked()), this, SLOT(exBtnClicked()));
 	connect(m_ui->noDevicesLinuxHelper, SIGNAL(clicked()), this, SLOT(noDevicesLinuxHelperClicked()));
 	connect(&timer, SIGNAL(timeout()), this, SLOT(timerUpdate()), Qt::DirectConnection);
@@ -470,13 +470,6 @@ void StartWindow::retryBtnClicked()
 	startSearching();
 }
 
-void StartWindow::cancelBtnClicked()
-{
-	QMutexLocker locker(&mutex);
-	hide();
-	selectedDevices.insert(0, "nodevices");
-}
-
 void StartWindow::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
@@ -585,6 +578,13 @@ void StartWindow::showRight()
 	right->show();
 
 	m_ui->exBtn->setText(str_close);
+}
+
+void StartWindow::closeEvent(QCloseEvent *event)
+{
+	QMutexLocker locker(&mutex);
+	hide();
+	selectedDevices.insert(0, "nodevices");
 }
 
 void StartWindow::exBtnClicked()
