@@ -6,7 +6,7 @@ mkdir $TMP_DIR
 for path in ${H_DIR}/*.h; do
 	filename="${path##*/}"
 	profname="${filename%.*}"
-	tar -rvf ${TMP_DIR}/${profname}.tar -C $H_DIR $filename
+	7z a ${TMP_DIR}/${profname}.7z $filename
 done	
 
 for path in ${PY_DIR}/*.py; do
