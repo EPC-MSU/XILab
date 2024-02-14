@@ -65,7 +65,7 @@ pipeline {
               sh "./build.sh add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.tar.gz"
               sh "ls"
-              stash name: "result-${BUILDOS}", includes: "xilab-*.AppImage,xilab-*.tar.gz,profile-*.tar.gz"
+              stash name: "result-${BUILDOS}", includes: "xilab-*.AppImage,xilab-*.tar.gz,profile-*.tar.gz,profile-*.zip"
             }
           } // stage
 
@@ -106,7 +106,7 @@ pipeline {
         sh "ls"
         sh "7z a -mx0 xilab-release_${BRANCH_NAME}_build-${BUILD_ID}.7z xilab-*.tar.gz xilab-win32.7z xilab-win64.7z xilab-*.exe xilab-*.AppImage"
         sh "7z l xilab-release_${BRANCH_NAME}_build-${BUILD_ID}.7z"
-        archiveArtifacts artifacts: "xilab-release*7z,profile-*.tar.gz,profile-*.tar.zip"
+        archiveArtifacts artifacts: "xilab-release*7z,profile-*.tar.gz,profile-*.zip"
       }
     } // stage
 

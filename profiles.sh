@@ -35,8 +35,8 @@ for path in ${TMP_DIR}/*.tar; do
 	tar -rvf profile-STANDA.tar -C $TMP_DIR ${filename}.gz
 done
 
-zip profile-STANDA.tar.zip profile-STANDA.tar
+zip profile-STANDA.zip profile-STANDA.tar
 if [ ! $ARCHIVE_DIR -ef . ]; then
-       	mv profile-STANDA.tar.zip $ARCHIVE_DIR
+       	mv profile-STANDA.zip $ARCHIVE_DIR
 fi
 rm -rvf $TMP_DIR
