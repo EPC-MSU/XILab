@@ -3,14 +3,14 @@ SetCompressor /SOLID lzma
 ;Ярлыки ставим для всех пользователей.
 ;В программе надо сделать, чтобы все настройки сохранялись не в директорию установки (programfiles), а в общие доки пользователей (%appdata% в контексте ShellVars:all)
 RequestExecutionLevel admin
-!define PRODUCT_NAME "mDDC"
+!define PRODUCT_NAME "mdrive_direct_control"
 !searchparse /file src/main.h `#define XILAB_VERSION "` VER_MAJOR `.` VER_MINOR `.` VER_RELEASE `"`
 !define PRODUCT_VERSION "${VER_MAJOR}.${VER_MINOR}.${VER_RELEASE}"
 
 !define PRODUCT_MANUFACTURER "XIMC"
 !define URL_INFO "http://www.standasupport.com"
 !define URL_UPDATE "http://www.standasupport.com/projects/support/wiki/Software"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mDDC.exe"
+!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mdrive_direct_control.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME} ${PRODUCT_VERSION}"
 
 !include "MUI2.nsh"
@@ -33,10 +33,10 @@ Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 !define MUI_FINISHPAGE_RUN_FUNCTION RunXilab
 Function RunXilab
 SetOutPath $INSTDIR
-Exec "$INSTDIR\mDDC.exe"
+Exec "$INSTDIR\mdrive_direct_control.exe"
 FunctionEnd
 
-!define MUI_FINISHPAGE_RUN_TEXT "Run mDDC"
+!define MUI_FINISHPAGE_RUN_TEXT "Run mdrive_direct_control"
 ;!define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\changelog.txt"
 ;!define MUI_FINISHPAGE_SHOWREADME_TEXT "View changelog"
 
@@ -53,7 +53,7 @@ Var StartMenuFolder
 !insertmacro MUI_LANGUAGE "English"
 
 
-;--Поиск и деинсталляция старых версий mDDC
+;--Поиск и деинсталляция старых версий mdrive_direct_control
 Section -SecUnEarlier
   StrCpy $0 0
 loop:
@@ -62,7 +62,7 @@ loop:
   IntOp $0 $0 + 1
   StrCpy $2 $1 5
   StrCpy $3 $1 3 6
-  StrCmp $2 "mDDC" 0 loop
+  StrCmp $2 "mdrive_direct_control" 0 loop
   StrCmp $3 "1.4" loop 0
   Call MakeUninstall
   Goto loop
@@ -107,7 +107,7 @@ Section "Application files" SecMain_32
   File  /oname=driver\mdrive.cat "driver\mdrive.cat"
   File  /oname=$WINDIR\Inf\mdrive.inf "driver\mdrive.inf"
   File  /oname=$WINDIR\Inf\mdrive.cat "driver\mdrive.cat"
-  File  /oname=mDDC.exe "${RELEASEFILES}\mDDC [release - usermode].exe"
+  File  /oname=mdrive_direct_control.exe "${RELEASEFILES}\mdrive_direct_control [release - usermode].exe"
   
   CreateDirectory "$INSTDIR\scripts"
   SetOutPath "$INSTDIR\scripts"
@@ -120,9 +120,9 @@ Section "Application files" SecMain_32
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Applications
   CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
   SetOutPath "$INSTDIR"
-  CreateShortCut "$SMPROGRAMS\$StartMenuFolder\mDDC.lnk" "$INSTDIR\mDDC.exe"
+  CreateShortCut "$SMPROGRAMS\$StartMenuFolder\mdrive_direct_control.lnk" "$INSTDIR\mdrive_direct_control.exe"
   CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\uninst.exe"
-  CreateShortCut "$DESKTOP\mDDC.lnk" "$INSTDIR\mDDC.exe"
+  CreateShortCut "$DESKTOP\mdrive_direct_control.lnk" "$INSTDIR\mdrive_direct_control.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
@@ -162,7 +162,7 @@ Section "Application files" SecMain_64
   File  /oname=driver\mdrive.cat "driver\mdrive.cat"
   File  /oname=$WINDIR\Inf\mdrive.inf "driver\mdrive.inf"
   File  /oname=$WINDIR\Inf\mdrive.cat "driver\mdrive.cat"
-  File  /oname=mDDC.exe "${RELEASEFILES}\mDDC [release - usermode].exe"
+  File  /oname=mdrive_direct_control.exe "${RELEASEFILES}\mdrive_direct_control [release - usermode].exe"
   
   CreateDirectory "$INSTDIR\scripts"
   SetOutPath "$INSTDIR\scripts"
@@ -175,9 +175,9 @@ Section "Application files" SecMain_64
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Applications
   CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
   SetOutPath "$INSTDIR"
-  CreateShortCut "$SMPROGRAMS\$StartMenuFolder\mDDC.lnk" "$INSTDIR\mDDC.exe"
+  CreateShortCut "$SMPROGRAMS\$StartMenuFolder\mdrive_direct_control.lnk" "$INSTDIR\mdrive_direct_control.exe"
   CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\uninst.exe"
-  CreateShortCut "$DESKTOP\mDDC.lnk" "$INSTDIR\mDDC.exe"
+  CreateShortCut "$DESKTOP\mdrive_direct_control.lnk" "$INSTDIR\mdrive_direct_control.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
@@ -208,11 +208,11 @@ SectionEnd
 
 Section -SecReg
   WriteUninstaller "$INSTDIR\uninst.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\mDDC.exe"
+  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\mdrive_direct_control.exe"
   WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "StartMenuFolder" "$StartMenuFolder"
   WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "DisplayName" "${PRODUCT_NAME} ${PRODUCT_VERSION}"
   WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
-  WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\mDDC.exe"
+  WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\mdrive_direct_control.exe"
   WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_MANUFACTURER}"
   WriteRegStr HKLM "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${URL_INFO}"
@@ -310,13 +310,13 @@ ${EndIf}
   Delete "$INSTDIR\mdrivedefault.cfg"
   Delete "$INSTDIR\qt.conf"
   Delete "$INSTDIR\changelog.txt"
-  Delete "$INSTDIR\mDDC.exe"
+  Delete "$INSTDIR\mdrive_direct_control.exe"
   Delete "$INSTDIR\uninst.exe"
   RMDir "$INSTDIR"
   ;
-  Delete "$DESKTOP\mDDC.lnk"
+  Delete "$DESKTOP\mdrive_direct_control.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
-  Delete "$SMPROGRAMS\$StartMenuFolder\mDDC.lnk"
+  Delete "$SMPROGRAMS\$StartMenuFolder\mdrive_direct_control.lnk"
   RMDir "$SMPROGRAMS\$StartMenuFolder"
   ;
   DeleteRegKey HKLM "${PRODUCT_UNINST_KEY}"

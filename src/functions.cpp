@@ -245,15 +245,15 @@ QString getDefaultPath()
 {
 #if defined(WIN32) || defined(WIN64)
 	//output format: %appdata%/XILab
-	return QString::fromLocal8Bit(getenv("APPDATA"))+ "\\mDDC.conf";
+	return QString::fromLocal8Bit(getenv("APPDATA"))+ "\\mdrive_direct_control.conf";
 #endif
 #ifdef __LINUX__
 	//output format: $HOME/.XILab/
-	return QString::fromLocal8Bit(getenv("HOME")) + "/.config/mDDC.conf";
+	return QString::fromLocal8Bit(getenv("HOME")) + "/.config/mdrive_direct_control.conf";
 #endif
 #ifdef __APPLE__
 	//output format: $HOME/Library/Application Support/XiLab (see #5749-7)
-	return QString::fromLocal8Bit(getenv("HOME")) + "/Library/Application Support/mDDC.conf";
+	return QString::fromLocal8Bit(getenv("HOME")) + "/Library/Application Support/mdrive_direct_control.conf";
 #endif
 }
 
@@ -261,15 +261,15 @@ QString getOldDefaultPath()
 {
 #if defined(WIN32) || defined(WIN64)
 	//output format: %appdata%/XILab
-	return QString::fromLocal8Bit(getenv("APPDATA")) + "\\mDDC.conf";
+	return QString::fromLocal8Bit(getenv("APPDATA")) + "\\mdrive_direct_control.conf";
 #endif
 #ifdef __LINUX__
 	//output format: $HOME/.XILab/
-	return QString::fromLocal8Bit(getenv("HOME")) + "/.config/mDDC.conf";
+	return QString::fromLocal8Bit(getenv("HOME")) + "/.config/mdrive_direct_control.conf";
 #endif
 #ifdef __APPLE__
 	//output format: $HOME/XiLab
-	return QString::fromLocal8Bit(getenv("HOME")) + "/mDDC.conf";
+	return QString::fromLocal8Bit(getenv("HOME")) + "/mdrive_direct_control.conf";
 #endif
 }
 

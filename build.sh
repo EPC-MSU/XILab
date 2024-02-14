@@ -60,7 +60,7 @@ export QTDIR PATH LD_LIBRARY_PATH
 major="7" #major version, autodetection will be added later
 libximc_linux="libximc.so.$major.0.0"
 VER=$(grep VERSION src/main.h | sed 's/#define XILAB_VERSION "\([0-9a-zA-Z\ \.]*\)*"/\1/' | tr -d ' \r')
-r_dir="mDDC-$VER"
+r_dir="mdrive_direct_control-$VER"
 
 # cleanup first
 clean_some_stuff
@@ -104,12 +104,12 @@ cp ./usr/lib/$libximc_linux ../$r_dir/
 cp mdrivedefault.cfg ../$r_dir/
 
 # add scripts and profiles
-mkdir -p ../$r_dir/Library/mDDC/
-cp -R ./xiresource/scripts ../$r_dir/Library/mDDC/
-cp -R ./xiresource/profiles ../$r_dir/Library/mDDC/
-cp -R ./xiresource/schemes/. ../$r_dir/Library/mDDC/profiles
+mkdir -p ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/scripts ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/profiles ../$r_dir/Library/mdrive_direct_control/
+cp -R ./xiresource/schemes/. ../$r_dir/Library/mdrive_direct_control/profiles
 # mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
-rm -r ../$r_dir/Library/mDDC/profiles/STANDA
+rm -r ../$r_dir/Library/mdrive_direct_control/profiles/STANDA
 
 # add qwt
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ../$r_dir/
@@ -121,25 +121,25 @@ sed "s/%qwtver/$QWT_VER/" --in-place ./linux_*_XILab_*.pro
 if [ "$param1" = "add_service_build" ] ; then
 	qmake linux_servicemode_XILab_${bits}.pro
 	make
-	mv release_${bits}/XILab_${bits}_service ../$r_dir/mDDC_${bits}_service
-	strip ../$r_dir/mDDC_${bits}_service
-	ls -l ../$r_dir/mDDC_${bits}_service
+	mv release_${bits}/XILab_${bits}_service ../$r_dir/mdrive_direct_control_${bits}_service
+	strip ../$r_dir/mdrive_direct_control_${bits}_service
+	ls -l ../$r_dir/mdrive_direct_control_${bits}_service
 	
 	make clean
 fi
 
 qmake linux_usermode_XILab_${bits}.pro
 make
-mv release_${bits}/XILab_${bits}_user ../$r_dir/mDDC_${bits}_user
-strip ../$r_dir/mDDC_${bits}_user
-ls -l ../$r_dir/mDDC_${bits}_user
+mv release_${bits}/XILab_${bits}_user ../$r_dir/mdrive_direct_control_${bits}_user
+strip ../$r_dir/mdrive_direct_control_${bits}_user
+ls -l ../$r_dir/mdrive_direct_control_${bits}_user
 
 wd=`pwd`
 cd ..
-tar -czf mDDC-$BUILD_SUFFIX.tar.gz ./$r_dir
-mv ./$r_dir/mDDC_${bits}_user ./
+tar -czf mdrive_direct_control-$BUILD_SUFFIX.tar.gz ./$r_dir
+mv ./$r_dir/mdrive_direct_control_${bits}_user ./
 rm -r ./$r_dir/*
-mv ./mDDC_${bits}_user ./$r_dir/
+mv ./mdrive_direct_control_${bits}_user ./$r_dir/
 cd -
 
 # prepare files for AppImage
@@ -154,8 +154,8 @@ cp $wd/keyfile.sqlite ./$r_dir/usr/share/mDrive/default_keyfile.sqlite
 cp /usr/local/qwt-${QWT_VER}/lib/libqwt.so.${QWT_VER_MAJOR} ./$r_dir/usr/lib/
 cp /lib/$archpath/libpng12.so.0 ./$r_dir/lib/$archpath/
 
-mv ./$r_dir/mDDC_${bits}_user ./$r_dir/usr/bin/mDDC
-sed 's#/usr/share/#././/share/#' --in-place ./$r_dir/usr/bin/mDDC  # patch mDrive binary - relative paths
+mv ./$r_dir/mdrive_direct_control_${bits}_user ./$r_dir/usr/bin/mDrive_Direct_Control
+sed 's#/usr/share/#././/share/#' --in-place ./$r_dir/usr/bin/mDrive_Direct_Control  # patch mDrive binary - relative paths
 sed "s#%ver#$VER#" --in-place ./$r_dir/mDrive.desktop  # patch desktop file - version
 for name in Core DBus Gui Network Script Svg Xml ; do cp /usr/lib/$archpath/libQt${name}.so.${QT_VER_MAJOR} ./$r_dir/usr/lib/$archpath/ ; done
 cp /usr/lib/$archpath/libaudio.so.2 ./$r_dir/usr/lib/$archpath/
@@ -166,7 +166,7 @@ appimagetool-${pkgtype}.AppImage -n ./$r_dir/
 if [ -f "mDrive.appdata.xml" ]; then  # imagetool on 32-bit Linux is bugged without "-n" switch
   mv "mDrice.appdata.xml" "mDrive-Intel_80386.AppImage"
 fi
-mv mDrive-*.AppImage "mDDC-${VER}-${pkgtype}.AppImage"
+mv mDrive-*.AppImage "mdrive_direct_control-${VER}-${pkgtype}.AppImage"
 
 # add scripts and profiles
 cd -
@@ -176,20 +176,20 @@ cp -R ./xiresource/profiles ../$r_dir/AppImage
 cp -R ./xiresource/schemes/. ../$r_dir/AppImage/profiles
 # mDrive Direct Control shouldn't work with Standa. So, exclude its profiles. #87855
 rm -r ../$r_dir/AppImage/profiles/STANDA
-mv ../mDDC-${VER}-${pkgtype}.AppImage ../$r_dir/AppImage
+mv ../mdrive_direct_control-${VER}-${pkgtype}.AppImage ../$r_dir/AppImage
 cd ../$r_dir/AppImage
-tar -czf ../mDDC-${VER}-${pkgtype}.tar.gz ./
+tar -czf ../mdrive_direct_control-${VER}-${pkgtype}.tar.gz ./
 cd -
-mv ../$r_dir/mDDC-${VER}-${pkgtype}.tar.gz ../
+mv ../$r_dir/mdrive_direct_control-${VER}-${pkgtype}.tar.gz ../
 rm -r ../$r_dir/AppImage
 
 # move artifacts
 cd "$wd"
-mv ../mDDC-$BUILD_SUFFIX.tar.gz ./
-mv ../mDDC-${VER}-${pkgtype}.tar.gz ./
+mv ../mdrive_direct_control-$BUILD_SUFFIX.tar.gz ./
+mv ../mdrive_direct_control-${VER}-${pkgtype}.tar.gz ./
 
 # clean up
-rm -rf ../mDDC-${VER}
+rm -rf ../mdrive_direct_control-${VER}
 clean_some_stuff
 }
 
@@ -210,36 +210,36 @@ qmake mac_XILab.pro -spec unsupported/macx-clang-libc++
 make
 
 # rewrite Qt paths inside mDrive with Qt tool
-macdeployqt release/mDDC.app
-mv release/mDDC.app/ ../$r_dir/
-strip ../$r_dir/mDDC.app/Contents/MacOS/mDDC
-ls -l ../$r_dir/mDDC.app
+macdeployqt release/mDrive_Direct_Control.app
+mv release/mDrive_Direct_Control.app/ ../$r_dir/
+strip ../$r_dir/mDrive_Direct_Control.app/Contents/MacOS/mDrive_Direct_Control
+ls -l ../$r_dir/mDrive_Direct_Control.app
 
 # add qwt to the bundle
-mkdir -p ../$r_dir/mDDC.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/
-cp /usr/local/qwt-${QWT_VER}/lib/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt ../$r_dir/mDDC.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
+mkdir -p ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/
+cp /usr/local/qwt-${QWT_VER}/lib/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
 
 # rewrite Qt paths inside Qwt with our own hands
 qt_root="$QTDIR/lib"
 for sublib in QtCore QtGui QtSvg ; do
   subpath="${sublib}.framework/Versions/${QT_VER_MAJOR}/$sublib"
-  install_name_tool -change "$qt_root/$subpath" "@executable_path/../Frameworks/$subpath" ../$r_dir/mDDC.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
+  install_name_tool -change "$qt_root/$subpath" "@executable_path/../Frameworks/$subpath" ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/qwt.framework/Versions/${QWT_VER_MAJOR}/qwt
 done
 
 # add libximc framework (with xiwrapper and bindy inside) to the bundle
-cp -r ./macosx/libximc.framework ../$r_dir/mDDC.app/Contents/Frameworks/
+cp -r ./macosx/libximc.framework ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/
 
 # add bindy dylib (needed since Xilab 1.13) to the bundle
-cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../$r_dir/mDDC.app/Contents/Frameworks/
+cp -r ./macosx/libximc.framework/Versions/${major}/Frameworks/libbindy.dylib ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/
 
 # add mdrivedefault.cfg to program dir
-cp mdrivedefault.cfg ../$r_dir/mDDC.app/Contents/MacOS/
+cp mdrivedefault.cfg ../$r_dir/mDrive_Direct_Control.app/Contents/MacOS/
 
 # add default libximc keyfile (for bindy) to program dir
-cp keyfile.sqlite ../$r_dir/mDDC.app/Contents/MacOS/default_keyfile.sqlite
+cp keyfile.sqlite ../$r_dir/mDrive_Direct_Control.app/Contents/MacOS/default_keyfile.sqlite
 
 # fix permissions for framework and bindy because original permissions are proabably missing
-chmod -R ugo+rX ../$r_dir/mDDC.app/Contents/Frameworks/libximc.framework ../$r_dir/mDDC.app/Contents/Frameworks/libbindy.dylib ../$r_dir/mDDC.app/Contents/MacOS/default_keyfile.sqlite
+chmod -R ugo+rX ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/libximc.framework ../$r_dir/mDrive_Direct_Control.app/Contents/Frameworks/libbindy.dylib ../$r_dir/mDrive_Direct_Control.app/Contents/MacOS/default_keyfile.sqlite
 
 # add scripts and profiles
 mkdir -p ../$r_dir/Library/XILab/
@@ -273,21 +273,21 @@ done
 # package and create .dmg volume to hold the installer
 cd ..
 rm -rf installer.pkg
-rm -rf dmg mDDC-*.dmg
+rm -rf dmg mdrive_direct_control-*.dmg
 mkdir ./$r_dir/Applications
-mv ./$r_dir/mDDC.app ./$r_dir/Applications/
+mv ./$r_dir/mDrive_Direct_Control.app ./$r_dir/Applications/
 plist="component.plist"
 pkgbuild --analyze --root "./$r_dir/" "$plist"
 pkgbuild --root "./$r_dir/" --version "$VER" --component-plist "$plist" --identifier "com.ximc.xilab" --install-location "/"  installer.pkg
 rm "$plist"
 mkdir -p dmg
 cp -pR installer.pkg dmg
-hdiutil create mDDC-${VER}.dmg -volname "mDDC-${VER}" -fs HFS+ -srcfolder dmg
-tar -czf mDDC-${VER}-osx64.tar.gz ./mDDC-${VER}.dmg
-cd - && mv ../mDDC-${VER}-osx64.tar.gz ./
+hdiutil create mdrive_direct_control-${VER}.dmg -volname "mdrive_direct_control-${VER}" -fs HFS+ -srcfolder dmg
+tar -czf mdrive_direct_control-${VER}-osx64.tar.gz ./mdrive_direct_control-${VER}.dmg
+cd - && mv ../mdrive_direct_control-${VER}-osx64.tar.gz ./
 
 # cleanup macosx
-rm -rf ../installer.pkg ../mDDC-${VER}.dmg ../mDDC-${VER} ../dmg
+rm -rf ../installer.pkg ../mdrive_direct_control-${VER}.dmg ../mdrive_direct_control-${VER} ../dmg
 clean_some_stuff
 }
 

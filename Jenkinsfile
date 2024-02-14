@@ -65,7 +65,7 @@ pipeline {
               sh "./build.sh add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.tar.gz"
               sh "ls"
-              stash name: "result-${BUILDOS}", includes: "mDDC-*.AppImage,mDDC-*.tar.gz,profile-*.tar.gz"
+              stash name: "result-${BUILDOS}", includes: "mdrive_direct_control-*.AppImage,mdrive_direct_control-*.tar.gz,profile-*.tar.gz"
             }
           } // stage
 
@@ -79,7 +79,7 @@ pipeline {
               powershell "Invoke-WebRequest -Uri https://artifacts.ci.ximc.ru/jenkins/libximc/libximc-${LIBXIMC_VERSION}-all.tar.gz -OutFile ximc-0.0.tar.gz"
               bat "build.bat add_service_build"
               //touch file: "xilab-fake-${BUILDOS}.exe"
-              stash name: "result-${BUILDOS}", includes: "mDDC-*.exe, mDDC-*.7z"
+              stash name: "result-${BUILDOS}", includes: "mdrive_direct_control-*.exe, mdrive_direct_control-*.7z"
             }
           } // stage
         } // stages
@@ -104,9 +104,9 @@ pipeline {
         unstash "result-win"
         unstash "result-osx"
         sh "ls"
-        sh "7z a -mx0 mDDC-release_${BRANCH_NAME}_build-${BUILD_ID}.7z mDDC-*.tar.gz mDDC-win32.7z mDDC-win64.7z mDDC-*.exe mDDC-*.AppImage"
-        sh "7z l mDDC-release_${BRANCH_NAME}_build-${BUILD_ID}.7z"
-        archiveArtifacts artifacts: "mDDC-release*7z,profile-*.tar.gz"
+        sh "7z a -mx0 mdrive_direct_control-release_${BRANCH_NAME}_build-${BUILD_ID}.7z mdrive_direct_control-*.tar.gz mdrive_direct_control-win32.7z mdrive_direct_control-win64.7z mdrive_direct_control-*.exe mdrive_direct_control-*.AppImage"
+        sh "7z l mdrive_direct_control-release_${BRANCH_NAME}_build-${BUILD_ID}.7z"
+        archiveArtifacts artifacts: "mdrive_direct_control-release*7z,profile-*.tar.gz"
       }
     } // stage
 
