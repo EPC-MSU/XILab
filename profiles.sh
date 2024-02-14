@@ -6,7 +6,11 @@ mkdir $TMP_DIR
 for path in ${H_DIR}/*.h; do
 	filename="${path##*/}"
 	profname="${filename%.*}"
-	zip -u ${TMP_DIR}/${profname}.zip $filename
+	if [ ! -f "${TMP_DIR}/${profname}.zip" ]; then
+		zip ${TMP_DIR}/${profname}.zip ${H_DIR}/$filename
+	else
+		zip -u ${TMP_DIR}/${profname}.zip ${H_DIR}/$filename
+	fi
 done	
 
 for path in ${PY_DIR}/*.py; do
@@ -18,8 +22,7 @@ done
 for path in ${CFG_DIR}/*.cfg; do
 	filename="${path##*/}"
 	profname="${filename%.*}"
-	if [ -e $path ]
-	then
+	if [ -e $path ]; then
 		tar -rvf ${TMP_DIR}/${profname}.tar -C $CFG_DIR $filename
 	else
 		echo $path
@@ -32,8 +35,8 @@ for path in ${TMP_DIR}/*.tar; do
 	tar -rvf profile-STANDA.tar -C $TMP_DIR ${filename}.gz
 done
 
-gzip profile-STANDA.tar
+zip profile-STANDA.tar.zip profile-STANDA.tar
 if [ ! $ARCHIVE_DIR -ef . ]; then
-       	mv profile-STANDA.tar.gz $ARCHIVE_DIR
+       	mv profile-STANDA.tar.zip $ARCHIVE_DIR
 fi
 rm -rvf $TMP_DIR
