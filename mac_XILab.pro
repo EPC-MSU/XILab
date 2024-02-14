@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = mDrive_Direct_Control
+TARGET = mDDC
 CONFIG += app_bundle
 CONFIG += x86_64
 DESTDIR = ./release

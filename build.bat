@@ -33,9 +33,9 @@ call :APP
 @if "%NODE_NAME%" == "" goto SUCCESS
 
 cd "%DISTDIR%"
-7z a %BASEDIR%\mdrive_direct_control-win32.7z win32\
+7z a %BASEDIR%\mDDC-win32.7z win32\
 @if not %errorlevel% == 0 goto FAIL
-7z a %BASEDIR%\mdrive_direct_control-win64.7z win64\
+7z a %BASEDIR%\mDDC-win64.7z win64\
 @if not %errorlevel% == 0 goto FAIL
 
 :: it is an exit
@@ -145,15 +145,15 @@ goto :eof
 
 devenv /nologo /build %SOLCONF% XILab.sln 
 @if not %errorlevel% == 0 goto FAIL
-move /Y %ARCH%\%BINDIR%\"mdrive_direct_control "[%BINDIR%].exe a.exe
+move /Y %ARCH%\%BINDIR%\"mDDC "[%BINDIR%].exe a.exe
 @if not %errorlevel% == 0 goto FAIL
 :: Sign binaries only in release build and if CERTNAME is given
 @if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' if 'x%CERTNAME%' NEQ 'x' SignTool.exe sign /v /n %CERTNAME% a.exe
 
 @if not %errorlevel% == 0 goto FAIL
-move /Y a.exe %ARCH%\%BINDIR%\"mdrive_direct_control "[%BINDIR%].exe
+move /Y a.exe %ARCH%\%BINDIR%\"mDDC "[%BINDIR%].exe
 @if not %errorlevel% == 0 goto FAIL
-copy %ARCH%\%BINDIR%\"mdrive_direct_control ["%BINDIR%"].exe" %DISTARCH%
+copy %ARCH%\%BINDIR%\"mDDC ["%BINDIR%"].exe" %DISTARCH%
 @if not %errorlevel% == 0 goto FAIL
 
 copy %QTDIR%\bin\QtCore4.dll %DISTARCH%
@@ -222,9 +222,9 @@ copy %QWTBINDIR%\qwt.dll %DISTARCH%\qwt.dll
 :NSIS
 makensis XILab-setup-UTF8.nsi
 @if not %errorlevel% == 0 goto FAIL
-ren mdrive_direct_control-*.exe mdrive_direct_control-*.exe
+ren mDDC-*.exe mDDC-*.exe
 @if not %errorlevel% == 0 goto FAIL
 :: Sign binaries only in release build
-@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' SignTool.exe sign /v /n %CERTNAME% mdrive_direct_control-*.exe
+@if 'x%XIMC_RELEASE_TYPE%' == 'xRELEASE' SignTool.exe sign /v /n %CERTNAME% mDDC-*.exe
 @if not %errorlevel% == 0 goto FAIL
 @goto :eof
