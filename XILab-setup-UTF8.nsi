@@ -60,10 +60,8 @@ loop:
   EnumRegKey $1 HKLM Software\Microsoft\Windows\CurrentVersion\Uninstall $0
   StrCmp $1 "" done
   IntOp $0 $0 + 1
-  StrCpy $2 $1 5
-  StrCpy $3 $1 3 6
+  StrCpy $2 $1 21
   StrCmp $2 "mdrive_direct_control" 0 loop
-  StrCmp $3 "1.4" loop 0
   Call MakeUninstall
   Goto loop
 done:
