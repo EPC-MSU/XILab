@@ -25,7 +25,8 @@ Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
 ;-WelcomePage
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
-!define MUI_WELCOMEPAGE_TITLE_3LINES "Welcome to the ${PRODUCT_NAME} ${PRODUCT_VERSION} Setup Wizard" ;TODO: remove test
+!define MUI_WELCOMEPAGE_TITLE "MA SUPA TEST"
+!define MUI_WELCOMEPAGE_TITLE_3LINES "Welcome to the ${PRODUCT_NAME} ${PRODUCT_VERSION} Setup Wizard"
 !define MUI_WELCOMEPAGE_TEXT "This wizard will guide you through the installation of ${PRODUCT_NAME} ${PRODUCT_VERSION}.$\n"
 ;--FinishPage
 !define MUI_FINISHPAGE_RUN
