@@ -6,7 +6,7 @@ mkdir $TMP_DIR
 for path in ${H_DIR}/*.h; do
 	filename="${path##*/}"
 	profname="${filename%.*}"
-	7z a ${TMP_DIR}/${profname}.7z $filename
+	zip -u ${TMP_DIR}/${profname}.zip $filename
 done	
 
 for path in ${PY_DIR}/*.py; do
