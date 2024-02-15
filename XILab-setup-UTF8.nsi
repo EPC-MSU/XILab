@@ -54,17 +54,15 @@ Var StartMenuFolder
 
 ;--Поиск и деинсталляция старых версий XILab
 Section -SecUnEarlier
-  StrCpy $0 0
+  StrCpy $0 0        ; <- set $0 to 0, $0 is an iter.variable, like int i in C/C++
 loop:
-  EnumRegKey $1 HKLM Software\Microsoft\Windows\CurrentVersion\Uninstall $0
-  StrCmp $1 "" done
-  IntOp $0 $0 + 1
-  StrCpy $2 $1 5
-  StrCpy $3 $1 3 6
-  StrCmp $2 "XILab" 0 loop
-  StrCmp $3 "1.4" loop 0
-  Call MakeUninstall
-  Goto loop
+  EnumRegKey $1 HKLM Software\Microsoft\Windows\CurrentVersion\Uninstall $0 ; <- set $1 to $0th Registry Key name
+  StrCmp $1 "" done  ; <- In case of empty current registry key, go to done
+  IntOp $0 $0 + 1    ; <- Increment $0
+  StrCpy $2 $1 5     ; <- Copy first 5 letters of the key to variable $2
+  StrCmp $2 "XILab" 0 loop ; <- If $2 is not "XILab", go to loop, else continue
+  Call MakeUninstall ; <- Uninstall
+  Goto loop          ; <- Go to loop
 done:
 SectionEnd
 
