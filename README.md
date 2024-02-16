@@ -1,5 +1,7 @@
 # XILab
 
+## The "XILab" project is no longer supported
+
 ![](Resources/images/icons/motor_icon.png)
 
 Standa 8SMC5 motor controller software.
